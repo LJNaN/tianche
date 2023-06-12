@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Scene from '@/views/Scene.vue'
 </script>
 
@@ -9,8 +9,8 @@ import Scene from '@/views/Scene.vue'
 
 <style scoped>
 :global(#app) {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #999;
   pointer-events: none;
 }
