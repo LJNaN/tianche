@@ -220,7 +220,5 @@ watch(
 <style>
 .chart {
   pointer-events: all;
-  width: 100%;
-  height: 100%;
 }
 </style>
