@@ -2,12 +2,12 @@
 import { onMounted, ref } from "vue";
 import * as echarts from "echarts";
 
-// let url = ref('./assets/3d/img/4.png')
+ let url = ref('./assets/3d/img/4.png')
 </script>
 
 <template>
   <div class="header">
-    <!-- <img :src="url"> -->
+    <img :src="url">
   </div>
   
 </template>
@@ -25,6 +25,8 @@ import * as echarts from "echarts";
   pointer-events: all;
 }
 .img {
-
+  width: 1920px;
+  height: 80px;
+  
 }
 </style>
