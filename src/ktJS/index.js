@@ -2,6 +2,7 @@ import { API } from './API.js'
 import { CACHE } from './CACHE.js'
 import { STATE } from './STATE.js'
 import { DATA } from './DATA.js'
+import TU from './threeUtils.js'
 
 let container
 
@@ -29,17 +30,38 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       container.loadModelsByUrl({
         modelUrls: jsonParser.modelUrls,
         onProgress: (model, evt) => {
+          if (!evt.sceneList) {
+            evt.sceneList = {}
+            STATE.sceneList = evt.sceneList
+            window.STATE = STATE
+          }
+          evt.sceneList[model.name] = model
+
           // console.log('progress', model)
         },
         onLoad: (evt) => {
           // console.log('onload', evt)
           window.container = evt
+          CACHE.container = evt
 
           /**
            *  根据jsonParser.nodes中的节点更新3D场景，注意，调用该方法会覆盖onProgress中的模型编辑操作
            *  因此，想要在代码中二次编辑模型，需在该方法调用之后再调用
-           */
-          evt.updateSceneByNodes(jsonParser.nodes[0])
+          */
+
+          evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
+            evt.sceneList.guidao.scale.set(STATE.sceneScale, STATE.sceneScale, STATE.sceneScale)
+            container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
+            container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
+            console.log('evt.sceneList.guidao: ', evt.sceneList.guidao);
+
+            TU.init(container, Bol3D)
+            API.handleLine()
+            API.initSkyCar()
+            // API.testBox()
+            // API.loadGUI()
+          })
+
 
           /**
           * updateSceneByNodes(node, duration, callback)
@@ -51,7 +73,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           //   console.log('update finish')
           // })
 
-          
+
         }
       })
 
