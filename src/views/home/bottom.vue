@@ -6,13 +6,12 @@ import * as echarts from "echarts";
 
 <template>
   <div class="bottom">
-    homebottomhomebottomhomebottomhomebottomhomebottomhomebottomhomebottom
   </div>
 </template>
 
 <style scoped>
 .bottom {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: absolute;
   left: 0;
   bottom: 0;

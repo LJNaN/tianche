@@ -1,9 +1,22 @@
 * {
   margin: 0;
-  user-select: none;
+  padding: 0;
   box-sizing: border-box;
-}
-
-.dg.ac {
-  z-index: 1 !important;
-}
+  user-select: none;
+  }
+  
+  .dg.ac {
+  z-index: 10 !important;
+  }
+  
+  *::before {
+  box-sizing: border-box;
+  }
+  
+  *::after {
+  box-sizing: border-box;
+  }
+  
+  body {
+  font-size: 16px;
+  }

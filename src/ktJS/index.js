@@ -27,6 +27,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
         publicPath: '/editor/'  // 节点解析，资源文件路径（包含hdr，天空盒，图片等）最终路径为STATE.PUBLICPATH加上这一段
       })
       jsonParser.parseNodes(nodeData, jsonParser.nodes) // 解析节点, jsonParser.nodes存储了配置文件导出的所有节点信息
+      console.log('jsonParser.modelUrls,',jsonParser.modelUrls);
       container.loadModelsByUrl({
         modelUrls: jsonParser.modelUrls,
         onProgress: (model, evt) => {
