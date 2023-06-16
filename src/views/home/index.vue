@@ -16,6 +16,7 @@ import Bottom from './bottom.vue'
 
 <style scoped>
 .home {
+  background: url("/assets/3d/img/1.png") center / 100% 100% no-repeat;
   width: 100%;
   height: 100%;
   z-index: 2;
