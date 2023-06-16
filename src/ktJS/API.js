@@ -232,10 +232,8 @@ class SkyCar {
   }
 
   initSkyCar() {
-    const boxG = new Bol3D.BoxGeometry(5, 5, 5)
-    const boxM = new Bol3D.MeshBasicMaterial({ color: 0xffffff })
-    const box = new Bol3D.Mesh(boxG, boxM)
-    this.skyCarMesh = box
+    this.skyCarMesh = STATE.sceneList.tianche.clone()
+    this.skyCarMesh.visible = true
     CACHE.container.scene.add(this.skyCarMesh)
   }
 
@@ -258,12 +256,12 @@ class SkyCar {
       })
 
       if (line) {
-        line.material.color.set('#FF0000')
         const { direction, worldPosition, long } = line.userData
         const longToStart = this.coordinate - map.startCoordinate
         const longToEnd = map.endCoordinate - this.coordinate
 
         const currentPosition = new Bol3D.Vector3(0, 0, 0)
+        const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
         if (direction === 'x') {
           const moveDirection = map.direction === 'x' ? -1 : 1
           currentPosition.x = worldPosition.x + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
@@ -275,6 +273,12 @@ class SkyCar {
           currentPosition.y = worldPosition.y
           currentPosition.z = worldPosition.z + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
         }
+
+        lookAtPosition.x = currentPosition.x
+        lookAtPosition.y = currentPosition.y
+        lookAtPosition.z = currentPosition.z
+
+        this.skyCarMesh.lookAt(lookAtPosition)
 
         if (this.animation) {
           this.animation.stop()
@@ -292,15 +296,47 @@ class SkyCar {
 }
 
 function initSkyCar() {
-  const skyCar1 = new SkyCar(37500)
-  const skyCar2 = new SkyCar(100000)
+  const skyCar1 = new SkyCar(82500)
+  const skyCar2 = new SkyCar(822200)
+  const skyCar3 = new SkyCar(180000)
+  const skyCar4 = new SkyCar(78000)
+  const skyCar5 = new SkyCar(226200)
+  const skyCar6 = new SkyCar(1353761)
+  console.log('skyCar1: ', skyCar1);
+  console.log('skyCar2: ', skyCar2);
+  console.log('skyCar3: ', skyCar3);
+  console.log('skyCar4: ', skyCar4);
+  console.log('skyCar5: ', skyCar5);
+  console.log('skyCar6: ', skyCar6);
+  
+
   setInterval(() => {
-    skyCar1.coordinate += 100
+    if(skyCar1.coordinate >= 1500000) skyCar1.coordinate = 19000
+    skyCar1.coordinate += 200
     skyCar1.setPosition()
+
+    if(skyCar2.coordinate >= 1500000) skyCar2.coordinate = 19000
     skyCar2.coordinate += 200
     skyCar2.setPosition()
+
+    if(skyCar3.coordinate >= 1500000) skyCar3.coordinate = 19000
+    skyCar3.coordinate += 200
+    skyCar3.setPosition()
+
+    if(skyCar4.coordinate >= 1500000) skyCar4.coordinate = 19000
+    skyCar4.coordinate += 200
+    skyCar4.setPosition()
+
+    if(skyCar5.coordinate >= 1500000) skyCar5.coordinate = 19000
+    skyCar5.coordinate += 200
+    skyCar5.setPosition()
+
+    if(skyCar6.coordinate >= 1500000) skyCar6.coordinate = 19000
+    skyCar6.coordinate += 200
+    skyCar6.setPosition()
+
   }, 333)
-  console.log('skyCar1: ', skyCar1);
+
 }
 
 export const API = {

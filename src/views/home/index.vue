@@ -8,9 +8,9 @@ import Bottom from './bottom.vue'
 
 <template>
   <div class="home">
-    <Header></Header>
+    <!-- <Header></Header>
     <Right></Right>
-    <Bottom></Bottom>
+    <Bottom></Bottom> -->
   </div>
 </template>
 

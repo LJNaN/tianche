@@ -52,9 +52,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             evt.sceneList.guidao.scale.set(STATE.sceneScale, STATE.sceneScale, STATE.sceneScale)
-            container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
-            container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
+            // container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
+            // container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
             console.log('evt.sceneList.guidao: ', evt.sceneList.guidao);
+            STATE.sceneList.tianche.visible = false
 
             TU.init(container, Bol3D)
             API.handleLine()
