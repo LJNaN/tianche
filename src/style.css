@@ -4,6 +4,16 @@
   box-sizing: border-box;
   user-select: none;
   }
+
+  ul,li{
+    list-style: none;
+  }
+
+  .zitichaochu{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   
   .dg.ac {
   z-index: 10 !important;
