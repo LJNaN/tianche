@@ -31,8 +31,8 @@ let qb = ref("./assets/3d/img/5.png");
         <p>多云 23-34℃</p>
       </div>
       <div class="right-time">
-        <div>{{ currentDateStr }}</div>
-        <div>{{"星期" + num}}</div>
+        <div><p>{{ currentDateStr }}</p></div>
+        <div><p>{{"星期" + num}}</p></div>
       </div>
       
       <div class="right-fill">
@@ -44,6 +44,9 @@ let qb = ref("./assets/3d/img/5.png");
 </template>
 
 <style scoped lang='less'>
+p{
+  color: #FFFF;
+}
 .header {
   background: url("/assets/3d/img/4.png") center / 134% 100% no-repeat;
   position: absolute;
@@ -102,5 +105,6 @@ let qb = ref("./assets/3d/img/5.png");
       }
     }
   }
+  
 }
 </style>

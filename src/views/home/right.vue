@@ -1,6 +1,7 @@
 <template>
   <div class="right">
     <div class="topdiv">
+      <div class="zuyoutp"></div>
       <div class="youtu">
 
       </div>
@@ -8,6 +9,7 @@
       <Chart :option="option" width="100%" height="100%"></Chart>
     </div>
     <div class="inthediv">
+      <div class="zuyoutp"></div>
       <div class="inttu">
 
       </div>
@@ -15,6 +17,7 @@
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
     <div class="underdiv">
+      <div class="zuyoutp"></div>
       <div class="undertu">
 
       </div>
@@ -697,6 +700,16 @@ onMounted(() => {});
     width: 100%;
     height: 25%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 97%;
+      height: 100%;
+      left: 1%;
+      z-index: 2;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .topp {
       word-break: break-all;
       position: absolute;
@@ -714,6 +727,16 @@ onMounted(() => {});
     width: 100%;
     height: 25%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 97%;
+      height: 100%;
+      left: 1%;
+      z-index: 2;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .inthep {
       word-break: break-all;
       position: absolute;
@@ -730,6 +753,16 @@ onMounted(() => {});
     height: 25%;
     bottom: 1.5%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 97%;
+      height: 100%;
+      left: 1%;
+      z-index: 2;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .underp {
       word-break: break-all;
       position: absolute;
