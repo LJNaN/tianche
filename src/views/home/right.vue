@@ -367,6 +367,7 @@ const option2 = reactive({
   ],
   yAxis: [
     {
+      max: 3000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -500,7 +501,7 @@ const option3 = reactive({
   grid: {
     left: "3%",
     right: "4%",
-    bottom: "3%",
+    bottom: "-3%",
     containLabel: true,
   },
   xAxis: [
@@ -551,6 +552,7 @@ const option3 = reactive({
   ],
   yAxis: [
     {
+      max: 3000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -610,7 +612,7 @@ const option3 = reactive({
       // name: 'xxxxx',
       type: "bar",
       stack: "搜索引擎",
-      barWidth: 40,
+      // barWidth: 40,
       label: {
         show: false,
       },
@@ -751,7 +753,7 @@ onMounted(() => {});
     position: absolute;
     width: 100%;
     height: 25%;
-    bottom: 1.5%;
+    bottom: 3.5%;
     z-index: 2;
     .zuyoutp {
       // border: 1px solid red;

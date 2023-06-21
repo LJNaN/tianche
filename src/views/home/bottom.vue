@@ -76,7 +76,7 @@ const option2 = reactive({
     top: "45%",
     left: "5%",
     right: "5%",
-    bottom: "8%",
+    bottom: "4%",
     containLabel: true,
   },
   tooltip: {
@@ -109,7 +109,7 @@ const option2 = reactive({
   },
   legend: {
     left: "center",
-    top: 86,
+    top: 75,
     itemWidth: 15,
     itemHeight: 10,
     itemGap: 15,
@@ -264,7 +264,7 @@ const option3 = reactive({
   color: ["#5E99DA", "#1A6A74"],
   legend: {
     show: true,
-    top: "30%",
+    top: "25%",
     icon: "rect",
     itemWidth: 15, // 图例标记的图形宽度。
     itemHeight: 15, //  图例标记的图形高度。
@@ -275,10 +275,10 @@ const option3 = reactive({
     },
   },
   grid: {
-    top: "50%",
+    top: "45%",
     left: "3%",
     right: "4%",
-    bottom: "3%",
+    bottom: "5%",
     containLabel: true,
   },
   xAxis: [
@@ -329,6 +329,7 @@ const option3 = reactive({
   ],
   yAxis: [
     {
+      max: 3000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -353,7 +354,6 @@ const option3 = reactive({
       },
       axisLabel: {
         show: true,
-
         textStyle: {
           color: "#fff",
           fontSize: 14,
@@ -366,7 +366,9 @@ const option3 = reactive({
   ],
   series: [
     {
+      
       itemStyle: {
+        
         color: {
           type: "linear",
           x: 0, //右
@@ -386,10 +388,10 @@ const option3 = reactive({
         },
         barBorderRadius: [20, 20, 20, 20],
       },
-      name: "xxxxx",
+      name: "CycleCount",
       type: "bar",
       stack: "搜索引擎",
-      barWidth: 40,
+      // barWidth: 40,
       barWidth: "20%",
       label: {
         show: false,
@@ -420,7 +422,7 @@ const option3 = reactive({
         },
         barBorderRadius: [20, 20, 20, 20],
       },
-      name: "xxxxxx",
+      name: "MFGCount",
       type: "bar",
       barWidth: "20%",
       label: {
