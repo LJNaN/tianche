@@ -1,9 +1,8 @@
 <template>
   <div class="bottom">
     <div class="leftdiv">
-      <div class="lefttu">
-
-      </div>
+      <div class="zuyoutp"></div>
+      <div class="lefttu"></div>
       <p class="zdivp">Alarm Info</p>
       <div class="tablediv">
         <div class="table-title">
@@ -31,16 +30,14 @@
       </div>
     </div>
     <div class="zdiv">
-      <div class="ztup">
-
-      </div>
+      <div class="zuyoutp"></div>
+      <div class="ztup"></div>
       <p class="zdivp">Delivery Time</p>
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
     <div class="rdiv">
-      <div class="rtu">
-
-      </div>
+      <div class="zuyoutp"></div>
+      <div class="rtu"></div>
       <p class="rdivp">Delivery Count</p>
       <Chart :option="option3" width="100%" height="100%"></Chart>
     </div>
@@ -143,12 +140,12 @@ const option2 = reactive({
       "05/05",
     ],
     axisLine: {
-        show: true,
-        lineStyle: {
-          width: 2,
-          color: "rgba(208, 199, 199, 0.78)",
-        },
+      show: true,
+      lineStyle: {
+        width: 2,
+        color: "rgba(208, 199, 199, 0.78)",
       },
+    },
     axisTick: {
       show: false,
     },
@@ -404,25 +401,25 @@ const option3 = reactive({
     },
     {
       itemStyle: {
-            color: {
-            type: 'linear',
-            x: 0,  //右
-            y: 0,  //下
-            x2: 0,  //左
-            y2: 1,  //上
-            colorStops: [
-               {
-                  offset: 0.4,
-                  color: '#29AD9B' // 0% 处的颜色
-               },
-               {
-                  offset: 1,
-                  color: '#1D4365' // 100% 处的颜色
-               }
-            ]
-         },
-            barBorderRadius: [20, 20, 20, 20],
-         },
+        color: {
+          type: "linear",
+          x: 0, //右
+          y: 0, //下
+          x2: 0, //左
+          y2: 1, //上
+          colorStops: [
+            {
+              offset: 0.4,
+              color: "#29AD9B", // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: "#1D4365", // 100% 处的颜色
+            },
+          ],
+        },
+        barBorderRadius: [20, 20, 20, 20],
+      },
       name: "xxxxxx",
       type: "bar",
       barWidth: "20%",
@@ -476,8 +473,22 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 100%;
+      height: 70%;
+      z-index: 2;
+      top: 18%;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .tablediv {
-      background:linear-gradient(to right,rgba(29, 138, 255) -400%,rgba(29, 138, 255,0));
+      background: linear-gradient(
+        to right,
+        rgba(29, 138, 255) -400%,
+        rgba(29, 138, 255, 0)
+      );
       // background: url("/assets/3d/img/2.png") center / 100% 100% no-repeat;
       // border: 1px solid gold;
       word-break: break-all;
@@ -494,7 +505,7 @@ onMounted(() => {});
       word-break: break-all;
       position: absolute;
       left: 15%;
-      top: 15%;
+      top: 10%;
       z-index: 2;
       color: #65e019;
     }
@@ -528,11 +539,21 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 100%;
+      height: 70%;
+      z-index: 2;
+      top: 18%;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .zdivp {
       word-break: break-all;
       position: absolute;
       left: 15%;
-      top: 15%;
+      top: 10%;
       z-index: 2;
       color: #f64c3f;
     }
@@ -547,11 +568,21 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+    .zuyoutp {
+      // border: 1px solid red;
+      word-break: break-all;
+      position: absolute;
+      width: 100%;
+      height: 70%;
+      z-index: 2;
+      top: 18%;
+      background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
+    }
     .rdivp {
       word-break: break-all;
       position: absolute;
       left: 15%;
-      top: 15%;
+      top: 10%;
       z-index: 2;
       color: #f99004;
     }
@@ -583,32 +614,32 @@ onMounted(() => {});
       }
     }
   }
-  .lefttu{
+  .lefttu {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 33%;
     left: 0%;
-    top:6%;
+    top: 6%;
     background: url("/assets/3d/img/8.png") center / 100% 100% no-repeat;
   }
 
-  .ztup{
+  .ztup {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 33%;
     left: 0%;
-    top:6%;
+    top: 6%;
     background: url("/assets/3d/img/7.png") center / 100% 100% no-repeat;
   }
-  .rtu{
+  .rtu {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 33%;
     left: 0%;
-    top:6%;
+    top: 6%;
     background: url("/assets/3d/img/9.png") center / 100% 100% no-repeat;
   }
 
