@@ -2,7 +2,7 @@ import { STATE } from './STATE.js'
 import { CACHE } from './CACHE.js'
 import { DATA } from './DATA.js'
 import TU from './threeUtils.js'
-
+import { Reflector } from './js/Reflector.js'
 // 相机动画（传指定state）
 const targetPos = new Bol3D.Vector3()
 const pos = new Bol3D.Vector3()
@@ -308,35 +308,71 @@ function initSkyCar() {
   console.log('skyCar4: ', skyCar4);
   console.log('skyCar5: ', skyCar5);
   console.log('skyCar6: ', skyCar6);
-  
+
 
   setInterval(() => {
-    if(skyCar1.coordinate >= 1500000) skyCar1.coordinate = 19000
+    if (skyCar1.coordinate >= 1500000) skyCar1.coordinate = 19000
     skyCar1.coordinate += 200
     skyCar1.setPosition()
 
-    if(skyCar2.coordinate >= 1500000) skyCar2.coordinate = 19000
+    if (skyCar2.coordinate >= 1500000) skyCar2.coordinate = 19000
     skyCar2.coordinate += 200
     skyCar2.setPosition()
 
-    if(skyCar3.coordinate >= 1500000) skyCar3.coordinate = 19000
+    if (skyCar3.coordinate >= 1500000) skyCar3.coordinate = 19000
     skyCar3.coordinate += 200
     skyCar3.setPosition()
 
-    if(skyCar4.coordinate >= 1500000) skyCar4.coordinate = 19000
+    if (skyCar4.coordinate >= 1500000) skyCar4.coordinate = 19000
     skyCar4.coordinate += 200
     skyCar4.setPosition()
 
-    if(skyCar5.coordinate >= 1500000) skyCar5.coordinate = 19000
+    if (skyCar5.coordinate >= 1500000) skyCar5.coordinate = 19000
     skyCar5.coordinate += 200
     skyCar5.setPosition()
 
-    if(skyCar6.coordinate >= 1500000) skyCar6.coordinate = 19000
+    if (skyCar6.coordinate >= 1500000) skyCar6.coordinate = 19000
     skyCar6.coordinate += 200
     skyCar6.setPosition()
 
   }, 333)
 
+}
+
+function initReflexFloor() {
+  const geo1 = new Bol3D.PlaneGeometry(1000, 1000)
+
+  const reflector = new Reflector(geo1, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+    blur: 0.3
+  })
+
+  console.log('reflector: ', reflector);
+  reflector.rotation.x = -Math.PI / 2
+  reflector.position.set(0, -1, 0)
+  CACHE.container.scene.add(reflector)
+  CACHE.container.addBloom(reflector)
+  TU.setModelPosition(reflector)
+
+
+
+  const gui = new dat.GUI()
+  const floorBlur = gui.addFolder('地板模糊')
+  floorBlur
+    .add(reflector.material.uniforms.blurSize, 'value')
+    .min(0)
+    .max(2)
+    .step(0.01)
+    .onChange((val) => {
+      reflector.material.uniforms.blurSize.value = val
+    })
+
+
+
+  // TU.setModelPosition(light)
 }
 
 export const API = {
@@ -345,5 +381,6 @@ export const API = {
   loadGUI,
   handleLine,
   initSkyCar,
+  initReflexFloor,
   testBox
 }
