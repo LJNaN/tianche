@@ -96239,7 +96239,6 @@ void main(){
 	    }
 	    // *** updateSceneByNodes functions start ***
 	    updateElements(elements) {
-	        console.log('elements', elements);
 	        if (!elements)
 	            return;
 	        if (elements.tag) {

@@ -1,51 +1,128 @@
 <template>
-  <div class="dropdown">
-    <button @click="selects">{{ dropdownText }}</button>
-  </div>
-  <ul class="my-ul" v-show="showDropdown" @click="selectOption">
-      <li v-for="option in options" :key="option">{{ option }}</li>
+  <div class="xlk">
+    <div class="dropdown">
+      <button @click="selects">{{ selected }}</button>
+    </div>
+    <ul class="my-ul" v-show="showDropdown" @click="selectOption">
+      <li v-for="option in options" :key="option" @click="selectItem(option)">{{ option }}</li>
     </ul>
-</template>
-<script>
-import { ref } from "vue";
-export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-  },
-  setup(props) {
-    const dropdownText = ref(props.options[0]);
-    let showDropdown = ref(false);
+  </div>
 
-    function selects(event) {
-      showDropdown.value = !showDropdown.value;
-    }
-    
-    function selectOption(event) {
-      const target = event.target;
-      if (target.nodeName === "LI") {
-        dropdownText.value = target.innerText;
-        showDropdown.value = false;
-      }
-    }
-    return {
-      dropdownText,
-      showDropdown,
-      selects,
-      selectOption,
-    };
-  },
+  <div class="my-p">
+    <input type="text" class="my-p-input" placeholder="请输入关键字..." v-model="searchText" />
+    <div class="search" @click="API.search(selected, searchText)"></div>
+  </div>
+
+  <el-scrollbar class="candidate" v-show="candidateList.length && searchText && candidateShow">
+    <div class="candidate-item" v-for="item in candidateList" @click="handleItem(item)">
+      {{ item }}
+    </div>
+  </el-scrollbar>
+</template>
+
+<script setup>
+import { onMounted, ref, watch, nextTick } from "vue";
+import { DATA } from '@/ktJS/DATA'
+import { API } from '@/ktJS/API'
+import { STATE } from '@/ktJS/STATE'
+
+const options = ref(['天车', '轨道', 'OHB', '卡匣', '设备', '指令']);
+
+let selected = ref(options.value[0]);
+let searchText = ref('')
+let showDropdown = ref(false);
+let candidateList = ref([])
+let candidateShow = ref(false)
+
+watch(
+  () => searchText.value,
+  ((val) => {
+    candidateShow.value = true
+    searchCandidate(val)
+  })
+)
+
+
+function selects() {
+  showDropdown.value = !showDropdown.value;
+}
+
+function selectOption(event) {
+  const target = event.target;
+  if (target.nodeName === "LI") {
+    selected.value = target.innerText;
+    showDropdown.value = false;
+    searchText.value = ''
+  }
+}
+
+function selectItem(item) {
+  selected.value = item
 };
+
+
+
+function searchCandidate(text) {
+  candidateList.value = []
+  if (selected.value === '轨道') {
+    candidateList.value = DATA.pointCoordinateMap.filter(e => e.name.includes(text)).map(e => e.name)
+
+  } else if (selected.value === '天车') {
+    candidateList.value = STATE.sceneList.skyCarList.filter(e => e.id.includes(text)).map(e => e.id)
+  }
+}
+
+
+function handleItem(item) {
+  if (selected.value === '轨道' || selected.value === '天车') {
+    searchText.value = item
+  }
+
+  STATE.searchAnimateDesdory = true
+  setTimeout(() => {
+    API.search(selected.value, searchText.value)
+  }, 100)
+  nextTick(() => {
+    candidateShow.value = false
+  })
+}
+
+
 </script>
-<style scoped lang='less'>
+
+<style scoped lang="less">
+select option {
+  background-color: transparent;
+}
+
+.xlk {
+  background: url("/assets/3d/img/20.png") center / 100% 100% no-repeat;
+  word-break: break-all;
+  position: absolute;
+  width: 19%;
+  height: 53%;
+  z-index: 2;
+  bottom: 1%;
+  left: 1%;
+  pointer-events: all;
+}
+
+.search {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 2;
+  width: 5vh;
+  height: 4vh;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
   pointer-events: all;
   background: transparent;
 }
+
 .dropdown button {
   border: none;
   padding: 1.161vh;
@@ -56,7 +133,8 @@ export default {
   color: #FFFFFF;
   cursor: pointer;
 }
-.my-ul{
+
+.my-ul {
   width: 23.5%;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -67,6 +145,7 @@ export default {
   border-top: none;
   border-bottom: none;
 }
+
 .my-ul li {
   text-align: center;
   color: #ffff;
@@ -75,14 +154,80 @@ export default {
   cursor: pointer;
   background: transparent;
   border-bottom: 1px solid #bfbfbf;
+
   .li::after {
     content: "";
     display: block;
     margin-top: 5px;
   }
 }
+
 .my-ul li:hover {
   background-color: #f2f2f2;
   background: transparent;
+}
+
+.my-p {
+  word-break: break-all;
+  position: absolute;
+  font-size: 14px;
+  width: 13.5%;
+  height: 53%;
+  z-index: 2;
+  left: 6.5%;
+  bottom: 1%;
+
+  &-input {
+    word-break: break-all;
+    position: absolute;
+    border: none;
+    font-size: 14px;
+    top: 27.5%;
+    background: transparent;
+    color: #FFF;
+
+    &:focus {
+      border: none;
+      outline: none;
+      background: none;
+    }
+
+    &::placeholder {
+      color: #aaaaaa;
+    }
+  }
+}
+
+
+p {
+  color: #ffff;
+}
+
+.candidate {
+  height: 40vh;
+  width: 14.5%;
+  position: absolute;
+  top: 100%;
+  left: 5.5%;
+  display: flex;
+  flex-direction: column;
+
+  &-item {
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 30px;
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  &-item:nth-child(odd) {
+    background-color: #0004;
+  }
+
+  &-item:nth-child(even) {
+    background-color: #0001;
+  }
 }
 </style>

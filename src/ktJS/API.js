@@ -3,6 +3,7 @@ import { CACHE } from './CACHE.js'
 import { DATA } from './DATA.js'
 import TU from './threeUtils.js'
 import { Reflector } from './js/Reflector.js'
+import * as TWEEN from '@tweenjs/tween.js'
 // 相机动画（传指定state）
 const targetPos = new Bol3D.Vector3()
 const pos = new Bol3D.Vector3()
@@ -72,7 +73,7 @@ function cameraAnimation({ cameraState, callback, delayTime = 0, duration = 800 
 function loadGUI() {
   // gui
   const gui = new dat.GUI()
-  
+
 
   // filter pass
   const filterFolder = gui.addFolder('滤镜')
@@ -140,9 +141,12 @@ function loadGUI() {
 }
 
 function testBox() {
+  // TU.setModelPosition(STATE.sceneList.WWATA02V)
+
   const boxG = new Bol3D.BoxGeometry(5, 5, 5)
   const boxM = new Bol3D.MeshBasicMaterial({ color: 0xffffff })
   const box = new Bol3D.Mesh(boxG, boxM)
+  box.name = 'testBox'
   CACHE.box = box
   TU.setModelPosition(box)
   function waitContainerLoad() {
@@ -177,17 +181,27 @@ function handleLine() {
       child.userData.direction = direction
       child.userData.worldPosition = lineWorldPosition
       child.userData.long = long
+      child.userData.id = child.name.replace('-', '_')
+
+      if (!STATE.sceneList.lineList) {
+        STATE.sceneList.lineList = []
+      }
+      STATE.sceneList.lineList.push(child)
     }
   })
 }
 
+
+// 天车类
 class SkyCar {
   coordinate = 0
+  id = ''
   skyCarMesh = null
   animation = null
 
-  constructor(coordinate) {
-    this.coordinate = coordinate
+  constructor(opt) {
+    this.coordinate = opt.coordinate
+    this.id = opt.id
     this.initSkyCar()
     this.setPosition()
   }
@@ -196,6 +210,19 @@ class SkyCar {
     this.skyCarMesh = STATE.sceneList.tianche.clone()
     this.skyCarMesh.visible = true
     CACHE.container.scene.add(this.skyCarMesh)
+    // const animate1 = STATE.animations.tianche[0]._mixer.clipAction(STATE.animations.tianche[0]._clip)
+    // animate1.loop = Bol3D.LoopOnce
+    // animate1.clampWhenFinished = true
+    // CACHE.container.mixers.push(animate1)
+    // this.skyCarMesh.userData.animate = animate1
+
+    this.skyCarMesh.traverse(e => {
+      if (e.isMesh) {
+        e.userData.type = '天车'
+        e.userData.id = this.id
+        CACHE.container.clickObjects.push(e)
+      }
+    })
   }
 
   setPosition() {
@@ -226,12 +253,12 @@ class SkyCar {
         if (direction === 'x') {
           const moveDirection = map.direction === 'x' ? -1 : 1
           currentPosition.x = worldPosition.x + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
-          currentPosition.y = worldPosition.y
+          currentPosition.y = worldPosition.y - 9.3
           currentPosition.z = worldPosition.z
         } else if (direction === 'z') {
           const moveDirection = map.direction === 'z' ? -1 : 1
           currentPosition.x = worldPosition.x
-          currentPosition.y = worldPosition.y
+          currentPosition.y = worldPosition.y - 9.3
           currentPosition.z = worldPosition.z + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
         }
 
@@ -256,80 +283,232 @@ class SkyCar {
   }
 }
 
+// 加载模拟天车
 function initSkyCar() {
-  const skyCar1 = new SkyCar(82500)
-  const skyCar2 = new SkyCar(822200)
-  const skyCar3 = new SkyCar(180000)
-  const skyCar4 = new SkyCar(78000)
-  const skyCar5 = new SkyCar(226200)
-  const skyCar6 = new SkyCar(1353761)
-  
-  
-  
-  
-  
-  
+  DATA.skyCarMap.forEach(e => {
+    const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
+    console.log('skyCar: ', skyCar);
+    setInterval(() => {
+      if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
+      skyCar.coordinate += 200
+      skyCar.setPosition()
+    }, 333)
 
-
-  setInterval(() => {
-    if (skyCar1.coordinate >= 1500000) skyCar1.coordinate = 19000
-    skyCar1.coordinate += 200
-    skyCar1.setPosition()
-
-    if (skyCar2.coordinate >= 1500000) skyCar2.coordinate = 19000
-    skyCar2.coordinate += 200
-    skyCar2.setPosition()
-
-    if (skyCar3.coordinate >= 1500000) skyCar3.coordinate = 19000
-    skyCar3.coordinate += 200
-    skyCar3.setPosition()
-
-    if (skyCar4.coordinate >= 1500000) skyCar4.coordinate = 19000
-    skyCar4.coordinate += 200
-    skyCar4.setPosition()
-
-    if (skyCar5.coordinate >= 1500000) skyCar5.coordinate = 19000
-    skyCar5.coordinate += 200
-    skyCar5.setPosition()
-
-    if (skyCar6.coordinate >= 1500000) skyCar6.coordinate = 19000
-    skyCar6.coordinate += 200
-    skyCar6.setPosition()
-
-  }, 333)
-
+    if (!STATE.sceneList.skyCarList) {
+      STATE.sceneList.skyCarList = []
+    }
+    STATE.sceneList.skyCarList.push(skyCar)
+  })
 }
 
+// 加载反射器地板
 function initReflexFloor() {
-  const geo1 = new Bol3D.PlaneGeometry(1000, 1000)
+  const geo1 = new Bol3D.PlaneGeometry(600, 800)
 
   const reflector = new Reflector(geo1, {
     clipBias: 0,
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
     color: 0x777777,
-    blur: 0.23
+    blur: 0.4
   })
 
   reflector.rotation.x = -Math.PI / 2
-  reflector.position.set(0, -1, 0)
+  reflector.position.set(0, -0.4, 0)
   CACHE.container.scene.add(reflector)
   // TU.setModelPosition(reflector)
 
 
 
-  const gui = new dat.GUI()
-  const floorBlur = gui.addFolder('地板模糊')
-  floorBlur
-    .add(reflector.material.uniforms.blurSize, 'value')
-    .min(0)
-    .max(2)
-    .step(0.01)
-    .onChange((val) => {
-      reflector.material.uniforms.blurSize.value = val
-    })
+  // const gui = new dat.GUI()
+  // const floorBlur = gui.addFolder('地板模糊')
+  // floorBlur
+  //   .add(reflector.material.uniforms.blurSize, 'value')
+  //   .min(0)
+  //   .max(2)
+  //   .step(0.01)
+  //   .onChange((val) => {
+  //     reflector.material.uniforms.blurSize.value = val
+  //   })
 
 }
+
+// 加载临时的设备
+function initDeviceByMap() {
+  for (let key in DATA.deviceMap) {
+    DATA.deviceMap[key].forEach((e, index) => {
+      const model = STATE.sceneList[key].clone()
+      model.visible = true
+      model.position.set(...e.position)
+      model.rotation.y = e.rotate * Math.PI / 180
+      CACHE.container.scene.add(model)
+    })
+  }
+}
+
+
+// 二维的搜索 并跟随移动
+function search(type, id) {
+
+  STATE.searchAnimateDesdory = false
+  let obj = null
+  if (type === '天车') {
+    const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
+    if (skyCar) obj = skyCar.skyCarMesh
+
+  } else if (type === '轨道') {
+    const line = STATE.sceneList.lineList.find(e => e.userData.id === id)
+    if (line) obj = line
+  }
+
+  if (obj) {
+    let isCameraMoveOver = false // 动画移动完成
+
+    const camera = CACHE.container.orbitCamera
+    const contorl = CACHE.container.orbitControls
+    let objWorldPosition = new Bol3D.Vector3()
+    obj.getWorldPosition(objWorldPosition)
+    new TWEEN.Tween(camera.position)
+      .to({
+        x: objWorldPosition.x + 100,
+        y: objWorldPosition.y + 100,
+        z: objWorldPosition.z + 100
+      }, 1000)
+      .dynamic(true)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .start()
+      .onComplete(() => {
+        isCameraMoveOver = true
+      })
+
+    new TWEEN.Tween(contorl.target)
+      .to({
+        x: objWorldPosition.x,
+        y: objWorldPosition.y,
+        z: objWorldPosition.z
+      }, 1000)
+      .dynamic(true)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .start()
+
+    // 针对不同类型个性化的动画
+    let animate = () => { }
+
+    if (type === '天车') {
+      const eventFunc = () => {
+        STATE.searchAnimateDesdory = true
+        CACHE.container.orbitControls.removeEventListener('start', eventFunc)
+      }
+      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      animate = () => {
+
+        if (isCameraMoveOver) {
+          camera.position.set(objWorldPosition.x + 100, objWorldPosition.y + 100, objWorldPosition.z + 100)
+          contorl.target.set(objWorldPosition.x, objWorldPosition.y, objWorldPosition.z)
+        }
+      }
+
+    } else if (type === '轨道') {
+      const color = obj.material.color.clone()
+
+      obj.material.color.g = 0.0
+      obj.material.color.b = 0.0
+      const eventFunc = () => {
+        STATE.searchAnimateDesdory = true
+        obj.material.color = color
+        CACHE.container.orbitControls.removeEventListener('start', eventFunc)
+      }
+      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      animate = () => {
+        const dt = STATE.clock.getElapsedTime()
+        const redColor = Math.abs(Math.sin(dt * 2))
+        obj.material.color.r = redColor
+      }
+    }
+
+
+    render()
+    function render() {
+      obj.getWorldPosition(objWorldPosition)
+
+      TWEEN.update();
+      if (STATE.searchAnimateDesdory) {
+        return
+      } else {
+        animate()
+        requestAnimationFrame(render)
+      }
+    }
+  }
+}
+
+// 天车单击弹窗
+function initSkyCarPopup(type, id) {
+  const name = 'popup_' + type + '_' + id
+  const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
+  if (skyCar) {
+    const popupInGroup = skyCar.skyCarMesh.children.find(e => e.name === name)
+    if (!popupInGroup) {
+      const popup = new Bol3D.POI.Popup3DSprite({
+        value: `
+      <div style="
+        pointer-events: all;
+        margin:0;
+        color: #ffffff;
+      ">
+  
+        <div style="
+          position: absolute;
+          background: url('./assets/3d/img/39.png') center / 100% 100% no-repeat;
+          width: 30vw;
+          height: 20vh;
+          transform: translate(-50%, -50%);
+        ">
+          <p style="font-size: 8vh;line-height: 80%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${id}</p>
+        </div>
+  
+        <div style="
+          position: absolute;
+          background: url('./assets/3d/img/40.png') center / 100% 100% no-repeat;
+          width: 8vw;
+          height: 10vh;
+          animation: arrowJump 1s linear infinite;
+        ">
+        </div>
+      </div>
+        `,
+        position: [0, 0, 0],
+        className: 'popup3dclass popup3d_tianche',
+        closeVisible: true,
+        closeColor: "#FFFFFF",
+        closeCallback: (() => {
+          const pop = skyCar.skyCarMesh.children.find(e => e.name === name)
+          if (pop) {
+            pop.parent.remove(pop)
+          }
+        })
+      })
+
+      popup.scale.set(0.05, 0.05, 0.05)
+      popup.name = name
+      skyCar.skyCarMesh.add(popup)
+      popup.position.y = 2.3
+    }
+  }
+}
+
+// 获取动画
+const getAnimationList = () => {
+  const animations = {};
+  CACHE.container.mixerActions.forEach((item) => {
+    if(!animations[item._mixer._root.name]) {
+      animations[item._mixer._root.name] = []
+    }
+    animations[item._mixer._root.name].push(item)
+  });
+  STATE.animations = animations
+};
+
 
 export const API = {
   ...TU,
@@ -338,5 +517,9 @@ export const API = {
   handleLine,
   initSkyCar,
   initReflexFloor,
+  search,
+  initDeviceByMap,
+  initSkyCarPopup,
+  getAnimationList,
   testBox
 }

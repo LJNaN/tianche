@@ -31,3 +31,36 @@ li {
 body {
   font-size: 16px;
 }
+
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('/assets/YouSheBiaoTiHei.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.popup3dclass {
+  pointer-events: none !important;
+}
+
+
+.popup3d_tianche .popup-close {
+  scale: 2.8;
+  right: -9vw !important;
+  top: -9vh !important;
+}
+
+@keyframes arrowJump {
+  0% {
+    transform: translate(-50%, 40%);
+  }
+
+  50% {
+    transform: translate(-50%, 90%);
+  }
+
+  100% {
+    transform: translate(-50%, 40%);
+  }
+}

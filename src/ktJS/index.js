@@ -15,7 +15,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
     .then((result) => {
       const nodeData = result.data
       const fileList = result.fileList
-      
+
       container = new Bol3D.Container({
         publicPath: STATE.PUBLIC_PATH,
         container: domElement,
@@ -44,6 +44,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
         onLoad: (evt) => {
           // 
           window.container = evt
+          window.STATE = STATE
           CACHE.container = evt
 
           /**
@@ -52,13 +53,20 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           */
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
-            
+
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
 
 
-            // 天车处理
-            STATE.sceneList.tianche.visible = false
+            // 天车不知道为什么放大不了，手动放大
+            STATE.sceneList.tianche.scale.set(10, 10, 10)
+
+
+            // 默认的设备隐藏
+            const hiddenDevices = ['2LP机台（W01区域）', 'huojia4', 'huojia2', 'OLUS', 'WWATA03V', 'WHWSA01', 'WMACB03', 'WSSP008', 'WTSTK01', 'WWATA02V', '2LP机台（W01区域）', 'WBS002', 'WS0RA01(I01区域)', 'WS0RA01(I02区域)', 'WS0RA01', 'FOSB', 'FOUP']
+            hiddenDevices.forEach(e => {
+              STATE.sceneList[e].visible = false
+            })
 
             // 主场景处理
             const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
@@ -68,10 +76,14 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             }
 
             TU.init(container, Bol3D)
+            API.getAnimationList()
             API.handleLine()
-            // API.initSkyCar()
             API.initReflexFloor()
+            API.initDeviceByMap()
+            API.initSkyCar()
             // API.testBox()
+            API.search()
+
             // API.loadGUI()
           })
 
@@ -96,5 +108,14 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       const events = new Bol3D.Events(container)
       events.ondbclick = (e) => { }
       events.onhover = (e) => { }
+      events.onclick = (e) => {
+        if (e.objects.length) {
+          const obj = e.objects[0].object
+          if (obj.userData.type === '天车') {
+            API.search('天车', obj.userData.id)
+            API.initSkyCarPopup('天车', obj.userData.id)
+          }
+        }
+      }
     })
 }
