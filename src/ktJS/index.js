@@ -113,7 +113,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           const obj = e.objects[0].object
           if (obj.userData.type === '天车') {
             API.search('天车', obj.userData.id)
-            API.initSkyCarPopup('天车', obj.userData.id)
+            const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
+            if(instance) {
+              instance.initClickPopup()
+            }
           }
         }
       }

@@ -44,11 +44,14 @@ body {
   pointer-events: none !important;
 }
 
+.popup-close {
+  z-index: 3;
+}
 
 .popup3d_tianche .popup-close {
-  scale: 2.8;
-  right: -9vw !important;
-  top: -9vh !important;
+  scale: 2;
+  right: -11vw !important;
+  top: -20vh !important;
 }
 
 @keyframes arrowJump {

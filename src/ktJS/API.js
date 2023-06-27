@@ -198,11 +198,14 @@ class SkyCar {
   id = ''
   skyCarMesh = null
   animation = null
+  popup = null
+  clickPopup = null
 
   constructor(opt) {
     this.coordinate = opt.coordinate
     this.id = opt.id
     this.initSkyCar()
+    this.initPopup()
     this.setPosition()
   }
 
@@ -223,6 +226,154 @@ class SkyCar {
         CACHE.container.clickObjects.push(e)
       }
     })
+  }
+
+  initPopup() {
+    const name = 'popup_天车_' + this.id
+    const popup = new Bol3D.POI.Popup3DSprite({
+      value: `
+      <div style="
+        pointer-events: all;
+        margin:0;
+        color: #ffffff;
+      ">
+
+        <div style="
+          position: absolute;
+          background: url('./assets/3d/img/39.png') center / 100% 100% no-repeat;
+          width: 30vw;
+          height: 20vh;
+          transform: translate(-50%, -50%);
+        ">
+          <p style="font-size: 8vh;line-height: 80%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${this.id}</p>
+        </div>
+
+        <div style="
+          position: absolute;
+          background: url('./assets/3d/img/40.png') center / 100% 100% no-repeat;
+          width: 8vw;
+          height: 10vh;
+          animation: arrowJump 1s linear infinite;
+        ">
+        </div>
+      </div>
+    `,
+      position: [0, 0, 0],
+      className: 'popup3dclass popup3d_tianche',
+      closeVisible: false
+    })
+
+    popup.scale.set(0.05, 0.05, 0.05)
+    popup.name = name
+    this.skyCarMesh.add(popup)
+    this.skyCarMesh.userData.popup = popup
+    popup.position.y = 2.3
+    this.popup = popup
+
+    popup.element.addEventListener('click', (() => {
+      search('天车', this.id)
+      this.initClickPopup()
+    }))
+
+  }
+
+  initClickPopup() {
+    if (this.clickPopup) {
+      return;
+    }
+
+    const name = 'click_popup_天车_' + this.id
+    const items = [
+      { name: '卡匣ID', value: '09728' },
+      { name: 'COMMAND ID', value: '57129' },
+      { name: 'USER ID', value: '59741' },
+      { name: '起点', value: '69715' },
+      { name: '终点', value: '98558' },
+      { name: '优先级', value: '低' },
+      { name: '当前状态', value: '漫游' },
+      { name: 'ALARM 情况', value: '正常' },
+    ]
+    let textValue = ``
+    for (let i = 0; i < items.length; i++) {
+      textValue += `
+    
+      <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        height: 12.5%;
+        width: 100%;
+        background: url('./assets/3d/img/44.png') center / 100% 100% no-repeat;
+        ">
+        <p style="font-size: 2vh;">${items[i].name}</p>
+        <p style="font-size: 2vh;">${items[i].value}</p>
+      </div>`
+    }
+
+    const clickPopup = new Bol3D.POI.Popup3DSprite({
+      value: `
+      <div style="
+        pointer-events: none;
+        margin:0;
+        color: #ffffff;
+      ">
+
+      <div style="
+          position: absolute;
+          background: url('./assets/3d/img/43.png') center / 100% 100% no-repeat;
+          width: 25vw;
+          height: 47vh;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          left: 50%;
+          top: 50%;
+          z-index: 2;
+        ">
+        <p style="
+          font-size: 2vh;
+          font-weight: bold;
+          letter-spacing: 8px;
+          margin-left: 4px;
+          text-align: center;
+          margin-top: 10%;
+        ">
+          天车
+        </p>
+
+        <div style="
+          display: flex;
+          flex-direction: column;
+          width: 85%;
+          margin: 4% auto 0 auto;
+          height: 68%;
+        ">
+        ${textValue}
+        </div>
+      </div>
+    </div>
+    `,
+      position: [0, 0, 0],
+      className: 'popup3dclass popup3d_tianche',
+      closeVisible: true,
+      closeColor: "#FFFFFF",
+      closeCallback: (() => {
+        this.popup.visible = true
+        this.clickPopup.parent.remove(this.clickPopup)
+        this.clickPopup = null
+      })
+    })
+
+    clickPopup.scale.set(0.08, 0.08, 0.08)
+    clickPopup.name = name
+
+    console.log('this: ', this);
+    console.log('this.popup: ', this.popup);
+    this.popup.visible = false
+    this.skyCarMesh.add(clickPopup)
+    this.clickPopup = clickPopup
+    clickPopup.position.y = 2.3
   }
 
   setPosition() {
@@ -287,7 +438,7 @@ class SkyCar {
 function initSkyCar() {
   DATA.skyCarMap.forEach(e => {
     const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
-    console.log('skyCar: ', skyCar);
+
     setInterval(() => {
       if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
       skyCar.coordinate += 200
@@ -444,64 +595,14 @@ function search(type, id) {
 
 // 天车单击弹窗
 function initSkyCarPopup(type, id) {
-  const name = 'popup_' + type + '_' + id
-  const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
-  if (skyCar) {
-    const popupInGroup = skyCar.skyCarMesh.children.find(e => e.name === name)
-    if (!popupInGroup) {
-      const popup = new Bol3D.POI.Popup3DSprite({
-        value: `
-      <div style="
-        pointer-events: all;
-        margin:0;
-        color: #ffffff;
-      ">
-  
-        <div style="
-          position: absolute;
-          background: url('./assets/3d/img/39.png') center / 100% 100% no-repeat;
-          width: 30vw;
-          height: 20vh;
-          transform: translate(-50%, -50%);
-        ">
-          <p style="font-size: 8vh;line-height: 80%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${id}</p>
-        </div>
-  
-        <div style="
-          position: absolute;
-          background: url('./assets/3d/img/40.png') center / 100% 100% no-repeat;
-          width: 8vw;
-          height: 10vh;
-          animation: arrowJump 1s linear infinite;
-        ">
-        </div>
-      </div>
-        `,
-        position: [0, 0, 0],
-        className: 'popup3dclass popup3d_tianche',
-        closeVisible: true,
-        closeColor: "#FFFFFF",
-        closeCallback: (() => {
-          const pop = skyCar.skyCarMesh.children.find(e => e.name === name)
-          if (pop) {
-            pop.parent.remove(pop)
-          }
-        })
-      })
 
-      popup.scale.set(0.05, 0.05, 0.05)
-      popup.name = name
-      skyCar.skyCarMesh.add(popup)
-      popup.position.y = 2.3
-    }
-  }
 }
 
 // 获取动画
 const getAnimationList = () => {
   const animations = {};
   CACHE.container.mixerActions.forEach((item) => {
-    if(!animations[item._mixer._root.name]) {
+    if (!animations[item._mixer._root.name]) {
       animations[item._mixer._root.name] = []
     }
     animations[item._mixer._root.name].push(item)
