@@ -15,7 +15,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
     .then((result) => {
       const nodeData = result.data
       const fileList = result.fileList
-
+      
       container = new Bol3D.Container({
         publicPath: STATE.PUBLIC_PATH,
         container: domElement,
@@ -24,11 +24,12 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       const jsonParser = new Bol3D.JSONParser({
         container,
         modelUrls: fileList,
-        publicPath: '/editor/'  // 节点解析，资源文件路径（包含hdr，天空盒，图片等）最终路径为STATE.PUBLICPATH加上这一段
+        publicPath: '/editor/',  // 节点解析，资源文件路径（包含hdr，天空盒，图片等）最终路径为STATE.PUBLICPATH加上这一段
+        publicPath2: './assets/3d'
       })
       jsonParser.parseNodes(nodeData, jsonParser.nodes) // 解析节点, jsonParser.nodes存储了配置文件导出的所有节点信息
-      console.log('jsonParser.modelUrls,',jsonParser.modelUrls);
       container.loadModelsByUrl({
+        publicPath: './assets/3d',
         modelUrls: jsonParser.modelUrls,
         onProgress: (model, evt) => {
           if (!evt.sceneList) {
@@ -38,10 +39,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           }
           evt.sceneList[model.name] = model
 
-          // console.log('progress', model)
+          // 
         },
         onLoad: (evt) => {
-          // console.log('onload', evt)
+          // 
           window.container = evt
           CACHE.container = evt
 
@@ -51,15 +52,26 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           */
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
-            evt.sceneList.guidao.scale.set(STATE.sceneScale, STATE.sceneScale, STATE.sceneScale)
-            // container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
-            // container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
-            console.log('evt.sceneList.guidao: ', evt.sceneList.guidao);
+            
+            container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
+            container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
+
+
+            // 天车处理
             STATE.sceneList.tianche.visible = false
+
+            // 主场景处理
+            const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
+            if (di) {
+              di.material.transparent = true
+              di.material.opacity = 0.4
+              console.log('di.material: ', di.material);
+            }
 
             TU.init(container, Bol3D)
             API.handleLine()
-            API.initSkyCar()
+            // API.initSkyCar()
+            API.initReflexFloor()
             // API.testBox()
             // API.loadGUI()
           })
@@ -72,7 +84,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           * @callback: 更新完成回调
           */
           // evt.updateSceneByNodes(jsonParser.nodes[0] , 800 , () => {
-          //   console.log('update finish')
+          //   
           // })
 
 

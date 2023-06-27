@@ -4,7 +4,7 @@ import Scene from '@/views/Scene.vue'
 
 <template>
   <Scene/>
-  <router-view></router-view>
+  <!-- <router-view></router-view> -->
 </template>
 
 <style scoped>
