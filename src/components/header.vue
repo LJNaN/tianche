@@ -26,6 +26,9 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
 
 <template>
   <div class="header">
+    <div class="yyyy">
+
+    </div>
     <div class="xlk">
       <Dropdown :options="['天车', '轨道', 'OHB', '卡匣', '设备', '指令']" />
     </div>
@@ -58,6 +61,12 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
 </template>
 
 <style scoped lang='less'>
+.yyyy{
+  border: 1px solid red;
+  position: absolute;
+  width: 10%;
+  height: 10%;
+}
 .my-p {
   word-break: break-all;
   position: absolute;
