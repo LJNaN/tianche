@@ -28,18 +28,11 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
   <div class="header">
     <div class="xlk">
       <Dropdown :options="['天车', '轨道', 'OHB', '卡匣', '设备', '指令']" />
-
-      <!-- <select v-model="selectedOption" class="my-dropdown">
-        <option value="天车">天车</option>
-        <option value="轨道">轨道</option>
-        <option value="OHB">OHB</option>
-        <option value="卡匣">卡匣</option>
-        <option value="设备">设备</option>
-        <option value="指令">指令</option>
-      </select> -->
     </div>
+
     <div class="my-p">
-      <input type="text" name="" id="" placeholder="请输出设备id..."/>
+      <input type="text" class="my-p-input" placeholder="请输入设备id..." />
+      <div class="search"></div>
     </div>
 
     <div class="right">
@@ -59,13 +52,13 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
       <div class="right-fill">
         <img :src="qb" />
       </div>
+
     </div>
   </div>
 </template>
 
 <style scoped lang='less'>
 .my-p {
-  // border: 1px solid red;
   word-break: break-all;
   position: absolute;
   font-size: 14px;
@@ -74,23 +67,28 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
   z-index: 2;
   left: 6.5%;
   bottom: 1%;
-  input {
+
+  &-input {
     word-break: break-all;
     position: absolute;
     border: none;
     font-size: 14px;
     top: 27.5%;
     background: transparent;
+    color: #FFF;
+
     &:focus {
       border: none;
       outline: none;
       background: none;
     }
+
     &::placeholder {
-      color: #a39696;
+      color: #aaaaaa;
     }
   }
 }
+
 .my-dropdown {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -102,17 +100,9 @@ const options = reactive(["天车", "轨道", "OHB", "卡匣", "设备", "指令
   background-color: transparent;
   appearance: none;
   margin-left: 15px;
-  // color: #FFFF;
 }
+
 select option {
-  background-color: transparent;
-}
-select option[value="天车"],
-select option[value="轨道"],
-select option[value="OHB"],
-select option[value="卡匣"],
-select option[value="设备"],
-select option[value="指令"] {
   background-color: transparent;
 }
 
@@ -127,11 +117,12 @@ select option[value="指令"] {
   left: 1%;
   pointer-events: all;
 }
+
 p {
   color: #ffff;
 }
+
 .header {
-  // border: 1px solid red;
   background: url("/assets/3d/img/4.png") center / 134% 100% no-repeat;
   position: absolute;
   left: 0;
@@ -142,7 +133,6 @@ p {
   pointer-events: all;
 
   .right {
-    // border: 1px solid red;
     position: absolute;
     right: 0;
     top: 16%;
@@ -158,6 +148,7 @@ p {
       height: 60%;
       align-items: center;
       justify-content: center;
+
       img {
         width: 21px;
         height: 17px;
@@ -166,6 +157,7 @@ p {
         justify-content: center;
       }
     }
+
     &-time {
       flex: 3;
       height: 60%;
@@ -174,14 +166,15 @@ p {
       justify-content: center;
       gap: 10px;
     }
+
     &-fill {
-      // border: 1px solid red;
       flex: 1;
       height: 60%;
       align-items: center;
       display: flex;
       justify-content: start;
       align-items: center;
+
       img {
         top: 10%;
         width: 18px;
@@ -191,5 +184,15 @@ p {
       }
     }
   }
+}
+
+.search {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  z-index: 2;
+  width: 10%;
+  height: 10%;
+  border: 1px solid rgb(231, 16, 63);
 }
 </style>

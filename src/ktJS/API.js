@@ -72,46 +72,7 @@ function cameraAnimation({ cameraState, callback, delayTime = 0, duration = 800 
 function loadGUI() {
   // gui
   const gui = new dat.GUI()
-  // // default opts
-  // const deafultsScene = { distance: 8000, }
-  // // scenes
-  // const scenesFolder = gui.addFolder('场景')
-  // // toneMapping
-  // scenesFolder.add(CACHE.container.renderer, 'toneMappingExposure', 0, 10).step(0.001).name('exposure')
-  // scenesFolder.add(CACHE.container.ambientLight, 'intensity').step(0.1).min(0).max(10).name('环境光强度')
-  // scenesFolder.add(CACHE.container.gammaPass, 'enabled').name('gamma校正')
-  // scenesFolder
-  //   .addColor(CACHE.container.attrs.lights.directionLights[0], 'color')
-  //   .onChange((val) => {
-  //     CACHE.container.directionLights[0].color.set(val)
-  //   })
-  //   .name('平行光颜色')
-  // scenesFolder.add(CACHE.container.directionLights[0].position, 'x')
-  // scenesFolder.add(CACHE.container.directionLights[0].position, 'y')
-  // scenesFolder.add(CACHE.container.directionLights[0].position, 'z')
-  // scenesFolder.add(deafultsScene, 'distance').onChange((val) => {
-  //   CACHE.container.directionLights[0].shadow.camera.left = -val
-  //   CACHE.container.directionLights[0].shadow.camera.right = val
-  //   CACHE.container.directionLights[0].shadow.camera.top = val
-  //   CACHE.container.directionLights[0].shadow.camera.bottom = -val
-  //   CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
-  //   CACHE.container.directionLights[0].shadow.needsUpdate = true
-  // })
-  // scenesFolder.add(CACHE.container.directionLights[0].shadow.camera, 'far').onChange(() => {
-  //   CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
-  //   CACHE.container.directionLights[0].shadow.needsUpdate = true
-  // })
-  // scenesFolder.add(CACHE.container.directionLights[0].shadow.camera, 'near').onChange(() => {
-  //   CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
-  //   CACHE.container.directionLights[0].shadow.needsUpdate = true
-  // })
-  // scenesFolder
-  //   .add(CACHE.container.directionLights[0].shadow, 'bias')
-  //   .step(0.0001)
-  //   .onChange(() => {
-  //     CACHE.container.directionLights[0].shadow.needsUpdate = true
-  //   })
-  // scenesFolder.add(CACHE.container.directionLights[0], 'intensity').step(0.1).min(0).max(10)
+  
 
   // filter pass
   const filterFolder = gui.addFolder('滤镜')
@@ -302,12 +263,12 @@ function initSkyCar() {
   const skyCar4 = new SkyCar(78000)
   const skyCar5 = new SkyCar(226200)
   const skyCar6 = new SkyCar(1353761)
-  console.log('skyCar1: ', skyCar1);
-  console.log('skyCar2: ', skyCar2);
-  console.log('skyCar3: ', skyCar3);
-  console.log('skyCar4: ', skyCar4);
-  console.log('skyCar5: ', skyCar5);
-  console.log('skyCar6: ', skyCar6);
+  
+  
+  
+  
+  
+  
 
 
   setInterval(() => {
@@ -347,15 +308,13 @@ function initReflexFloor() {
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
     color: 0x777777,
-    blur: 0.3
+    blur: 0.23
   })
 
-  console.log('reflector: ', reflector);
   reflector.rotation.x = -Math.PI / 2
   reflector.position.set(0, -1, 0)
   CACHE.container.scene.add(reflector)
-  CACHE.container.addBloom(reflector)
-  TU.setModelPosition(reflector)
+  // TU.setModelPosition(reflector)
 
 
 
@@ -370,9 +329,6 @@ function initReflexFloor() {
       reflector.material.uniforms.blurSize.value = val
     })
 
-
-
-  // TU.setModelPosition(light)
 }
 
 export const API = {

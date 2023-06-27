@@ -1,7 +1,6 @@
 <template>
   <div class="dropdown">
     <button @click="selects">{{ dropdownText }}</button>
-    
   </div>
   <ul class="my-ul" v-show="showDropdown" @click="selectOption">
       <li v-for="option in options" :key="option">{{ option }}</li>
@@ -19,12 +18,11 @@ export default {
   setup(props) {
     const dropdownText = ref(props.options[0]);
     let showDropdown = ref(false);
-    console.log(showDropdown.value);
 
     function selects(event) {
-      console.log(showDropdown);
       showDropdown.value = !showDropdown.value;
     }
+    
     function selectOption(event) {
       const target = event.target;
       if (target.nodeName === "LI") {
@@ -49,20 +47,17 @@ export default {
   background: transparent;
 }
 .dropdown button {
-//   border: 1px solid #ccc;
   border: none;
-  background-color: #fff;
   padding: 1.161vh;
   width: 160%;
-  //   height: 80%;
   font-size: 14px;
   text-align: center;
   background: transparent;
-  color: #a39696;
-  //   vertical-align: baseline;
+  color: #FFFFFF;
+  cursor: pointer;
 }
 .my-ul{
-    width: 23.5%;
+  width: 23.5%;
   border: 1px solid #ccc;
   background-color: #fff;
   list-style: none;
@@ -71,7 +66,6 @@ export default {
   text-align: center;
   border-top: none;
   border-bottom: none;
-//   outline: 1px solid #ccc;
 }
 .my-ul li {
   text-align: center;

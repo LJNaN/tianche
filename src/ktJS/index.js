@@ -64,8 +64,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
             if (di) {
               di.material.transparent = true
-              di.material.opacity = 0.4
-              console.log('di.material: ', di.material);
+              di.material.opacity = 0.65
             }
 
             TU.init(container, Bol3D)
