@@ -500,8 +500,10 @@ function initDeviceByMap() {
 
 // 二维的搜索 并跟随移动
 function search(type, id) {
-
+  // 恢复动画销毁为false
   STATE.searchAnimateDesdory = false
+
+  // 找到当前 obj
   let obj = null
   if (type === '天车') {
     const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
@@ -513,18 +515,27 @@ function search(type, id) {
   }
 
   if (obj) {
+    // 相机移动动画
     let isCameraMoveOver = false // 动画移动完成
-
     const camera = CACHE.container.orbitCamera
     const contorl = CACHE.container.orbitControls
     let objWorldPosition = new Bol3D.Vector3()
     obj.getWorldPosition(objWorldPosition)
+
     new TWEEN.Tween(camera.position)
       .to({
-        x: objWorldPosition.x + 100,
-        y: objWorldPosition.y + 100,
-        z: objWorldPosition.z + 100
-      }, 1000)
+        x: Math.abs(camera.position.x) > 100 ? camera.position.x / 2 : camera.position.x,
+        y: Math.abs(camera.position.y) > 200 ? camera.position.y / 2 : camera.position.y,
+        z: Math.abs(camera.position.z) > 100 ? camera.position.z / 2 : camera.position.z
+      }, 1500)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .start()
+      .onUpdate(() => {
+        camera.updateProjectionMatrix()
+      })
+
+    new TWEEN.Tween(contorl.target)
+      .to(objWorldPosition, 1500)
       .dynamic(true)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .start()
@@ -532,15 +543,6 @@ function search(type, id) {
         isCameraMoveOver = true
       })
 
-    new TWEEN.Tween(contorl.target)
-      .to({
-        x: objWorldPosition.x,
-        y: objWorldPosition.y,
-        z: objWorldPosition.z
-      }, 1000)
-      .dynamic(true)
-      .easing(TWEEN.Easing.Quadratic.InOut)
-      .start()
 
     // 针对不同类型个性化的动画
     let animate = () => { }
@@ -550,11 +552,10 @@ function search(type, id) {
         STATE.searchAnimateDesdory = true
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
+
       CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
-
         if (isCameraMoveOver) {
-          camera.position.set(objWorldPosition.x + 100, objWorldPosition.y + 100, objWorldPosition.z + 100)
           contorl.target.set(objWorldPosition.x, objWorldPosition.y, objWorldPosition.z)
         }
       }

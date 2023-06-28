@@ -63,10 +63,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
 
             // 默认的设备隐藏
-            const hiddenDevices = ['2LP机台（W01区域）', 'huojia4', 'huojia2', 'OLUS', 'WWATA03V', 'WHWSA01', 'WMACB03', 'WSSP008', 'WTSTK01', 'WWATA02V', '2LP机台（W01区域）', 'WBS002', 'WS0RA01(I01区域)', 'WS0RA01(I02区域)', 'WS0RA01', 'FOSB', 'FOUP']
-            hiddenDevices.forEach(e => {
-              STATE.sceneList[e].visible = false
-            })
+            // const hiddenDevices = ['2LPjitai(W01)', 'huojia4', 'huojia2', 'OLUS', 'WWATA03V', 'WHWSA01', 'WMACB03', 'WSSP008', 'WTSTK01', 'WWATA02V', '2LPjitai(W01)', 'WBS002', 'WS0RA01(I01)', 'WS0RA01(I02)', 'WS0RA01', 'FOSB', 'FOUP']
+            // hiddenDevices.forEach(e => {
+              // STATE.sceneList[e].visible = false
+            // })
 
             // 主场景处理
             const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')

@@ -10814,8 +10814,8 @@
           "parent": ""
         },
         {
-          "uuid": "root_WS0RA01(I02区域)_7",
-          "name": "WS0RA01(I02区域)",
+          "uuid": "root_WS0RA01(I02)_7",
+          "name": "WS0RA01(I02)",
           "visible": true,
           "selected": false,
           "index": 0,
@@ -10823,7 +10823,7 @@
           "type": "Group",
           "children": [
             {
-              "uuid": "root_WS0RA01(I02区域)_7_Default_light",
+              "uuid": "root_WS0RA01(I02)_7_Default_light",
               "name": "Default_light",
               "visible": true,
               "selected": false,
@@ -10850,10 +10850,10 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_WS0RA01(I02区域)_7"
+              "parent": "root_WS0RA01(I02)_7"
             },
             {
-              "uuid": "root_WS0RA01(I02区域)_7_Box127",
+              "uuid": "root_WS0RA01(I02)_7_Box127",
               "name": "Box127",
               "visible": true,
               "selected": false,
@@ -10862,7 +10862,7 @@
               "type": "Group",
               "children": [
                 {
-                  "uuid": "root_WS0RA01(I02区域)_7_Box127_Box127_1",
+                  "uuid": "root_WS0RA01(I02)_7_Box127_Box127_1",
                   "name": "Box127_1",
                   "visible": true,
                   "selected": false,
@@ -10892,7 +10892,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I02区域)_7_Box127",
+                  "parent": "root_WS0RA01(I02)_7_Box127",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #142",
@@ -10915,7 +10915,7 @@
                   }
                 },
                 {
-                  "uuid": "root_WS0RA01(I02区域)_7_Box127_Box127_2",
+                  "uuid": "root_WS0RA01(I02)_7_Box127_Box127_2",
                   "name": "Box127_2",
                   "visible": true,
                   "selected": false,
@@ -10945,7 +10945,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I02区域)_7_Box127",
+                  "parent": "root_WS0RA01(I02)_7_Box127",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #143",
@@ -10968,7 +10968,7 @@
                   }
                 },
                 {
-                  "uuid": "root_WS0RA01(I02区域)_7_Box127_Box127_3",
+                  "uuid": "root_WS0RA01(I02)_7_Box127_Box127_3",
                   "name": "Box127_3",
                   "visible": true,
                   "selected": false,
@@ -10998,7 +10998,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I02区域)_7_Box127",
+                  "parent": "root_WS0RA01(I02)_7_Box127",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #144",
@@ -11040,7 +11040,7 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_WS0RA01(I02区域)_7"
+              "parent": "root_WS0RA01(I02)_7"
             }
           ],
           "options": {
@@ -11065,8 +11065,8 @@
           "parent": ""
         },
         {
-          "uuid": "root_WS0RA01(I01区域)_6",
-          "name": "WS0RA01(I01区域)",
+          "uuid": "root_WS0RA01(I01)_6",
+          "name": "WS0RA01(I01)",
           "visible": true,
           "selected": false,
           "index": 0,
@@ -11074,7 +11074,7 @@
           "type": "Group",
           "children": [
             {
-              "uuid": "root_WS0RA01(I01区域)_6_Default_light",
+              "uuid": "root_WS0RA01(I01)_6_Default_light",
               "name": "Default_light",
               "visible": true,
               "selected": false,
@@ -11101,10 +11101,10 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_WS0RA01(I01区域)_6"
+              "parent": "root_WS0RA01(I01)_6"
             },
             {
-              "uuid": "root_WS0RA01(I01区域)_6_Box126",
+              "uuid": "root_WS0RA01(I01)_6_Box126",
               "name": "Box126",
               "visible": true,
               "selected": false,
@@ -11113,7 +11113,7 @@
               "type": "Group",
               "children": [
                 {
-                  "uuid": "root_WS0RA01(I01区域)_6_Box126_Box126_1",
+                  "uuid": "root_WS0RA01(I01)_6_Box126_Box126_1",
                   "name": "Box126_1",
                   "visible": true,
                   "selected": false,
@@ -11143,7 +11143,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I01区域)_6_Box126",
+                  "parent": "root_WS0RA01(I01)_6_Box126",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #166",
@@ -11166,7 +11166,7 @@
                   }
                 },
                 {
-                  "uuid": "root_WS0RA01(I01区域)_6_Box126_Box126_2",
+                  "uuid": "root_WS0RA01(I01)_6_Box126_Box126_2",
                   "name": "Box126_2",
                   "visible": true,
                   "selected": false,
@@ -11196,7 +11196,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I01区域)_6_Box126",
+                  "parent": "root_WS0RA01(I01)_6_Box126",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #167",
@@ -11219,7 +11219,7 @@
                   }
                 },
                 {
-                  "uuid": "root_WS0RA01(I01区域)_6_Box126_Box126_3",
+                  "uuid": "root_WS0RA01(I01)_6_Box126_Box126_3",
                   "name": "Box126_3",
                   "visible": true,
                   "selected": false,
@@ -11249,7 +11249,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_WS0RA01(I01区域)_6_Box126",
+                  "parent": "root_WS0RA01(I01)_6_Box126",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #168",
@@ -11291,7 +11291,7 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_WS0RA01(I01区域)_6"
+              "parent": "root_WS0RA01(I01)_6"
             }
           ],
           "options": {
@@ -12267,8 +12267,8 @@
           "parent": ""
         },
         {
-          "uuid": "root_2LP机台（W01区域）_13",
-          "name": "2LP机台（W01区域）",
+          "uuid": "root_2LPjitai(W01)_13",
+          "name": "2LPjitai(W01)",
           "visible": true,
           "selected": false,
           "index": 0,
@@ -12276,7 +12276,7 @@
           "type": "Group",
           "children": [
             {
-              "uuid": "root_2LP机台（W01区域）_13_Default_light",
+              "uuid": "root_2LPjitai(W01)_13_Default_light",
               "name": "Default_light",
               "visible": true,
               "selected": false,
@@ -12303,10 +12303,10 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_2LP机台（W01区域）_13"
+              "parent": "root_2LPjitai(W01)_13"
             },
             {
-              "uuid": "root_2LP机台（W01区域）_13_图形001",
+              "uuid": "root_2LPjitai(W01)_13_图形001",
               "name": "图形001",
               "visible": true,
               "selected": false,
@@ -12315,7 +12315,7 @@
               "type": "Group",
               "children": [
                 {
-                  "uuid": "root_2LP机台（W01区域）_13_图形001_图形001_1",
+                  "uuid": "root_2LPjitai(W01)_13_图形001_图形001_1",
                   "name": "图形001_1",
                   "visible": true,
                   "selected": false,
@@ -12345,7 +12345,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_2LP机台（W01区域）_13_图形001",
+                  "parent": "root_2LPjitai(W01)_13_图形001",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #46",
@@ -12368,7 +12368,7 @@
                   }
                 },
                 {
-                  "uuid": "root_2LP机台（W01区域）_13_图形001_图形001_2",
+                  "uuid": "root_2LPjitai(W01)_13_图形001_图形001_2",
                   "name": "图形001_2",
                   "visible": true,
                   "selected": false,
@@ -12398,7 +12398,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_2LP机台（W01区域）_13_图形001",
+                  "parent": "root_2LPjitai(W01)_13_图形001",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #47",
@@ -12421,7 +12421,7 @@
                   }
                 },
                 {
-                  "uuid": "root_2LP机台（W01区域）_13_图形001_图形001_3",
+                  "uuid": "root_2LPjitai(W01)_13_图形001_图形001_3",
                   "name": "图形001_3",
                   "visible": true,
                   "selected": false,
@@ -12451,7 +12451,7 @@
                     "bloom": false
                   },
                   "show": true,
-                  "parent": "root_2LP机台（W01区域）_13_图形001",
+                  "parent": "root_2LPjitai(W01)_13_图形001",
                   "matOptions": {
                     "type": "MeshStandardMaterial",
                     "name": "Material #48",
@@ -12493,7 +12493,7 @@
                 "renderOrder": 0
               },
               "show": true,
-              "parent": "root_2LP机台（W01区域）_13"
+              "parent": "root_2LPjitai(W01)_13"
             }
           ],
           "options": {
@@ -21514,14 +21514,14 @@
     "WBS002.glb",
     "WHWSA01.glb",
     "WMACB03.glb",
-    "WS0RA01(I01区域).glb",
-    "WS0RA01(I02区域).glb",
+    "WS0RA01(I01).glb",
+    "WS0RA01(I02).glb",
     "WS0RA01.glb",
     "WSSP008.glb",
     "WTSTK01.glb",
     "WWATA02V.glb",
     "WWATA03V.glb",
-    "2LP机台（W01区域）.glb",
+    "2LPjitai(W01).glb",
     "FOSB.glb",
     "tianche.glb",
     "huojia4.glb",

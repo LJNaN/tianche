@@ -262,7 +262,7 @@ const deviceMap = {
     { rotate: 0, position: [-226, 0, -7] },
     { rotate: 0, position: [-194, 0, -7] }
   ],
-  '2LP机台（W01区域）': [
+  '2LPjitai(W01)': [
     { rotate: 180, position: [-158, 0, -62] }
   ]
 }
