@@ -6,7 +6,7 @@
     <div class="right">
       <div class="right-weather">
         <img :src="urlyun" />
-        <p>多云 19-24℃</p>
+        <p>多云 20-24℃</p>
       </div>
 
       <div class="right-time">

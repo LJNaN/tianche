@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import * as echarts from "echarts";
-import Header from '@/components/Header.vue'
+import Header from '@/components/header.vue'
 import Right from './right.vue'
 import Bottom from './bottom.vue'
 </script>
