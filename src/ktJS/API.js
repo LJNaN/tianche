@@ -1,9 +1,76 @@
 import { STATE } from './STATE.js'
 import { CACHE } from './CACHE.js'
 import { DATA } from './DATA.js'
-import TU from './threeUtils.js'
+import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
+import mockData from './js/mock'
+
+
+// 获取数据
+function getData() {
+  STATE.sceneList.skyCarList = []
+  let wsMessage = null
+
+  // 真实数据
+  // ======================================
+  // const ws = new WebSocket(
+  //   // `ws://localhost:8001/MOC/OHTC/SendData/${new Date() * 1}`
+  //   `ws://192.168.150.133:8090/MOC/OHTC/SendData/${new Date() * 1}`
+  // )
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
+
+
+
+  // 模拟数据
+  // =======================================
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData.length) i = 0
+  //   drive(JSON.parse(mockData[i].data))
+  //   i++
+  // }, 333)
+
+}
+
+// 数据驱动
+function drive(wsMessage) {
+
+  // 处理天车
+  if (wsMessage?.VehicleInfo?.length) {
+    wsMessage.VehicleInfo.forEach(e => {
+      const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
+      if (skyCar) {
+        skyCar.coordinate = e.position
+        skyCar.setPosition()
+      } else {
+        const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
+        STATE.sceneList.skyCarList.push(newCar)
+      }
+    })
+  }
+
+  // 处理报警
+  if (wsMessage?.AlarmInfo?.length) {
+    if (STATE.alarmList) {
+      wsMessage.AlarmInfo.forEach(e => {
+        if (e.alarmType === 'set') {
+          STATE.alarmList.value.unshift(e)
+        } else if (e.alarmType === 'cancel') {
+          const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
+          if (itemIndex >= 0) {
+            STATE.alarmList.value.splice(itemIndex, 1)
+          }
+        }
+      })
+    }
+  }
+}
+
+
 // 相机动画（传指定state）
 const targetPos = new Bol3D.Vector3()
 const pos = new Bol3D.Vector3()
@@ -200,6 +267,7 @@ class SkyCar {
   animation = null
   popup = null
   clickPopup = null
+  mixer = null
 
   constructor(opt) {
     this.coordinate = opt.coordinate
@@ -210,14 +278,20 @@ class SkyCar {
   }
 
   initSkyCar() {
+    const this_ = this
     this.skyCarMesh = STATE.sceneList.tianche.clone()
     this.skyCarMesh.visible = true
     CACHE.container.scene.add(this.skyCarMesh)
-    // const animate1 = STATE.animations.tianche[0]._mixer.clipAction(STATE.animations.tianche[0]._clip)
-    // animate1.loop = Bol3D.LoopOnce
-    // animate1.clampWhenFinished = true
-    // CACHE.container.mixers.push(animate1)
-    // this.skyCarMesh.userData.animate = animate1
+
+    this.mixer = new Bol3D.AnimationMixer(this.skyCarMesh)
+    const clip = STATE.animations.tianche[0]._clip
+    this.mixer.clipAction(clip).play()
+
+    animate()
+    function animate() {
+      this_.mixer.update(0.01)
+      requestAnimationFrame(animate)
+    }
 
     this.skyCarMesh.traverse(e => {
       if (e.isMesh) {
@@ -368,8 +442,8 @@ class SkyCar {
     clickPopup.scale.set(0.08, 0.08, 0.08)
     clickPopup.name = name
 
-    console.log('this: ', this);
-    console.log('this.popup: ', this.popup);
+
+
     this.popup.visible = false
     this.skyCarMesh.add(clickPopup)
     this.clickPopup = clickPopup
@@ -450,6 +524,10 @@ function initSkyCar() {
     }
     STATE.sceneList.skyCarList.push(skyCar)
   })
+
+
+  console.log('STATE.sceneList: ', STATE.sceneList.skyCarList);
+  console.log('STATE.aimate: ', STATE.animations.tianche);
 }
 
 // 加载反射器地板
@@ -614,6 +692,7 @@ const getAnimationList = () => {
 
 export const API = {
   ...TU,
+  getData,
   cameraAnimation,
   loadGUI,
   handleLine,

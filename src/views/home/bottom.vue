@@ -1,5 +1,6 @@
 <template>
   <div class="bottom">
+
     <div class="leftdiv">
       <div class="zuyoutp"></div>
       <div class="lefttu"></div>
@@ -8,39 +9,39 @@
         <div class="table-title">
           <span v-for="(item, index) in title" :key="index">{{ item }}</span>
         </div>
-        <ul class="table-content">
-          <li v-for="(item, index) in content" :key="index">
-            <p :title="item.data1">
-              <span class="zitichaochu">{{ item.data1 }}</span>
+        <el-scrollbar class="table-content">
+          <div v-for="(item, index) in alarmList" :key="item.alarmId">
+            <p title="报警代码">
+              <span class="zitichaochu">{{ item.alarmCode }}</span>
             </p>
-            <p :title="item.data2">
-              <span class="zitichaochu">{{ item.data2 }}</span>
+            <p title="异常描述">
+              <span class="zitichaochu">{{ item.alarmData }}</span>
             </p>
-            <p :title="item.data3">
-              <span class="zitichaochu">{{ item.data3 }}</span>
+            <p title="天车">
+              <span class="zitichaochu">{{ item.remark }}</span>
             </p>
-            <p :title="item.data4">
-              <span class="zitichaochu">{{ item.data4 }}</span>
+            <p title="创建时间">
+              <span class="zitichaochu">{{ item.createTime }}</span>
             </p>
-            <p :title="item.data5">
-              <span class="zitichaochu">{{ item.data5 }}</span>
-            </p>
-          </li>
-        </ul>
+          </div>
+        </el-scrollbar>
       </div>
     </div>
+
     <div class="zdiv">
       <div class="zuyoutp"></div>
       <div class="ztup"></div>
       <p class="zdivp">Delivery Time</p>
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
+
     <div class="rdiv">
       <div class="zuyoutp"></div>
       <div class="rtu"></div>
       <p class="rdivp">Delivery Count</p>
       <Chart :option="option3" width="100%" height="100%"></Chart>
     </div>
+    
   </div>
 </template>
 
@@ -48,29 +49,27 @@
 import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
+import { STATE } from '@/ktJS/STATE.js'
 
-const title = ["报警代码", "异常描述", "其他信息", "天车", "创建时间"];
+const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
-const content = [
+// 报警列表
+const alarmList = ref([])
+STATE.alarmList = alarmList
+
+// 数据格式
+const mockAlarmList = [
   {
-    data1: "M2053",
-    data2: "2053_天车前方 障礙检知-近 ",
-    data3: "卡匣【xxxxxx】, 站位【WSTBW01_1005】 位置【150762】 ",
-    data4: "V0015",
-    data5: "2023-05-20 14:07:32",
+    alarmId: 0,
+    alarmCode: "M2053",
+    alarmData: "2053_天车前方 障礙检知-近 ",
+    alarmType: "set",
+    remark: "V0015",
+    createTime: "2023-05-20 14:07:32",
   },
-];
+]
 
-for (let index = 0; index < 2; index++) {
-  content.push({
-    data1: "M2053",
-    data2: "2053_天车前方 障礙检知-近 ",
-    data3: "卡匣【xxxxxx】, 站位【WSTBW01_1005】 位置【150762】 ",
-    data4: "V0015",
-    data5: "2023-05-20 14:07:32",
-  });
-}
-
+// 第二个表
 const option2 = reactive({
   grid: {
     top: "45%",
@@ -252,6 +251,7 @@ const option2 = reactive({
   ],
 });
 
+// 第三个表
 const option3 = reactive({
   tooltip: {
     trigger: "axis",
@@ -366,9 +366,9 @@ const option3 = reactive({
   ],
   series: [
     {
-      
+
       itemStyle: {
-        
+
         color: {
           type: "linear",
           x: 0, //右
@@ -436,27 +436,11 @@ const option3 = reactive({
     },
   ],
 });
-
-// setInterval(() => {
-//   option.series.forEach((e) => {
-//     let randomDataArr = [];
-//     for (let i = 0; i < 7; i++) {
-//       randomDataArr.push({
-//         value: Math.floor(Math.random() * 500) + 500,
-//         name: i,
-//       });
-//     }
-//     e.data = randomDataArr;
-//   });
-// }, 6000);
-
-onMounted(() => {});
 </script>
 
 <style lang='less' scoped>
 .bottom {
   background: url("/assets/3d/img/3.png") center / 100% 100% no-repeat;
-  // border: 1px solid red;
   word-break: break-all;
   position: absolute;
   left: 0.5%;
@@ -466,8 +450,6 @@ onMounted(() => {});
   z-index: 2;
 
   .leftdiv {
-    // border: 1px solid red;
-    // border: 1px solid rgb(0, 255, 157);
     word-break: break-all;
     position: absolute;
     left: 0.5%;
@@ -475,8 +457,8 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+
     .zuyoutp {
-      // border: 1px solid red;
       word-break: break-all;
       position: absolute;
       width: 100%;
@@ -485,14 +467,11 @@ onMounted(() => {});
       top: 18%;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .tablediv {
-      background: linear-gradient(
-        to right,
-        rgba(29, 138, 255) -400%,
-        rgba(29, 138, 255, 0)
-      );
-      // background: url("/assets/3d/img/2.png") center / 100% 100% no-repeat;
-      // border: 1px solid gold;
+      background: linear-gradient(to right,
+          rgba(29, 138, 255) -400%,
+          rgba(29, 138, 255, 0));
       word-break: break-all;
       position: absolute;
       left: 5%;
@@ -500,9 +479,9 @@ onMounted(() => {});
       width: 90%;
       height: 55%;
       z-index: 2;
-      // border:1px solid yellow;
       overflow: hidden;
     }
+
     .zdivp {
       word-break: break-all;
       position: absolute;
@@ -511,29 +490,29 @@ onMounted(() => {});
       z-index: 2;
       color: #65e019;
     }
+
     .table-title {
       display: flex;
       align-items: center;
-      // border: 1px solid greenyellow;
       height: 40px;
       color: #ffffff;
       font-size: 0.8vw;
-      border-top: 1px solid white;
-      border-right: 1px solid white;
+      border-top: 1px solid #aaa;
+      border-right: 1px solid #aaa;
+
       span {
         flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
-        border-left: 1px solid white;
-        border-bottom: 1px solid white;
+        border-left: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
       }
     }
   }
 
   .zdiv {
-    // border: 1px solid rgb(0, 255, 157);
     word-break: break-all;
     position: absolute;
     left: 34%;
@@ -541,6 +520,7 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+
     .zuyoutp {
       // border: 1px solid red;
       word-break: break-all;
@@ -551,6 +531,7 @@ onMounted(() => {});
       top: 18%;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .zdivp {
       word-break: break-all;
       position: absolute;
@@ -562,7 +543,6 @@ onMounted(() => {});
   }
 
   .rdiv {
-    // border: 1px solid rgb(0, 255, 157);
     word-break: break-all;
     position: absolute;
     right: 0.5%;
@@ -570,8 +550,8 @@ onMounted(() => {});
     width: 32%;
     height: 100%;
     z-index: 2;
+
     .zuyoutp {
-      // border: 1px solid red;
       word-break: break-all;
       position: absolute;
       width: 100%;
@@ -580,6 +560,7 @@ onMounted(() => {});
       top: 18%;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .rdivp {
       word-break: break-all;
       position: absolute;
@@ -589,33 +570,35 @@ onMounted(() => {});
       color: #f99004;
     }
   }
+
   .table-content {
     pointer-events: all;
-    border-right: 1px solid white;
-    li {
-      // border: 1px solid rgb(0, 255, 157);
+
+    div {
       display: flex;
       height: 40px;
       align-items: center;
       height: 40px;
       color: #ffffff;
       font-size: 0.4vw;
+
       p {
         display: flex;
         align-items: center;
         justify-content: center;
-        // flex: 1;
         padding: 0 2%;
-        width: 20%;
-        border-left: 1px solid white;
-        border-bottom: 1px solid white;
+        width: 25%;
+        border-left: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
         height: 100%;
       }
+
       p:first-child {
         color: red;
       }
     }
   }
+
   .lefttu {
     word-break: break-all;
     position: absolute;
@@ -635,6 +618,7 @@ onMounted(() => {});
     top: 6%;
     background: url("/assets/3d/img/7.png") center / 100% 100% no-repeat;
   }
+
   .rtu {
     word-break: break-all;
     position: absolute;

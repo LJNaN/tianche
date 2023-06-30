@@ -6,16 +6,14 @@ import { ElMessage } from 'element-plus' // 引入el 提示框，这个项目里
 const env = import.meta.env
 axios.defaults.timeout = 60000
 axios.defaults.baseURL = ''
-const BASE_URL = env.DEV ? 'http://192.168.0.103:5173/api' : window.location.protocol == 'https:' ? 'https://www.kantu3d.com/gxq' : 'http://219.153.117.212:92'
+const BASE_URL = ''
 
 //http request 拦截器
 axios.interceptors.request.use(
   (config) => {
     // 配置请求头
     config.headers = {
-      //'Content-Type':'application/x-www-form-urlencoded',   // 传参方式表单
       'Content-Type': 'application/json;charset=UTF-8' // 传参方式json
-      //   'token':'80c483d59ca86ad0393cf8a98416e2a1'              // 这里自定义配置，这里传的是token
     }
     return config
   },
@@ -27,7 +25,7 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   (response) => {
-    return response
+    return response.data
   },
   (error) => {
     const { response } = error
@@ -42,7 +40,7 @@ axios.interceptors.response.use(
 )
 
 // 封装 GET POST 请求并导出
-export function request(url = '', params = {}, type = 'POST') {
+export function request(url = '', params = {}, type = 'GET') {
   //设置 url params type 的默认值
   return new Promise((resolve, reject) => {
     let promise

@@ -1,6 +1,6 @@
 import { request } from './index'
 
-// example
-export function getRealData(params: {}) {
-  return request('/GetRealData', params, 'post')
+// 卡匣数据同步接口
+export function getCarrierInfo() {
+  return request('/api/MCS/GetCarrierInfo')
 }

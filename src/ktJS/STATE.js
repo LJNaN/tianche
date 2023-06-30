@@ -15,6 +15,8 @@ const clock = new Bol3D.Clock()
 // 搜索框对应三维动画是否跳出
 let searchAnimateDesdory = false
 
+// 二维的报警列表
+let alarmList = null
 
 export const STATE = {
   initialState,
@@ -22,5 +24,6 @@ export const STATE = {
   sceneScale,
   clock,
   searchAnimateDesdory,
+  alarmList,
   PUBLIC_PATH
 }

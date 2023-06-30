@@ -16,7 +16,7 @@ export default defineConfig({
     // 代理
     proxy: {
       "/api": {
-        target: "http://101.200.140.188:8090/WebService.asmx",
+        target: "http://192.168.150.133:8090",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

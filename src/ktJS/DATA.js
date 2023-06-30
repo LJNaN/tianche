@@ -271,21 +271,21 @@ const deviceMap = {
 const skyCarMap = [{
   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
   coordinate: 82500
-}, {
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  coordinate: 822200
-}, {
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  coordinate: 180000
-}, {
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  coordinate: 78000
-}, {
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  coordinate: 226200
-}, {
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  coordinate: 1353761
+// }, {
+//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+//   coordinate: 822200
+// }, {
+//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+//   coordinate: 180000
+// }, {
+//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+//   coordinate: 78000
+// }, {
+//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+//   coordinate: 226200
+// }, {
+//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+//   coordinate: 1353761
 }]
 
 
