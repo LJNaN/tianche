@@ -13,7 +13,7 @@
     <div class="search" @click="API.search(selected, searchText)"></div>
   </div>
 
-  <el-scrollbar class="candidate" v-show="candidateList.length && searchText && candidateShow">
+  <el-scrollbar class="candidate" v-show="candidateList.length && searchText">
     <div class="candidate-item" v-for="item in candidateList" @click="handleItem(item)">
       {{ item }}
     </div>
@@ -32,12 +32,10 @@ let selected = ref(options.value[0]);
 let searchText = ref('')
 let showDropdown = ref(false);
 let candidateList = ref([])
-let candidateShow = ref(false)
 
 watch(
   () => searchText.value,
   ((val) => {
-    candidateShow.value = true
     searchCandidate(val)
   })
 )
@@ -83,7 +81,7 @@ function handleItem(item) {
     API.search(selected.value, searchText.value)
   }, 100)
   nextTick(() => {
-    candidateShow.value = false
+    searchText.value = ''
   })
 }
 

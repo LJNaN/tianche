@@ -49,19 +49,14 @@ const props = defineProps({
 
 const { width, height, autoResize, gap, autoTooltip, autoSelect, option, type } = toRefs(props)
 
+
 let chartRef = ref(null)
 let chartInstance = null
 
 onMounted(() => {
-  if (option?.value?.hasOwnProperty('series')) {
-    chartInstance = new initChart()
-
-
-    if (autoResize.value) {
-      window.addEventListener("resize", chartInstance.resizeHandler.bind(chartInstance));
-    }
-  }
+  newAChart()
 })
+
 
 onBeforeUnmount(() => {
   if (!chartInstance) {
@@ -74,6 +69,15 @@ onBeforeUnmount(() => {
   chartInstance.chart.dispose();
   chartInstance = null;
 })
+
+function newAChart() {
+  if (option.value?.hasOwnProperty('series')) {
+    chartInstance = new initChart()
+    if (autoResize.value) {
+      window.addEventListener("resize", chartInstance.resizeHandler.bind(chartInstance));
+    }
+  }
+}
 
 
 class initChart {
@@ -177,9 +181,9 @@ class initChart {
     this.setTimer();
   }
 
-  handleClick(params) {
-    // this.$emit("click", params);
-  }
+  // handleClick(params) {
+  //   // this.$emit("click", params);
+  // }
 
   setOptions() {
     if (!this.chart) {
@@ -208,11 +212,14 @@ class initChart {
 watch(
   () => option,
   (newVal) => {
+    if(!chartInstance) {
+      newAChart()
+    }
+
     if (chartInstance && newVal.value?.hasOwnProperty && newVal.value.hasOwnProperty('series')) {
-      
       chartInstance.chart.setOption(newVal.value)
     }
-  }, { deep: true }
+  }, { deep: true,immediate: true }
 )
 </script>
 
