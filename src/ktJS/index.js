@@ -68,9 +68,6 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
               STATE.sceneList[e].visible = false
             })
 
-            // 天车不隐藏
-            STATE.sceneList.tianche.visible = true
-
             // 主场景处理
             const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
             if (di) {

@@ -268,30 +268,23 @@ class SkyCar {
   popup = null
   clickPopup = null
   mixer = null
+  actions = null
+  speed = 0.05
 
   constructor(opt) {
-    this.coordinate = opt.coordinate
-    this.id = opt.id
+    if (opt.coordinate != undefined) this.coordinate = opt.coordinate
+    if (opt.id != undefined) this.id = opt.id
+    if (opt.speed != undefined) this.speed = opt.speed
     this.initSkyCar()
     this.initPopup()
+    this.setAnimation()
     this.setPosition()
   }
 
   initSkyCar() {
-    const this_ = this
     this.skyCarMesh = STATE.sceneList.tianche.clone()
     this.skyCarMesh.visible = true
     CACHE.container.scene.add(this.skyCarMesh)
-
-    this.mixer = new Bol3D.AnimationMixer(this.skyCarMesh)
-    const clip = STATE.animations.tianche[0]._clip
-    this.mixer.clipAction(clip).play()
-
-    animate()
-    function animate() {
-      this_.mixer.update(0.01)
-      requestAnimationFrame(animate)
-    }
 
     this.skyCarMesh.traverse(e => {
       if (e.isMesh) {
@@ -506,6 +499,71 @@ class SkyCar {
       }
     }
   }
+
+  setAnimation() {
+    const this_ = this
+    // 克隆动画
+    this.mixer = new Bol3D.AnimationMixer(this.skyCarMesh)
+    STATE.animations.tianche.forEach(e => {
+      this.mixer.clipAction(e._clip)
+    })
+    const actions = {}
+    this.mixer._actions.forEach(e => {
+      e.clampWhenFinished = true
+      e.loop = Bol3D.LoopOnce
+      e.name = e._clip.name
+      actions[e._clip.name] = e
+    })
+    this.actions = actions
+    this.skyCarMesh.userData.instance = this
+    // 恢复默认状态
+    this.actions.suo.play()
+
+    animate()
+    function animate() {
+      this_.mixer.update(this_.speed)
+      requestAnimationFrame(animate)
+    }
+  }
+
+  // 设置伸缩方法
+  down() {
+    this.actions.shen.enabled = true
+    this.actions.suo.enabled = false
+    this.actions.fang.enabled = false
+    this.actions.shou.enabled = false
+
+    // this.actions.kakousuo.reset().play()
+    // this.actions.dangbansuo.reset().play()
+    this.actions.shen.clampWhenFinished = false
+    this.actions.shen.reset().play()
+
+    this.mixer.addEventListener('finished', ((e) => {
+      if (e.action.name === 'shen') {
+        this.actions.shen.enabled = false
+        this.actions.fang.enabled = true
+        this.actions.fang.reset().play()
+      }
+    }))
+  }
+
+  up() {
+    this.actions.shou.enabled = true
+    this.actions.fang.enabled = false
+    this.actions.shen.enabled = false
+    this.actions.suo.enabled = false
+    
+    this.actions.shou.reset().play()
+    this.mixer.addEventListener('finished', ((e) => {
+      if (e.action.name === 'shou') {
+        this.actions.shou.enabled = false
+        this.actions.suo.enabled = true
+        this.actions.suo.reset().play()
+        this.actions.kakoushen.reset().play()
+        this.actions.dangbanshen.reset().play()
+      }
+    }))
+  }
 }
 
 // 加载模拟天车
@@ -517,7 +575,7 @@ function initSkyCar() {
       if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
       skyCar.coordinate += 200
       skyCar.setPosition()
-    }, 333)
+    }, 333000)
 
     if (!STATE.sceneList.skyCarList) {
       STATE.sceneList.skyCarList = []
@@ -526,8 +584,8 @@ function initSkyCar() {
   })
 
 
-  console.log('STATE.sceneList: ', STATE.sceneList.skyCarList);
-  console.log('STATE.aimate: ', STATE.animations.tianche);
+
+
 }
 
 // 加载反射器地板
