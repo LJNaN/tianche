@@ -3,6 +3,7 @@ import { CACHE } from './CACHE.js'
 import { STATE } from './STATE.js'
 import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
+import { test } from '@/axios/api.ts'
 
 let container
 
@@ -19,6 +20,23 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       container = new Bol3D.Container({
         publicPath: STATE.PUBLIC_PATH,
         container: domElement,
+        loadingBar: {
+          type: '10',
+          show: true
+        },
+        lights: {
+          directionLights: [{
+            color: 0xaccdff,
+            intensity: 0.8,
+            position: [50, 200, -90],
+            mapSize: [2048, 2048],
+            near: 0.01,
+            far: 600,
+            bias: -0.001,
+            distance: 500,
+            target: [0, 0, 0]
+          }],
+        }
       })
 
       const jsonParser = new Bol3D.JSONParser({
@@ -53,14 +71,27 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           */
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
+            // 开灯开阴影
+            CACHE.container.directionLights[0].visible = true
+            CACHE.container.directionLights[0].castShadow = true
+            CACHE.container.scene.traverse(child => {
+              if (child.isMesh) {
+                if (child.name === 'di') {
+                  child.receiveShadow = true
+                } else if (child.name === 'ding') {
+                  child.visible = false
+                } else {
+                  child.castShadow = true
+                  child.receiveShadow = true
+                }
+              }
+            })
 
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
 
-
             // 天车不知道为什么放大不了，手动放大
             STATE.sceneList.tianche.scale.set(10, 10, 10)
-
 
             // 默认的设备隐藏
             const hiddenDevices = ['2LPjitai(W01)', 'huojia4', 'huojia2', 'OLUS', 'WWATA03V', 'WHWSA01', 'WMACB03', 'WSSP008', 'WTSTK01', 'WWATA02V', '2LPjitai(W01)', 'WBS002', 'WS0RA01(I01)', 'WS0RA01(I02)', 'WS0RA01', 'FOSB', 'FOUP']
@@ -72,7 +103,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
             if (di) {
               di.material.transparent = true
-              di.material.opacity = 0.65
+              di.material.opacity = 0.68
             }
 
             TU.init(container, Bol3D)
@@ -82,10 +113,19 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.initReflexFloor()
             API.initDeviceByMap()
             API.initSkyCar()
-            // API.testBox()
             API.search()
-
+            // API.testBox()
             // API.loadGUI()
+
+            
+            test().then(e => {
+              console.log(e)
+            }).catch(e => {
+              console.log(e)
+            })
+
+
+            CACHE.container.loadingBar.style.visibility = 'hidden'
           })
 
 
@@ -115,7 +155,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           if (obj.userData.type === '天车') {
             API.search('天车', obj.userData.id)
             const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
-            if(instance) {
+            if (instance) {
               instance.initClickPopup()
             }
           }

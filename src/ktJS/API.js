@@ -4,8 +4,6 @@ import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
-import mockData from './js/mock'
-
 
 // 获取数据
 function getData() {
@@ -14,14 +12,15 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const ws = new WebSocket(
-  //   // `ws://localhost:8001/MOC/OHTC/SendData/${new Date() * 1}`
-  //   `ws://192.168.150.133:8090/MOC/OHTC/SendData/${new Date() * 1}`
-  // )
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(
+    // `ws://192.168.150.133:8090/MOC/OHTC/SendData/${new Date() * 1}`
+    api
+  )
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -38,14 +37,73 @@ function getData() {
 
 // 数据驱动
 function drive(wsMessage) {
-
   // 处理天车
   if (wsMessage?.VehicleInfo?.length) {
     wsMessage.VehicleInfo.forEach(e => {
       const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
       if (skyCar) {
-        skyCar.coordinate = e.position
-        skyCar.setPosition()
+        // 处理颜色
+        if (e.ohtStatus_OnlineControl === '0') { // 离线
+          if (skyCar.state != 5) {
+            skyCar.state = 5
+            skyCar.setPopupColor()
+          }
+
+        } else {
+          if (e.ohtStatus_UnLoading === '1' || e.ohtStatus_Loading === '1') { // 放货/取货中
+            if (skyCar.state != 2) {
+              skyCar.state = 2
+              skyCar.setPopupColor()
+            }
+
+          } else if (e.ohtStatus_Quhuoxing === '1') { // 取货行
+            if (skyCar.state != 0) {
+              skyCar.state = 0
+              skyCar.setPopupColor()
+            }
+
+          } else if (e.ohtStatus_Fanghuoxing === '1') { // 放货行
+            if (skyCar.state != 1) {
+              skyCar.state = 1
+              skyCar.setPopupColor()
+            }
+
+          } else { // 漫游
+            if (skyCar.state != 3) {
+              skyCar.state = 3
+              skyCar.setPopupColor()
+            }
+          }
+        }
+
+        // 处理位置
+        {
+          if (!skyCar.history.new) {  // 初始化 history 时
+            skyCar.history.new = {
+              time: new Date() * 1,
+              coordinate: e.position
+            }
+            skyCar.history.old = Object.assign({}, skyCar.history.new)
+            skyCar.coordinate = e.position
+            skyCar.setPosition(0)
+
+          } else { // 更新 history
+            skyCar.history.new = {
+              time: new Date() * 1,
+              coordinate: e.position
+            }
+
+            if (skyCar.history.old.coordinate != skyCar.history.new.coordinate) {
+              // 位置动画
+              const time = skyCar.history.new.time - skyCar.history.old.time
+              skyCar.coordinate = skyCar.history.new.coordinate
+              skyCar.setPosition(time)
+
+              skyCar.history.old = Object.assign({}, skyCar.history.new)
+            }
+          }
+        }
+
       } else {
         const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
         STATE.sceneList.skyCarList.push(newCar)
@@ -141,6 +199,47 @@ function loadGUI() {
   // gui
   const gui = new dat.GUI()
 
+  // default opts
+  const deafultsScene = { distance: 8000, }
+  // scenes
+  const scenesFolder = gui.addFolder('场景')
+  // toneMapping
+  scenesFolder.add(CACHE.container.renderer, 'toneMappingExposure', 0, 10).step(0.001).name('exposure')
+  scenesFolder.add(CACHE.container.ambientLight, 'intensity').step(0.1).min(0).max(10).name('环境光强度')
+  scenesFolder.add(CACHE.container.gammaPass, 'enabled').name('gamma校正')
+  scenesFolder
+    .addColor(CACHE.container.attrs.lights.directionLights[0], 'color')
+    .onChange((val) => {
+      CACHE.container.directionLights[0].color.set(val)
+    })
+    .name('平行光颜色')
+  scenesFolder.add(CACHE.container.directionLights[0].position, 'x')
+  scenesFolder.add(CACHE.container.directionLights[0].position, 'y')
+  scenesFolder.add(CACHE.container.directionLights[0].position, 'z')
+  scenesFolder.add(deafultsScene, 'distance').onChange((val) => {
+    CACHE.container.directionLights[0].shadow.camera.left = -val
+    CACHE.container.directionLights[0].shadow.camera.right = val
+    CACHE.container.directionLights[0].shadow.camera.top = val
+    CACHE.container.directionLights[0].shadow.camera.bottom = -val
+    CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
+    CACHE.container.directionLights[0].shadow.needsUpdate = true
+  })
+  scenesFolder.add(CACHE.container.directionLights[0].shadow.camera, 'far').onChange(() => {
+    CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
+    CACHE.container.directionLights[0].shadow.needsUpdate = true
+  })
+  scenesFolder.add(CACHE.container.directionLights[0].shadow.camera, 'near').onChange(() => {
+    CACHE.container.directionLights[0].shadow.camera.updateProjectionMatrix()
+    CACHE.container.directionLights[0].shadow.needsUpdate = true
+  })
+  scenesFolder
+    .add(CACHE.container.directionLights[0].shadow, 'bias')
+    .step(0.0001)
+    .onChange(() => {
+      CACHE.container.directionLights[0].shadow.needsUpdate = true
+    })
+  scenesFolder.add(CACHE.container.directionLights[0], 'intensity').step(0.1).min(0).max(10)
+
 
   // filter pass
   const filterFolder = gui.addFolder('滤镜')
@@ -194,17 +293,6 @@ function loadGUI() {
       CACHE.container.filterPass.filterMaterial.uniforms.contrast.value = val
     })
 
-
-  // 测试小车
-  const skyCar = gui.addFolder('小车坐标')
-  skyCar
-    .add(CACHE.test, 'value')
-    .min(200000)
-    .max(1000000)
-    .step(1)
-    .onChange((val) => {
-      CACHE.test.value = val
-    })
 }
 
 function testBox() {
@@ -261,15 +349,17 @@ function handleLine() {
 
 // 天车类
 class SkyCar {
-  coordinate = 0
-  id = ''
-  skyCarMesh = null
-  animation = null
-  popup = null
-  clickPopup = null
-  mixer = null
-  actions = null
-  speed = 0.05
+  coordinate = 0           // 当前坐标
+  history = {}             // 历史坐标与时间
+  state = 5                // 状态
+  id = ''                  // id
+  skyCarMesh = null        // 天车模型
+  animation = null         // render 里的每帧动画
+  popup = null             // 默认弹窗
+  clickPopup = null        // 点击之后的弹窗
+  mixer = null             // 模型动画管理器
+  actions = null           // 模型动画
+  speed = 0.05             // 模型动画速度
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -307,7 +397,7 @@ class SkyCar {
 
         <div style="
           position: absolute;
-          background: url('./assets/3d/img/39.png') center / 100% 100% no-repeat;
+          background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[0]}.png') center / 100% 100% no-repeat;
           width: 30vw;
           height: 20vh;
           transform: translate(-50%, -50%);
@@ -317,7 +407,7 @@ class SkyCar {
 
         <div style="
           position: absolute;
-          background: url('./assets/3d/img/40.png') center / 100% 100% no-repeat;
+          background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[1]}.png') center / 100% 100% no-repeat;
           width: 8vw;
           height: 10vh;
           animation: arrowJump 1s linear infinite;
@@ -388,7 +478,7 @@ class SkyCar {
 
       <div style="
           position: absolute;
-          background: url('./assets/3d/img/43.png') center / 100% 100% no-repeat;
+          background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
           width: 25vw;
           height: 47vh;
           transform: translate(-50%, -50%);
@@ -443,7 +533,25 @@ class SkyCar {
     clickPopup.position.y = 2.3
   }
 
-  setPosition() {
+  setPopupColor() {
+    const item = DATA.skyCarStateColorMap[this.state]
+
+    const div = this.popup?.element?.children[0]
+    if (div) {
+      const title = div?.children[0]
+      const arrow = div?.children[1]
+      title.style.background = title.style.background.replace(/img\/.*?\.png/, `img/${item.img[0]}.png`)
+      arrow.style.background = arrow.style.background.replace(/img\/.*?\.png/, `img/${item.img[1]}.png`)
+    }
+
+    const clickDiv = this.clickPopup?.element?.children[0]
+    if (clickDiv) {
+      const content = clickDiv?.children[0]
+      content.style.background = content.style.background.replace(/img\/.*?\.png/, `img/${item.img[2]}.png`)
+    }
+  }
+
+  setPosition(time = 1000) {
     // 查找起始点、起始坐标
     const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.coordinate && e.endCoordinate > this.coordinate)
     if (map) {
@@ -494,7 +602,7 @@ class SkyCar {
           x: currentPosition.x,
           y: currentPosition.y,
           z: currentPosition.z
-        }, 333)
+        }, time)
         this.animation.start()
       }
     }
@@ -516,8 +624,6 @@ class SkyCar {
     })
     this.actions = actions
     this.skyCarMesh.userData.instance = this
-    // 恢复默认状态
-    this.actions.suo.play()
 
     animate()
     function animate() {
@@ -533,8 +639,6 @@ class SkyCar {
     this.actions.fang.enabled = false
     this.actions.shou.enabled = false
 
-    // this.actions.kakousuo.reset().play()
-    // this.actions.dangbansuo.reset().play()
     this.actions.shen.clampWhenFinished = false
     this.actions.shen.reset().play()
 
@@ -552,7 +656,7 @@ class SkyCar {
     this.actions.fang.enabled = false
     this.actions.shen.enabled = false
     this.actions.suo.enabled = false
-    
+
     this.actions.shou.reset().play()
     this.mixer.addEventListener('finished', ((e) => {
       if (e.action.name === 'shou') {
@@ -568,24 +672,20 @@ class SkyCar {
 
 // 加载模拟天车
 function initSkyCar() {
-  DATA.skyCarMap.forEach(e => {
-    const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
+  // DATA.skyCarMap.forEach(e => {
+  //   const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
 
-    setInterval(() => {
-      if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
-      skyCar.coordinate += 200
-      skyCar.setPosition()
-    }, 333000)
+  //   setInterval(() => {
+  //     if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
+  //     skyCar.coordinate += 200
+  //     skyCar.setPosition()
+  //   }, 333)
 
-    if (!STATE.sceneList.skyCarList) {
-      STATE.sceneList.skyCarList = []
-    }
-    STATE.sceneList.skyCarList.push(skyCar)
-  })
-
-
-
-
+  //   if (!STATE.sceneList.skyCarList) {
+  //     STATE.sceneList.skyCarList = []
+  //   }
+  //   STATE.sceneList.skyCarList.push(skyCar)
+  // })
 }
 
 // 加载反射器地板
@@ -597,7 +697,7 @@ function initReflexFloor() {
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
     color: 0x777777,
-    blur: 0.4
+    blur: 0.1
   })
 
   reflector.rotation.x = -Math.PI / 2

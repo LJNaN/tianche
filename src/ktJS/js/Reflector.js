@@ -14,9 +14,9 @@ const LinearSRGBColorSpace = Bol3D.LinearSRGBColorSpace
 
 class Reflector extends Mesh {
 
-	constructor( geometry, options = {} ) {
+	constructor(geometry, options = {}) {
 
-		super( geometry );
+		super(geometry);
 
 		this.isReflector = true;
 
@@ -25,12 +25,12 @@ class Reflector extends Mesh {
 
 		const scope = this;
 
-		const color = ( options.color !== undefined ) ? new Color( options.color ) : new Color( 0x7F7F7F );
+		const color = (options.color !== undefined) ? new Color(options.color) : new Color(0x7F7F7F);
 		const textureWidth = options.textureWidth || 512;
 		const textureHeight = options.textureHeight || 512;
 		const clipBias = options.clipBias || 0;
 		const shader = options.shader || Reflector.ReflectorShader;
-		const multisample = ( options.multisample !== undefined ) ? options.multisample : 4;
+		const multisample = (options.multisample !== undefined) ? options.multisample : 4;
 		const blur = options.blur || 0.0
 
 		//
@@ -40,7 +40,7 @@ class Reflector extends Mesh {
 		const reflectorWorldPosition = new Vector3();
 		const cameraWorldPosition = new Vector3();
 		const rotationMatrix = new Matrix4();
-		const lookAtPosition = new Vector3( 0, 0, - 1 );
+		const lookAtPosition = new Vector3(0, 0, - 1);
 		const clipPlane = new Vector4();
 
 		const view = new Vector3();
@@ -50,61 +50,61 @@ class Reflector extends Mesh {
 		const textureMatrix = new Matrix4();
 		const virtualCamera = this.camera;
 
-		const renderTarget = new WebGLRenderTarget( textureWidth, textureHeight, { samples: multisample, type: HalfFloatType } );
+		const renderTarget = new WebGLRenderTarget(textureWidth, textureHeight, { samples: multisample, type: HalfFloatType });
 
-		const material = new ShaderMaterial( {
-			name: ( shader.name !== undefined ) ? shader.name : 'unspecified',
-			uniforms: UniformsUtils.clone( shader.uniforms ),
+		const material = new ShaderMaterial({
+			name: (shader.name !== undefined) ? shader.name : 'unspecified',
+			uniforms: UniformsUtils.clone(shader.uniforms),
 			fragmentShader: shader.fragmentShader,
 			vertexShader: shader.vertexShader
-		} );
+		});
 
-		material.uniforms[ 'tDiffuse' ].value = renderTarget.texture;
-		material.uniforms[ 'color' ].value = color;
-		material.uniforms[ 'textureMatrix' ].value = textureMatrix;
+		material.uniforms['tDiffuse'].value = renderTarget.texture;
+		material.uniforms['color'].value = color;
+		material.uniforms['textureMatrix'].value = textureMatrix;
 		material.uniforms['blurSize'].value = blur;
 
 		this.material = material;
 
-		this.onBeforeRender = function ( renderer, scene, camera ) {
+		this.onBeforeRender = function (renderer, scene, camera) {
 
-			reflectorWorldPosition.setFromMatrixPosition( scope.matrixWorld );
-			cameraWorldPosition.setFromMatrixPosition( camera.matrixWorld );
+			reflectorWorldPosition.setFromMatrixPosition(scope.matrixWorld);
+			cameraWorldPosition.setFromMatrixPosition(camera.matrixWorld);
 
-			rotationMatrix.extractRotation( scope.matrixWorld );
+			rotationMatrix.extractRotation(scope.matrixWorld);
 
-			normal.set( 0, 0, 1 );
-			normal.applyMatrix4( rotationMatrix );
+			normal.set(0, 0, 1);
+			normal.applyMatrix4(rotationMatrix);
 
-			view.subVectors( reflectorWorldPosition, cameraWorldPosition );
+			view.subVectors(reflectorWorldPosition, cameraWorldPosition);
 
 			// Avoid rendering when reflector is facing away
 
-			if ( view.dot( normal ) > 0 ) return;
+			if (view.dot(normal) > 0) return;
 
-			view.reflect( normal ).negate();
-			view.add( reflectorWorldPosition );
+			view.reflect(normal).negate();
+			view.add(reflectorWorldPosition);
 
-			rotationMatrix.extractRotation( camera.matrixWorld );
+			rotationMatrix.extractRotation(camera.matrixWorld);
 
-			lookAtPosition.set( 0, 0, - 1 );
-			lookAtPosition.applyMatrix4( rotationMatrix );
-			lookAtPosition.add( cameraWorldPosition );
+			lookAtPosition.set(0, 0, - 1);
+			lookAtPosition.applyMatrix4(rotationMatrix);
+			lookAtPosition.add(cameraWorldPosition);
 
-			target.subVectors( reflectorWorldPosition, lookAtPosition );
-			target.reflect( normal ).negate();
-			target.add( reflectorWorldPosition );
+			target.subVectors(reflectorWorldPosition, lookAtPosition);
+			target.reflect(normal).negate();
+			target.add(reflectorWorldPosition);
 
-			virtualCamera.position.copy( view );
-			virtualCamera.up.set( 0, 1, 0 );
-			virtualCamera.up.applyMatrix4( rotationMatrix );
-			virtualCamera.up.reflect( normal );
-			virtualCamera.lookAt( target );
+			virtualCamera.position.copy(view);
+			virtualCamera.up.set(0, 1, 0);
+			virtualCamera.up.applyMatrix4(rotationMatrix);
+			virtualCamera.up.reflect(normal);
+			virtualCamera.lookAt(target);
 
 			virtualCamera.far = camera.far; // Used in WebGLBackground
 
 			virtualCamera.updateMatrixWorld();
-			virtualCamera.projectionMatrix.copy( camera.projectionMatrix );
+			virtualCamera.projectionMatrix.copy(camera.projectionMatrix);
 
 			// Update the texture matrix
 			textureMatrix.set(
@@ -113,32 +113,32 @@ class Reflector extends Mesh {
 				0.0, 0.0, 0.5, 0.5,
 				0.0, 0.0, 0.0, 1.0
 			);
-			textureMatrix.multiply( virtualCamera.projectionMatrix );
-			textureMatrix.multiply( virtualCamera.matrixWorldInverse );
-			textureMatrix.multiply( scope.matrixWorld );
+			textureMatrix.multiply(virtualCamera.projectionMatrix);
+			textureMatrix.multiply(virtualCamera.matrixWorldInverse);
+			textureMatrix.multiply(scope.matrixWorld);
 
 			// Now update projection matrix with new clip plane, implementing code from: http://www.terathon.com/code/oblique.html
 			// Paper explaining this technique: http://www.terathon.com/lengyel/Lengyel-Oblique.pdf
-			reflectorPlane.setFromNormalAndCoplanarPoint( normal, reflectorWorldPosition );
-			reflectorPlane.applyMatrix4( virtualCamera.matrixWorldInverse );
+			reflectorPlane.setFromNormalAndCoplanarPoint(normal, reflectorWorldPosition);
+			reflectorPlane.applyMatrix4(virtualCamera.matrixWorldInverse);
 
-			clipPlane.set( reflectorPlane.normal.x, reflectorPlane.normal.y, reflectorPlane.normal.z, reflectorPlane.constant );
+			clipPlane.set(reflectorPlane.normal.x, reflectorPlane.normal.y, reflectorPlane.normal.z, reflectorPlane.constant);
 
 			const projectionMatrix = virtualCamera.projectionMatrix;
 
-			q.x = ( Math.sign( clipPlane.x ) + projectionMatrix.elements[ 8 ] ) / projectionMatrix.elements[ 0 ];
-			q.y = ( Math.sign( clipPlane.y ) + projectionMatrix.elements[ 9 ] ) / projectionMatrix.elements[ 5 ];
+			q.x = (Math.sign(clipPlane.x) + projectionMatrix.elements[8]) / projectionMatrix.elements[0];
+			q.y = (Math.sign(clipPlane.y) + projectionMatrix.elements[9]) / projectionMatrix.elements[5];
 			q.z = - 1.0;
-			q.w = ( 1.0 + projectionMatrix.elements[ 10 ] ) / projectionMatrix.elements[ 14 ];
+			q.w = (1.0 + projectionMatrix.elements[10]) / projectionMatrix.elements[14];
 
 			// Calculate the scaled plane vector
-			clipPlane.multiplyScalar( 2.0 / clipPlane.dot( q ) );
+			clipPlane.multiplyScalar(2.0 / clipPlane.dot(q));
 
 			// Replacing the third row of the projection matrix
-			projectionMatrix.elements[ 2 ] = clipPlane.x;
-			projectionMatrix.elements[ 6 ] = clipPlane.y;
-			projectionMatrix.elements[ 10 ] = clipPlane.z + 1.0 - clipBias;
-			projectionMatrix.elements[ 14 ] = clipPlane.w;
+			projectionMatrix.elements[2] = clipPlane.x;
+			projectionMatrix.elements[6] = clipPlane.y;
+			projectionMatrix.elements[10] = clipPlane.z + 1.0 - clipBias;
+			projectionMatrix.elements[14] = clipPlane.w;
 
 			// Render
 			scope.visible = false;
@@ -155,27 +155,27 @@ class Reflector extends Mesh {
 			renderer.outputColorSpace = LinearSRGBColorSpace;
 			renderer.toneMapping = NoToneMapping;
 
-			renderer.setRenderTarget( renderTarget );
+			renderer.setRenderTarget(renderTarget);
 
-			renderer.state.buffers.depth.setMask( true ); // make sure the depth buffer is writable so it can be properly cleared, see #18897
+			renderer.state.buffers.depth.setMask(true); // make sure the depth buffer is writable so it can be properly cleared, see #18897
 
-			if ( renderer.autoClear === false ) renderer.clear();
-			renderer.render( scene, virtualCamera );
+			if (renderer.autoClear === false) renderer.clear();
+			renderer.render(scene, virtualCamera);
 
 			renderer.xr.enabled = currentXrEnabled;
 			renderer.shadowMap.autoUpdate = currentShadowAutoUpdate;
 			renderer.outputColorSpace = currentOutputColorSpace;
 			renderer.toneMapping = currentToneMapping;
 
-			renderer.setRenderTarget( currentRenderTarget );
+			renderer.setRenderTarget(currentRenderTarget);
 
 			// Restore viewport
 
 			const viewport = camera.viewport;
 
-			if ( viewport !== undefined ) {
+			if (viewport !== undefined) {
 
-				renderer.state.viewport( viewport );
+				renderer.state.viewport(viewport);
 
 			}
 
@@ -217,7 +217,7 @@ Reflector.ReflectorShader = {
 		'textureMatrix': {
 			value: null
 		},
-		
+
 		'blurSize': {
 			value: null
 		}
@@ -263,15 +263,15 @@ Reflector.ReflectorShader = {
 
 		vec4 blur( sampler2D diffuse, float blurSize, vec4 uv ) {
 			vec4 sum = vec4(0.0);
-			sum += texture2DProj(diffuse, vec4(uv.x - 4.0 * blurSize, uv.y, uv.z, uv.w)) * 0.05;
-			sum += texture2DProj(diffuse, vec4(uv.x - 3.0 * blurSize, uv.y, uv.z, uv.w)) * 0.09;
-			sum += texture2DProj(diffuse, vec4(uv.x - 2.0 * blurSize, uv.y, uv.z, uv.w)) * 0.12;
-			sum += texture2DProj(diffuse, vec4(uv.x - blurSize, uv.y, uv.z, uv.w)) * 0.15;
+			sum += texture2DProj(diffuse, vec4(uv.x - 4.0 * blurSize, uv.y - 4.0 * blurSize, uv.z, uv.w)) * 0.05;
+			sum += texture2DProj(diffuse, vec4(uv.x - 3.0 * blurSize, uv.y - 3.0 * blurSize, uv.z, uv.w)) * 0.09;
+			sum += texture2DProj(diffuse, vec4(uv.x - 2.0 * blurSize, uv.y - 2.0 * blurSize, uv.z, uv.w)) * 0.12;
+			sum += texture2DProj(diffuse, vec4(uv.x - 1.0 * blurSize, uv.y - 1.0 * blurSize, uv.z, uv.w)) * 0.15;
 			sum += texture2DProj(diffuse, vec4(uv.x, uv.y, uv.z, uv.w)) * 0.16;
-			sum += texture2DProj(diffuse, vec4(uv.x + blurSize, uv.y, uv.z, uv.w)) * 0.15;
-			sum += texture2DProj(diffuse, vec4(uv.x + 2.0 * blurSize, uv.y, uv.z, uv.w)) * 0.12;
-			sum += texture2DProj(diffuse, vec4(uv.x + 3.0 * blurSize, uv.y, uv.z, uv.w)) * 0.09;
-			sum += texture2DProj(diffuse, vec4(uv.x + 4.0 * blurSize, uv.y, uv.z, uv.w)) * 0.05;
+			sum += texture2DProj(diffuse, vec4(uv.x + 1.0 * blurSize, uv.y + 1.0 * blurSize, uv.z, uv.w)) * 0.15;
+			sum += texture2DProj(diffuse, vec4(uv.x + 2.0 * blurSize, uv.y + 2.0 * blurSize, uv.z, uv.w)) * 0.12;
+			sum += texture2DProj(diffuse, vec4(uv.x + 3.0 * blurSize, uv.y + 3.0 * blurSize, uv.z, uv.w)) * 0.09;
+			sum += texture2DProj(diffuse, vec4(uv.x + 4.0 * blurSize, uv.y + 4.0 * blurSize, uv.z, uv.w)) * 0.05;
 
 			return sum;
 		}

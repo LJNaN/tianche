@@ -95443,8 +95443,9 @@ void main(){
 	                const mixer = new AnimationMixer(scenes);
 	                mixer.name = gltf.animations[i].name;
 	                this.mixers.push(mixer);
-	                const m = mixer.clipAction(gltf.animations[i]).play();
-	                m.paused = true;
+	                // const m = mixer.clipAction(gltf.animations[i]).play();
+	                // m.paused = true;
+	                const m = mixer.clipAction(gltf.animations[i]);
 	                mixer.actions = m;
 	                this.mixerActions.push(m);
 	            }

@@ -219,7 +219,7 @@ watch(
     if (chartInstance && newVal.value?.hasOwnProperty && newVal.value.hasOwnProperty('series')) {
       chartInstance.chart.setOption(newVal.value)
     }
-  }, { deep: true,immediate: true }
+  }, { deep: true }
 )
 </script>
 

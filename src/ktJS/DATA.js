@@ -269,28 +269,39 @@ const deviceMap = {
 
 // 模拟天车位置
 const skyCarMap = [{
-  id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  id: JSON.stringify(Math.ceil(Math.random() * 100)).padStart(3, '0'),
   coordinate: 82500
-// }, {
-//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-//   coordinate: 822200
-// }, {
-//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-//   coordinate: 180000
-// }, {
-//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-//   coordinate: 78000
-// }, {
-//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-//   coordinate: 226200
-// }, {
-//   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-//   coordinate: 1353761
+  // }, {
+  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  //   coordinate: 822200
+  // }, {
+  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  //   coordinate: 180000
+  // }, {
+  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  //   coordinate: 78000
+  // }, {
+  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  //   coordinate: 226200
+  // }, {
+  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
+  //   coordinate: 1353761
 }]
 
+
+// 天车弹窗的状态、颜色、图片状态
+const skyCarStateColorMap = [
+  { id: 0, name: '小车去起始地取货走行中', color: '#00fbf8', img: [39, 40, 12] },
+  { id: 1, name: '小车去目的地放货走行中', color: '#0000f6', img: [37, 38, 12] },
+  { id: 2, name: '小车去取货/放货动作执行中', color: '#8183fd', img: [35, 36, 12] },
+  { id: 3, name: '小车无指令状态/cycling状态', color: '#00f600', img: [33, 34, 12] },
+  { id: 4, name: '小车发生故障', color: '#fd0100', img: [31, 32, 13] },
+  { id: 5, name: '小车上线前状态', color: '#7d7d7d', img: [41, 42, 12] }
+]
 
 export const DATA = {
   pointCoordinateMap,
   skyCarMap,
+  skyCarStateColorMap,
   deviceMap
 }
