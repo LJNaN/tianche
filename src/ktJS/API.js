@@ -4,6 +4,7 @@ import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
+import mockData from './js/mock'
 
 // 获取数据
 function getData() {
@@ -12,26 +13,23 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(
-    // `ws://192.168.150.133:8090/MOC/OHTC/SendData/${new Date() * 1}`
-    api
-  )
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData.length) i = 0
-  //   drive(JSON.parse(mockData[i].data))
-  //   i++
-  // }, 333)
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData.length) i = 0
+    drive(JSON.parse(mockData[i].data))
+    i++
+  }, 333)
 
 }
 
@@ -830,13 +828,9 @@ function search(type, id) {
   }
 }
 
-// 天车单击弹窗
-function initSkyCarPopup(type, id) {
-
-}
 
 // 获取动画
-const getAnimationList = () => {
+function getAnimationList() {
   const animations = {};
   CACHE.container.mixerActions.forEach((item) => {
     if (!animations[item._mixer._root.name]) {
@@ -845,7 +839,42 @@ const getAnimationList = () => {
     animations[item._mixer._root.name].push(item)
   });
   STATE.animations = animations
-};
+}
+
+// 加载货架
+function initShelves() {
+  if (!STATE.sceneList.shelves) {
+    STATE.sceneList.shelves = {}
+  }
+
+  for (let area in DATA.shelvesMap) {
+    for (let shelf in DATA.shelvesMap[area]) {
+      const item = DATA.shelvesMap[area][shelf]
+      let model = null
+      if(item.fields.length === 4) {
+        model = STATE.sceneList.huojia4.clone()
+      } else {
+        model = STATE.sceneList.huojia2.clone()
+      }
+      model.visible = true
+      model.position.set(...item.position)
+      model.rotation.y = item.rotate * Math.PI / 180
+      model.userData.fields = item.fields
+      model.userData.name = shelf
+      model.userData.area = area
+      STATE.sceneList.shelves[shelf] = model
+      CACHE.container.scene.add(model)
+    }
+  }
+
+  for (let key in STATE.sceneList.shelves) {
+    if(key === 'W01_38') {
+      TU.setModelPosition(STATE.sceneList.shelves[key])
+      CACHE.container.orbitControls.target.set(STATE.sceneList.shelves[key].position.x, STATE.sceneList.shelves[key].position.y, STATE.sceneList.shelves[key].position.z)
+      break
+    }
+  }
+}
 
 
 export const API = {
@@ -858,7 +887,7 @@ export const API = {
   initReflexFloor,
   search,
   initDeviceByMap,
-  initSkyCarPopup,
   getAnimationList,
+  initShelves,
   testBox
 }

@@ -113,17 +113,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.initReflexFloor()
             API.initDeviceByMap()
             API.initSkyCar()
+            API.initShelves()
             API.search()
             // API.testBox()
             // API.loadGUI()
-
-            
-            test().then(e => {
-              console.log(e)
-            }).catch(e => {
-              console.log(e)
-            })
-
 
             CACHE.container.loadingBar.style.visibility = 'hidden'
           })
