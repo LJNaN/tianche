@@ -36,7 +36,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             distance: 500,
             target: [0, 0, 0]
           }],
-        }
+        },
+        stats: true
       })
 
       const jsonParser = new Bol3D.JSONParser({
@@ -115,6 +116,55 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.initSkyCar()
             API.initShelves()
             API.search()
+
+
+            // 货架实例化
+            const shalves2 = []
+            const shalves4 = []
+            for (let key in STATE.sceneList.shelves) {
+              if (STATE.sceneList.shelves[key].name === 'huojia4') {
+                shalves4.push(STATE.sceneList.shelves[key])
+              } else if (STATE.sceneList.shelves[key].name === 'huojia2') {
+                shalves2.push(STATE.sceneList.shelves[key])
+              }
+            }
+
+            console.log('shalves4: ', shalves4);
+            API.instantiationGroupInfo(shalves4, 1, 'shalves4', CACHE.container)
+
+
+            //实例化
+            console.log(
+              "CACHE\n",
+              '实例转换坐标、缩放、旋转信息\n', CACHE.instanceTransformInfo, '\n',
+              '实例转换外观、形状信息\n', CACHE.instanceMeshInfo, '\n',
+              '已删除的模型\n', CACHE.removed
+            );
+
+            // remove unused obj3d
+            for (const i in CACHE.removed) {
+              const removed = CACHE.removed[i];
+              removed.parent.remove(removed);
+            }
+
+            // instance
+            for (const key in CACHE.instanceMeshInfo) {
+              const { geometry, material } = CACHE.instanceMeshInfo[key];
+              const count = CACHE.instanceTransformInfo[key].length;
+              const instanceMesh = new Bol3D.InstancedMesh(geometry, material, count);
+              // instanceMesh.castShadow = true
+              const matrix = new Bol3D.Matrix4();
+              for (let i = 0; i < count; i++) {
+                const { position, quaternion, scale } = CACHE.instanceTransformInfo[key][i];
+                matrix.compose(position, quaternion, scale);
+                instanceMesh.setMatrixAt(i, matrix);
+                instanceMesh.name = key;
+              }
+              evt.scene.add(instanceMesh);
+              // CACHE.outsideScene.push(instanceMesh);
+            }
+
+
             // API.testBox()
             // API.loadGUI()
 

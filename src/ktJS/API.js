@@ -843,15 +843,13 @@ function getAnimationList() {
 
 // 加载货架
 function initShelves() {
-  if (!STATE.sceneList.shelves) {
-    STATE.sceneList.shelves = {}
-  }
+  STATE.sceneList.shelves = {}
 
   for (let area in DATA.shelvesMap) {
     for (let shelf in DATA.shelvesMap[area]) {
       const item = DATA.shelvesMap[area][shelf]
       let model = null
-      if(item.fields.length === 4) {
+      if (item.fields.length === 4) {
         model = STATE.sceneList.huojia4.clone()
       } else {
         model = STATE.sceneList.huojia2.clone()
@@ -867,13 +865,131 @@ function initShelves() {
     }
   }
 
+
   for (let key in STATE.sceneList.shelves) {
-    if(key === 'W01_38') {
+    if (key === 'W01_38') {
       TU.setModelPosition(STATE.sceneList.shelves[key])
       CACHE.container.orbitControls.target.set(STATE.sceneList.shelves[key].position.x, STATE.sceneList.shelves[key].position.y, STATE.sceneList.shelves[key].position.z)
       break
     }
   }
+}
+
+/**
+ * 组实例化
+ * @param {Array} arr 需要实例化的 相同组结构的模型集合 例如：[group1{mesh_1,mesh_2,mesh_3},group2{mesh_1,mesh_2,mesh_3},group3{mesh_1,mesh_2,mesh_3}]
+ * @param {Number} meshNumber 组结构中，mesh的数量
+ * @param {String} name 实例化信息命名
+ * @param {Object} evt container
+ */
+function instantiationGroupInfo(arr, meshNumber, name, evt) {
+  arr.forEach((item) => {
+    for (let i = 1; i <= meshNumber; i++) {
+      let child = item.children[i - 1] || item;
+
+      const instanceName = `${name}${i}`;
+      if (!CACHE.instanceTransformInfo[instanceName])
+        CACHE.instanceTransformInfo[instanceName] = [];
+
+      const p = new Bol3D.Vector3();
+
+      let position = child.parent.getWorldPosition(p);
+      let quaternion = child.parent.quaternion.clone();
+      let scale = child.parent.scale.clone();
+      if (!item.children[i - 1]) {
+        position = child.getWorldPosition(p);
+        quaternion = child.quaternion.clone();
+        scale = child.scale.clone();
+      }
+
+      CACHE.instanceTransformInfo[instanceName].push({
+        position,
+        quaternion,
+        scale,
+      });
+
+      if (!CACHE.instanceMeshInfo[instanceName])
+        CACHE.instanceMeshInfo[instanceName] = {
+          material: child.material.clone(),
+          geometry: child.geometry.clone(),
+        };
+
+      let flag = -1;
+      for (let j = 0; j < evt.clickObjects.length; j++) {
+        if (evt.clickObjects[j].uuid === child.uuid) {
+          flag = j;
+          break;
+        }
+      }
+      if (flag !== -1) evt.clickObjects.splice(flag, 1);
+
+      if (!CACHE.removed[child.parent.name])
+        CACHE.removed[child.parent.name] = child.parent;
+
+      child.parent.remove(child)
+      child.geometry.dispose();
+      if (child.material.map) {
+        child.material.map.dispose();
+        child.material.map = null;
+      }
+      child.material.dispose();
+      child = null;
+    }
+  });
+}
+
+/**
+* 单模型实例化
+* @param {Array} arr 需要实例化的 单mesh结构模型集合 例如：[mesh_1,mesh_2,mesh_3]
+* @param {String} name 实例化信息命名
+* @param {Object} evt container
+*/
+function instantiationSingleInfo(identicalMeshArray, name, evt) {
+  identicalMeshArray.forEach((item) => {
+    const instanceName = `${name}`;
+    if (!CACHE.instanceTransformInfo[instanceName])
+      CACHE.instanceTransformInfo[instanceName] = [];
+
+    let p = new Bol3D.Vector3()
+    let s = new Bol3D.Vector3()
+    let q = new Bol3D.Quaternion()
+
+
+    item.getWorldPosition(p)
+    item.getWorldScale(s)
+    item.getWorldQuaternion(q)
+
+    CACHE.instanceTransformInfo[instanceName].push({
+      position: p,
+      quaternion: q,
+      scale: s,
+    });
+
+    if (!CACHE.instanceMeshInfo[instanceName])
+      CACHE.instanceMeshInfo[instanceName] = {
+        material: item.material.clone(),
+        geometry: item.geometry.clone(),
+      };
+
+    let flag = -1;
+    for (let j = 0; j < evt.clickObjects.length; j++) {
+      if (evt.clickObjects[j].uuid === item.uuid) {
+        flag = j;
+        break;
+      }
+    }
+    if (flag !== -1) evt.clickObjects.splice(flag, 1);
+
+    if (!CACHE.removed[item.name]) CACHE.removed[item.name] = item;
+
+    item.geometry.dispose();
+    if (item.material.map) {
+      item.material.map.dispose();
+      item.material.map = null;
+    }
+    item.material.dispose();
+    item = null;
+  });
 }
 
 
@@ -889,5 +1005,7 @@ export const API = {
   initDeviceByMap,
   getAnimationList,
   initShelves,
+  instantiationGroupInfo,
+  instantiationSingleInfo,
   testBox
 }
