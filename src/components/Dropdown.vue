@@ -79,10 +79,8 @@ function handleItem(item) {
   STATE.searchAnimateDesdory = true
   setTimeout(() => {
     API.search(selected.value, searchText.value)
-  }, 100)
-  nextTick(() => {
     searchText.value = ''
-  })
+  }, 100)
 }
 
 

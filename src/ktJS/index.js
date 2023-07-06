@@ -64,6 +64,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           // 
           window.container = evt
           window.STATE = STATE
+          window.CACHE = CACHE
           CACHE.container = evt
 
           /**
@@ -111,7 +112,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.getData()
             API.getAnimationList()
             API.handleLine()
-            API.initReflexFloor()
+            // API.initReflexFloor()
             API.initDeviceByMap()
             API.initSkyCar()
             API.initShelves()
@@ -129,8 +130,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
               }
             }
 
-            console.log('shalves4: ', shalves4);
-            API.instantiationGroupInfo(shalves4, 1, 'shalves4', CACHE.container)
+            API.instantiationGroupInfo(shalves4, 'shalves4', CACHE.container)
+            API.instantiationGroupInfo(shalves2, 'shalves2', CACHE.container)
+            
 
 
             //实例化
@@ -159,15 +161,20 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                 matrix.compose(position, quaternion, scale);
                 instanceMesh.setMatrixAt(i, matrix);
                 instanceMesh.name = key;
+                instanceMesh.castShadow = true
               }
               evt.scene.add(instanceMesh);
               // CACHE.outsideScene.push(instanceMesh);
             }
 
 
+            STATE.sceneList.shelves = {
+              shalves4: CACHE.container.scene.children.find(e => e.name === 'shalves4'),
+              shalves2: CACHE.container.scene.children.find(e => e.name === 'shalves2')
+            }
+            
             // API.testBox()
             // API.loadGUI()
-
             CACHE.container.loadingBar.style.visibility = 'hidden'
           })
 

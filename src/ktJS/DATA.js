@@ -269,23 +269,50 @@ const deviceMap = {
 
 // 模拟天车位置
 const skyCarMap = [{
-  id: JSON.stringify(Math.ceil(Math.random() * 100)).padStart(3, '0'),
-  coordinate: 82500
-  // }, {
-  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  //   coordinate: 822200
-  // }, {
-  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  //   coordinate: 180000
-  // }, {
-  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  //   coordinate: 78000
-  // }, {
-  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  //   coordinate: 226200
-  // }, {
-  //   id: JSON.stringify(Math.ceil(Math.random()*100)).padStart(3, '0'),
-  //   coordinate: 1353761
+  id: 'V0001',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0002',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0003',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0004',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0005',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0006',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0007',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0008',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0009',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0010',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0011',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0012',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0013',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0014',
+  coordinate: Math.floor(Math.random() * 1500000)
+}, {
+  id: 'V0015',
+  coordinate: Math.floor(Math.random() * 1500000)
 }]
 
 

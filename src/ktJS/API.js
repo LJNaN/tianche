@@ -24,12 +24,12 @@ function getData() {
 
   // 模拟数据
   // =======================================
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData.length) i = 0
-    drive(JSON.parse(mockData[i].data))
-    i++
-  }, 333)
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData.length) i = 0
+  //   drive(JSON.parse(mockData[i].data))
+  //   i++
+  // }, 333)
 
 }
 
@@ -294,7 +294,6 @@ function loadGUI() {
 }
 
 function testBox() {
-  // TU.setModelPosition(STATE.sceneList.WWATA02V)
 
   const boxG = new Bol3D.BoxGeometry(5, 5, 5)
   const boxM = new Bol3D.MeshBasicMaterial({ color: 0xffffff })
@@ -349,7 +348,7 @@ function handleLine() {
 class SkyCar {
   coordinate = 0           // 当前坐标
   history = {}             // 历史坐标与时间
-  state = 5                // 状态
+  state = 0                // 状态
   id = ''                  // id
   skyCarMesh = null        // 天车模型
   animation = null         // render 里的每帧动画
@@ -670,20 +669,30 @@ class SkyCar {
 
 // 加载模拟天车
 function initSkyCar() {
-  // DATA.skyCarMap.forEach(e => {
-  //   const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
+  DATA.skyCarMap.forEach(e => {
+    const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
 
-  //   setInterval(() => {
-  //     if (skyCar.coordinate >= 1500000) skyCar.coordinate = 19000
-  //     skyCar.coordinate += 200
-  //     skyCar.setPosition()
-  //   }, 333)
+    setInterval(() => {
+      if (skyCar.coordinate >= 1500000) skyCar.coordinate = 0
 
-  //   if (!STATE.sceneList.skyCarList) {
-  //     STATE.sceneList.skyCarList = []
-  //   }
-  //   STATE.sceneList.skyCarList.push(skyCar)
-  // })
+      loop()
+      function loop() {
+        const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.coordinate && e.endCoordinate > skyCar.coordinate)
+        if (!map) {
+          skyCar.coordinate += 200
+          loop()
+        }
+      }
+
+      skyCar.coordinate += 200
+      skyCar.setPosition()
+    }, 333)
+
+    if (!STATE.sceneList.skyCarList) {
+      STATE.sceneList.skyCarList = []
+    }
+    STATE.sceneList.skyCarList.push(skyCar)
+  })
 }
 
 // 加载反射器地板
@@ -701,7 +710,6 @@ function initReflexFloor() {
   reflector.rotation.x = -Math.PI / 2
   reflector.position.set(0, -0.4, 0)
   CACHE.container.scene.add(reflector)
-  // TU.setModelPosition(reflector)
 
 
 
@@ -721,19 +729,23 @@ function initReflexFloor() {
 // 加载临时的设备
 function initDeviceByMap() {
   for (let key in DATA.deviceMap) {
+    let arr = []
     DATA.deviceMap[key].forEach((e, index) => {
       const model = STATE.sceneList[key].clone()
       model.visible = true
       model.position.set(...e.position)
       model.rotation.y = e.rotate * Math.PI / 180
+      arr.push(model)
       CACHE.container.scene.add(model)
     })
+    instantiationGroupInfo(arr, key, CACHE.container)
   }
 }
 
 
 // 二维的搜索 并跟随移动
 function search(type, id) {
+  console.log('type, id: ', type, id);
   // 恢复动画销毁为false
   STATE.searchAnimateDesdory = false
 
@@ -746,6 +758,13 @@ function search(type, id) {
   } else if (type === '轨道') {
     const line = STATE.sceneList.lineList.find(e => e.userData.id === id)
     if (line) obj = line
+    if (obj) {
+      STATE.sceneList.lineList.forEach(e => {
+        if (e.userData.color) {
+          e.material.color = e.userData.color
+        }
+      })
+    }
   }
 
   if (obj) {
@@ -796,6 +815,7 @@ function search(type, id) {
 
     } else if (type === '轨道') {
       const color = obj.material.color.clone()
+      obj.userData.color = color
 
       obj.material.color.g = 0.0
       obj.material.color.b = 0.0
@@ -864,77 +884,66 @@ function initShelves() {
       CACHE.container.scene.add(model)
     }
   }
-
-
-  for (let key in STATE.sceneList.shelves) {
-    if (key === 'W01_38') {
-      TU.setModelPosition(STATE.sceneList.shelves[key])
-      CACHE.container.orbitControls.target.set(STATE.sceneList.shelves[key].position.x, STATE.sceneList.shelves[key].position.y, STATE.sceneList.shelves[key].position.z)
-      break
-    }
-  }
 }
 
 /**
  * 组实例化
  * @param {Array} arr 需要实例化的 相同组结构的模型集合 例如：[group1{mesh_1,mesh_2,mesh_3},group2{mesh_1,mesh_2,mesh_3},group3{mesh_1,mesh_2,mesh_3}]
- * @param {Number} meshNumber 组结构中，mesh的数量
  * @param {String} name 实例化信息命名
  * @param {Object} evt container
  */
-function instantiationGroupInfo(arr, meshNumber, name, evt) {
+function instantiationGroupInfo(arr, name, evt) {
+
   arr.forEach((item) => {
-    for (let i = 1; i <= meshNumber; i++) {
-      let child = item.children[i - 1] || item;
+    item.traverse(child => {
+      if (child.isMesh) {
+        let position = new Bol3D.Vector3()
+        let scale = new Bol3D.Vector3()
+        let quaternion = new Bol3D.Quaternion()
+        child.getWorldPosition(position)
+        child.getWorldScale(scale)
+        child.getWorldQuaternion(quaternion)
 
-      const instanceName = `${name}${i}`;
-      if (!CACHE.instanceTransformInfo[instanceName])
-        CACHE.instanceTransformInfo[instanceName] = [];
+        const instanceName = `${child.name}`;
 
-      const p = new Bol3D.Vector3();
-
-      let position = child.parent.getWorldPosition(p);
-      let quaternion = child.parent.quaternion.clone();
-      let scale = child.parent.scale.clone();
-      if (!item.children[i - 1]) {
-        position = child.getWorldPosition(p);
-        quaternion = child.quaternion.clone();
-        scale = child.scale.clone();
-      }
-
-      CACHE.instanceTransformInfo[instanceName].push({
-        position,
-        quaternion,
-        scale,
-      });
-
-      if (!CACHE.instanceMeshInfo[instanceName])
-        CACHE.instanceMeshInfo[instanceName] = {
-          material: child.material.clone(),
-          geometry: child.geometry.clone(),
-        };
-
-      let flag = -1;
-      for (let j = 0; j < evt.clickObjects.length; j++) {
-        if (evt.clickObjects[j].uuid === child.uuid) {
-          flag = j;
-          break;
+        if (!CACHE.instanceTransformInfo[instanceName]) {
+          CACHE.instanceTransformInfo[instanceName] = [];
         }
-      }
-      if (flag !== -1) evt.clickObjects.splice(flag, 1);
 
-      if (!CACHE.removed[child.parent.name])
-        CACHE.removed[child.parent.name] = child.parent;
+        CACHE.instanceTransformInfo[instanceName].push({
+          position,
+          quaternion,
+          scale,
+        });
 
-      child.parent.remove(child)
-      child.geometry.dispose();
-      if (child.material.map) {
-        child.material.map.dispose();
-        child.material.map = null;
+        if (!CACHE.instanceMeshInfo[instanceName])
+          CACHE.instanceMeshInfo[instanceName] = {
+            material: child.material.clone(),
+            geometry: child.geometry.clone(),
+          };
+
+        let flag = -1;
+        for (let j = 0; j < evt.clickObjects.length; j++) {
+          if (evt.clickObjects[j].uuid === child.uuid) {
+            flag = j;
+            break;
+          }
+        }
+        if (flag !== -1) evt.clickObjects.splice(flag, 1);
+
+        if (!CACHE.removed[item.uuid]) {
+          CACHE.removed[item.uuid] = item;
+        }
+
+        child.geometry.dispose();
+        if (child.material.map) {
+          child.material.map.dispose();
+          child.material.map = null;
+        }
+        child.material.dispose();
+        child = null;
       }
-      child.material.dispose();
-      child = null;
-    }
+    })
   });
 }
 
@@ -980,7 +989,7 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
     }
     if (flag !== -1) evt.clickObjects.splice(flag, 1);
 
-    if (!CACHE.removed[item.name]) CACHE.removed[item.name] = item;
+    if (!CACHE.removed[item.uuid]) CACHE.removed[item.uuid] = item;
 
     item.geometry.dispose();
     if (item.material.map) {
@@ -992,6 +1001,10 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
   });
 }
 
+// 实例化
+function doInstance() {
+
+}
 
 export const API = {
   ...TU,
