@@ -95,7 +95,7 @@ const option2 = reactive({
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ":" + params[i].value + "家<br/>";
+          str += params[i].seriesName + ":" + params[i].value + "秒<br/>";
         }
       }
       return str;
@@ -158,7 +158,7 @@ const option2 = reactive({
   },
   yAxis: [
     {
-      max: 300,
+      max: 200,
       type: "value",
       nameTextStyle: {
         color: "#fff",
@@ -207,8 +207,7 @@ const option2 = reactive({
         color: "#5470c6",
       },
       data: [
-        175, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168,
-        142,
+        175, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168,142,
       ],
     },
     {
@@ -329,7 +328,7 @@ const option3 = reactive({
   ],
   yAxis: [
     {
-      max: 3000,
+      max: 12000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -397,8 +396,7 @@ const option3 = reactive({
         show: false,
       },
       data: [
-        620, 732, 701, 734, 1090, 1130, 1120, 652, 987, 231, 654, 513, 135, 963,
-        752,
+        5620, 4732, 6701, 3734, 8090, 6130, 4120, 3652, 4987, 8231, 4654, 5513, 10135, 6963,4752,
       ],
     },
     {
@@ -430,8 +428,7 @@ const option3 = reactive({
       },
       stack: "搜索引擎",
       data: [
-        132, 101, 134, 290, 230, 220, 721, 692, 432, 521, 687, 653, 715, 145,
-        963,
+        3132, 5101, 2134, 6290, 1230, 1220, 1721, 5692, 2432, 4521, 2687, 1653, 2715, 2145,2963,
       ],
     },
   ],
