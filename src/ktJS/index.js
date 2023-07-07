@@ -126,6 +126,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             for (let key in STATE.sceneList.shelves) {
               if (STATE.sceneList.shelves[key].name === 'huojia4') {
                 shalves4.push(STATE.sceneList.shelves[key])
+                
               } else if (STATE.sceneList.shelves[key].name === 'huojia2') {
                 shalves2.push(STATE.sceneList.shelves[key])
               }
@@ -201,7 +202,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.onclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
-          // console.log('obj: ', obj);
+          console.log('obj: ', e.objects[0]);
 
           if (obj.userData.type === '天车') {
             API.search('天车', obj.userData.id)
@@ -221,7 +222,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.search('轨道', obj.userData.id)
 
           } else if (obj.isInstancedMesh) {
-            API.clickInstance(e)
+            const obj = e.objects[0].object
+            const index = e.objects[0].instanceId
+            API.clickInstance(obj, index)
           }
         }
       }

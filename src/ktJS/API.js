@@ -843,8 +843,8 @@ function search(type, id) {
       obj.material.color.g = 0.0
       obj.material.color.b = 0.0
 
-      console.log('obj: ', obj);
       
+
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
           STATE.currentPopup.parent.remove(STATE.currentPopup)
@@ -992,9 +992,9 @@ function search(type, id) {
 }
 
 // 实例化点击
-function clickInstance(e) {
-  const obj = e.objects[0].object
-  const index = e.objects[0].instanceId
+function clickInstance(obj, index) {
+  
+  
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
 
   if (STATE.currentPopup) {
@@ -1177,7 +1177,7 @@ function initShelves() {
       item.shelf = shelf
       item.area = area
       STATE.sceneList.shelvesArr.push(item)
-      
+
       let model = null
       if (item.fields.length === 4) {
         model = STATE.sceneList.huojia4.clone()
@@ -1226,6 +1226,13 @@ function instantiationGroupInfo(arr, name, evt) {
           quaternion,
           scale,
         });
+
+        if (item.name.includes('huojia')) {
+          if (!CACHE.instanceNameMap[item.name]) {
+            CACHE.instanceNameMap[item.name] = [];
+          }
+          CACHE.instanceNameMap[item.name].push({ index: CACHE.instanceNameMap[item.name].length, name: item.userData.name })
+        }
 
         if (!CACHE.instanceMeshInfo[instanceName])
           CACHE.instanceMeshInfo[instanceName] = {

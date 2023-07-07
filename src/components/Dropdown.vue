@@ -91,31 +91,17 @@ function handleItem(item) {
       const OHBItemInfo = temp.find(e => e.shelf === item)
       const OHBItem = STATE.sceneList.shelves[OHBItemInfo.shelf]
       
-    
-      const OHBItemP = OHBItem.children[0].geometry.attributes.position.array
-      const targetPosition = [OHBItemP[0], OHBItemP[1], OHBItemP[2]]
-      console.log('targetPosition: ', targetPosition);
-      
-
       let instanceMesh = null
+      let index = 0
       if (OHBItem.name === 'huojia4') {
         instanceMesh = container.scene.children.find(e => e.isInstancedMesh && e.name.includes('shalves4_'))
+        index = CACHE.instanceNameMap.huojia4.find(e => e.name === OHBItem.userData.name).index
       } else if (OHBItem.name === 'huojia2') {
         instanceMesh = container.scene.children.find(e => e.isInstancedMesh && e.name.includes('shalves2_'))
+        index = CACHE.instanceNameMap.huojia2.find(e => e.name === OHBItem.userData.name).index
       }
 
-      
-      const insPosition = instanceMesh.geometry.attributes.position.array
-      console.log('insPosition: ', insPosition);
-      
-      for (let i = 0; i < instanceMesh.count; i = i + 3) {
-        if (insPosition[i] === targetPosition[0]
-          && insPosition[i + 1] === targetPosition[1]
-          && insPosition[i + 2] === targetPosition[2]) {
-            
-        }
-      }
-      // API.clickInstance(OHBItem)
+      API.clickInstance(instanceMesh, index)
     }
   }, 100)
 }
