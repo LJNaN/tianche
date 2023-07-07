@@ -327,7 +327,7 @@ const skyCarStateColorMap = [
 ]
 
 
-// 货架
+// OHB 货架
 const shelvesMap = {
   'WBW01G01': {
     'W01_2_01': { fields: [1197, 1198, 1199, 1200], rotate: 90, position: [-159, 25.17, -92] },

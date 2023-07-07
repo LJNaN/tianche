@@ -3,6 +3,7 @@ import { CACHE } from './CACHE.js'
 import { STATE } from './STATE.js'
 import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
+import * as TWEEN from '@tweenjs/tween.js'
 import { test } from '@/axios/api.ts'
 
 let container
@@ -25,17 +26,17 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           show: true
         },
         lights: {
-          directionLights: [{
-            color: 0xaccdff,
-            intensity: 0.8,
-            position: [50, 200, -90],
-            mapSize: [2048, 2048],
-            near: 0.01,
-            far: 600,
-            bias: -0.001,
-            distance: 500,
-            target: [0, 0, 0]
-          }],
+          // directionLights: [{
+          //   color: 0xaccdff,
+          //   intensity: 0.8,
+          //   position: [50, 200, -90],
+          //   mapSize: [2048, 2048],
+          //   near: 0.01,
+          //   far: 600,
+          //   bias: -0.001,
+          //   distance: 500,
+          //   target: [0, 0, 0]
+          // }],
         },
         stats: true
       })
@@ -74,20 +75,20 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 开灯开阴影
-            CACHE.container.directionLights[0].visible = true
-            CACHE.container.directionLights[0].castShadow = true
-            CACHE.container.scene.traverse(child => {
-              if (child.isMesh) {
-                if (child.name === 'di') {
-                  child.receiveShadow = true
-                } else if (child.name === 'ding') {
-                  child.visible = false
-                } else {
-                  child.castShadow = true
-                  child.receiveShadow = true
-                }
-              }
-            })
+            // CACHE.container.directionLights[0].visible = true
+            // CACHE.container.directionLights[0].castShadow = true
+            // CACHE.container.scene.traverse(child => {
+            //   if (child.isMesh) {
+            //     if (child.name === 'di') {
+            //       child.receiveShadow = true
+            //     } else if (child.name === 'ding') {
+            //       child.visible = false
+            //     } else {
+            //       child.castShadow = true
+            //       child.receiveShadow = true
+            //     }
+            //   }
+            // })
 
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
@@ -132,7 +133,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
             API.instantiationGroupInfo(shalves4, 'shalves4', CACHE.container)
             API.instantiationGroupInfo(shalves2, 'shalves2', CACHE.container)
-            
+
 
 
             //实例化
@@ -163,16 +164,14 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                 instanceMesh.name = key;
                 instanceMesh.castShadow = true
               }
+              if (key != '2portOhb' && key != '4portOhb') {
+                CACHE.container.clickObjects.push(instanceMesh)
+              }
               evt.scene.add(instanceMesh);
-              // CACHE.outsideScene.push(instanceMesh);
             }
 
 
-            STATE.sceneList.shelves = {
-              shalves4: CACHE.container.scene.children.find(e => e.name === 'shalves4'),
-              shalves2: CACHE.container.scene.children.find(e => e.name === 'shalves2')
-            }
-            
+
             // API.testBox()
             // API.loadGUI()
             CACHE.container.loadingBar.style.visibility = 'hidden'
@@ -202,12 +201,27 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.onclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
+          // console.log('obj: ', obj);
+
           if (obj.userData.type === '天车') {
             API.search('天车', obj.userData.id)
             const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
             if (instance) {
+              STATE.sceneList.skyCarList.forEach(e2 => {
+                e2.popup.visible = true
+                if (e2.clickPopup) {
+                  e2.clickPopup.element.remove()
+                  e2.clickPopup.parent.remove(e2.clickPopup)
+                  e2.clickPopup = null
+                }
+              })
               instance.initClickPopup()
             }
+          } else if (obj.userData.type === '轨道') {
+            API.search('轨道', obj.userData.id)
+
+          } else if (obj.isInstancedMesh) {
+            API.clickInstance(e)
           }
         }
       }

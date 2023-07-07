@@ -54,6 +54,24 @@ body {
   top: -20vh !important;
 }
 
+.popup3d_jitai .popup-close {
+  scale: 2;
+  right: -11vw !important;
+  top: -14vh !important;
+}
+
+.popup3d_shalves .popup-close {
+  scale: 2;
+  right: -11vw !important;
+  top: -7vh !important;
+}
+
+.popup3d_guidao .popup-close {
+  scale: 2;
+  right: -11vw !important;
+  top: -18vh !important;
+}
+
 @keyframes arrowJump {
   0% {
     transform: translate(-50%, 40%);

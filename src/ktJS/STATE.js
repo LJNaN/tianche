@@ -18,6 +18,9 @@ let searchAnimateDesdory = false
 // 二维的报警列表
 let alarmList = null
 
+// 当前弹窗(除了天车)
+const currentPopup = null
+
 export const STATE = {
   initialState,
   sceneList,
@@ -25,5 +28,6 @@ export const STATE = {
   clock,
   searchAnimateDesdory,
   alarmList,
+  currentPopup,
   PUBLIC_PATH
 }

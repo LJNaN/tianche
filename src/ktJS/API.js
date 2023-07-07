@@ -329,11 +329,13 @@ function handleLine() {
       // 计算线段的世界坐标
       const lineWorldPosition = new Bol3D.Vector3()
       child.getWorldPosition(lineWorldPosition)
+      CACHE.container.clickObjects.push(child)
 
       child.userData.direction = direction
       child.userData.worldPosition = lineWorldPosition
       child.userData.long = long
       child.userData.id = child.name.replace('-', '_')
+      child.userData.type = '轨道'
 
       if (!STATE.sceneList.lineList) {
         STATE.sceneList.lineList = []
@@ -425,6 +427,17 @@ class SkyCar {
     this.popup = popup
 
     popup.element.addEventListener('click', (() => {
+      STATE.sceneList.skyCarList.forEach(e => {
+        e.popup.visible = true
+        if (e.clickPopup) {
+          if (e.clickPopup.parent) {
+            e.clickPopup.parent.remove(e.clickPopup)
+          }
+          e.clickPopup.element.remove()
+          e.clickPopup = null
+        }
+      })
+
       search('天车', this.id)
       this.initClickPopup()
     }))
@@ -434,6 +447,14 @@ class SkyCar {
   initClickPopup() {
     if (this.clickPopup) {
       return;
+    }
+
+    if (STATE.currentPopup) {
+      if (STATE.currentPopup.parent) {
+        STATE.currentPopup.parent.remove(STATE.currentPopup)
+      }
+      STATE.currentPopup.element.remove()
+      STATE.currentPopup = null
     }
 
     const name = 'click_popup_天车_' + this.id
@@ -456,9 +477,9 @@ class SkyCar {
         justify-content: space-between;
         align-items: center;
         padding: 0 5%;
-        height: 12.5%;
+        height: 4vh;
         width: 100%;
-        background: url('./assets/3d/img/44.png') center / 100% 100% no-repeat;
+        background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
         <p style="font-size: 2vh;">${items[i].name}</p>
         <p style="font-size: 2vh;">${items[i].value}</p>
@@ -501,7 +522,7 @@ class SkyCar {
           flex-direction: column;
           width: 85%;
           margin: 4% auto 0 auto;
-          height: 68%;
+          height: 100%;
         ">
         ${textValue}
         </div>
@@ -516,6 +537,7 @@ class SkyCar {
         this.popup.visible = true
         this.clickPopup.parent.remove(this.clickPopup)
         this.clickPopup = null
+        STATE.currentPopup = null
       })
     })
 
@@ -528,6 +550,7 @@ class SkyCar {
     this.skyCarMesh.add(clickPopup)
     this.clickPopup = clickPopup
     clickPopup.position.y = 2.3
+    STATE.currentPopup = clickPopup
   }
 
   setPopupColor() {
@@ -745,7 +768,7 @@ function initDeviceByMap() {
 
 // 二维的搜索 并跟随移动
 function search(type, id) {
-  console.log('type, id: ', type, id);
+
   // 恢复动画销毁为false
   STATE.searchAnimateDesdory = false
 
@@ -777,10 +800,10 @@ function search(type, id) {
 
     new TWEEN.Tween(camera.position)
       .to({
-        x: Math.abs(camera.position.x) > 100 ? camera.position.x / 2 : camera.position.x,
-        y: Math.abs(camera.position.y) > 200 ? camera.position.y / 2 : camera.position.y,
-        z: Math.abs(camera.position.z) > 100 ? camera.position.z / 2 : camera.position.z
-      }, 1500)
+        x: Math.abs(camera.position.x - objWorldPosition.x) > 200 ? camera.position.x / 2 : camera.position.x,
+        y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 2 : camera.position.y,
+        z: Math.abs(camera.position.z - objWorldPosition.z) > 200 ? camera.position.z / 2 : camera.position.z
+      }, 800)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .start()
       .onUpdate(() => {
@@ -788,7 +811,7 @@ function search(type, id) {
       })
 
     new TWEEN.Tween(contorl.target)
-      .to(objWorldPosition, 1500)
+      .to(objWorldPosition, 800)
       .dynamic(true)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .start()
@@ -819,6 +842,126 @@ function search(type, id) {
 
       obj.material.color.g = 0.0
       obj.material.color.b = 0.0
+
+      console.log('obj: ', obj);
+      
+      if (STATE.currentPopup) {
+        if (STATE.currentPopup.parent) {
+          STATE.currentPopup.parent.remove(STATE.currentPopup)
+        }
+        STATE.currentPopup.element.remove()
+        STATE.currentPopup = null
+      }
+
+      let title = '轨道'
+      let height = '40vh'
+      let className = 'popup3d_guidao'
+      let items = [
+        { name: '起点节点', value: '256121' },
+        { name: '起点坐标', value: '5216322' },
+        { name: '终点节点', value: '214125' },
+        { name: '终点坐标', value: '53261' },
+        { name: '轨道状态', value: '正常' },
+        { name: 'Alarm 情况', value: '无' }
+      ]
+
+      let textValue = ``
+      for (let i = 0; i < items.length; i++) {
+        textValue += `
+            <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 5%;
+              height: 4vh;
+              width: 100%;
+              background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+              ">
+              <p style="font-size: 2vh;">${items[i].name}</p>
+              <p style="font-size: 2vh;">${items[i].value}</p>
+            </div>`
+      }
+
+      const popup = new Bol3D.POI.Popup3DSprite({
+        value: `
+            <div style="
+              pointer-events: none;
+              margin:0;
+              color: #ffffff;
+            ">
+
+            <div style="
+                position: absolute;
+                background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+                width: 25vw;
+                height: ${height};
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: column;
+                left: 50%;
+                top: 50%;
+                z-index: 2;
+              ">
+              <p style="
+                font-size: 2vh;
+                font-weight: bold;
+                letter-spacing: 8px;
+                margin-left: 4px;
+                text-align: center;
+                margin-top: 10%;
+              ">
+                ${title}
+              </p>
+
+              <div style="
+                display: flex;
+                flex-direction: column;
+                width: 85%;
+                margin: 4% auto 0 auto;
+                height: 100%;
+              ">
+              ${textValue}
+              </div>
+            </div>
+          </div>
+          `,
+        position: [0, 0, 0],
+        className: `popup3dclass ${className}`,
+        closeVisible: true,
+        closeColor: "#FFFFFF",
+        closeCallback: (() => {
+          popup.element.remove()
+          popup.parent.remove(popup)
+          STATE.currentPopup = null
+        })
+      })
+
+      popup.scale.set(0.08, 0.08, 0.08)
+      popup.name = 'popup_' + obj.name
+      popup.position.set(objWorldPosition.x, objWorldPosition.y + 30, objWorldPosition.z)
+      CACHE.container.scene.add(popup)
+      STATE.currentPopup = popup
+
+      new TWEEN.Tween(camera.position)
+        .to({
+          x: Math.abs(camera.position.x - objWorldPosition.x) > 200 ? camera.position.x / 2 : camera.position.x,
+          y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 2 : camera.position.y,
+          z: Math.abs(camera.position.z - objWorldPosition.z) > 200 ? camera.position.z / 2 : camera.position.z
+        }, 800)
+        .start()
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+          camera.updateProjectionMatrix()
+        })
+      new TWEEN.Tween(contorl.target)
+        .to({
+          x: objWorldPosition.x,
+          y: objWorldPosition.y + 30,
+          z: objWorldPosition.z
+        }, 800)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start()
+
       const eventFunc = () => {
         STATE.searchAnimateDesdory = true
         obj.material.color = color
@@ -848,6 +991,168 @@ function search(type, id) {
   }
 }
 
+// 实例化点击
+function clickInstance(e) {
+  const obj = e.objects[0].object
+  const index = e.objects[0].instanceId
+  const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
+
+  if (STATE.currentPopup) {
+    STATE.currentPopup.element.remove()
+    STATE.currentPopup.parent.remove(STATE.currentPopup)
+    STATE.currentPopup = null
+    STATE.sceneList.skyCarList.forEach(e2 => {
+      e2.popup.visible = true
+    })
+  }
+  const name = 'popup_' + obj.name
+  let items = []
+  let title = ''
+  let height = ''
+  let className = ''
+
+  if (obj.name.includes('shalves2')) {
+    title = 'OHB'
+    items = [{ name: 'shelf ID', value: '84358' }]
+    height = '16vh'
+    className = 'popup3d_shalves'
+
+  } else if (obj.name.includes('shalves4')) {
+    title = 'OHB'
+    items = [{ name: 'shelf ID', value: '84358' }]
+    height = '16vh'
+    className = 'popup3d_shalves'
+
+  } else {
+    title = '机台'
+    items = [
+      { name: '机台ID', value: '09728' },
+      { name: '机台Type', value: '57129' },
+      { name: '机台状态', value: 'Enable' },
+      { name: '在线状态', value: '在线' }
+    ]
+    height = '30vh'
+    className = 'popup3d_jitai'
+  }
+
+
+
+
+  let textValue = ``
+  for (let i = 0; i < items.length; i++) {
+    textValue += `
+      <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        height: 4vh;
+        width: 100%;
+        background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+        ">
+        <p style="font-size: 2vh;">${items[i].name}</p>
+        <p style="font-size: 2vh;">${items[i].value}</p>
+      </div>`
+  }
+
+  const popup = new Bol3D.POI.Popup3DSprite({
+    value: `
+      <div style="
+        pointer-events: none;
+        margin:0;
+        color: #ffffff;
+      ">
+
+      <div style="
+          position: absolute;
+          background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+          width: 25vw;
+          height: ${height};
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          left: 50%;
+          top: 50%;
+          z-index: 2;
+        ">
+        <p style="
+          font-size: 2vh;
+          font-weight: bold;
+          letter-spacing: 8px;
+          margin-left: 4px;
+          text-align: center;
+          margin-top: 10%;
+        ">
+          ${title}
+        </p>
+
+        <div style="
+          display: flex;
+          flex-direction: column;
+          width: 85%;
+          margin: 4% auto 0 auto;
+          height: 100%;
+        ">
+        ${textValue}
+        </div>
+      </div>
+    </div>
+    `,
+    position: [0, 0, 0],
+    className: `popup3dclass ${className}`,
+    closeVisible: true,
+    closeColor: "#FFFFFF",
+    closeCallback: (() => {
+      popup.element.remove()
+      popup.parent.remove(popup)
+      STATE.currentPopup = null
+    })
+  })
+
+  popup.scale.set(0.08, 0.08, 0.08)
+  popup.name = name
+  popup.position.set(transformInfo.position.x, transformInfo.position.y + 30, transformInfo.position.z)
+  CACHE.container.scene.add(popup)
+  STATE.currentPopup = popup
+
+  let desdory = false
+  const camera = CACHE.container.orbitCamera
+  const contorl = CACHE.container.orbitControls
+  new TWEEN.Tween(camera.position)
+    .to({
+      x: Math.abs(camera.position.x - transformInfo.position.x) > 200 ? camera.position.x / 2 : camera.position.x,
+      y: Math.abs(camera.position.y - transformInfo.position.y) > 200 ? camera.position.y / 2 : camera.position.y,
+      z: Math.abs(camera.position.z - transformInfo.position.z) > 200 ? camera.position.z / 2 : camera.position.z
+    }, 800)
+    .start()
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => {
+      camera.updateProjectionMatrix()
+    })
+    .onComplete(() => {
+      desdory = true
+    })
+
+  new TWEEN.Tween(contorl.target)
+    .to({
+      x: transformInfo.position.x,
+      y: transformInfo.position.y + 30,
+      z: transformInfo.position.z
+    }, 800)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .start()
+
+  render()
+  function render() {
+    TWEEN.update();
+    if (desdory) {
+      return
+    } else {
+      requestAnimationFrame(render)
+    }
+  }
+}
+
 
 // 获取动画
 function getAnimationList() {
@@ -864,10 +1169,15 @@ function getAnimationList() {
 // 加载货架
 function initShelves() {
   STATE.sceneList.shelves = {}
+  STATE.sceneList.shelvesArr = []
 
   for (let area in DATA.shelvesMap) {
     for (let shelf in DATA.shelvesMap[area]) {
       const item = DATA.shelvesMap[area][shelf]
+      item.shelf = shelf
+      item.area = area
+      STATE.sceneList.shelvesArr.push(item)
+      
       let model = null
       if (item.fields.length === 4) {
         model = STATE.sceneList.huojia4.clone()
@@ -893,6 +1203,7 @@ function initShelves() {
  * @param {Object} evt container
  */
 function instantiationGroupInfo(arr, name, evt) {
+  // const randomNum = Math.floor(Math.random() * 10000)
 
   arr.forEach((item) => {
     item.traverse(child => {
@@ -904,7 +1215,7 @@ function instantiationGroupInfo(arr, name, evt) {
         child.getWorldScale(scale)
         child.getWorldQuaternion(quaternion)
 
-        const instanceName = `${child.name}`;
+        const instanceName = `${name}_${child.name}`;
 
         if (!CACHE.instanceTransformInfo[instanceName]) {
           CACHE.instanceTransformInfo[instanceName] = [];
@@ -1001,10 +1312,6 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
   });
 }
 
-// 实例化
-function doInstance() {
-
-}
 
 export const API = {
   ...TU,
@@ -1020,5 +1327,6 @@ export const API = {
   initShelves,
   instantiationGroupInfo,
   instantiationSingleInfo,
+  clickInstance,
   testBox
 }

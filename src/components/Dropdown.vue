@@ -32,6 +32,7 @@ let selected = ref(options.value[0]);
 let searchText = ref('')
 let showDropdown = ref(false);
 let candidateList = ref([])
+let temp = null
 
 watch(
   () => searchText.value,
@@ -67,19 +68,55 @@ function searchCandidate(text) {
 
   } else if (selected.value === '天车') {
     candidateList.value = STATE.sceneList.skyCarList.filter(e => e.id.includes(text)).map(e => e.id)
+
+  } else if (selected.value === 'OHB') {
+    const items = STATE.sceneList.shelvesArr.filter(e => e.shelf.includes(text))
+    candidateList.value = items.map(e => e.shelf)
+    temp = items
   }
 }
 
 
 function handleItem(item) {
-  if (selected.value === '轨道' || selected.value === '天车') {
+  if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB') {
     searchText.value = item
   }
 
   STATE.searchAnimateDesdory = true
   setTimeout(() => {
-    API.search(selected.value, searchText.value)
-    searchText.value = ''
+    if (selected.value === '轨道' || selected.value === '天车') {
+      API.search(selected.value, searchText.value)
+
+    } else if (selected.value === 'OHB') {
+      const OHBItemInfo = temp.find(e => e.shelf === item)
+      const OHBItem = STATE.sceneList.shelves[OHBItemInfo.shelf]
+      
+    
+      const OHBItemP = OHBItem.children[0].geometry.attributes.position.array
+      const targetPosition = [OHBItemP[0], OHBItemP[1], OHBItemP[2]]
+      console.log('targetPosition: ', targetPosition);
+      
+
+      let instanceMesh = null
+      if (OHBItem.name === 'huojia4') {
+        instanceMesh = container.scene.children.find(e => e.isInstancedMesh && e.name.includes('shalves4_'))
+      } else if (OHBItem.name === 'huojia2') {
+        instanceMesh = container.scene.children.find(e => e.isInstancedMesh && e.name.includes('shalves2_'))
+      }
+
+      
+      const insPosition = instanceMesh.geometry.attributes.position.array
+      console.log('insPosition: ', insPosition);
+      
+      for (let i = 0; i < instanceMesh.count; i = i + 3) {
+        if (insPosition[i] === targetPosition[0]
+          && insPosition[i + 1] === targetPosition[1]
+          && insPosition[i + 2] === targetPosition[2]) {
+            
+        }
+      }
+      // API.clickInstance(OHBItem)
+    }
   }, 100)
 }
 
