@@ -12,6 +12,7 @@
     "@tweenjs/tween.js": "^21.0.0",
     "@types/three": "^0.149.0",
     "axios": "^1.2.1",
+    "dayjs": "^1.11.9",
     "echarts": "^5.4.1",
     "element-plus": "^2.2.27",
     "less": "^4.1.3",

@@ -50,6 +50,7 @@ import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { STATE } from '@/ktJS/STATE.js'
+import { get15Day } from '@/utils/get15Day'
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
@@ -122,22 +123,7 @@ const option2 = reactive({
   },
   xAxis: {
     type: "category",
-    data: [
-      "07/25",
-      "07/26",
-      "07/27",
-      "07/28",
-      "07/29",
-      "07/30",
-      "07/31",
-      "08/01",
-      "08/02",
-      "08/03",
-      "08/04",
-      "08/05",
-      "08/06",
-      "08/07",
-    ],
+    data: get15Day(),
     axisLine: {
       show: true,
       lineStyle: {
@@ -307,22 +293,7 @@ const option3 = reactive({
       axisTick: {
         show: false,
       },
-      data: [
-        "07/25",
-      "07/26",
-      "07/27",
-      "07/28",
-      "07/29",
-      "07/30",
-      "07/31",
-      "08/01",
-      "08/02",
-      "08/03",
-      "08/04",
-      "08/05",
-      "08/06",
-      "08/07",
-      ],
+      data: get15Day()
     },
   ],
   yAxis: [
