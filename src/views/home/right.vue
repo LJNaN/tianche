@@ -31,6 +31,7 @@
 import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
+import { get15Day } from '@/utils/get15Day'
 
 const option = reactive({
   backgroundColor: "",
@@ -346,23 +347,7 @@ const option2 = reactive({
       axisTick: {
         show: false,
       },
-      data: [
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-      ],
+      data: get15Day()
     },
   ],
   yAxis: [
@@ -529,23 +514,7 @@ const option3 = reactive({
       axisTick: {
         show: false,
       },
-      data: [
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-      ],
+      data: get15Day()
     },
   ],
   yAxis: [

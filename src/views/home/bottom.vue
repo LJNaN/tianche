@@ -10,17 +10,17 @@
           <span v-for="(item, index) in title" :key="index">{{ item }}</span>
         </div>
         <el-scrollbar class="table-content">
-          <div v-for="(item, index) in alarmList" :key="item.alarmId">
-            <p title="报警代码">
+          <div v-for="(item) in alarmList" :key="item.alarmId">
+            <p :title="item.alarmCode">
               <span class="zitichaochu">{{ item.alarmCode }}</span>
             </p>
-            <p title="异常描述">
+            <p :title="item.alarmData">
               <span class="zitichaochu">{{ item.alarmData }}</span>
             </p>
-            <p title="天车">
+            <p :title="item.remark">
               <span class="zitichaochu">{{ item.remark }}</span>
             </p>
-            <p title="创建时间">
+            <p :title="item.createTime">
               <span class="zitichaochu">{{ item.createTime }}</span>
             </p>
           </div>
@@ -50,6 +50,7 @@ import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { STATE } from '@/ktJS/STATE.js'
+import { get15Day } from '@/utils/get15Day'
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
@@ -61,7 +62,7 @@ STATE.alarmList = alarmList
 const mockAlarmList = [
   {
     alarmId: 0,
-    alarmCode: "M2053",
+    alarmCode: "M20531111111111111111",
     alarmData: "2053_天车前方 障礙检知-近 ",
     alarmType: "set",
     remark: "V0015",
@@ -122,22 +123,7 @@ const option2 = reactive({
   },
   xAxis: {
     type: "category",
-    data: [
-      "05/05",
-      "05/06",
-      "05/07",
-      "05/08",
-      "05/09",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-      "05/05",
-    ],
+    data: get15Day(),
     axisLine: {
       show: true,
       lineStyle: {
@@ -158,7 +144,7 @@ const option2 = reactive({
   },
   yAxis: [
     {
-      max: 200,
+      max: 300,
       type: "value",
       nameTextStyle: {
         color: "#fff",
@@ -207,7 +193,7 @@ const option2 = reactive({
         color: "#5470c6",
       },
       data: [
-        175, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168,142,
+        134, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168,142,
       ],
     },
     {
@@ -225,7 +211,7 @@ const option2 = reactive({
       lineStyle: {
         color: "#91cc75",
       },
-      data: [212, 140, 132, 55, 40, 68, 75, 62, 174, 61, 52, 75, 96, 41, 34],
+      data: [150, 120, 132, 55, 40, 68, 75, 62, 174, 61, 52, 75, 96, 41, 34],
     },
     {
       name: "CycleTime",
@@ -243,7 +229,7 @@ const option2 = reactive({
         color: "#f3454b",
       },
       data: [
-        122, 213, 128, 146, 106, 160, 140, 123, 153, 162, 142, 152, 167, 145,
+        122, 146, 128, 146, 106, 160, 140, 123, 153, 162, 142, 152, 167, 145,
         163,
       ],
     },
@@ -307,23 +293,7 @@ const option3 = reactive({
       axisTick: {
         show: false,
       },
-      data: [
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-        "05/05",
-      ],
+      data: get15Day()
     },
   ],
   yAxis: [
@@ -570,6 +540,7 @@ const option3 = reactive({
 
   .table-content {
     pointer-events: all;
+    
 
     div {
       display: flex;
@@ -578,6 +549,7 @@ const option3 = reactive({
       height: 40px;
       color: #ffffff;
       font-size: 0.4vw;
+      border-right: 1px solid #aaa;
 
       p {
         display: flex;
