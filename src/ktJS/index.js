@@ -38,7 +38,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           //   target: [0, 0, 0]
           // }],
         },
-        stats: true
+        stats: false
       })
 
       const jsonParser = new Bol3D.JSONParser({
@@ -197,9 +197,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
        * 出于性能考虑，container中的clickObjects不再自动添加，需要在加载模型时手动添加，注意！！！
        */
       const events = new Bol3D.Events(container)
-      events.ondbclick = (e) => { }
+      events.onclick = (e) => { }
       events.onhover = (e) => { }
-      events.onclick = (e) => {
+      events.ondblclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
           console.log('obj: ', e.objects[0]);

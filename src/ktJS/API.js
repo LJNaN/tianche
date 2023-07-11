@@ -426,7 +426,7 @@ class SkyCar {
     popup.position.y = 2.3
     this.popup = popup
 
-    popup.element.addEventListener('click', (() => {
+    popup.element.addEventListener('dblclick', (() => {
       STATE.sceneList.skyCarList.forEach(e => {
         e.popup.visible = true
         if (e.clickPopup) {
