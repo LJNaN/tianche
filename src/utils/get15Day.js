@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 export function get15Day() {
     const today = dayjs(); // 获取当前时间
