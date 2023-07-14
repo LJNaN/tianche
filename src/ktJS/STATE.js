@@ -21,6 +21,12 @@ let alarmList = null
 // 当前弹窗(除了天车)
 const currentPopup = null
 
+// 卡匣状态表
+const kaxiaList = new Bol3D.Group()
+
+// 货架状态表
+const shelvesList = []
+
 export const STATE = {
   initialState,
   sceneList,
@@ -29,5 +35,7 @@ export const STATE = {
   searchAnimateDesdory,
   alarmList,
   currentPopup,
+  kaxiaList,
+  shelvesList,
   PUBLIC_PATH
 }

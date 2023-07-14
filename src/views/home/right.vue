@@ -44,7 +44,6 @@ const option = reactive({
   },
   tooltip: {
     trigger: "axis",
-    backgroundColor: "rgba(1, 13, 19, 0.5)",
     borderWidth: 1,
     axisPointer: {
       type: "shadow",
@@ -59,14 +58,10 @@ const option = reactive({
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ":" + params[i].value + "%<br/>";
+          str += params[i].seriesName + ": " + params[i].value + " %<br/>";
         }
       }
       return str;
-    },
-    textStyle: {
-      color: "rgba(212, 232, 254, 1)",
-      // fontSize: fontChart(0.24),
     },
     extraCssText: "z-index:2",
   },
@@ -86,37 +81,7 @@ const option = reactive({
   },
   xAxis: {
     type: "category",
-    data: [
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-      "01G01",
-    ],
+    data: get15Day(),
     axisLine: {
         show: true,
         lineStyle: {
@@ -639,7 +604,7 @@ setInterval(() => {
     } else {
       for (let i = 0; i < 29; i++) {
         randomDataArr.push({
-          value: Math.floor(Math.random() * 500) + 500,
+          value: Math.floor(Math.random() * 50) + 50,
           name: i,
         });
       }

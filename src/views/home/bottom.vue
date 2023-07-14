@@ -11,16 +11,17 @@
         </div>
         <el-scrollbar class="table-content">
           <div v-for="(item) in alarmList" :key="item.alarmId">
-            <p :title="item.alarmCode">
+            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
               <span class="zitichaochu">{{ item.alarmCode }}</span>
             </p>
-            <p :title="item.alarmData">
+            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
               <span class="zitichaochu">{{ item.alarmData }}</span>
             </p>
-            <p :title="item.remark">
+            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime"
+              style="cursor: pointer;" @click="handleAlertSkyCar(item.remark)">
               <span class="zitichaochu">{{ item.remark }}</span>
             </p>
-            <p :title="item.createTime">
+            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
               <span class="zitichaochu">{{ item.createTime }}</span>
             </p>
           </div>
@@ -41,7 +42,7 @@
       <p class="rdivp">Delivery Count</p>
       <Chart :option="option3" width="100%" height="100%"></Chart>
     </div>
-    
+
   </div>
 </template>
 
@@ -50,6 +51,7 @@ import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { STATE } from '@/ktJS/STATE.js'
+import { API } from '@/ktJS/API.js'
 import { get15Day } from '@/utils/get15Day'
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
@@ -58,17 +60,60 @@ const title = ["报警代码", "异常描述", "天车", "创建时间"];
 const alarmList = ref([])
 STATE.alarmList = alarmList
 
+// 点击天车报警 跳转
+function handleAlertSkyCar(id) {
+  const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
+  if (skyCar) {
+    API.search('天车', id)
+    const element = skyCar.popup.element
+    const event = new MouseEvent('dblclick', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+    element.dispatchEvent(event);
+  }
+}
+
 // 数据格式
-const mockAlarmList = [
-  {
-    alarmId: 0,
-    alarmCode: "M20531111111111111111",
-    alarmData: "2053_天车前方 障礙检知-近 ",
-    alarmType: "set",
-    remark: "V0015",
-    createTime: "2023-05-20 14:07:32",
-  },
-]
+const mockAlarmList = [{
+  alarmId: 0,
+  alarmCode: "M2322",
+  alarmData: "2322_天车前方障碍感知-远",
+  remark: "V0015",
+  createTime: "07-14 14:07:32",
+}, {
+  alarmId: 1,
+  alarmCode: "M2321",
+  alarmData: "2322_天车前方障碍感知-中",
+  remark: "V0014",
+  createTime: "07-14 14:07:19",
+}, {
+  alarmId: 2,
+  alarmCode: "M2321",
+  alarmData: "2322_天车前方障碍感知-中",
+  remark: "V0009",
+  createTime: "07-14 14:07:17",
+}, {
+  alarmId: 3,
+  alarmCode: "M2322",
+  alarmData: "2322_天车前方障碍感知-远",
+  remark: "V0005",
+  createTime: "07-14 14:07:02",
+}, {
+  alarmId: 4,
+  alarmCode: "M2321",
+  alarmData: "2322_天车前方障碍感知-中",
+  remark: "V0013",
+  createTime: "07-14 14:06:12",
+}, {
+  alarmId: 5,
+  alarmCode: "M2322",
+  alarmData: "2322_天车前方障碍感知-远",
+  remark: "V0001",
+  createTime: "07-14 14:05:53",
+}]
+// alarmList.value = mockAlarmList
 
 // 第二个表
 const option2 = reactive({
@@ -81,8 +126,6 @@ const option2 = reactive({
   },
   tooltip: {
     trigger: "axis",
-    backgroundColor: "rgba(1, 13, 19, 0.5)",
-    borderWidth: 1,
     axisPointer: {
       type: "shadow",
       // label: {
@@ -90,20 +133,17 @@ const option2 = reactive({
       // },
     },
     formatter: function (params) {
+      console.log('params: ', params);
       var str = "";
       if (params.length > 0) {
         str = params[0].name + "<br/>";
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ":" + params[i].value + "秒<br/>";
+          str += params[i].seriesName + ": " + params[i].value + " 秒<br/>";
         }
       }
       return str;
-    },
-    textStyle: {
-      color: "rgba(212, 232, 254, 1)",
-      // fontSize: fontChart(0.24),
     },
     extraCssText: "z-index:2",
   },
@@ -193,7 +233,7 @@ const option2 = reactive({
         color: "#5470c6",
       },
       data: [
-        134, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168,142,
+        134, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168, 142,
       ],
     },
     {
@@ -366,7 +406,7 @@ const option3 = reactive({
         show: false,
       },
       data: [
-        5620, 4732, 6701, 3734, 8090, 6130, 4120, 3652, 4987, 8231, 4654, 5513, 10135, 6963,4752,
+        5620, 4732, 6701, 3734, 8090, 6130, 4120, 3652, 4987, 8231, 4654, 5513, 10135, 6963, 4752,
       ],
     },
     {
@@ -398,7 +438,7 @@ const option3 = reactive({
       },
       stack: "搜索引擎",
       data: [
-        3132, 5101, 2134, 6290, 1230, 1220, 1721, 5692, 2432, 4521, 2687, 1653, 2715, 2145,2963,
+        3132, 5101, 2134, 6290, 1230, 1220, 1721, 5692, 2432, 4521, 2687, 1653, 2715, 2145, 2963,
       ],
     },
   ],
@@ -540,7 +580,7 @@ const option3 = reactive({
 
   .table-content {
     pointer-events: all;
-    
+
 
     div {
       display: flex;
@@ -563,7 +603,8 @@ const option3 = reactive({
       }
 
       p:first-child {
-        color: red;
+        color: #f64c3f;
+        font-weight: bold;
       }
     }
   }

@@ -859,7 +859,7 @@ function search(type, id) {
       obj.material.color.g = 0.0
       obj.material.color.b = 0.0
 
-      
+
 
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
@@ -1013,8 +1013,8 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-  
-  
+
+
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
 
   if (STATE.currentPopup) {
@@ -1204,6 +1204,44 @@ function initShelves() {
       } else {
         model = STATE.sceneList.huojia2.clone()
       }
+      // 加一些模拟货物
+      item.fields.forEach((e, index) => {
+        const kaxia = Math.random() > 0.85 ? Math.random() > 0.5 ? STATE.sceneList.FOSB.clone() : STATE.sceneList.FOUP.clone() : null
+        if (kaxia) {
+          kaxia.userData.id = Math.floor(Math.random() * 10000)
+          kaxia.userData.area = area
+          kaxia.userData.shelf = shelf
+          kaxia.userData.shelfIndex = e
+          kaxia.scale.set(15, 15, 15)
+          kaxia.rotation.y = item.rotate * Math.PI / 180 - Math.PI / 2
+          kaxia.visible = true
+          if (item.fields.length === 4) {
+            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
+              kaxia.position.set(item.position[0] - 7.3 + index * 4.9, 27, item.position[2])
+            } else {
+              kaxia.position.set(item.position[0], 27, item.position[2] - 7.3 + index * 4.9)
+            }
+          } else if (item.fields.length === 2) {
+            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
+              kaxia.position.set(item.position[0] - 2.5 + index * 4.9, 27, item.position[2])
+            } else {
+              kaxia.position.set(item.position[0], 27, item.position[2] - 2.5 + index * 4.9)
+            }
+          }
+          STATE.kaxiaList.add(kaxia)
+
+
+          if (!STATE.shelvesList[shelf]) {
+            STATE.shelvesList[shelf] = {}
+          }
+
+          STATE.shelvesList[shelf][e] = {
+            mesh: kaxia,
+            position: [kaxia.position.x, kaxia.position.y, kaxia.position.z],
+            rotateY: kaxia.rotation.y
+          }
+        }
+      })
       model.visible = true
       model.position.set(...item.position)
       model.rotation.y = item.rotate * Math.PI / 180
@@ -1214,6 +1252,11 @@ function initShelves() {
       CACHE.container.scene.add(model)
     }
   }
+
+
+  CACHE.container.scene.add(STATE.kaxiaList)
+  STATE.sceneList.kaxiaList = STATE.kaxiaList
+
 }
 
 /**

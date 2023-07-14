@@ -8,18 +8,27 @@ import Bottom from './bottom.vue'
 
 <template>
   <div class="home">
+    <!-- <img class="logo" src="/assets/3d/img/logo.png" alt="logo"> -->
     <Header></Header>
     <Right></Right>
     <Bottom></Bottom>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .home {
   background: url("/assets/3d/img/1.png") center / 100% 100% no-repeat;
   width: 100%;
   height: 100%;
   z-index: 2;
   position: absolute;
+
+  .logo {
+    position: absolute;
+    left: 21.5%;
+    top: 2.5%;
+    height: calc(3vw * 1.347);
+    width: 3vw;
+  }
 }
 </style>

@@ -26,17 +26,17 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           show: true
         },
         lights: {
-          // directionLights: [{
-          //   color: 0xaccdff,
-          //   intensity: 0.8,
-          //   position: [50, 200, -90],
-          //   mapSize: [2048, 2048],
-          //   near: 0.01,
-          //   far: 600,
-          //   bias: -0.001,
-          //   distance: 500,
-          //   target: [0, 0, 0]
-          // }],
+          directionLights: [{
+            color: 0xaccdff,
+            intensity: 0.5,
+            position: [50, 200, -90],
+            mapSize: [2048, 2048],
+            near: 0.01,
+            far: 600,
+            bias: -0.001,
+            distance: 500,
+            target: [0, 0, 0]
+          }],
         },
         stats: false
       })
@@ -75,26 +75,28 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 开灯开阴影
-            // CACHE.container.directionLights[0].visible = true
-            // CACHE.container.directionLights[0].castShadow = true
-            // CACHE.container.scene.traverse(child => {
-            //   if (child.isMesh) {
-            //     if (child.name === 'di') {
-            //       child.receiveShadow = true
-            //     } else if (child.name === 'ding') {
-            //       child.visible = false
-            //     } else {
-            //       child.castShadow = true
-            //       child.receiveShadow = true
-            //     }
-            //   }
-            // })
+            CACHE.container.directionLights[0].visible = true
+            CACHE.container.directionLights[0].castShadow = true
+            CACHE.container.scene.traverse(child => {
+              if (child.isMesh) {
+                if (child.name === 'di') {
+                  child.receiveShadow = true
+                } else if (child.name === 'ding') {
+                  child.visible = false
+                } else {
+                  child.castShadow = true
+                  // child.receiveShadow = true
+                }
+              }
+            })
 
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
 
             // 天车不知道为什么放大不了，手动放大
             STATE.sceneList.tianche.scale.set(10, 10, 10)
+            // OLUS放大
+            STATE.sceneList.OLUS.scale.set(30, 30, 30)
 
             // 默认的设备隐藏
             const hiddenDevices = ['2LPjitai(W01)', 'huojia4', 'huojia2', 'OLUS', 'WWATA03V', 'WHWSA01', 'WMACB03', 'WSSP008', 'WTSTK01', 'WWATA02V', '2LPjitai(W01)', 'WBS002', 'WS0RA01(I01)', 'WS0RA01(I02)', 'WS0RA01', 'FOSB', 'FOUP']
@@ -114,8 +116,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.getAnimationList()
             API.handleLine()
             // API.initReflexFloor()
+            // API.initSkyCar()
             API.initDeviceByMap()
-            API.initSkyCar()
             API.initShelves()
             API.search()
 
@@ -148,7 +150,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             // remove unused obj3d
             for (const i in CACHE.removed) {
               const removed = CACHE.removed[i];
-              removed.parent.remove(removed);
+              if(removed.parent) {
+                removed.parent.remove(removed);
+              }
             }
 
             // instance
@@ -172,7 +176,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             }
 
 
-
+           
             // API.testBox()
             // API.loadGUI()
             CACHE.container.loadingBar.style.visibility = 'hidden'
