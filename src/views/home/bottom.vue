@@ -11,16 +11,16 @@
         </div>
         <el-scrollbar class="table-content">
           <div v-for="(item) in alarmList" :key="item.alarmId">
-            <p :title="item.alarmCode">
+            <p :title="item.alarmCode +'     '+ item.alarmData +'     '+ item.remark +'     '+ item.createTime">
               <span class="zitichaochu">{{ item.alarmCode }}</span>
             </p>
-            <p :title="item.alarmData">
+            <p :title="item.alarmCode +'     '+ item.alarmData +'     '+ item.remark +'     '+ item.createTime">
               <span class="zitichaochu">{{ item.alarmData }}</span>
             </p>
-            <p :title="item.remark">
+            <p :title="item.alarmCode +'     '+ item.alarmData +'     '+ item.remark +'     '+ item.createTime">
               <span class="zitichaochu">{{ item.remark }}</span>
             </p>
-            <p :title="item.createTime">
+            <p :title="item.alarmCode +'     '+ item.alarmData +'     '+ item.remark +'     '+ item.createTime">
               <span class="zitichaochu">{{ item.createTime }}</span>
             </p>
           </div>
@@ -62,7 +62,7 @@ STATE.alarmList = alarmList
 const mockAlarmList = [
   {
     alarmId: 0,
-    alarmCode: "M20531111111111111111",
+    alarmCode: "M20531",
     alarmData: "2053_天车前方 障礙检知-近 ",
     alarmType: "set",
     remark: "V0015",
@@ -602,5 +602,6 @@ const option3 = reactive({
     width: 100%;
     height: 100%;
   }
+  
 }
 </style>
