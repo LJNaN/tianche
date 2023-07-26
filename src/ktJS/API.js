@@ -5,6 +5,7 @@ import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData from './js/mock'
+import mockData2 from './js/mock2'
 
 // 获取数据
 function getData() {
@@ -24,13 +25,12 @@ function getData() {
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData.length) i = 0
-  //   drive(JSON.parse(mockData[i].data))
-  //   i++
-  // }, 333)
-
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
+    drive(mockData2[i])
+    i++
+  }, 333)
 }
 
 // 数据驱动
@@ -66,6 +66,8 @@ function drive(wsMessage) {
               skyCar.setPopupColor()
             }
 
+          } else if (e.ohtStatus_Loading === '0' && skyCar.state === 2) { // 完成取货/放货
+            skyCar.state = 1
           } else { // 漫游
             if (skyCar.state != 3) {
               skyCar.state = 3
@@ -74,13 +76,24 @@ function drive(wsMessage) {
           }
         }
 
-        // 处理位置
+        // 处理变化
         {
           if (!skyCar.history.new) {  // 初始化 history 时
             skyCar.history.new = {
               time: new Date() * 1,
-              coordinate: e.position
+              position: e.position || null,
+              location: e.location || null,
+              loading: e.ohtStatus_Loading || null,
+              quhuoda: e.ohtStatus_QuhuoDa || null,
+              roaming: e.ohtStatus_Roaming || null,
+              idle: e.ohtStatus_Idle || null,
+              isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+              moveEnable: e.ohtStatus_MoveEnable || null,
+              fanghuoxing: e.ohtStatus_Fanghuoxing || null,
+              fanghuoda: e.ohtStatus_Fanghuoda || null,
+              unLoading: e.ohtStatus_UnLoading || null,
             }
+
             skyCar.history.old = Object.assign({}, skyCar.history.new)
             skyCar.coordinate = e.position
             skyCar.setPosition(0)
@@ -88,13 +101,23 @@ function drive(wsMessage) {
           } else { // 更新 history
             skyCar.history.new = {
               time: new Date() * 1,
-              coordinate: e.position
+              position: e.position || null,
+              location: e.location || null,
+              loading: e.ohtStatus_Loading || null,
+              quhuoda: e.ohtStatus_QuhuoDa || null,
+              roaming: e.ohtStatus_Roaming || null,
+              idle: e.ohtStatus_Idle || null,
+              isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+              moveEnable: e.ohtStatus_MoveEnable || null,
+              fanghuoxing: e.ohtStatus_Fanghuoxing || null,
+              fanghuoda: e.ohtStatus_Fanghuoda || null,
+              unLoading: e.ohtStatus_UnLoading || null,
             }
 
-            if (skyCar.history.old.coordinate != skyCar.history.new.coordinate) {
+            if (skyCar.history.old?.position != skyCar.history.new?.position) {
               // 位置动画
               const time = skyCar.history.new.time - skyCar.history.old.time
-              skyCar.coordinate = skyCar.history.new.coordinate
+              skyCar.coordinate = skyCar.history.new.position
               skyCar.setPosition(time)
 
               skyCar.history.old = Object.assign({}, skyCar.history.new)
@@ -694,12 +717,12 @@ class SkyCar {
 function initSkyCar() {
   DATA.skyCarMap.forEach(e => {
     const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
-    
+
     initLoop()
     function initLoop() {
       if (skyCar.coordinate >= 1500000) skyCar.coordinate = 0
-      for(let i = 0; i < STATE.sceneList.skyCarList.length; i++) {
-        if(Math.abs(STATE.sceneList.skyCarList[i].coordinate - skyCar.coordinate) < 2000) {
+      for (let i = 0; i < STATE.sceneList.skyCarList.length; i++) {
+        if (Math.abs(STATE.sceneList.skyCarList[i].coordinate - skyCar.coordinate) < 2000) {
           skyCar.coordinate += 200
           initLoop()
         }
@@ -708,7 +731,7 @@ function initSkyCar() {
           skyCar.coordinate += 200
           initLoop()
         }
-      }  
+      }
 
     }
 
@@ -859,7 +882,7 @@ function search(type, id) {
       obj.material.color.g = 0.0
       obj.material.color.b = 0.0
 
-      
+
 
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
@@ -1013,8 +1036,8 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-  
-  
+
+
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
 
   if (STATE.currentPopup) {

@@ -133,7 +133,7 @@ const option2 = reactive({
       // },
     },
     formatter: function (params) {
-      console.log('params: ', params);
+      
       var str = "";
       if (params.length > 0) {
         str = params[0].name + "<br/>";

@@ -75,20 +75,20 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 开灯开阴影
-            CACHE.container.directionLights[0].visible = true
-            CACHE.container.directionLights[0].castShadow = true
-            CACHE.container.scene.traverse(child => {
-              if (child.isMesh) {
-                if (child.name === 'di') {
-                  child.receiveShadow = true
-                } else if (child.name === 'ding') {
-                  child.visible = false
-                } else {
-                  child.castShadow = true
-                  // child.receiveShadow = true
-                }
-              }
-            })
+            // CACHE.container.directionLights[0].visible = true
+            // CACHE.container.directionLights[0].castShadow = true
+            // CACHE.container.scene.traverse(child => {
+            //   if (child.isMesh) {
+            //     if (child.name === 'di') {
+            //       child.receiveShadow = true
+            //     } else if (child.name === 'ding') {
+            //       child.visible = false
+            //     } else {
+            //       child.castShadow = true
+            //       // child.receiveShadow = true
+            //     }
+            //   }
+            // })
 
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
