@@ -1,5 +1,5 @@
-export const showMessage = (status:number|string) : string => {
-    let message:string = "";
+export const showMessage = (status)=> {
+    let message = "";
     switch (status) {
         case 400:
             message = "请求错误(400)";

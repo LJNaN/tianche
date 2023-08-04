@@ -4,7 +4,6 @@ import { STATE } from './STATE.js'
 import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import * as TWEEN from '@tweenjs/tween.js'
-import { test } from '@/axios/api.ts'
 
 let container
 
@@ -75,7 +74,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 开灯开阴影
-            // CACHE.container.directionLights[0].visible = true
+            CACHE.container.directionLights[0].visible = true
             // CACHE.container.directionLights[0].castShadow = true
             // CACHE.container.scene.traverse(child => {
             //   if (child.isMesh) {
@@ -105,17 +104,39 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             })
 
             // 主场景处理
-            const di = STATE.sceneList.guidao.children.find(e => e.name === 'di')
-            if (di) {
-              di.material.transparent = true
-              di.material.opacity = 0.68
-            }
+            STATE.sceneList.guidao.traverse(e => {
+              if (e.isMesh) {
+                if (e.name === 'di') {
+                  e.material.transparent = true
+                  e.material.opacity = 0.68
+                  e.material.color = new Bol3D.Color(0.63, 0.63, 0.63)
+                } else if (e.name.includes('-')) {
+                  e.renderOrder = 1
+                }
+              }
+            })
+
+            // WBS002 处理
+            STATE.sceneList.WBS002.children[1].position.x = 0
+            STATE.sceneList.WBS002.children[1].position.z = 0
+
+            // kuang 处理
+            STATE.sceneList.kuang.scale.set(10, 10, 10)
+            STATE.sceneList.kuang.traverse(e => {
+              e.visible = true
+              if(e.isMesh) {
+                e.material.color.r = 0.4 * e.material.color.r
+                e.material.color.g = 0.4 * e.material.color.g
+                e.material.color.b = 0.4 * e.material.color.b
+                CACHE.container.addBloom(e)
+              }
+            })
 
             TU.init(container, Bol3D)
             API.getData()
             API.getAnimationList()
             API.handleLine()
-            // API.initReflexFloor()
+            API.initReflexFloor()
             // API.initSkyCar()
             API.initDeviceByMap()
             API.initShelves()
@@ -128,7 +149,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             for (let key in STATE.sceneList.shelves) {
               if (STATE.sceneList.shelves[key].name === 'huojia4') {
                 shalves4.push(STATE.sceneList.shelves[key])
-                
+
               } else if (STATE.sceneList.shelves[key].name === 'huojia2') {
                 shalves2.push(STATE.sceneList.shelves[key])
               }
@@ -140,17 +161,17 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
 
             //实例化
-            console.log(
-              "CACHE\n",
-              '实例转换坐标、缩放、旋转信息\n', CACHE.instanceTransformInfo, '\n',
-              '实例转换外观、形状信息\n', CACHE.instanceMeshInfo, '\n',
-              '已删除的模型\n', CACHE.removed
-            );
+            // console.log(
+            //   "CACHE\n",
+            //   '实例转换坐标、缩放、旋转信息\n', CACHE.instanceTransformInfo, '\n',
+            //   '实例转换外观、形状信息\n', CACHE.instanceMeshInfo, '\n',
+            //   '已删除的模型\n', CACHE.removed
+            // );
 
             // remove unused obj3d
             for (const i in CACHE.removed) {
               const removed = CACHE.removed[i];
-              if(removed.parent) {
+              if (removed.parent) {
                 removed.parent.remove(removed);
               }
             }
@@ -176,8 +197,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             }
 
 
-           
-            // API.testBox()
+
+            API.testBox()
             // API.loadGUI()
             CACHE.container.loadingBar.style.visibility = 'hidden'
           })
@@ -226,9 +247,11 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.search('轨道', obj.userData.id)
 
           } else if (obj.isInstancedMesh) {
-            const obj = e.objects[0].object
             const index = e.objects[0].instanceId
             API.clickInstance(obj, index)
+
+          } else if (obj.userData.type === 'kaxia') {
+            API.search('卡匣', obj.userData.id)
           }
         }
       }

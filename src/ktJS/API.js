@@ -6,6 +6,7 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData from './js/mock'
 import mockData2 from './js/mock2'
+import { GetCarrierInfo, OhtFindCmdId } from '@/axios/api.js'
 
 // 获取数据
 function getData() {
@@ -25,12 +26,22 @@ function getData() {
 
   // 模拟数据
   // =======================================
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData2.length) i = 0
-    drive(mockData2[i])
-    i++
-  }, 333)
+
+
+  setTimeout(() => {
+    drive(mockData2[0])
+  }, 1000);
+
+  setTimeout(() => {
+    drive(mockData2[30])
+  }, 3000);
+
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
+  //   i++
+  // }, 333)
 }
 
 // 数据驱动
@@ -74,6 +85,7 @@ function drive(wsMessage) {
               skyCar.setPopupColor()
             }
           }
+
         }
 
         // 处理变化
@@ -84,14 +96,16 @@ function drive(wsMessage) {
               position: e.position || null,
               location: e.location || null,
               loading: e.ohtStatus_Loading || null,
-              quhuoda: e.ohtStatus_QuhuoDa || null,
+              quhuoda: e.ohtStatus_Quhuoda || null,
               roaming: e.ohtStatus_Roaming || null,
               idle: e.ohtStatus_Idle || null,
               isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+              therfidFoup: e.therfidFoup || null,
               moveEnable: e.ohtStatus_MoveEnable || null,
               fanghuoxing: e.ohtStatus_Fanghuoxing || null,
               fanghuoda: e.ohtStatus_Fanghuoda || null,
               unLoading: e.ohtStatus_UnLoading || null,
+              ohtID: e.ohtID || null
             }
 
             skyCar.history.old = Object.assign({}, skyCar.history.new)
@@ -104,25 +118,126 @@ function drive(wsMessage) {
               position: e.position || null,
               location: e.location || null,
               loading: e.ohtStatus_Loading || null,
-              quhuoda: e.ohtStatus_QuhuoDa || null,
+              quhuoda: e.ohtStatus_Quhuoda || null,
               roaming: e.ohtStatus_Roaming || null,
               idle: e.ohtStatus_Idle || null,
               isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+              therfidFoup: e.therfidFoup || null,
               moveEnable: e.ohtStatus_MoveEnable || null,
               fanghuoxing: e.ohtStatus_Fanghuoxing || null,
               fanghuoda: e.ohtStatus_Fanghuoda || null,
               unLoading: e.ohtStatus_UnLoading || null,
+              ohtID: e.ohtID || null
             }
+
+
 
             if (skyCar.history.old?.position != skyCar.history.new?.position) {
               // 位置动画
               const time = skyCar.history.new.time - skyCar.history.old.time
               skyCar.coordinate = skyCar.history.new.position
               skyCar.setPosition(time)
-
-              skyCar.history.old = Object.assign({}, skyCar.history.new)
             }
           }
+
+          // 处理状态
+          if ( // 装载开始
+            (skyCar.history.old.location == '0' && skyCar.history.new.location != '0') &&
+            (skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1') &&
+            (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1') &&
+            (skyCar.history.old.roaming == '1' && skyCar.history.new.roaming == '0')
+          ) {
+            // 找离天车最近的货架
+            let distance = 0
+            let shelf = null
+            STATE.sceneList.shelves2Arr.forEach(e => {
+              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+              if (distance === 0) {
+                distance = dis
+                shelf = e
+              }
+              else if (dis < distance) {
+                distance = dis
+                shelf = e
+              }
+            })
+            STATE.sceneList.shelves4Arr.forEach(e => {
+              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+              if (distance === 0) {
+                distance = dis
+                shelf = e
+              }
+              else if (dis < distance) {
+                distance = dis
+                shelf = e
+              }
+            })
+
+            // 查找最近的货架最近的卡匣，有就搬，没有就生成
+            const cb = () => {
+              const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
+
+              if (kaxia) {
+                console.log('kaxia: ', kaxia);
+                kaxia.parent.remove(kaxia)
+                kaxia.position.set(0, 0, 0)
+                kaxia.scale.set(1.5, 1.5, 1.5)
+                skyCar.skyCarMesh.add(kaxia)
+                kaxia.area = ''
+                kaxia.shelf = ''
+                kaxia.shelfIndex = -1
+              } else {
+                const newKaxia = STATE.sceneList.FOUP.clone()
+                newKaxia.userData.area = ''
+                newKaxia.userData.shelf = ''
+                newKaxia.userData.shelfIndex = -1
+                newKaxia.userData.type = 'kaxia'
+                newKaxia.scale.set(1.5, 1.5, 1.5)
+                newKaxia.rotation.y = shelf.rotate * Math.PI / 180 - Math.PI
+                newKaxia.visible = true
+                newKaxia.traverse(e2 => {
+                  if (e2.isMesh) {
+                    e2.userData.id = newKaxia.userData.id
+                    e2.userData.area = newKaxia.userData.area
+                    e2.userData.shelf = newKaxia.userData.shelf
+                    e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+                    e2.userData.type = newKaxia.userData.type
+                    CACHE.container.clickObjects.push(e2)
+                  }
+                })
+                skyCar.skyCarMesh.add(newKaxia)
+              }
+
+              // if (shelf.fields.length === 4) {
+              //   if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
+              //     kaxia.position.set(shelf.position[0] - 7.3 + index * 4.9, 27, shelf.position[2])
+              //   } else {
+              //     kaxia.position.set(shelf.position[0], 27, shelf.position[2] - 7.3 + index * 4.9)
+              //   }
+              // } else if (shelf.fields.length === 2) {
+              //   if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
+              //     kaxia.position.set(shelf.position[0] - 2.5 + index * 4.9, 27, shelf.position[2])
+              //   } else {
+              //     kaxia.position.set(shelf.position[0], 27, shelf.position[2] - 2.5 + index * 4.9)
+              //   }
+              // }
+            }
+            skyCar.down(cb)
+
+
+
+
+
+          } else if ( // 装载结束
+            (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
+            (skyCar.history.old.isHaveFoup == '0' && skyCar.history.new.isHaveFoup == '1') &&
+            (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') &&
+            (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
+            (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
+          ) {
+            skyCar.up()
+          }
+          skyCar.history.old = Object.assign({}, skyCar.history.new)
         }
 
       } else {
@@ -132,20 +247,40 @@ function drive(wsMessage) {
     })
   }
 
-  // 处理报警
-  if (wsMessage?.AlarmInfo?.length) {
-    if (STATE.alarmList) {
-      wsMessage.AlarmInfo.forEach(e => {
-        if (e.alarmType === 'set') {
-          STATE.alarmList.value.unshift(e)
-        } else if (e.alarmType === 'cancel') {
-          const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
-          if (itemIndex >= 0) {
-            STATE.alarmList.value.splice(itemIndex, 1)
+  // // 处理报警
+  // if (wsMessage?.AlarmInfo?.length) {
+  //   if (STATE.alarmList) {
+  //     wsMessage.AlarmInfo.forEach(e => {
+  //       if (e.alarmType === 'set') {
+  //         STATE.alarmList.value.unshift(e)
+  //       } else if (e.alarmType === 'cancel') {
+  //         const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
+  //         if (itemIndex >= 0) {
+  //           STATE.alarmList.value.splice(itemIndex, 1)
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
+
+  // 处理轨道
+  if (wsMessage?.BayStateInfo?.length) {
+    wsMessage.BayStateInfo.forEach(e => {
+      const item = DATA.pointCoordinateMap.find(e2 => e2.startPoint == e.point && e2.endPoint == e.ntPoint)
+      if (item) {
+        item.startCoordinate = e.startPosition
+        item.endCoordinate = e.endPosition
+        item.status = e.status
+
+        // 锁定变透明
+        if (e.status === '0') {
+          const mesh = STATE.sceneList.lineList.find(e2 => e2.name == (e.point + '-' + e.ntPoint))
+          if (mesh) {
+            mesh.material.color = new Bol3D.Color(0.3, 0.3, 0.3)
           }
         }
-      })
-    }
+      }
+    })
   }
 }
 
@@ -480,16 +615,20 @@ class SkyCar {
       STATE.currentPopup = null
     }
 
+    OhtFindCmdId(this.id).then(res => {
+
+    })
+
     const name = 'click_popup_天车_' + this.id
     const items = [
-      { name: '卡匣ID', value: '09728' },
-      { name: 'COMMAND ID', value: '57129' },
-      { name: 'USER ID', value: '59741' },
-      { name: '起点', value: '69715' },
-      { name: '终点', value: '98558' },
-      { name: '优先级', value: '低' },
-      { name: '当前状态', value: '漫游' },
-      { name: 'ALARM 情况', value: '正常' },
+      { name: '卡匣ID', value: this.history.new.therfidFoup || '--' },
+      { name: 'COMMAND ID', value: '--' },
+      { name: 'USER ID', value: '--' },
+      { name: '起点', value: '--' },
+      { name: '终点', value: '--' },
+      { name: '优先级', value: '--' },
+      { name: '当前状态', value: DATA.skyCarStateColorMap.find(e => e.id === this.state)?.name || '--' },
+      { name: 'ALARM 情况', value: this.history.new.ohtStatus_ErrSet === '1' ? '异常' : '正常' },
     ]
     let textValue = ``
     for (let i = 0; i < items.length; i++) {
@@ -676,7 +815,7 @@ class SkyCar {
   }
 
   // 设置伸缩方法
-  down() {
+  down(cb) {
     this.actions.shen.enabled = true
     this.actions.suo.enabled = false
     this.actions.fang.enabled = false
@@ -685,22 +824,29 @@ class SkyCar {
     this.actions.shen.clampWhenFinished = false
     this.actions.shen.reset().play()
 
+
     this.mixer.addEventListener('finished', ((e) => {
       if (e.action.name === 'shen') {
         this.actions.shen.enabled = false
         this.actions.fang.enabled = true
         this.actions.fang.reset().play()
+
+        setTimeout(() => {
+          this.actions.fang.paused = true
+          cb && cb()
+        }, 250)
       }
     }))
   }
 
-  up() {
+  up(cb) {
     this.actions.shou.enabled = true
     this.actions.fang.enabled = false
     this.actions.shen.enabled = false
     this.actions.suo.enabled = false
 
     this.actions.shou.reset().play()
+    this.actions.shou.time = 2.4
     this.mixer.addEventListener('finished', ((e) => {
       if (e.action.name === 'shou') {
         this.actions.shou.enabled = false
@@ -708,6 +854,8 @@ class SkyCar {
         this.actions.suo.reset().play()
         this.actions.kakoushen.reset().play()
         this.actions.dangbanshen.reset().play()
+      } else if (e.action.name === 'suo') {
+        cb && cb()
       }
     }))
   }
@@ -766,7 +914,7 @@ function initReflexFloor() {
     textureWidth: window.innerWidth * window.devicePixelRatio,
     textureHeight: window.innerHeight * window.devicePixelRatio,
     color: 0x777777,
-    blur: 0.1
+    blur: 0.25
   })
 
   reflector.rotation.x = -Math.PI / 2
@@ -827,9 +975,13 @@ function search(type, id) {
         }
       })
     }
+  } else if (type === '卡匣') {
+    const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === id)
+    if (kaxia) obj = kaxia
   }
 
   if (obj) {
+
     // 相机移动动画
     let isCameraMoveOver = false // 动画移动完成
     const camera = CACHE.container.orbitCamera
@@ -839,9 +991,9 @@ function search(type, id) {
 
     new TWEEN.Tween(camera.position)
       .to({
-        x: Math.abs(camera.position.x - objWorldPosition.x) > 200 ? camera.position.x / 2 : camera.position.x,
-        y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 2 : camera.position.y,
-        z: Math.abs(camera.position.z - objWorldPosition.z) > 200 ? camera.position.z / 2 : camera.position.z
+        x: Math.abs(camera.position.x - objWorldPosition.x) > 120 ? camera.position.x / 4 : camera.position.x,
+        y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 4 : camera.position.y,
+        z: Math.abs(camera.position.z - objWorldPosition.z) > 120 ? camera.position.z / 4 : camera.position.z
       }, 800)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .start()
@@ -879,10 +1031,6 @@ function search(type, id) {
       const color = obj.material.color.clone()
       obj.userData.color = color
 
-      obj.material.color.g = 0.0
-      obj.material.color.b = 0.0
-
-
 
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
@@ -896,15 +1044,17 @@ function search(type, id) {
         })
       }
 
+      const lineData = DATA.pointCoordinateMap.find(e => e.name === obj.userData.id)
+
       let title = '轨道'
-      let height = '40vh'
+      let height = '37vh'
       let className = 'popup3d_guidao'
       let items = [
-        { name: '起点节点', value: '256121' },
-        { name: '起点坐标', value: '5216322' },
-        { name: '终点节点', value: '214125' },
-        { name: '终点坐标', value: '53261' },
-        { name: '轨道状态', value: '正常' },
+        { name: '起点节点', value: lineData?.startPoint },
+        { name: '起点坐标', value: lineData?.startCoordinate },
+        { name: '终点节点', value: lineData?.endPoint },
+        { name: '终点坐标', value: lineData?.endCoordinate },
+        { name: '轨道状态', value: (lineData?.status === '1' ? '释放' : '锁定') },
         { name: 'Alarm 情况', value: '无' }
       ]
 
@@ -987,9 +1137,9 @@ function search(type, id) {
 
       new TWEEN.Tween(camera.position)
         .to({
-          x: Math.abs(camera.position.x - objWorldPosition.x) > 200 ? camera.position.x / 2 : camera.position.x,
-          y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 2 : camera.position.y,
-          z: Math.abs(camera.position.z - objWorldPosition.z) > 200 ? camera.position.z / 2 : camera.position.z
+          x: Math.abs(camera.position.x - objWorldPosition.x) > 120 ? camera.position.x / 4 : camera.position.x,
+          y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 4 : camera.position.y,
+          z: Math.abs(camera.position.z - objWorldPosition.z) > 120 ? camera.position.z / 4 : camera.position.z
         }, 800)
         .start()
         .easing(TWEEN.Easing.Quadratic.InOut)
@@ -1013,9 +1163,244 @@ function search(type, id) {
       CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         const dt = STATE.clock.getElapsedTime()
-        const redColor = Math.abs(Math.sin(dt * 2))
-        obj.material.color.r = redColor
+        const mixColor = Math.abs(Math.sin(dt * 2))
+        obj.material.color.r = color.r + mixColor * 0.95
+        obj.material.color.g = color.g + mixColor * 0.41
       }
+    } else if (type === '卡匣') {
+      if (STATE.currentPopup) {
+        if (STATE.currentPopup.parent) {
+          STATE.currentPopup.parent.remove(STATE.currentPopup)
+        }
+        STATE.currentPopup.element.remove()
+        STATE.currentPopup = null
+
+        STATE.sceneList.skyCarList.forEach(e => {
+          e.popup.visible = true
+        })
+      }
+
+      let title = '卡匣'
+      let height = '45vh'
+      let className = 'popup3d_kaxia'
+      let items = [
+        { name: '卡匣 ID', value: '--' },
+        { name: 'Command ID', value: '--' },
+        { name: 'User ID', value: '--' },
+        { name: '起点', value: '--' },
+        { name: '终点', value: '--' },
+        { name: '优先级', value: '--' },
+        { name: '当前位置', value: '--' },
+        { name: '当前状态', value: '--' }
+      ]
+
+      let textValue = ``
+      for (let i = 0; i < items.length; i++) {
+        textValue += `
+            <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 5%;
+              height: 4vh;
+              width: 100%;
+              background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+              ">
+              <p style="font-size: 2vh;">${items[i].name}</p>
+              <p style="font-size: 2vh;">${items[i].value}</p>
+            </div>`
+      }
+
+      const popup = new Bol3D.POI.Popup3DSprite({
+        value: `
+            <div style="
+              pointer-events: none;
+              margin:0;
+              color: #ffffff;
+            ">
+
+            <div style="
+                position: absolute;
+                background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+                width: 25vw;
+                height: ${height};
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: column;
+                left: 50%;
+                top: 50%;
+                z-index: 2;
+              ">
+              <p style="
+                font-size: 2vh;
+                font-weight: bold;
+                letter-spacing: 8px;
+                margin-left: 4px;
+                text-align: center;
+                margin-top: 10%;
+              ">
+                ${title}
+              </p>
+
+              <div style="
+                display: flex;
+                flex-direction: column;
+                width: 85%;
+                margin: 4% auto 0 auto;
+                height: 100%;
+              ">
+              ${textValue}
+              </div>
+            </div>
+          </div>
+          `,
+        position: [0, 0, 0],
+        className: `popup3dclass ${className}`,
+        closeVisible: true,
+        closeColor: "#FFFFFF",
+        closeCallback: (() => {
+          popup.element.remove()
+          popup.parent.remove(popup)
+          STATE.currentPopup = null
+        })
+      })
+
+      popup.scale.set(0.08, 0.08, 0.08)
+      popup.name = 'popup_' + obj.name
+      popup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+      CACHE.container.scene.add(popup)
+      STATE.currentPopup = popup
+
+      new TWEEN.Tween(camera.position)
+        .to({
+          x: Math.abs(camera.position.x - objWorldPosition.x) > 70 ? camera.position.x / 3 : camera.position.x,
+          y: Math.abs(camera.position.y - objWorldPosition.y) > 70 ? camera.position.y / 3 : camera.position.y,
+          z: Math.abs(camera.position.z - objWorldPosition.z) > 70 ? camera.position.z / 3 : camera.position.z
+        }, 800)
+        .start()
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+          camera.updateProjectionMatrix()
+        })
+      new TWEEN.Tween(contorl.target)
+        .to({
+          x: objWorldPosition.x,
+          y: objWorldPosition.y + 5,
+          z: objWorldPosition.z
+        }, 800)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start()
+
+      const eventFunc = () => {
+        STATE.searchAnimateDesdory = true
+        CACHE.container.orbitControls.removeEventListener('start', eventFunc)
+      }
+
+      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      animate = () => {
+        if (isCameraMoveOver) {
+          contorl.target.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+        }
+      }
+
+      // 接口
+      GetCarrierInfo().then(res => {
+        if (res?.data?.length) {
+          const data = res.data.find(e => e.carrierId == id)
+          if (data) {
+            popup.parent.remove(popup)
+            STATE.currentPopup.element.remove()
+
+            let items = [
+              { name: '卡匣 ID', value: data.carrierId || '--' },
+              { name: 'Command ID', value: '--' },
+              { name: 'User ID', value: '--' },
+              { name: '起点', value: '--' },
+              { name: '终点', value: '--' },
+              { name: '优先级', value: '--' },
+              { name: '当前位置', value: data.locationId || '--' },
+              { name: '当前状态', value: data.carrierType || '--' }
+            ]
+
+            let textValue = ``
+            for (let i = 0; i < items.length; i++) {
+              textValue += `
+                  <div style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 5%;
+                    height: 4vh;
+                    width: 100%;
+                    background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+                    ">
+                    <p style="font-size: 2vh;">${items[i].name}</p>
+                    <p style="font-size: 2vh;">${items[i].value}</p>
+                  </div>`
+            }
+
+            const newPopup = new Bol3D.POI.Popup3DSprite({
+              value: `
+                  <div style="
+                    pointer-events: none;
+                    margin:0;
+                    color: #ffffff;
+                  ">
+      
+                  <div style="
+                      position: absolute;
+                      background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+                      width: 25vw;
+                      height: ${height};
+                      transform: translate(-50%, -50%);
+                      display: flex;
+                      flex-direction: column;
+                      left: 50%;
+                      top: 50%;
+                      z-index: 2;
+                    ">
+                    <p style="
+                      font-size: 2vh;
+                      font-weight: bold;
+                      letter-spacing: 8px;
+                      margin-left: 4px;
+                      text-align: center;
+                      margin-top: 10%;
+                    ">
+                      ${title}
+                    </p>
+      
+                    <div style="
+                      display: flex;
+                      flex-direction: column;
+                      width: 85%;
+                      margin: 4% auto 0 auto;
+                      height: 100%;
+                    ">
+                    ${textValue}
+                    </div>
+                  </div>
+                </div>
+                `,
+              position: [0, 0, 0],
+              className: `popup3dclass ${className}`,
+              closeVisible: true,
+              closeColor: "#FFFFFF",
+              closeCallback: (() => {
+                popup.element.remove()
+                STATE.currentPopup = null
+                popup.parent && popup.parent.remove(popup)
+              })
+            })
+
+            newPopup.scale.set(0.08, 0.08, 0.08)
+            newPopup.name = 'popup_' + obj.name
+            newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+            CACHE.container.scene.add(newPopup)
+            STATE.currentPopup = newPopup
+          }
+        }
+      })
     }
 
 
@@ -1056,13 +1441,13 @@ function clickInstance(obj, index) {
 
   if (obj.name.includes('shalves2')) {
     title = 'OHB'
-    items = [{ name: 'shelf ID', value: '84358' }]
+    items = [{ name: 'shelf ID', value: STATE.sceneList.shelves2Arr[index].area + '_' + STATE.sceneList.shelves2Arr[index].fields[0] + '_' + STATE.sceneList.shelves2Arr[index].fields[1] }]
     height = '16vh'
     className = 'popup3d_shalves'
 
   } else if (obj.name.includes('shalves4')) {
     title = 'OHB'
-    items = [{ name: 'shelf ID', value: '84358' }]
+    items = [{ name: 'shelf ID', value: STATE.sceneList.shelves4Arr[index].area + '_' + STATE.sceneList.shelves4Arr[index].fields[0] + '_' + STATE.sceneList.shelves4Arr[index].fields[3] }]
     height = '16vh'
     className = 'popup3d_shalves'
 
@@ -1154,7 +1539,7 @@ function clickInstance(obj, index) {
 
   popup.scale.set(0.08, 0.08, 0.08)
   popup.name = name
-  popup.position.set(transformInfo.position.x, transformInfo.position.y + 30, transformInfo.position.z)
+  popup.position.set(transformInfo.position.x, transformInfo.position.y + 15, transformInfo.position.z)
   CACHE.container.scene.add(popup)
   STATE.currentPopup = popup
 
@@ -1163,9 +1548,9 @@ function clickInstance(obj, index) {
   const contorl = CACHE.container.orbitControls
   new TWEEN.Tween(camera.position)
     .to({
-      x: Math.abs(camera.position.x - transformInfo.position.x) > 200 ? camera.position.x / 2 : camera.position.x,
-      y: Math.abs(camera.position.y - transformInfo.position.y) > 200 ? camera.position.y / 2 : camera.position.y,
-      z: Math.abs(camera.position.z - transformInfo.position.z) > 200 ? camera.position.z / 2 : camera.position.z
+      x: Math.abs(camera.position.x - transformInfo.position.x) > 120 ? camera.position.x / 4 : camera.position.x,
+      y: Math.abs(camera.position.y - transformInfo.position.y) > 200 ? camera.position.y / 4 : camera.position.y,
+      z: Math.abs(camera.position.z - transformInfo.position.z) > 120 ? camera.position.z / 4 : camera.position.z
     }, 800)
     .start()
     .easing(TWEEN.Easing.Quadratic.InOut)
@@ -1179,7 +1564,7 @@ function clickInstance(obj, index) {
   new TWEEN.Tween(contorl.target)
     .to({
       x: transformInfo.position.x,
-      y: transformInfo.position.y + 30,
+      y: transformInfo.position.y + 15,
       z: transformInfo.position.z
     }, 800)
     .easing(TWEEN.Easing.Quadratic.InOut)
@@ -1212,21 +1597,73 @@ function getAnimationList() {
 // 加载货架
 function initShelves() {
   STATE.sceneList.shelves = {}
-  STATE.sceneList.shelvesArr = []
+  STATE.sceneList.shelves2Arr = []
+  STATE.sceneList.shelves4Arr = []
 
   for (let area in DATA.shelvesMap) {
     for (let shelf in DATA.shelvesMap[area]) {
       const item = DATA.shelvesMap[area][shelf]
       item.shelf = shelf
       item.area = area
-      STATE.sceneList.shelvesArr.push(item)
 
       let model = null
       if (item.fields.length === 4) {
+        STATE.sceneList.shelves4Arr.push(item)
         model = STATE.sceneList.huojia4.clone()
       } else {
+        STATE.sceneList.shelves2Arr.push(item)
         model = STATE.sceneList.huojia2.clone()
       }
+
+      // 加一些模拟货物
+      item.fields.forEach((e, index) => {
+        const kaxia = Math.random() > 0.95 ? Math.random() > 0.5 ? STATE.sceneList.FOSB.clone() : STATE.sceneList.FOUP.clone() : null
+        if (kaxia) {
+          kaxia.userData.id = ['HX3Fdemo00000067', 'HX3Fdemo00000023', 'HX3Fdemo00000020', '845 8334 6466 5D66 F', 'HX3Fdemo00000202'][Math.floor(Math.random() * 5)]
+          kaxia.userData.area = area
+          kaxia.userData.shelf = shelf
+          kaxia.userData.shelfIndex = e
+          kaxia.userData.type = 'kaxia'
+          kaxia.scale.set(15, 15, 15)
+          kaxia.rotation.y = item.rotate * Math.PI / 180 - Math.PI / 2
+          kaxia.visible = true
+          kaxia.traverse(e2 => {
+            if (e2.isMesh) {
+              e2.userData.id = kaxia.userData.id
+              e2.userData.area = kaxia.userData.area
+              e2.userData.shelf = kaxia.userData.shelf
+              e2.userData.shelfIndex = kaxia.userData.shelfIndex
+              e2.userData.type = kaxia.userData.type
+              CACHE.container.clickObjects.push(e2)
+            }
+          })
+          if (item.fields.length === 4) {
+            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
+              kaxia.position.set(item.position[0] - 7.3 + index * 4.9, 27, item.position[2])
+            } else {
+              kaxia.position.set(item.position[0], 27, item.position[2] - 7.3 + index * 4.9)
+            }
+          } else if (item.fields.length === 2) {
+            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
+              kaxia.position.set(item.position[0] - 2.5 + index * 4.9, 27, item.position[2])
+            } else {
+              kaxia.position.set(item.position[0], 27, item.position[2] - 2.5 + index * 4.9)
+            }
+          }
+          STATE.kaxiaList.add(kaxia)
+
+
+          if (!STATE.shelvesList[shelf]) {
+            STATE.shelvesList[shelf] = {}
+          }
+
+          STATE.shelvesList[shelf][e] = {
+            mesh: kaxia,
+            position: [kaxia.position.x, kaxia.position.y, kaxia.position.z],
+            rotateY: kaxia.rotation.y
+          }
+        }
+      })
       model.visible = true
       model.position.set(...item.position)
       model.rotation.y = item.rotate * Math.PI / 180
@@ -1235,6 +1672,10 @@ function initShelves() {
       model.userData.area = area
       STATE.sceneList.shelves[shelf] = model
       CACHE.container.scene.add(model)
+
+
+      CACHE.container.scene.add(STATE.kaxiaList)
+      STATE.sceneList.kaxiaList = STATE.kaxiaList
     }
   }
 }

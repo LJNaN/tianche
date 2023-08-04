@@ -25,6 +25,7 @@ import { onMounted, ref, watch, nextTick } from "vue";
 import { DATA } from '@/ktJS/DATA'
 import { API } from '@/ktJS/API'
 import { STATE } from '@/ktJS/STATE'
+import { CACHE } from "@/ktJS/CACHE";
 
 const options = ref(['天车', '轨道', 'OHB', '卡匣', '设备', '指令']);
 
@@ -70,15 +71,32 @@ function searchCandidate(text) {
     candidateList.value = STATE.sceneList.skyCarList.filter(e => e.id.includes(text)).map(e => e.id)
 
   } else if (selected.value === 'OHB') {
-    const items = STATE.sceneList.shelvesArr.filter(e => e.shelf.includes(text))
-    candidateList.value = items.map(e => e.shelf)
-    temp = items
+    const items4 = STATE.sceneList.shelves4Arr.filter(e => e.shelf.includes(text))
+    const items2 = STATE.sceneList.shelves2Arr.filter(e => e.shelf.includes(text))
+    const arr = [...items2, ...items4]
+    candidateList.value = arr.map(e => e.shelf)
+    temp = arr
+
+  } else if (selected.value === '卡匣') {
+    candidateList.value = STATE.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
+
+  } else if (selected.value === '设备') {
+    const arr = []
+    for (let key in DATA.deviceMap) {
+      if (key.includes(text)) {
+        DATA.deviceMap[key].forEach((e2, index) => {
+          arr.push(key + '_' + (index + 1))
+        })
+      }
+    }
+
+    candidateList.value = arr
   }
 }
 
 
 function handleItem(item) {
-  if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB') {
+  if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB' || selected.value === '卡匣' || selected.value === '设备') {
     searchText.value = item
   }
 
@@ -90,7 +108,7 @@ function handleItem(item) {
     } else if (selected.value === 'OHB') {
       const OHBItemInfo = temp.find(e => e.shelf === item)
       const OHBItem = STATE.sceneList.shelves[OHBItemInfo.shelf]
-      
+
       let instanceMesh = null
       let index = 0
       if (OHBItem.name === 'huojia4') {
@@ -102,6 +120,21 @@ function handleItem(item) {
       }
 
       API.clickInstance(instanceMesh, index)
+
+    } else if (selected.value === '卡匣') {
+      API.search(selected.value, searchText.value)
+
+    } else if (selected.value === '设备') {
+      const itemSplitArr = item.split('_')
+      const instanceMesh = CACHE.container.scene.children.find(e =>
+        e.isInstancedMesh
+        && e.name.split('_')[0] === itemSplitArr[0]
+      )
+      
+      if (instanceMesh) {
+        const index = itemSplitArr[itemSplitArr.length - 1] - 1
+        API.clickInstance(instanceMesh, index)
+      }
     }
   }, 100)
 }

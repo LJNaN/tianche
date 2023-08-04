@@ -16,7 +16,8 @@ export default defineConfig({
     // 代理
     proxy: {
       "/api": {
-        target: "http://192.168.150.133:8090",
+        // target: "http://192.168.150.133:8090",
+        target: "http://128.168.11.111:8090",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
