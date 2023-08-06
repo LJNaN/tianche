@@ -74,7 +74,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 开灯开阴影
-            CACHE.container.directionLights[0].visible = true
+            // CACHE.container.directionLights[0].visible = true
             // CACHE.container.directionLights[0].castShadow = true
             // CACHE.container.scene.traverse(child => {
             //   if (child.isMesh) {
@@ -136,7 +136,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.getData()
             API.getAnimationList()
             API.handleLine()
-            API.initReflexFloor()
+            // API.initReflexFloor()
             // API.initSkyCar()
             API.initDeviceByMap()
             API.initShelves()

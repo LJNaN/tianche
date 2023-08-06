@@ -834,7 +834,7 @@ class SkyCar {
         setTimeout(() => {
           this.actions.fang.paused = true
           cb && cb()
-        }, 250)
+        }, 160)
       }
     }))
   }
@@ -846,7 +846,7 @@ class SkyCar {
     this.actions.suo.enabled = false
 
     this.actions.shou.reset().play()
-    this.actions.shou.time = 2.4
+    this.actions.shou.time = 3.3
     this.mixer.addEventListener('finished', ((e) => {
       if (e.action.name === 'shou') {
         this.actions.shou.enabled = false
@@ -989,11 +989,12 @@ function search(type, id) {
     let objWorldPosition = new Bol3D.Vector3()
     obj.getWorldPosition(objWorldPosition)
 
+
     new TWEEN.Tween(camera.position)
       .to({
-        x: Math.abs(camera.position.x - objWorldPosition.x) > 120 ? camera.position.x / 4 : camera.position.x,
-        y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 4 : camera.position.y,
-        z: Math.abs(camera.position.z - objWorldPosition.z) > 120 ? camera.position.z / 4 : camera.position.z
+        x: Math.abs(camera.position.x - objWorldPosition.x) > 100 ? camera.position.x - (camera.position.x - objWorldPosition.x) / 1.2 : camera.position.x,
+        y: Math.abs(camera.position.y - objWorldPosition.y) > 100 ? 100 : camera.position.y,
+        z: Math.abs(camera.position.z - objWorldPosition.z) > 100 ? camera.position.z - (camera.position.z - objWorldPosition.z) / 1.2 : camera.position.z
       }, 800)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .start()
@@ -1135,25 +1136,6 @@ function search(type, id) {
       CACHE.container.scene.add(popup)
       STATE.currentPopup = popup
 
-      new TWEEN.Tween(camera.position)
-        .to({
-          x: Math.abs(camera.position.x - objWorldPosition.x) > 120 ? camera.position.x / 4 : camera.position.x,
-          y: Math.abs(camera.position.y - objWorldPosition.y) > 200 ? camera.position.y / 4 : camera.position.y,
-          z: Math.abs(camera.position.z - objWorldPosition.z) > 120 ? camera.position.z / 4 : camera.position.z
-        }, 800)
-        .start()
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(() => {
-          camera.updateProjectionMatrix()
-        })
-      new TWEEN.Tween(contorl.target)
-        .to({
-          x: objWorldPosition.x,
-          y: objWorldPosition.y + 30,
-          z: objWorldPosition.z
-        }, 800)
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .start()
 
       const eventFunc = () => {
         STATE.searchAnimateDesdory = true
@@ -1548,9 +1530,9 @@ function clickInstance(obj, index) {
   const contorl = CACHE.container.orbitControls
   new TWEEN.Tween(camera.position)
     .to({
-      x: Math.abs(camera.position.x - transformInfo.position.x) > 120 ? camera.position.x / 4 : camera.position.x,
-      y: Math.abs(camera.position.y - transformInfo.position.y) > 200 ? camera.position.y / 4 : camera.position.y,
-      z: Math.abs(camera.position.z - transformInfo.position.z) > 120 ? camera.position.z / 4 : camera.position.z
+      x: Math.abs(camera.position.x - transformInfo.position.x) > 100 ? camera.position.x - (camera.position.x - objWorldPosition.x) / 1.2 : camera.position.x,
+      y: Math.abs(camera.position.y - transformInfo.position.y) > 100 ? 100 : camera.position.y,
+      z: Math.abs(camera.position.z - transformInfo.position.z) > 100 ? camera.position.z - (camera.position.z - objWorldPosition.z) / 1.2 : camera.position.z
     }, 800)
     .start()
     .easing(TWEEN.Easing.Quadratic.InOut)
