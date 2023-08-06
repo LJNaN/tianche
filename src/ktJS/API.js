@@ -28,20 +28,13 @@ function getData() {
   // =======================================
 
 
-  setTimeout(() => {
-    drive(mockData2[0])
-  }, 1000);
 
-  setTimeout(() => {
-    drive(mockData2[30])
-  }, 3000);
-
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
-  //   i++
-  // }, 333)
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
+    drive(mockData2[i])
+    i++
+  }, 111)
 }
 
 // 数据驱动
@@ -90,159 +83,255 @@ function drive(wsMessage) {
 
         // 处理变化
         {
-          if (!skyCar.history.new) {  // 初始化 history 时
-            skyCar.history.new = {
-              time: new Date() * 1,
-              position: e.position || null,
-              location: e.location || null,
-              loading: e.ohtStatus_Loading || null,
-              quhuoda: e.ohtStatus_Quhuoda || null,
-              roaming: e.ohtStatus_Roaming || null,
-              idle: e.ohtStatus_Idle || null,
-              isHaveFoup: e.ohtStatus_IsHaveFoup || null,
-              therfidFoup: e.therfidFoup || null,
-              moveEnable: e.ohtStatus_MoveEnable || null,
-              fanghuoxing: e.ohtStatus_Fanghuoxing || null,
-              fanghuoda: e.ohtStatus_Fanghuoda || null,
-              unLoading: e.ohtStatus_UnLoading || null,
-              ohtID: e.ohtID || null
-            }
-
-            skyCar.history.old = Object.assign({}, skyCar.history.new)
-            skyCar.coordinate = e.position
-            skyCar.setPosition(0)
-
-          } else { // 更新 history
-            skyCar.history.new = {
-              time: new Date() * 1,
-              position: e.position || null,
-              location: e.location || null,
-              loading: e.ohtStatus_Loading || null,
-              quhuoda: e.ohtStatus_Quhuoda || null,
-              roaming: e.ohtStatus_Roaming || null,
-              idle: e.ohtStatus_Idle || null,
-              isHaveFoup: e.ohtStatus_IsHaveFoup || null,
-              therfidFoup: e.therfidFoup || null,
-              moveEnable: e.ohtStatus_MoveEnable || null,
-              fanghuoxing: e.ohtStatus_Fanghuoxing || null,
-              fanghuoda: e.ohtStatus_Fanghuoda || null,
-              unLoading: e.ohtStatus_UnLoading || null,
-              ohtID: e.ohtID || null
-            }
-
-
-
-            if (skyCar.history.old?.position != skyCar.history.new?.position) {
-              // 位置动画
-              const time = skyCar.history.new.time - skyCar.history.old.time
-              skyCar.coordinate = skyCar.history.new.position
-              skyCar.setPosition(time)
-            }
-          }
-
-          // 处理状态
-          if ( // 装载开始
-            (skyCar.history.old.location == '0' && skyCar.history.new.location != '0') &&
-            (skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1') &&
-            (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1') &&
-            (skyCar.history.old.roaming == '1' && skyCar.history.new.roaming == '0')
-          ) {
-            // 找离天车最近的货架
-            let distance = 0
-            let shelf = null
-            STATE.sceneList.shelves2Arr.forEach(e => {
-              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
-              if (distance === 0) {
-                distance = dis
-                shelf = e
-              }
-              else if (dis < distance) {
-                distance = dis
-                shelf = e
-              }
-            })
-            STATE.sceneList.shelves4Arr.forEach(e => {
-              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
-              if (distance === 0) {
-                distance = dis
-                shelf = e
-              }
-              else if (dis < distance) {
-                distance = dis
-                shelf = e
-              }
-            })
-
-            // 查找最近的货架最近的卡匣，有就搬，没有就生成
-            const cb = () => {
-              const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
-
-              if (kaxia) {
-                console.log('kaxia: ', kaxia);
-                kaxia.parent.remove(kaxia)
-                kaxia.position.set(0, 0, 0)
-                kaxia.scale.set(1.5, 1.5, 1.5)
-                skyCar.skyCarMesh.add(kaxia)
-                kaxia.area = ''
-                kaxia.shelf = ''
-                kaxia.shelfIndex = -1
-              } else {
-                const newKaxia = STATE.sceneList.FOUP.clone()
-                newKaxia.userData.area = ''
-                newKaxia.userData.shelf = ''
-                newKaxia.userData.shelfIndex = -1
-                newKaxia.userData.type = 'kaxia'
-                newKaxia.scale.set(1.5, 1.5, 1.5)
-                newKaxia.rotation.y = shelf.rotate * Math.PI / 180 - Math.PI
-                newKaxia.visible = true
-                newKaxia.traverse(e2 => {
-                  if (e2.isMesh) {
-                    e2.userData.id = newKaxia.userData.id
-                    e2.userData.area = newKaxia.userData.area
-                    e2.userData.shelf = newKaxia.userData.shelf
-                    e2.userData.shelfIndex = newKaxia.userData.shelfIndex
-                    e2.userData.type = newKaxia.userData.type
-                    CACHE.container.clickObjects.push(e2)
-                  }
-                })
-                skyCar.skyCarMesh.add(newKaxia)
-              }
-
-              // if (shelf.fields.length === 4) {
-              //   if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
-              //     kaxia.position.set(shelf.position[0] - 7.3 + index * 4.9, 27, shelf.position[2])
-              //   } else {
-              //     kaxia.position.set(shelf.position[0], 27, shelf.position[2] - 7.3 + index * 4.9)
-              //   }
-              // } else if (shelf.fields.length === 2) {
-              //   if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
-              //     kaxia.position.set(shelf.position[0] - 2.5 + index * 4.9, 27, shelf.position[2])
-              //   } else {
-              //     kaxia.position.set(shelf.position[0], 27, shelf.position[2] - 2.5 + index * 4.9)
-              //   }
-              // }
-            }
-            skyCar.down(cb)
-
-
-
-
-
-          } else if ( // 装载结束
-            (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
-            (skyCar.history.old.isHaveFoup == '0' && skyCar.history.new.isHaveFoup == '1') &&
-            (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') &&
-            (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
-            (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
-          ) {
-            skyCar.up()
-          }
           skyCar.history.old = Object.assign({}, skyCar.history.new)
+          skyCar.history.new = {
+            time: new Date() * 1,
+            position: e.position || null,
+            location: e.location || null,
+            loading: e.ohtStatus_Loading || null,
+            quhuoda: e.ohtStatus_Quhuoda || null,
+            roaming: e.ohtStatus_Roaming || null,
+            idle: e.ohtStatus_Idle || null,
+            isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+            therfidFoup: e.therfidFoup || null,
+            moveEnable: e.ohtStatus_MoveEnable || null,
+            fanghuoxing: e.ohtStatus_Fanghuoxing || null,
+            fanghuoda: e.ohtStatus_Fanghuoda || null,
+            unLoading: e.ohtStatus_UnLoading || null,
+            ohtID: e.ohtID || null
+          }
+
+          if (skyCar.history.old?.position != skyCar.history.new?.position) {
+            // 位置动画
+            const time = skyCar.history.new.time - skyCar.history.old.time
+            skyCar.coordinate = skyCar.history.new.position
+            skyCar.setPosition(time, onComplete)
+          } else {
+            onComplete()
+          }
+
+          function onComplete() {
+            // 处理状态
+            if ( // 装载开始
+              (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1')
+            ) {
+              console.log('装载开始')
+              // 找离天车最近的货架
+              let distance = 0
+              let shelf = null
+              STATE.sceneList.shelves2Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                }
+                else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+              STATE.sceneList.shelves4Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                }
+                else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+
+              // 查找最近的货架最近的卡匣，有就搬，没有就生成
+              const cb = () => {
+                const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
+
+                if (kaxia) {
+                  kaxia.parent.remove(kaxia)
+                  kaxia.position.set(0, -0.25, 0)
+                  kaxia.scale.set(1.5, 1.5, 1.5)
+                  kaxia.rotation.y = -Math.PI / 2
+                  const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
+                  if (group) {
+                    group.add(kaxia)
+                    skyCar.catch = kaxia
+                  }
+                  kaxia.area = ''
+                  kaxia.shelf = ''
+                  kaxia.shelfIndex = -1
+                } else {
+                  const newKaxia = STATE.sceneList.FOUP.clone()
+                  newKaxia.userData.area = ''
+                  newKaxia.userData.shelf = ''
+                  newKaxia.userData.shelfIndex = -1
+                  newKaxia.userData.type = 'kaxia'
+                  newKaxia.scale.set(1.5, 1.5, 1.5)
+                  newKaxia.position.set(0, -0.25, 0)
+                  newKaxia.rotation.y = -Math.PI / 2
+                  newKaxia.visible = true
+                  newKaxia.traverse(e2 => {
+                    if (e2.isMesh) {
+                      e2.userData.id = newKaxia.userData.id
+                      e2.userData.area = newKaxia.userData.area
+                      e2.userData.shelf = newKaxia.userData.shelf
+                      e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+                      e2.userData.type = newKaxia.userData.type
+                      CACHE.container.clickObjects.push(e2)
+                    }
+                  })
+                  const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
+                  if (group) {
+                    group.add(newKaxia)
+                    skyCar.catch = newKaxia
+                  }
+                }
+              }
+              skyCar.down(cb)
+
+
+            } else if ( // 装载结束
+              (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
+              (skyCar.history.old.isHaveFoup == '0' && skyCar.history.new.isHaveFoup == '1') &&
+              (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') &&
+              (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
+              (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
+            ) {
+              console.log('装载结束')
+              skyCar.up()
+
+            } else if ( // 卸货开始
+              (skyCar.history.old.fanghuoda == '0' && skyCar.history.new.fanghuoda == '1')
+            ) {
+              console.log('卸货开始')
+              // 找离天车最近的货架
+              let distance = 0
+              let shelf = null
+              STATE.sceneList.shelves2Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                } else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+              STATE.sceneList.shelves4Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                } else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+
+              const cb = () => {
+                if (skyCar.catch) {
+
+                  skyCar.catch.userData.area = shelf.area
+                  skyCar.catch.userData.shelf = shelf.shelf
+                  skyCar.catch.userData.type = 'kaxia'
+                  skyCar.catch.scale.set(15, 15, 15)
+                  skyCar.catch.rotation.y = shelf.rotate * Math.PI / 180 - Math.PI / 2
+                  skyCar.catch.visible = true
+
+                  if (shelf.fields.length === 4) {
+                    if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
+                      let index = 0
+                      if (skyCar.catch.position.x < shelf.position[0] - 7.3 + 0 * 4.9) index = 0
+                      else if (skyCar.catch.position.x < shelf.position[0] - 7.3 + 1 * 4.9) index = 1
+                      else if (skyCar.catch.position.x < shelf.position[0] - 7.3 + 2 * 4.9) index = 2
+                      else if (skyCar.catch.position.x < shelf.position[0] - 7.3 + 3 * 4.9) index = 3
+
+                      skyCar.catch.userData.shelfIndex = index
+                      skyCar.catch.position.set(shelf.position[0] - 7.3 + index * 4.9, 27, shelf.position[2])
+
+                    } else {
+                      let index = 0
+                      if (skyCar.catch.position.z < shelf.position[2] - 7.3 + 0 * 4.9) index = 0
+                      else if (skyCar.catch.position.z < shelf.position[2] - 7.3 + 1 * 4.9) index = 1
+                      else if (skyCar.catch.position.z < shelf.position[2] - 7.3 + 2 * 4.9) index = 2
+                      else if (skyCar.catch.position.z < shelf.position[2] - 7.3 + 3 * 4.9) index = 3
+
+                      skyCar.catch.userData.shelfIndex = index
+                      skyCar.catch.position.set(shelf.position[0], 27, shelf.position[2] - 7.3 + index * 4.9)
+                    }
+
+                  } else if (shelf.fields.length === 2) {
+                    if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(shelf.area)) {
+                      let index = 0
+                      if (skyCar.catch.position.x < shelf.position[0] - 2.5 + 0 * 4.9) index = 0
+                      else if (skyCar.catch.position.x < shelf.position[0] - 2.5 + 1 * 4.9) index = 1
+
+                      skyCar.catch.userData.shelfIndex = index
+                      skyCar.catch.position.set(shelf.position[0] - 2.5 + index * 4.9, 27, shelf.position[2])
+
+                    } else {
+                      let index = 0
+                      if (skyCar.catch.position.z < shelf.position[2] - 2.5 + 0 * 4.9) index = 0
+                      else if (skyCar.catch.position.z < shelf.position[2] - 2.5 + 1 * 4.9) index = 1
+
+                      skyCar.catch.userData.shelfIndex = index
+                      skyCar.catch.position.set(shelf.position[0], 27, shelf.position[2] - 2.5 + index * 4.9)
+                    }
+                  }
+
+                  skyCar.catch.traverse(e2 => {
+                    if (e2.isMesh) {
+                      e2.userData.id = skyCar.catch.userData.id
+                      e2.userData.area = skyCar.catch.userData.area
+                      e2.userData.shelf = skyCar.catch.userData.shelf
+                      e2.userData.shelfIndex = skyCar.catch.userData.shelfIndex
+                      e2.userData.type = skyCar.catch.userData.type
+                      CACHE.container.clickObjects.push(e2)
+                    }
+                  })
+
+                  skyCar.catch.parent.remove(skyCar.catch)
+                  STATE.kaxiaList.add(skyCar.catch)
+                  skyCar.catch = null
+                }
+              }
+              skyCar.down(cb)
+
+            } else if ( // 卸货结束
+              (skyCar.history.old.fanghuoda == '1' && skyCar.history.new.fanghuoda == '0') &&
+              (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
+              (skyCar.history.old.isHaveFoup == '1' && skyCar.history.new.isHaveFoup == '0') &&
+              (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
+              (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')
+            ) {
+              console.log('卸货结束')
+              skyCar.up()
+            }
+          }
         }
 
       } else {
         const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
         STATE.sceneList.skyCarList.push(newCar)
+        newCar.history.new = {
+          time: new Date() * 1,
+          position: e.position || null,
+          location: e.location || null,
+          loading: e.ohtStatus_Loading || null,
+          quhuoda: e.ohtStatus_Quhuoda || null,
+          roaming: e.ohtStatus_Roaming || null,
+          idle: e.ohtStatus_Idle || null,
+          isHaveFoup: e.ohtStatus_IsHaveFoup || null,
+          therfidFoup: e.therfidFoup || null,
+          moveEnable: e.ohtStatus_MoveEnable || null,
+          fanghuoxing: e.ohtStatus_Fanghuoxing || null,
+          fanghuoda: e.ohtStatus_Fanghuoda || null,
+          unLoading: e.ohtStatus_UnLoading || null,
+          ohtID: e.ohtID || null
+        }
+
+        newCar.history.old = Object.assign({}, newCar.history.new)
+        newCar.coordinate = e.position
+        newCar.setPosition(0)
       }
     })
   }
@@ -517,6 +606,7 @@ class SkyCar {
   mixer = null             // 模型动画管理器
   actions = null           // 模型动画
   speed = 0.05             // 模型动画速度
+  catch = null             // 当前抓取的卡匣
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -733,7 +823,7 @@ class SkyCar {
     }
   }
 
-  setPosition(time = 1000) {
+  setPosition(time = 1000, cb) {
     // 查找起始点、起始坐标
     const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.coordinate && e.endCoordinate > this.coordinate)
     if (map) {
@@ -784,8 +874,11 @@ class SkyCar {
           x: currentPosition.x,
           y: currentPosition.y,
           z: currentPosition.z
-        }, time)
+        }, cb ? time / 4 : time)
         this.animation.start()
+        this.animation.onComplete(() => {
+          cb && cb()
+        })
       }
     }
   }
@@ -816,48 +909,67 @@ class SkyCar {
 
   // 设置伸缩方法
   down(cb) {
+    const this_ = this
     this.actions.shen.enabled = true
     this.actions.suo.enabled = false
     this.actions.fang.enabled = false
+    this.actions.fang.paused = false
     this.actions.shou.enabled = false
 
     this.actions.shen.clampWhenFinished = false
     this.actions.shen.reset().play()
 
 
-    this.mixer.addEventListener('finished', ((e) => {
+    this.mixer.addEventListener('finished', function finished_shen(e) {
       if (e.action.name === 'shen') {
-        this.actions.shen.enabled = false
-        this.actions.fang.enabled = true
-        this.actions.fang.reset().play()
+        this_.actions.shen.enabled = false
+        this_.actions.fang.enabled = true
+        this_.actions.fang.time = 0
+        this_.actions.fang.reset().play()
 
-        setTimeout(() => {
-          this.actions.fang.paused = true
-          cb && cb()
-        }, 160)
+        let renderFlag = true
+        render()
+        function render() {
+          if (renderFlag) {
+            requestAnimationFrame(render)
+            if (this_.actions.fang.time > 0.5) {
+              this_.actions.fang.time = 0.5
+              this_.actions.fang.paused = true
+              this_.mixer.removeEventListener('finished', finished_shen)
+              renderFlag = false
+              cb && cb()
+            }
+          }
+        }
       }
-    }))
+    })
   }
 
   up(cb) {
+    const this_ = this
     this.actions.shou.enabled = true
     this.actions.fang.enabled = false
     this.actions.shen.enabled = false
     this.actions.suo.enabled = false
 
-    this.actions.shou.reset().play()
-    this.actions.shou.time = 3.3
-    this.mixer.addEventListener('finished', ((e) => {
+    this.actions.shou.paused = false
+    this.actions.shou.reset()
+    this.actions.shou.time = 2.7
+    this.actions.shou.play()
+
+    this.mixer.addEventListener('finished', function finished_suo(e) {
       if (e.action.name === 'shou') {
-        this.actions.shou.enabled = false
-        this.actions.suo.enabled = true
-        this.actions.suo.reset().play()
-        this.actions.kakoushen.reset().play()
-        this.actions.dangbanshen.reset().play()
+
+        this_.actions.shou.enabled = false
+        this_.actions.suo.enabled = true
+        this_.actions.suo.reset().play()
+        this_.actions.kakoushen.reset().play()
+        this_.actions.dangbanshen.reset().play()
       } else if (e.action.name === 'suo') {
+        this_.mixer.removeEventListener('finished', finished_suo)
         cb && cb()
       }
-    }))
+    })
   }
 }
 

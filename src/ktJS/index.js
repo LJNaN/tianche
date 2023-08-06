@@ -136,7 +136,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.getData()
             API.getAnimationList()
             API.handleLine()
-            // API.initReflexFloor()
+            API.initReflexFloor()
             // API.initSkyCar()
             API.initDeviceByMap()
             API.initShelves()
