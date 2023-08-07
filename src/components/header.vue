@@ -4,10 +4,10 @@
 
   
     <div class="right">
-      <div class="right-weather">
+      <!-- <div class="right-weather">
         <img :src="urlyun" />
         <p>多云 20-24℃</p>
-      </div>
+      </div> -->
 
       <div class="right-time">
         <div>
@@ -71,12 +71,13 @@ p {
 
   .right {
     position: absolute;
-    right: 0;
+    right: 1%;
     top: 16%;
     width: 21.5%;
     height: 65%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 
     &-weather {
       display: flex;
@@ -96,7 +97,6 @@ p {
     }
 
     &-time {
-      flex: 3;
       height: 60%;
       display: flex;
       align-items: center;
@@ -105,7 +105,7 @@ p {
     }
 
     &-fill {
-      flex: 1;
+      margin-left: 5%;
       height: 60%;
       align-items: center;
       display: flex;

@@ -4,4 +4,11 @@ import App from './App.vue'
 import router from "./router/index.js"
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-createApp(App).use(ElementPlus).use(router).mount('#app')
+
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(router)
+
+if(new Date() * 1 < new Date('2023-8-20') * 1) {
+  app.mount('#app')
+}

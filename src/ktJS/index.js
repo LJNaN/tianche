@@ -198,7 +198,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
 
 
-            API.testBox()
+            // API.testBox()
             // API.loadGUI()
             CACHE.container.loadingBar.style.visibility = 'hidden'
           })
