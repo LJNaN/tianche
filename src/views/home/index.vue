@@ -4,14 +4,19 @@ import * as echarts from "echarts";
 import Header from '@/components/header.vue'
 import Right from './right.vue'
 import Bottom from './bottom.vue'
+import store from '../../store'
+import Yc from './yc.vue'
+
 </script>
 
 <template>
   <div class="home">
     <!-- <img class="logo" src="/assets/3d/img/logo.png" alt="logo"> -->
     <Header></Header>
-    <Right></Right>
-    <Bottom></Bottom>
+    <!-- <Header></Header> -->
+    <Right v-if="store.state.isShowButton"></Right>
+    <Bottom v-if="store.state.isShowButton"></Bottom>
+    <Yc></Yc>
   </div>
 </template>
 
