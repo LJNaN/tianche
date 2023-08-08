@@ -17,31 +17,26 @@
         </div>
       </div>
 
-      <div class="right-fill">
+      <div class="right-fill" @click="handleFillScreen">
         <img :src="qb" />
       </div>
     </div>
 
-    <!-- <div class="xy"> -->
-      <!-- <div class="istrue" @click="isshow()"></div> -->
-      <!-- <div class="isfalse" @click="isnotshow()"></div> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
-import store from "../store";
 
-function isshow() {
-  // console.log(state,"state")
-  store.state.isShowButton = !store.state.isShowButton;
-}
-
-function isnotshow() {
-  // console.log(state,"state")
-  store.state.isShowButton = false;
+function handleFillScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
 }
 
 function convertWeekToChinese(day) {
@@ -119,6 +114,7 @@ p {
       display: flex;
       justify-content: start;
       align-items: center;
+      cursor: pointer;
 
       img {
         top: 10%;
@@ -139,6 +135,7 @@ p {
   bottom: -30%;
   right: 1%;
 }
+
 .istrue {
   position: absolute;
   background: url("/assets/3d/img/49.png") center / 100% 100% no-repeat;
@@ -148,6 +145,7 @@ p {
   bottom: 0%;
   right: 0%;
 }
+
 .isfalse {
   position: absolute;
   background: url("/assets/3d/img/50.png") center / 75% 75% no-repeat;
