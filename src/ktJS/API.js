@@ -15,12 +15,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -29,13 +29,17 @@ function getData() {
 
 
 
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
-  //   i++
-  // }, 111)
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
+    drive(mockData2[i])
+    i++
+  }, 333)
 }
+
+setTimeout(() => {
+  STATE.alarmList.value.unshift({ "alarmCode": "M2053", "alarmId": "2d721efc-ec43-46a7-9986-f02d1cee6aa4", "alarmType": "set", "createTime": 1683369367000, "remark": "V0001" })
+}, 5000)
 
 // 数据驱动
 function drive(wsMessage) {
@@ -115,7 +119,7 @@ function drive(wsMessage) {
             if ( // 装载开始
               (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1')
             ) {
-              console.log('装载开始')
+
               // 找离天车最近的货架
               let distance = 0
               let shelf = null
@@ -143,9 +147,10 @@ function drive(wsMessage) {
               })
 
               // 查找最近的货架最近的卡匣，有就搬，没有就生成
-              const cb = () => {
-                const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
+              const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
 
+              const direction = shelf.direction
+              const cb = () => {
                 if (kaxia) {
                   kaxia.parent.remove(kaxia)
                   kaxia.position.set(0, -0.25, 0)
@@ -186,6 +191,7 @@ function drive(wsMessage) {
                   }
                 }
               }
+              skyCar.catchDirection = direction
               skyCar.down(cb)
 
 
@@ -196,13 +202,12 @@ function drive(wsMessage) {
               (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
               (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
             ) {
-              console.log('装载结束')
               skyCar.up()
 
             } else if ( // 卸货开始
               (skyCar.history.old.fanghuoda == '0' && skyCar.history.new.fanghuoda == '1')
             ) {
-              console.log('卸货开始')
+
               // 找离天车最近的货架
               let distance = 0
               let shelf = null
@@ -303,7 +308,6 @@ function drive(wsMessage) {
               (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
               (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')
             ) {
-              console.log('卸货结束')
               skyCar.up()
             }
           }
@@ -607,6 +611,8 @@ class SkyCar {
   actions = null           // 模型动画
   speed = 0.05             // 模型动画速度
   catch = null             // 当前抓取的卡匣
+  catchDirection = 'left'  // 抓取方向
+  alert = false            // 是否为报警状态
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -705,104 +711,135 @@ class SkyCar {
       STATE.currentPopup = null
     }
 
-    OhtFindCmdId(this.id).then(res => {
 
-    })
+    const init = (data) => {
 
-    const name = 'click_popup_天车_' + this.id
-    const items = [
-      { name: '卡匣ID', value: this.history.new.therfidFoup || '--' },
-      { name: 'COMMAND ID', value: '--' },
-      { name: 'USER ID', value: '--' },
-      { name: '起点', value: '--' },
-      { name: '终点', value: '--' },
-      { name: '优先级', value: '--' },
-      { name: '当前状态', value: DATA.skyCarStateColorMap.find(e => e.id === this.state)?.name || '--' },
-      { name: 'ALARM 情况', value: this.history.new.ohtStatus_ErrSet === '1' ? '异常' : '正常' },
-    ]
-    let textValue = ``
-    for (let i = 0; i < items.length; i++) {
-      textValue += `
-    
-      <div style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 5%;
-        height: 4vh;
-        width: 100%;
-        background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
-        ">
-        <p style="font-size: 2vh;">${items[i].name}</p>
-        <p style="font-size: 2vh;">${items[i].value}</p>
-      </div>`
-    }
 
-    const clickPopup = new Bol3D.POI.Popup3DSprite({
-      value: `
-      <div style="
-        pointer-events: none;
-        margin:0;
-        color: #ffffff;
-      ">
+      if (this.clickPopup && this.clickPopup.parent) {
+        this.clickPopup.parent.remove(this.clickPopup)
+      }
 
-      <div style="
-          position: absolute;
-          background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
-          width: 25vw;
-          height: 47vh;
-          transform: translate(-50%, -50%);
-          display: flex;
-          flex-direction: column;
-          left: 50%;
-          top: 50%;
-          z-index: 2;
-        ">
-        <p style="
-          font-size: 2vh;
-          font-weight: bold;
-          letter-spacing: 8px;
-          margin-left: 4px;
-          text-align: center;
-          margin-top: 10%;
-        ">
-          天车
-        </p>
+      const name = 'click_popup_天车_' + this.id
+      const items = [
+        { name: '卡匣ID', value: this.history.new.therfidFoup || '--' },
+        { name: 'COMMAND ID', value: '--' },
+        { name: 'USER ID', value: '--' },
+        { name: '起点', value: '--' },
+        { name: '终点', value: '--' },
+        { name: '优先级', value: '--' },
+        { name: '当前状态', value: DATA.skyCarStateColorMap.find(e => e.id === this.state)?.name || '--' },
+        { name: 'ALARM 情况', value: this.history.new.ohtStatus_ErrSet === '1' ? '异常' : '正常' },
+      ]
 
+      for (let key in data) {
+        const item = items.find(e => e.name === key)
+        if (item) {
+          item.value = data[key]
+        }
+      }
+
+      let textValue = ``
+      for (let i = 0; i < items.length; i++) {
+        textValue += `
+      
         <div style="
           display: flex;
-          flex-direction: column;
-          width: 85%;
-          margin: 4% auto 0 auto;
-          height: 100%;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 5%;
+          height: 4vh;
+          width: 100%;
+          background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+          ">
+          <p style="font-size: 2vh;">${items[i].name}</p>
+          <p style="font-size: 2vh;">${items[i].value}</p>
+        </div>`
+      }
+
+      const clickPopup = new Bol3D.POI.Popup3DSprite({
+        value: `
+        <div style="
+          pointer-events: none;
+          margin:0;
+          color: #ffffff;
         ">
-        ${textValue}
+  
+        <div style="
+            position: absolute;
+            background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
+            width: 25vw;
+            height: 47vh;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            left: 50%;
+            top: 50%;
+            z-index: 2;
+          ">
+          <p style="
+            font-size: 2vh;
+            font-weight: bold;
+            letter-spacing: 8px;
+            margin-left: 4px;
+            text-align: center;
+            margin-top: 10%;
+          ">
+            天车
+          </p>
+  
+          <div style="
+            display: flex;
+            flex-direction: column;
+            width: 85%;
+            margin: 4% auto 0 auto;
+            height: 100%;
+          ">
+          ${textValue}
+          </div>
         </div>
       </div>
-    </div>
-    `,
-      position: [0, 0, 0],
-      className: 'popup3dclass popup3d_tianche',
-      closeVisible: true,
-      closeColor: "#FFFFFF",
-      closeCallback: (() => {
-        this.popup.visible = true
-        this.clickPopup.parent.remove(this.clickPopup)
-        this.clickPopup = null
-        STATE.currentPopup = null
+      `,
+        position: [0, 0, 0],
+        className: 'popup3dclass popup3d_tianche',
+        closeVisible: true,
+        closeColor: "#FFFFFF",
+        closeCallback: (() => {
+          this.popup.visible = true
+          this.clickPopup.parent.remove(this.clickPopup)
+          this.clickPopup = null
+          STATE.currentPopup = null
+        })
       })
+
+      clickPopup.scale.set(0.08, 0.08, 0.08)
+      clickPopup.name = name
+
+      this.popup.visible = false
+      this.skyCarMesh.add(clickPopup)
+      this.clickPopup = clickPopup
+      clickPopup.position.y = 2.3
+      STATE.currentPopup = clickPopup
+    }
+    init()
+
+    OhtFindCmdId(this.id).then(res => {
+      const data = {}
+      for (let key in res.data) {
+        if (key === 'commandid') {
+          data['COMMAND ID'] = res.data[key] || '--'
+        } else if (key === 'priority') {
+          data['优先级'] = res.data[key] || '--'
+        } else if (key === 'sourceport') {
+          data['起点'] = res.data[key] || '--'
+        } else if (key === 'destport') {
+          data['终点'] = res.data[key] || '--'
+        } else if (key === 'status') {
+          data['当前状态'] = res.data[key] || '--'
+        }
+      }
+      init(data)
     })
 
-    clickPopup.scale.set(0.08, 0.08, 0.08)
-    clickPopup.name = name
-
-
-
-    this.popup.visible = false
-    this.skyCarMesh.add(clickPopup)
-    this.clickPopup = clickPopup
-    clickPopup.position.y = 2.3
-    STATE.currentPopup = clickPopup
   }
 
   setPopupColor() {
@@ -824,6 +861,7 @@ class SkyCar {
   }
 
   setPosition(time = 1000, cb) {
+
     // 查找起始点、起始坐标
     const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.coordinate && e.endCoordinate > this.coordinate)
     if (map) {
@@ -907,37 +945,121 @@ class SkyCar {
     }
   }
 
+  setAlert(type) {
+    // type
+    // true: 开启报警
+    // false: 关闭报警
+    const this_ = this
+
+    if (type && !this.alert) {
+      this.alert = true
+    } else {
+      this.alert = false
+    }
+
+    const nameArr = ['tianche_9', 'tianche_2', 'tianche_7', 'tianche_8', 'tianche_20']
+  
+    if (this.alert) {
+      this.skyCarMesh.traverse(e => {
+        if (e.isMesh && nameArr.includes(e.name)) {
+          if (!e.userData.color) {
+            e.userData.color = e.material.color.clone()
+          }
+        }
+      })
+      render()
+    }
+
+    function render() {
+      if (this_.alert) {
+        console.log(12)
+        requestAnimationFrame(render)      
+        this_.skyCarMesh.traverse(e => {
+          if (e.isMesh && nameArr.includes(e.name)) {
+            const redColor = Math.abs(Math.sin(STATE.clock.getElapsedTime() * 3)) + 1
+            e.material.color.r = e.userData.color.r * redColor
+          }
+        })
+
+      } else {
+        this_.skyCarMesh.traverse(e => {
+          if (e.isMesh && nameArr.includes(e.name) && e.userData.color) {
+            e.material.color = e.userData.color.clone()
+          }
+        })
+      }
+    }
+  }
+
   // 设置伸缩方法
   down(cb) {
     const this_ = this
-    this.actions.shen.enabled = true
-    this.actions.suo.enabled = false
-    this.actions.fang.enabled = false
-    this.actions.fang.paused = false
-    this.actions.shou.enabled = false
+    if (this.catchDirection === 'right') {
+      this.actions.shen1.enabled = false
+      this.actions.suo1.enabled = false
+      this.actions.fang1.enabled = false
+      this.actions.shou1.enabled = false
 
-    this.actions.shen.clampWhenFinished = false
-    this.actions.shen.reset().play()
+      this.actions.shen.enabled = true
+      this.actions.suo.enabled = false
+      this.actions.fang.enabled = false
+      this.actions.fang.paused = false
+      this.actions.shou.enabled = false
+
+      this.actions.shen.clampWhenFinished = false
+      this.actions.shen.reset().play()
+    } else {
+      this.actions.shen.enabled = false
+      this.actions.suo.enabled = false
+      this.actions.fang.enabled = false
+      this.actions.shou.enabled = false
+
+      this.actions.shen1.enabled = true
+      this.actions.suo1.enabled = false
+      this.actions.fang1.enabled = false
+      this.actions.fang1.paused = false
+      this.actions.shou1.enabled = false
+
+      this.actions.shen1.clampWhenFinished = false
+      this.actions.shen1.reset().play()
+    }
 
 
     this.mixer.addEventListener('finished', function finished_shen(e) {
-      if (e.action.name === 'shen') {
-        this_.actions.shen.enabled = false
-        this_.actions.fang.enabled = true
-        this_.actions.fang.time = 0
-        this_.actions.fang.reset().play()
+      if (e.action.name === 'shen' || e.action.name === 'shen1') {
+        if (this.catchDirection === 'right') {
+          this_.actions.shen.enabled = false
+          this_.actions.fang.enabled = true
+          this_.actions.fang.time = 0
+          this_.actions.fang.reset().play()
+        } else {
+          this_.actions.shen1.enabled = false
+          this_.actions.fang1.enabled = true
+          this_.actions.fang1.time = 0
+          this_.actions.fang1.reset().play()
+        }
 
         let renderFlag = true
         render()
         function render() {
           if (renderFlag) {
             requestAnimationFrame(render)
-            if (this_.actions.fang.time > 0.5) {
-              this_.actions.fang.time = 0.5
-              this_.actions.fang.paused = true
-              this_.mixer.removeEventListener('finished', finished_shen)
-              renderFlag = false
-              cb && cb()
+            if (this_.catchDirection === 'right') {
+              if (this_.actions.fang.time > 0.5) {
+                this_.actions.fang.time = 0.5
+                this_.actions.fang.paused = true
+                this_.mixer.removeEventListener('finished', finished_shen)
+                renderFlag = false
+                cb && cb()
+              }
+            } else {
+              if (this_.actions.fang1.time > 0.5) {
+                this_.actions.fang1.time = 0.5
+                this_.actions.fang1.paused = true
+                this_.mixer.removeEventListener('finished', finished_shen)
+                renderFlag = false
+                cb && cb()
+              }
             }
           }
         }
@@ -947,25 +1069,55 @@ class SkyCar {
 
   up(cb) {
     const this_ = this
-    this.actions.shou.enabled = true
-    this.actions.fang.enabled = false
-    this.actions.shen.enabled = false
-    this.actions.suo.enabled = false
+    if (this.catchDirection === 'right') {
+      this.actions.shou1.enabled = false
+      this.actions.fang1.enabled = false
+      this.actions.shen1.enabled = false
+      this.actions.suo1.enabled = false
 
-    this.actions.shou.paused = false
-    this.actions.shou.reset()
-    this.actions.shou.time = 2.7
-    this.actions.shou.play()
+      this.actions.shou.enabled = true
+      this.actions.fang.enabled = false
+      this.actions.shen.enabled = false
+      this.actions.suo.enabled = false
+
+      this.actions.shou.paused = false
+      this.actions.shou.reset()
+      this.actions.shou.time = 2.7
+      this.actions.shou.play()
+    } else {
+      this.actions.shou.enabled = false
+      this.actions.fang.enabled = false
+      this.actions.shen.enabled = false
+      this.actions.suo.enabled = false
+
+      this.actions.shou1.enabled = true
+      this.actions.fang1.enabled = false
+      this.actions.shen1.enabled = false
+      this.actions.suo1.enabled = false
+
+      this.actions.shou1.paused = false
+      this.actions.shou1.reset()
+      this.actions.shou1.time = 2.7
+      this.actions.shou1.play()
+    }
+
 
     this.mixer.addEventListener('finished', function finished_suo(e) {
-      if (e.action.name === 'shou') {
+      if (e.action.name === 'shou' || e.action.name === 'shou1') {
 
-        this_.actions.shou.enabled = false
-        this_.actions.suo.enabled = true
-        this_.actions.suo.reset().play()
+        if (this_.catchDirection === 'right') {
+          this_.actions.shou.enabled = false
+          this_.actions.suo.enabled = true
+          this_.actions.suo.reset().play()
+        } else {
+          this_.actions.shou1.enabled = false
+          this_.actions.suo1.enabled = true
+          this_.actions.suo1.reset().play()
+        }
         this_.actions.kakoushen.reset().play()
         this_.actions.dangbanshen.reset().play()
-      } else if (e.action.name === 'suo') {
+
+      } else if (e.action.name === 'suo' || e.action.name === 'suo1') {
         this_.mixer.removeEventListener('finished', finished_suo)
         cb && cb()
       }
