@@ -37,6 +37,7 @@
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
+import store from '../store'
 
 let xs = ref(false);
 let yc = ref(true);
