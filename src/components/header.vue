@@ -27,10 +27,7 @@
       </div>
     </div>
 
-    <!-- <div class="xy"> -->
-    <!-- <div class="istrue" @click="isshow()"></div> -->
-    <!-- <div class="isfalse" @click="isnotshow()"></div> -->
-    <!-- </div> -->
+    
   </div>
 </template>
 
