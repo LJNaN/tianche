@@ -16,7 +16,7 @@ import Yc from './yc.vue'
     <!-- <Header></Header> -->
     <Right v-if="store.state.isShowButton"></Right>
     <Bottom v-if="store.state.isShowButton"></Bottom>
-    <Yc></Yc>
+    <!-- <Yc></Yc> -->
   </div>
 </template>
 

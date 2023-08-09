@@ -20,11 +20,16 @@
       <div class="right-fill">
         <img :src="qb" />
       </div>
+
+      <div class="xsyc">
+        <div class="xs" @click="isshow()" v-if="xs"></div>
+        <div class="yc" @click="notshow()" v-if="yc"></div>
+      </div>
     </div>
 
     <!-- <div class="xy"> -->
-      <!-- <div class="istrue" @click="isshow()"></div> -->
-      <!-- <div class="isfalse" @click="isnotshow()"></div> -->
+    <!-- <div class="istrue" @click="isshow()"></div> -->
+    <!-- <div class="isfalse" @click="isnotshow()"></div> -->
     <!-- </div> -->
   </div>
 </template>
@@ -34,14 +39,19 @@ import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
 import store from "../store";
 
+let xs = ref(false);
+let yc = ref(true);
+
 function isshow() {
-  // console.log(state,"state")
-  store.state.isShowButton = !store.state.isShowButton;
+  store.state.isShowButton = true;
+  xs.value = false;
+  yc.value = true;
 }
 
-function isnotshow() {
-  // console.log(state,"state")
+function notshow() {
   store.state.isShowButton = false;
+  xs.value = true;
+  yc.value = false;
 }
 
 function convertWeekToChinese(day) {
@@ -79,7 +89,7 @@ p {
 
   .right {
     position: absolute;
-    right: 1%;
+    right: 7%;
     top: 16%;
     width: 21.5%;
     height: 65%;
@@ -134,10 +144,38 @@ p {
 .xy {
   // border: 1px solid red;
   position: absolute;
-  width: 4%;
+  width: 6%;
   height: 35%;
   bottom: -30%;
   right: 1%;
+}
+.xs {
+  pointer-events: all;
+  background: url("/assets/3d/img/xs.png") center / 100% 100% no-repeat;
+  // border: 1px solid red;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0%;
+  left: 5%;
+}
+.yc {
+  pointer-events: all;
+  background: url("/assets/3d/img/yc.png") center / 100% 100% no-repeat;
+  // border: 1px solid red;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0%;
+  left: 5%;
+}
+.xsyc {
+  // border: 1px solid red;
+  position: absolute;
+  width: 20%;
+  height: 89%;
+  top: 3%;
+  right: -20%;
 }
 .istrue {
   position: absolute;
