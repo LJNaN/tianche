@@ -15,12 +15,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -29,17 +29,14 @@ function getData() {
 
 
 
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData2.length) i = 0
-    drive(mockData2[i])
-    i++
-  }, 333)
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
+  //   i++
+  // }, 333)
 }
 
-setTimeout(() => {
-  STATE.alarmList.value.unshift({ "alarmCode": "M2053", "alarmId": "2d721efc-ec43-46a7-9986-f02d1cee6aa4", "alarmType": "set", "createTime": 1683369367000, "remark": "V0001" })
-}, 5000)
 
 // 数据驱动
 function drive(wsMessage) {
@@ -1667,6 +1664,8 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
+  console.log('obj: ', obj);
+  console.log('index: ', index);
 
 
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
@@ -1794,9 +1793,9 @@ function clickInstance(obj, index) {
   const contorl = CACHE.container.orbitControls
   new TWEEN.Tween(camera.position)
     .to({
-      x: Math.abs(camera.position.x - transformInfo.position.x) > 100 ? camera.position.x - (camera.position.x - objWorldPosition.x) / 1.2 : camera.position.x,
+      x: Math.abs(camera.position.x - transformInfo.position.x) > 100 ? camera.position.x - (camera.position.x - transformInfo.position.x) / 1.2 : camera.position.x,
       y: Math.abs(camera.position.y - transformInfo.position.y) > 100 ? 100 : camera.position.y,
-      z: Math.abs(camera.position.z - transformInfo.position.z) > 100 ? camera.position.z - (camera.position.z - objWorldPosition.z) / 1.2 : camera.position.z
+      z: Math.abs(camera.position.z - transformInfo.position.z) > 100 ? camera.position.z - (camera.position.z - transformInfo.position.z) / 1.2 : camera.position.z
     }, 800)
     .start()
     .easing(TWEEN.Easing.Quadratic.InOut)

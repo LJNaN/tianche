@@ -86,7 +86,7 @@ p {
 
   .right {
     position: absolute;
-    right: 7%;
+    right: 3%;
     top: 16%;
     width: 21.5%;
     height: 65%;
@@ -161,10 +161,11 @@ p {
   pointer-events: all;
   background: url("/assets/3d/img/yc.png") center / 100% 100% no-repeat;
   // border: 1px solid red;
+  cursor: pointer;
   position: absolute;
   width: 50%;
   height: 100%;
-  top: 0%;
+  top: 5%;
   left: 5%;
 }
 .xsyc {
