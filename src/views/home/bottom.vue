@@ -10,19 +10,19 @@
           <span v-for="(item, index) in title" :key="index">{{ item }}</span>
         </div>
         <el-scrollbar class="table-content">
-          <div v-for="(item) in alarmList" :key="item.alarmId">
+          <div v-for="(item) in alarmList" :key="item.alarmId" @click="handleAlertSkyCar(item.remark)"
+            style="cursor: pointer;">
             <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
-              <span class="zitichaochu">{{ item.alarmCode }}</span>
+              <span class="zitichaochu">{{ item.alarmCode || '--' }}</span>
             </p>
             <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
-              <span class="zitichaochu">{{ item.alarmData }}</span>
-            </p>
-            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime"
-              style="cursor: pointer;" @click="handleAlertSkyCar(item.remark)">
-              <span class="zitichaochu">{{ item.remark }}</span>
+              <span class="zitichaochu">{{ item.alarmData || '--' }}</span>
             </p>
             <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
-              <span class="zitichaochu">{{ item.createTime }}</span>
+              <span class="zitichaochu">{{ item.remark || '--' }}</span>
+            </p>
+            <p :title="item.alarmCode + '     ' + item.alarmData + '     ' + item.remark + '     ' + item.createTime">
+              <span class="zitichaochu">{{ item.createTime || '--' }}</span>
             </p>
           </div>
         </el-scrollbar>
@@ -62,8 +62,14 @@ STATE.alarmList = alarmList
 
 // 点击天车报警 跳转
 function handleAlertSkyCar(id) {
+
   const skyCar = STATE.sceneList.skyCarList.find(e => e.id === id)
   if (skyCar) {
+    skyCar.setAlert(true)
+    setTimeout(() => {
+      skyCar.setAlert(false)
+    }, 60000)
+    
     API.search('天车', id)
     const element = skyCar.popup.element
     const event = new MouseEvent('dblclick', {
@@ -133,7 +139,7 @@ const option2 = reactive({
       // },
     },
     formatter: function (params) {
-      
+
       var str = "";
       if (params.length > 0) {
         str = params[0].name + "<br/>";
@@ -643,6 +649,6 @@ const option3 = reactive({
     width: 100%;
     height: 100%;
   }
-  
+
 }
 </style>

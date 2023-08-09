@@ -21759,7 +21759,7 @@
             "minDistance": 0,
             "maxDistance": 100000,
             "minPolarAngle": 0,
-            "maxPolarAngle": 90,
+            "maxPolarAngle": 88,
             "zoomSpeed": 1,
             "rotateSpeed": 1,
             "panSpeed": 1,

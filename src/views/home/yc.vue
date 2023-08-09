@@ -13,13 +13,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive } from "vue";
-import * as echarts from "echarts";
-import Chart from "@/components/Chart.vue";
 import store from '../../store'
 
 function isshow() {
-  console.log("store.state.isShowButton",store.state.isShowButton)
   store.state.isShowButton = !store.state.isShowButton;
 }
 
@@ -28,13 +24,13 @@ function isshow() {
 <style lang="less" scoped>
 
 .right{
+  cursor: pointer;
   pointer-events: all;
   background: url("/assets/3d/img/49.png") center / 90% 100% no-repeat;
-  // border: 1px solid red;
   position: absolute;
   width: 2%;
   height: 3%;
   top: 7%;
-  right: 1%;
+  right: 0.4%;
 }
 </style>

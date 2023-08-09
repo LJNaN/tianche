@@ -10,3 +10,5 @@ export function GetCarrierInfo() {
 export function OhtFindCmdId(id) {
   return request(`/api/MOC/OhtFindCmdId/${id}`)
 }
+
+

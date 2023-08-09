@@ -107,9 +107,13 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             STATE.sceneList.guidao.traverse(e => {
               if (e.isMesh) {
                 if (e.name === 'di') {
+                  // 地板马赛克处理
+                  const map = e.material.map.clone()
+                  e.material = new Bol3D.MeshLambertMaterial()
                   e.material.transparent = true
-                  e.material.opacity = 0.68
-                  e.material.color = new Bol3D.Color(0.63, 0.63, 0.63)
+                  e.material.opacity = 0.85
+                  e.material.map = map
+                  e.material.map.needsUpdate = true
                 } else if (e.name.includes('-')) {
                   e.renderOrder = 1
                 }

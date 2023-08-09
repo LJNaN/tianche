@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="right-fill">
+      <div class="right-fill" @click="handleFillScreen">
         <img :src="qb" />
       </div>
 
@@ -37,7 +37,6 @@
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
-import store from "../store";
 
 let xs = ref(false);
 let yc = ref(true);
@@ -129,6 +128,7 @@ p {
       display: flex;
       justify-content: start;
       align-items: center;
+      cursor: pointer;
 
       img {
         top: 10%;
@@ -186,6 +186,7 @@ p {
   bottom: 0%;
   right: 0%;
 }
+
 .isfalse {
   position: absolute;
   background: url("/assets/3d/img/50.png") center / 75% 75% no-repeat;
