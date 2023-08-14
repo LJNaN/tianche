@@ -32,6 +32,7 @@ import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { get15Day } from '@/utils/get15Day'
+import { OhbStorageRatio } from '@/axios/api'
 
 const option = reactive({
   backgroundColor: "",
@@ -58,7 +59,7 @@ const option = reactive({
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ": " + params[i].value + " %<br/>";
+          str += params[i].seriesName + ": " + params[i].value + "<br/>";
         }
       }
       return str;
@@ -81,14 +82,14 @@ const option = reactive({
   },
   xAxis: {
     type: "category",
-    data: get15Day(),
+    data: [],
     axisLine: {
-        show: true,
-        lineStyle: {
-          width: 2,
-          color: "rgba(208, 199, 199, 0.78)",
-        },
+      show: true,
+      lineStyle: {
+        width: 2,
+        color: "rgba(208, 199, 199, 0.78)",
       },
+    },
     axisTick: {
       show: false,
     },
@@ -96,8 +97,10 @@ const option = reactive({
       show: true,
       textStyle: {
         color: "#FFF", //X轴文字颜色
+        fontSize: 10
       },
-      rotate: 60,
+      interval: 0,
+      overflow:'breakAll'
     },
   },
   yAxis: [
@@ -173,7 +176,7 @@ const option = reactive({
     {
       name: "Capacity",
       type: "bar",
-      barWidth: 4,
+      barWidth: 10,
       itemStyle: {
         color: {
           type: "linear",
@@ -196,15 +199,12 @@ const option = reactive({
         // borderType: "solid",
         // borderColor: "rgba(220, 214, 214, 1)",
       },
-      data: [
-        91, 92, 88, 91, 87, 93, 91, 89, 92, 87, 83, 71, 93, 75, 31, 48, 62, 74,
-        86, 71, 13, 96, 72, 86, 74, 54, 65, 95, 84,
-      ],
+      data: [],
     },
     {
       name: "Used",
       type: "bar",
-      barWidth: 3,
+      barWidth: 10,
       itemStyle: {
         color: {
           type: "linear",
@@ -227,10 +227,7 @@ const option = reactive({
         // borderType: "solid",
         // borderColor: "rgba(220, 214, 214, 1)",
       },
-      data: [
-        91, 92, 88, 91, 87, 93, 91, 89, 92, 87, 83, 71, 93, 75, 31, 48, 62, 74,
-        86, 71, 13, 96, 72, 86, 74, 54, 65, 95, 84,
-      ],
+      data: [],
     },
     {
       name: "OHBRatio",
@@ -247,12 +244,10 @@ const option = reactive({
         // borderColor: "#fac858",
       },
       lineStyle: {
+        width: 3,
         color: "rgba(169, 170, 76, 1)",
       },
-      data: [
-        54, 65, 95, 84, 93, 86, 71, 13, 96, 72, 86, 74, 54, 65, 48, 62, 74, 84,
-        86, 71, 13, 96, 72, 86, 74, 54, 65, 95, 84,
-      ],
+      data: [],
     },
   ],
 });
@@ -385,7 +380,7 @@ const option2 = reactive({
       },
 
       data: [
-        6200, 7320, 7010, 7340, 8090, 6500, 7800, 6520, 9870, 2310, 6540, 5130, 5350, 9630,7520,
+        6200, 7320, 7010, 7340, 8090, 6500, 7800, 6520, 9870, 2310, 6540, 5130, 5350, 9630, 7520,
       ],
     },
     {
@@ -418,7 +413,7 @@ const option2 = reactive({
 
       stack: "搜索引擎",
       data: [
-        4320, 5010, 2340, 2900, 2300, 2200, 1721, 1692, 1432, 2521, 687, 1653, 3715, 1145,2963,
+        4320, 5010, 2340, 2900, 2300, 2200, 1721, 1692, 1432, 2521, 687, 1653, 3715, 1145, 2963,
       ],
     },
   ],
@@ -590,30 +585,36 @@ const option3 = reactive({
   ],
 });
 
-setInterval(() => {
-  option.series.forEach((item, index) => {
-    let randomDataArr = [];
-    if (index == 2) {
-      for (let i = 0; i < 29; i++) {
-        randomDataArr.push({
-          value: Math.floor(Math.random() * 100),
-          name: i,
-        });
-      }
-      item.data = randomDataArr;
-    } else {
-      for (let i = 0; i < 29; i++) {
-        randomDataArr.push({
-          value: Math.floor(Math.random() * 50) + 50,
-          name: i,
-        });
-      }
-      item.data = randomDataArr;
-    }
-  });
-}, 6000);
 
-onMounted(() => {});
+getData()
+function getData() {
+  OhbStorageRatio().then(res => {
+    const xAxis = []
+    const used = []
+    const ohbRatio = []
+    const capacity = []
+
+    res.data.forEach(e => {
+      xAxis.push(e.ohbId)
+      used.push(e.used || '0')
+      ohbRatio.push((e.ohbRatio * 100) || '0')
+      capacity.push(e.capacity || '0')
+    })
+
+    option.xAxis.data = xAxis
+    option.series[0].data = capacity
+    option.series[1].data = used
+    option.series[2].data = ohbRatio
+    console.log(option)
+  })
+}
+
+
+setInterval(() => {
+  getData()
+}, 60 * 1000 * 10);
+
+onMounted(() => { });
 </script>
 
 <style lang="less" scoped>
@@ -634,6 +635,7 @@ onMounted(() => {});
     width: 100%;
     height: 25%;
     z-index: 2;
+
     .zuyoutp {
       // border: 1px solid red;
       word-break: break-all;
@@ -644,6 +646,7 @@ onMounted(() => {});
       z-index: 2;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .topp {
       word-break: break-all;
       position: absolute;
@@ -661,6 +664,7 @@ onMounted(() => {});
     width: 100%;
     height: 25%;
     z-index: 2;
+
     .zuyoutp {
       // border: 1px solid red;
       word-break: break-all;
@@ -671,6 +675,7 @@ onMounted(() => {});
       z-index: 2;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .inthep {
       word-break: break-all;
       position: absolute;
@@ -680,6 +685,7 @@ onMounted(() => {});
       color: #f99004;
     }
   }
+
   .underdiv {
     word-break: break-all;
     position: absolute;
@@ -687,6 +693,7 @@ onMounted(() => {});
     height: 25%;
     bottom: 3.5%;
     z-index: 2;
+
     .zuyoutp {
       // border: 1px solid red;
       word-break: break-all;
@@ -697,6 +704,7 @@ onMounted(() => {});
       z-index: 2;
       background: url("/assets/3d/img/26.png") center / 100% 100% no-repeat;
     }
+
     .underp {
       word-break: break-all;
       position: absolute;
@@ -706,31 +714,34 @@ onMounted(() => {});
       color: #5bae2a;
     }
   }
-  .youtu{
+
+  .youtu {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 43%;
     right: 2%;
-    top:-26%;
+    top: -26%;
     background: url("/assets/3d/img/7.png") center / 100% 100% no-repeat;
   }
-  .inttu{
+
+  .inttu {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 43%;
     right: 2%;
-    top:-26%;
+    top: -26%;
     background: url("/assets/3d/img/9.png") center / 100% 100% no-repeat;
   }
-  .undertu{
+
+  .undertu {
     word-break: break-all;
     position: absolute;
     width: 1%;
     height: 43%;
     right: 2%;
-    top:-26%;
+    top: -26%;
     background: url("/assets/3d/img/8.png") center / 100% 100% no-repeat;
   }
 

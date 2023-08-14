@@ -53,6 +53,7 @@ import Chart from "@/components/Chart.vue";
 import { STATE } from '@/ktJS/STATE.js'
 import { API } from '@/ktJS/API.js'
 import { get15Day } from '@/utils/get15Day'
+import { McsDeliveryInfo } from '@/axios/api'
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
@@ -69,7 +70,7 @@ function handleAlertSkyCar(id) {
     setTimeout(() => {
       skyCar.setAlert(false)
     }, 60000)
-    
+
     API.search('天车', id)
     const element = skyCar.popup.element
     const event = new MouseEvent('dblclick', {
@@ -169,7 +170,7 @@ const option2 = reactive({
   },
   xAxis: {
     type: "category",
-    data: get15Day(),
+    data: [],
     axisLine: {
       show: true,
       lineStyle: {
@@ -238,9 +239,7 @@ const option2 = reactive({
       lineStyle: {
         color: "#5470c6",
       },
-      data: [
-        134, 160, 153, 121, 156, 166, 178, 135, 145, 102, 170, 143, 153, 168, 142,
-      ],
+      data: [],
     },
     {
       name: "MFGTime",
@@ -257,7 +256,7 @@ const option2 = reactive({
       lineStyle: {
         color: "#91cc75",
       },
-      data: [150, 120, 132, 55, 40, 68, 75, 62, 174, 61, 52, 75, 96, 41, 34],
+      data: [],
     },
     {
       name: "CycleTime",
@@ -274,10 +273,7 @@ const option2 = reactive({
       lineStyle: {
         color: "#f3454b",
       },
-      data: [
-        122, 146, 128, 146, 106, 160, 140, 123, 153, 162, 142, 152, 167, 145,
-        163,
-      ],
+      data: [],
     },
   ],
 });
@@ -309,42 +305,41 @@ const option3 = reactive({
     top: "45%",
     left: "3%",
     right: "4%",
-    bottom: "5%",
+    bottom: "4%",
     containLabel: true,
   },
-  xAxis: [
-    {
-      type: "category",
-      axisLine: {
-        show: true,
-        lineStyle: {
-          width: 2,
-          color: "rgba(208, 199, 199, 0.78)",
-        },
+  xAxis:
+  {
+    type: "category",
+    axisLine: {
+      show: true,
+      lineStyle: {
+        width: 2,
+        color: "rgba(208, 199, 199, 0.78)",
       },
-      axisLabel: {
-        rotate: 60,
-        //坐标轴刻度标签的相关设置
-        textStyle: {
-          color: "#FFFFFF",
-          fontSize: 12,
-        },
-      },
-      splitLine: {
-        show: false,
-        lineStyle: {
-          color: "#233653",
-        },
-      },
-      axisTick: {
-        show: false,
-      },
-      data: get15Day()
     },
-  ],
+    axisLabel: {
+      rotate: 60,
+      //坐标轴刻度标签的相关设置
+      textStyle: {
+        color: "#FFFFFF",
+        fontSize: 12,
+      },
+    },
+    splitLine: {
+      show: false,
+      lineStyle: {
+        color: "#233653",
+      },
+    },
+    axisTick: {
+      show: false,
+    },
+    data: []
+  },
+  
   yAxis: [
     {
-      max: 12000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -379,11 +374,10 @@ const option3 = reactive({
       },
     },
   ],
+
   series: [
     {
-
       itemStyle: {
-
         color: {
           type: "linear",
           x: 0, //右
@@ -411,9 +405,7 @@ const option3 = reactive({
       label: {
         show: false,
       },
-      data: [
-        5620, 4732, 6701, 3734, 8090, 6130, 4120, 3652, 4987, 8231, 4654, 5513, 10135, 6963, 4752,
-      ],
+      data: [],
     },
     {
       itemStyle: {
@@ -443,12 +435,48 @@ const option3 = reactive({
         show: false,
       },
       stack: "搜索引擎",
-      data: [
-        3132, 5101, 2134, 6290, 1230, 1220, 1721, 5692, 2432, 4521, 2687, 1653, 2715, 2145, 2963,
-      ],
+      data: [],
     },
   ],
 });
+
+
+getData()
+function getData() {
+  McsDeliveryInfo().then(res => {
+    const xAxis = []
+    const DeliveryTime = []
+    const MFGTime = []
+    const CycleTime = []
+    const CycleCount = []
+    const MFGCount = []
+
+    res.data.forEach(e => {
+      const dateStrArr = e.mfgdate.split('-')
+      xAxis.push(dateStrArr[1] + '-' + dateStrArr[2])
+      DeliveryTime.push(e.deliverytime || '0')
+      MFGTime.push(e.mfgtime || '0')
+      CycleTime.push(e.cycletime || '0')
+      CycleCount.push(e.cyclecnt || '0')
+      MFGCount.push(e.mfgcnt || '0')
+    })
+
+    option2.xAxis.data = xAxis
+    option2.series[0].data = DeliveryTime
+    option2.series[1].data = MFGTime
+    option2.series[2].data = CycleTime
+
+    option3.xAxis.data = xAxis
+    option3.series[0].data = CycleCount
+    option3.series[1].data = MFGCount
+
+  })
+}
+
+setInterval(() => {
+  getData()
+}, 60 * 1000 * 10);
+
 </script>
 
 <style lang='less' scoped>

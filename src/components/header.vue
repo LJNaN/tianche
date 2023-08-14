@@ -36,6 +36,16 @@ import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
 import store from '../store'
 
+function handleFillScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
 let xs = ref(false);
 let yc = ref(true);
 
@@ -172,6 +182,7 @@ p {
   // border: 1px solid red;
   position: absolute;
   width: 20%;
+  cursor: pointer;
   height: 89%;
   top: 3%;
   right: -20%;

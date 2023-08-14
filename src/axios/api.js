@@ -12,3 +12,13 @@ export function OhtFindCmdId(id) {
 }
 
 
+// 二维 OHB Storage Ratio
+export function OhbStorageRatio() {
+  return request(`/api/MCS/OhbStorageRatio`)
+}
+
+
+// 二维 Delivery Time/Count
+export function McsDeliveryInfo() {
+  return request(`/api/MCS/McsDeliveryInfo`)
+}
