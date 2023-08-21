@@ -6,14 +6,14 @@ import Right from './right.vue'
 import Bottom from './bottom.vue'
 import store from '../../store'
 import Yc from './yc.vue'
-
+// import Compass from '@/components/compass.vue';
 </script>
 
 <template>
   <div class="home">
     <!-- <img class="logo" src="/assets/3d/img/logo.png" alt="logo"> -->
     <Header></Header>
-    <!-- <Header></Header> -->
+    <!-- <Compass></Compass> -->
     <Right v-if="store.state.isShowButton"></Right>
     <Bottom v-if="store.state.isShowButton"></Bottom>
     <!-- <Yc></Yc> -->

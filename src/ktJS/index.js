@@ -104,21 +104,21 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             })
 
             // 主场景处理
-            STATE.sceneList.guidao.traverse(e => {
-              if (e.isMesh) {
-                if (e.name === 'di') {
-                  // 地板马赛克处理
-                  const map = e.material.map.clone()
-                  e.material = new Bol3D.MeshLambertMaterial()
-                  e.material.transparent = true
-                  e.material.opacity = 0.85
-                  e.material.map = map
-                  e.material.map.needsUpdate = true
-                } else if (e.name.includes('-')) {
-                  e.renderOrder = 1
-                }
-              }
-            })
+            // STATE.sceneList.guidao.traverse(e => {
+            //   if (e.isMesh) {
+            //     if (e.name === 'di') {
+            //       // 地板马赛克处理
+            //       const map = e.material.map.clone()
+            //       e.material = new Bol3D.MeshLambertMaterial()
+            //       e.material.transparent = true
+            //       e.material.opacity = 0.85
+            //       e.material.map = map
+            //       e.material.map.needsUpdate = true
+            //     } else if (e.name.includes('-')) {
+            //       e.renderOrder = 1
+            //     }
+            //   }
+            // })
 
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0
@@ -129,7 +129,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.getData()
             API.getAnimationList()
             API.handleLine()
-            API.initReflexFloor()
+            // API.initReflexFloor()
             // API.initSkyCar()
             API.initDeviceByMap()
             API.initShelves()

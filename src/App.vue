@@ -1,12 +1,10 @@
 <script setup>
 import Scene from '@/views/Scene.vue'
-// import Compass from './components/compass.vue';
 </script>
 
 <template>
   <Scene />
   <router-view></router-view>
-  <!-- <Compass></Compass> -->
 
   <div v-if="false" style="z-index: 22;">
     <div style="
