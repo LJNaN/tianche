@@ -123,18 +123,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0
             STATE.sceneList.WBS002.children[1].position.z = 0
-
-            // kuang 处理
-            STATE.sceneList.kuang.scale.set(10, 10, 10)
-            STATE.sceneList.kuang.traverse(e => {
-              e.visible = true
-              if(e.isMesh) {
-                e.material.color.r = 0.4 * e.material.color.r
-                e.material.color.g = 0.4 * e.material.color.g
-                e.material.color.b = 0.4 * e.material.color.b
-                CACHE.container.addBloom(e)
-              }
-            })
+          
 
             TU.init(container, Bol3D)
             API.getData()
