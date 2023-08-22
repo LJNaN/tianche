@@ -73,6 +73,14 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           */
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
+            // 左右键行为
+            // CACHE.container.orbitControls.mouseButtons = {
+            //   LEFT: Bol3D.MOUSE.PAN,
+            //   MIDDLE: Bol3D.MOUSE.DOLLY,
+            //   RIGHT: Bol3D.MOUSE.ROTATE
+            // }
+
+            
             // 开灯开阴影
             CACHE.container.directionLights[0].visible = true
             // CACHE.container.directionLights[0].castShadow = true
@@ -123,7 +131,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0
             STATE.sceneList.WBS002.children[1].position.z = 0
-          
+
 
             TU.init(container, Bol3D)
             API.getData()

@@ -87,6 +87,7 @@ function drive(wsMessage) {
           skyCar.history.old = Object.assign({}, skyCar.history.new)
           skyCar.history.new = {
             time: new Date() * 1,
+            machineTime: (new Date(e.lastTime) * 1) || (new Date() * 1),
             position: e.position || null,
             location: e.location || null,
             loading: e.ohtStatus_Loading || null,
@@ -104,7 +105,7 @@ function drive(wsMessage) {
 
           if (skyCar.history.old?.position != skyCar.history.new?.position) {
             // 位置动画
-            const time = skyCar.history.new.time - skyCar.history.old.time
+            const time = skyCar.history.new.machineTime - skyCar.history.old.machineTime
             skyCar.coordinate = skyCar.history.new.position
             skyCar.setPosition(time, onComplete)
           } else {
