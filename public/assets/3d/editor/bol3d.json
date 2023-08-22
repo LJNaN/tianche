@@ -8903,7 +8903,7 @@
             {
               "uuid": "root_guidao_0_002",
               "name": "002",
-              "visible": false,
+              "visible": true,
               "selected": false,
               "index": 1,
               "spread": false,

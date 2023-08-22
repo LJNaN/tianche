@@ -100,7 +100,7 @@ const option = reactive({
         fontSize: 10
       },
       interval: 0,
-      overflow:'breakAll'
+      overflow: 'breakAll'
     },
   },
   yAxis: [
@@ -359,7 +359,7 @@ const option2 = reactive({
           colorStops: [
             {
               offset: 0.4,
-              color: "#296DC4", // 0% 处的颜色
+              color: "#388eff", // 0% 处的颜色
             },
             {
               offset: 1,
@@ -374,47 +374,18 @@ const option2 = reactive({
       stack: "搜索引擎",
       barWidth: 40,
       //barWidth: 30,
-      barWidth: "20%",
+      barWidth: "30%",
       label: {
         show: false,
       },
 
-      data: [
-        62000, 73200, 70100, 73400, 80900, 65000, 78000, 65200, 98700, 23100, 65400, 51300, 53500, 96300, 75200,
-      ],
-    },
-    {
-      itemStyle: {
-        color: {
-          type: "linear",
-          x: 0, //右
-          y: 0, //下
-          x2: 0, //左
-          y2: 1, //上
-          colorStops: [
-            {
-              offset: 0.4,
-              color: "#29AD9B", // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: "#1D4365", // 100% 处的颜色
-            },
-          ],
-        },
-        borderRadius: [20, 20, 20, 20],
-      },
-      // name: 'xxxxxx',
-      type: "bar",
-      barWidth: "20%",
-      label: {
-        show: false,
-      },
-
-      stack: "搜索引擎",
-      data: [
-        43200, 50100, 23400, 29000, 23000, 22000, 17210, 16920, 14320, 25210, 68700, 16530, 37150, 11450, 29630,
-      ],
+      data: (() => {
+        let arr = []
+        for (let i = 0; i < 15; i++) {
+          arr.push(Math.floor(Math.random() * 10000) + 60000)
+        }
+        return arr
+      })(),
     },
   ],
 });
@@ -526,7 +497,7 @@ const option3 = reactive({
           colorStops: [
             {
               offset: 0.4,
-              color: "#296DC4", // 0% 处的颜色
+              color: "#388eff", // 0% 处的颜色
             },
             {
               offset: 1,
@@ -543,44 +514,14 @@ const option3 = reactive({
       label: {
         show: false,
       },
-      barWidth: "20%",
-      data: [
-        1620, 1650, 1673, 1634, 1677, 1630, 1620, 1652, 1587, 1631, 1654, 1613, 1635, 1663,
-        1652,
-      ],
-    },
-    {
-      itemStyle: {
-        color: {
-          type: "linear",
-          x: 0, //右
-          y: 0, //下
-          x2: 0, //左
-          y2: 1, //上
-          colorStops: [
-            {
-              offset: 0.4,
-              color: "#29AD9B", // 0% 处的颜色
-            },
-            {
-              offset: 1,
-              color: "#1D4365", // 100% 处的颜色
-            },
-          ],
-        },
-        borderRadius: [20, 20, 20, 20],
-      },
-      // name: '123123',
-      type: "bar",
-      label: {
-        show: false,
-      },
-      stack: "搜索引擎",
-      barWidth: "20%",
-      data: [
-        1632, 1601, 1634, 1655, 1632, 1644, 1621, 1652, 1632, 1621, 1617, 1643, 1615, 1645,
-        1663,
-      ],
+      barWidth: "30%",
+      data: (() => {
+        let arr = []
+        for (let i = 0; i < 15; i++) {
+          arr.push(Math.floor(Math.random() * 1000) + 2000)
+        }
+        return arr
+      })(),
     },
   ],
 });
@@ -612,6 +553,22 @@ function getData() {
 
 setInterval(() => {
   getData()
+
+  option2.series[0].data = (() => {
+    let arr = []
+    for (let i = 0; i < 15; i++) {
+      arr.push(Math.floor(Math.random() * 10000) + 60000)
+    }
+    return arr
+  })()
+
+  option3.series[0].data = (() => {
+    let arr = []
+    for (let i = 0; i < 15; i++) {
+      arr.push(Math.floor(Math.random() * 1000) + 2000)
+    }
+    return arr
+  })()
 }, 60 * 1000 * 10);
 
 onMounted(() => { });
