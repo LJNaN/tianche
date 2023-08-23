@@ -20,21 +20,15 @@
       <div class="right-fill" @click="handleFillScreen">
         <img :src="qb" />
       </div>
-
-      <div class="xsyc">
-        <div class="xs" @click="isshow()" v-if="xs"></div>
-        <div class="yc" @click="notshow()" v-if="yc"></div>
-      </div>
     </div>
 
-    
+
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
-import store from '../store'
 
 function handleFillScreen() {
   if (!document.fullscreenElement) {
@@ -44,21 +38,6 @@ function handleFillScreen() {
       document.exitFullscreen();
     }
   }
-}
-
-let xs = ref(false);
-let yc = ref(true);
-
-function isshow() {
-  store.state.isShowButton = true;
-  xs.value = false;
-  yc.value = true;
-}
-
-function notshow() {
-  store.state.isShowButton = false;
-  xs.value = true;
-  yc.value = false;
 }
 
 function convertWeekToChinese(day) {
@@ -73,9 +52,6 @@ const week = currentDate.getDay();
 const weekStr = convertWeekToChinese(week);
 const num = `${weekStr}`;
 const currentDateStr = `${year}/${month}/${day}`;
-
-let url = ref("./assets/3d/img/4.png");
-let urlyun = ref("./assets/3d/img/29.png");
 let qb = ref("./assets/3d/img/5.png");
 </script>
 
@@ -96,7 +72,7 @@ p {
 
   .right {
     position: absolute;
-    right: 3%;
+    right: 1%;
     top: 16%;
     width: 21.5%;
     height: 65%;
@@ -150,27 +126,26 @@ p {
 }
 
 .xy {
-  // border: 1px solid red;
   position: absolute;
   width: 6%;
   height: 35%;
   bottom: -30%;
   right: 1%;
 }
+
 .xs {
   pointer-events: all;
-  background: url("/assets/3d/img/xs.png") center / 100% 100% no-repeat;
-  // border: 1px solid red;
+  background: url("/assets/3d/img/53.png") center / 100% 100% no-repeat;
   position: absolute;
   width: 50%;
   height: 100%;
   top: 0%;
   left: 5%;
 }
+
 .yc {
   pointer-events: all;
-  background: url("/assets/3d/img/yc.png") center / 100% 100% no-repeat;
-  // border: 1px solid red;
+  background: url("/assets/3d/img/54.png") center / 100% 100% no-repeat;
   cursor: pointer;
   position: absolute;
   width: 50%;
@@ -178,8 +153,8 @@ p {
   top: 5%;
   left: 5%;
 }
+
 .xsyc {
-  // border: 1px solid red;
   position: absolute;
   width: 20%;
   cursor: pointer;
@@ -187,10 +162,10 @@ p {
   top: 3%;
   right: -20%;
 }
+
 .istrue {
   position: absolute;
-  background: url("/assets/3d/img/49.png") center / 100% 100% no-repeat;
-  // border: 1px solid red;
+  background: url("/assets/3d/img/53.png") center / 100% 100% no-repeat;
   width: 50%;
   height: 100%;
   bottom: 0%;
@@ -199,11 +174,9 @@ p {
 
 .isfalse {
   position: absolute;
-  background: url("/assets/3d/img/50.png") center / 75% 75% no-repeat;
-  // border: 1px solid red;
+  background: url("/assets/3d/img/54.png") center / 75% 75% no-repeat;
   width: 50%;
   height: 100%;
-  // bottom: 0%;
   right: 0%;
 }
 </style>

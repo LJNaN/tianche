@@ -4,9 +4,9 @@ import * as echarts from "echarts";
 import Header from '@/components/header.vue'
 import Right from './right.vue'
 import Bottom from './bottom.vue'
-import store from '../../store'
-import Yc from './yc.vue'
+import ExtensionBtn from './extensionBtn.vue'
 import Compass from '@/components/compass.vue';
+import { VUEDATA } from '@/VUEDATA'
 </script>
 
 <template>
@@ -14,9 +14,9 @@ import Compass from '@/components/compass.vue';
     <!-- <img class="logo" src="/assets/3d/img/logo.png" alt="logo"> -->
     <Header></Header>
     <Compass></Compass>
-    <Right v-if="store.state.isShowButton"></Right>
-    <Bottom v-if="store.state.isShowButton"></Bottom>
-    <!-- <Yc></Yc> -->
+    <Right v-show="VUEDATA.chartShow.value"></Right>
+    <Bottom v-show="VUEDATA.chartShow.value"></Bottom>
+    <ExtensionBtn></ExtensionBtn>
   </div>
 </template>
 

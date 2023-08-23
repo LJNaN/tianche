@@ -1,7 +1,7 @@
 <template>
   <div class="bottom">
 
-    <div class="leftdiv">
+    <div v-if="VUEDATA.selectedItem.value.includes(1)" class="leftdiv">
       <div class="zuyoutp"></div>
       <div class="lefttu"></div>
       <p class="zdivp">Alarm Info</p>
@@ -29,14 +29,14 @@
       </div>
     </div>
 
-    <div class="zdiv">
+    <div v-if="VUEDATA.selectedItem.value.includes(2)" class="zdiv">
       <div class="zuyoutp"></div>
       <div class="ztup"></div>
       <p class="zdivp">Delivery Time</p>
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
 
-    <div class="rdiv">
+    <div v-if="VUEDATA.selectedItem.value.includes(3)" class="rdiv">
       <div class="zuyoutp"></div>
       <div class="rtu"></div>
       <p class="rdivp">Delivery Count</p>
@@ -54,6 +54,7 @@ import { STATE } from '@/ktJS/STATE.js'
 import { API } from '@/ktJS/API.js'
 import { get15Day } from '@/utils/get15Day'
 import { McsDeliveryInfo } from '@/axios/api'
+import { VUEDATA } from '@/VUEDATA'
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
@@ -337,7 +338,7 @@ const option3 = reactive({
     },
     data: []
   },
-  
+
   yAxis: [
     {
       nameTextStyle: {
@@ -484,18 +485,17 @@ setInterval(() => {
   background: url("/assets/3d/img/3.png") center / 100% 100% no-repeat;
   word-break: break-all;
   position: absolute;
+  display: flex;
   left: 0.5%;
   bottom: 1.5%;
-  width: 74%;
   height: 30%;
   z-index: 2;
 
   .leftdiv {
+    margin-left: 0.5vw;
+    position: relative;
     word-break: break-all;
-    position: absolute;
-    left: 0.5%;
-    bottom: 1.5%;
-    width: 32%;
+    width: 24vw;
     height: 100%;
     z-index: 2;
 
@@ -554,16 +554,14 @@ setInterval(() => {
   }
 
   .zdiv {
+    margin-left: 0.5vw;
+    position: relative;
     word-break: break-all;
-    position: absolute;
-    left: 34%;
-    bottom: 1.5%;
-    width: 32%;
-    height: 100%;
+    width: 24vw;
+    height: 90%;
     z-index: 2;
 
     .zuyoutp {
-      // border: 1px solid red;
       word-break: break-all;
       position: absolute;
       width: 100%;
@@ -584,12 +582,11 @@ setInterval(() => {
   }
 
   .rdiv {
+    margin-left: 0.5vw;
+    position: relative;
     word-break: break-all;
-    position: absolute;
-    right: 0.5%;
-    bottom: 1.5%;
-    width: 32%;
-    height: 100%;
+    width: 24vw;
+    height: 90%;
     z-index: 2;
 
     .zuyoutp {
@@ -614,7 +611,7 @@ setInterval(() => {
 
   .table-content {
     pointer-events: all;
-
+    height: 85%;
 
     div {
       display: flex;

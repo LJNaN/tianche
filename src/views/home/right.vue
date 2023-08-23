@@ -1,14 +1,13 @@
 <template>
   <div class="right">
-    <div class="topdiv">
+    <div v-if="VUEDATA.selectedItem.value.includes(5)" class="topdiv">
       <div class="zuyoutp"></div>
-      <div class="youtu">
-
-      </div>
+      <div class="youtu"></div>
       <p class="topp">OHB Storage Ratio</p>
       <Chart :option="option" width="100%" height="100%"></Chart>
     </div>
-    <div class="inthediv">
+
+    <div v-if="VUEDATA.selectedItem.value.includes(6)" class="inthediv">
       <div class="zuyoutp"></div>
       <div class="inttu">
 
@@ -16,11 +15,10 @@
       <p class="inthep">MCBF</p>
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
-    <div class="underdiv">
-      <div class="zuyoutp"></div>
-      <div class="undertu">
 
-      </div>
+    <div v-if="VUEDATA.selectedItem.value.includes(4)" class="underdiv">
+      <div class="zuyoutp"></div>
+      <div class="undertu"></div>
       <p class="underp">MTBF</p>
       <Chart :option="option3" width="100%" height="100%"></Chart>
     </div>
@@ -33,6 +31,7 @@ import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { get15Day } from '@/utils/get15Day'
 import { OhbStorageRatio } from '@/axios/api'
+import { VUEDATA } from '@/VUEDATA'
 
 const option = reactive({
   backgroundColor: "",
@@ -40,7 +39,7 @@ const option = reactive({
     top: "30%",
     left: "5%",
     right: "5%",
-    bottom: "0%",
+    bottom: "0",
     containLabel: true,
   },
   tooltip: {
@@ -275,9 +274,9 @@ const option2 = reactive({
     },
   },
   grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
+    left: "2%",
+    right: "6%",
+    bottom: "13%",
     containLabel: true,
   },
   xAxis: [
@@ -413,9 +412,9 @@ const option3 = reactive({
     },
   },
   grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "-3%",
+    left: "5%",
+    right: "5%",
+    bottom: "13%",
     containLabel: true,
   },
   xAxis: [
@@ -580,21 +579,19 @@ onMounted(() => { });
   word-break: break-all;
   position: absolute;
   right: 0.5%;
-  bottom: 1.5%;
+  top: 12%;
   width: 24.8%;
-  height: 87.5%;
   z-index: 2;
 
   .topdiv {
     word-break: break-all;
-    position: absolute;
-    top: 10%;
+    position: relative;
+    margin-top: 14%;
     width: 100%;
-    height: 25%;
+    height: 20vh;
     z-index: 2;
 
     .zuyoutp {
-      // border: 1px solid red;
       word-break: break-all;
       position: absolute;
       width: 97%;
@@ -612,14 +609,24 @@ onMounted(() => { });
       z-index: 2;
       color: #f64c3f;
     }
+
+    .youtu {
+      word-break: break-all;
+      position: absolute;
+      width: 1%;
+      height: 43%;
+      right: 2%;
+      top: -26%;
+      background: url("/assets/3d/img/7.png") center / 100% 100% no-repeat;
+    }
   }
 
   .inthediv {
     word-break: break-all;
-    position: absolute;
-    top: 42%;
+    position: relative;
+    margin-top: 10%;
     width: 100%;
-    height: 25%;
+    height: 25vh;
     z-index: 2;
 
     .zuyoutp {
@@ -637,22 +644,30 @@ onMounted(() => { });
       word-break: break-all;
       position: absolute;
       right: 10%;
-      top: -12%;
+      top: -5%;
       z-index: 2;
       color: #f99004;
+    }
+
+    .inttu {
+      word-break: break-all;
+      position: absolute;
+      width: 1%;
+      height: 43%;
+      right: 2%;
+      top: -18%;
+      background: url("/assets/3d/img/9.png") center / 100% 100% no-repeat;
     }
   }
 
   .underdiv {
     word-break: break-all;
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 25%;
-    bottom: 3.5%;
+    height: 30vh;
     z-index: 2;
 
     .zuyoutp {
-      // border: 1px solid red;
       word-break: break-all;
       position: absolute;
       width: 97%;
@@ -666,41 +681,27 @@ onMounted(() => { });
       word-break: break-all;
       position: absolute;
       right: 10%;
-      top: -12%;
+      top: -6%;
       z-index: 2;
       color: #5bae2a;
     }
+
+    .undertu {
+      word-break: break-all;
+      position: absolute;
+      width: 1%;
+      height: 30%;
+      right: 2%;
+      top: -17%;
+      background: url("/assets/3d/img/8.png") center / 100% 100% no-repeat;
+    }
   }
 
-  .youtu {
-    word-break: break-all;
-    position: absolute;
-    width: 1%;
-    height: 43%;
-    right: 2%;
-    top: -26%;
-    background: url("/assets/3d/img/7.png") center / 100% 100% no-repeat;
-  }
 
-  .inttu {
-    word-break: break-all;
-    position: absolute;
-    width: 1%;
-    height: 43%;
-    right: 2%;
-    top: -26%;
-    background: url("/assets/3d/img/9.png") center / 100% 100% no-repeat;
-  }
 
-  .undertu {
-    word-break: break-all;
-    position: absolute;
-    width: 1%;
-    height: 43%;
-    right: 2%;
-    top: -26%;
-    background: url("/assets/3d/img/8.png") center / 100% 100% no-repeat;
-  }
+
+
+
 
   .echart1 {
     width: 100%;
