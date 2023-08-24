@@ -30,7 +30,7 @@ import { onMounted, ref, reactive } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { get15Day } from '@/utils/get15Day'
-import { OhbStorageRatio } from '@/axios/api'
+import { OhbStorageRatio, GetMTBFInfo, GetMCBFInfo } from '@/axios/api'
 import { VUEDATA } from '@/VUEDATA'
 
 const option = reactive({
@@ -306,7 +306,7 @@ const option2 = reactive({
       axisTick: {
         show: false,
       },
-      data: get15Day()
+      data: []
     },
   ],
   yAxis: [
@@ -378,13 +378,7 @@ const option2 = reactive({
         show: false,
       },
 
-      data: (() => {
-        let arr = []
-        for (let i = 0; i < 15; i++) {
-          arr.push(Math.floor(Math.random() * 10000) + 60000)
-        }
-        return arr
-      })(),
+      data: [],
     },
   ],
 });
@@ -444,7 +438,7 @@ const option3 = reactive({
       axisTick: {
         show: false,
       },
-      data: get15Day()
+      data: []
     },
   ],
   yAxis: [
@@ -514,13 +508,7 @@ const option3 = reactive({
         show: false,
       },
       barWidth: "30%",
-      data: (() => {
-        let arr = []
-        for (let i = 0; i < 15; i++) {
-          arr.push(Math.floor(Math.random() * 1000) + 2000)
-        }
-        return arr
-      })(),
+      data: [],
     },
   ],
 });
@@ -545,7 +533,34 @@ function getData() {
     option.series[0].data = capacity
     option.series[1].data = used
     option.series[2].data = ohbRatio
-    console.log(option)
+  })
+
+  GetMTBFInfo().then(res => {
+    const splitArr = res.data.slice(0, 15)
+    const xAxis = []
+    const value = []
+    splitArr.forEach(e => {
+      const time = e.mfgdate.substring(4, 6) + '-' + e.mfgdate.substring(6, 8)
+      xAxis.push(time)
+      value.push(e.mtbf)
+    })
+
+    option2.xAxis[0].data = xAxis
+    option2.series[0].data = value
+  })
+
+  GetMCBFInfo().then(res => {
+    const splitArr = res.data.slice(0, 15)
+    const xAxis = []
+    const value = []
+    splitArr.forEach(e => {
+      const time = e.mfgdate.substring(4, 6) + '-' + e.mfgdate.substring(6, 8)
+      xAxis.push(time)
+      value.push(e.mcbf)
+    })
+
+    option3.xAxis[0].data = xAxis
+    option3.series[0].data = value
   })
 }
 
@@ -553,21 +568,21 @@ function getData() {
 setInterval(() => {
   getData()
 
-  option2.series[0].data = (() => {
-    let arr = []
-    for (let i = 0; i < 15; i++) {
-      arr.push(Math.floor(Math.random() * 10000) + 60000)
-    }
-    return arr
-  })()
+  // option2.series[0].data = (() => {
+  //   let arr = []
+  //   for (let i = 0; i < 15; i++) {
+  //     arr.push(Math.floor(Math.random() * 10000) + 60000)
+  //   }
+  //   return arr
+  // })()
 
-  option3.series[0].data = (() => {
-    let arr = []
-    for (let i = 0; i < 15; i++) {
-      arr.push(Math.floor(Math.random() * 1000) + 2000)
-    }
-    return arr
-  })()
+  // option3.series[0].data = (() => {
+  //   let arr = []
+  //   for (let i = 0; i < 15; i++) {
+  //     arr.push(Math.floor(Math.random() * 1000) + 2000)
+  //   }
+  //   return arr
+  // })()
 }, 60 * 1000 * 10);
 
 onMounted(() => { });

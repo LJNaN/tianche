@@ -134,11 +134,10 @@ function zoomUp() {
 <template>
   <div class="main" :style="{
     right:
-      !VUEDATA.chartShow.value ? '1%' :
-        (VUEDATA.selectedItem.value.includes(4)
-          || VUEDATA.selectedItem.value.includes(5)
-          || VUEDATA.selectedItem.value.includes(6)
-        ) ? '26%' : '1%'
+      (VUEDATA.selectedItem.value.includes(4)
+        || VUEDATA.selectedItem.value.includes(5)
+        || VUEDATA.selectedItem.value.includes(6)
+      ) ? '26%' : '1%'
   }">
     <div class="compass">
       <div class="arrow" :style="{ transform: `rotateZ(${deg}deg)` }" @click="clickArrow()"></div>

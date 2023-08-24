@@ -4,8 +4,11 @@ import { STATE } from './STATE.js'
 import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import * as TWEEN from '@tweenjs/tween.js'
+import { progress } from '@/utils/progress.js'
 
 let container
+let loadedNum = 0
+let totalNum = 18
 
 // 通过配置文件加载
 export const loadSceneByJSON = ({ domElement, callback }) => {
@@ -20,10 +23,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       container = new Bol3D.Container({
         publicPath: STATE.PUBLIC_PATH,
         container: domElement,
-        loadingBar: {
-          type: '10',
-          show: true
-        },
+        // loadingBar: {
+        //   type: '10',
+        //   show: true
+        // },
         lights: {
           directionLights: [{
             color: 0xaccdff,
@@ -51,6 +54,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
         publicPath: './assets/3d',
         modelUrls: jsonParser.modelUrls,
         onProgress: (model, evt) => {
+          loadedNum++
+          progress.update((loadedNum / totalNum) * 100)
+
           if (!evt.sceneList) {
             evt.sceneList = {}
             STATE.sceneList = evt.sceneList
@@ -80,7 +86,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             //   RIGHT: Bol3D.MOUSE.ROTATE
             // }
 
-            
+
             // 开灯开阴影
             CACHE.container.directionLights[0].visible = true
             // CACHE.container.directionLights[0].castShadow = true
@@ -112,21 +118,15 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             })
 
             // 主场景处理
-            // STATE.sceneList.guidao.traverse(e => {
-            //   if (e.isMesh) {
-            //     if (e.name === 'di') {
-            //       // 地板马赛克处理
-            //       const map = e.material.map.clone()
-            //       e.material = new Bol3D.MeshLambertMaterial()
-            //       e.material.transparent = true
-            //       e.material.opacity = 0.85
-            //       e.material.map = map
-            //       e.material.map.needsUpdate = true
-            //     } else if (e.name.includes('-')) {
-            //       e.renderOrder = 1
-            //     }
-            //   }
-            // })
+            STATE.sceneList.guidao.traverse(e => {
+              if (e.isMesh && e.name === 'di') {
+                // 地板马赛克处理
+                // const map = e.material.map.clone()
+                e.material = new Bol3D.MeshLambertMaterial({ color: '#717880' })
+                // e.material.map = map
+                // e.material.map.needsUpdate = true
+              }
+            })
 
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0
@@ -198,10 +198,10 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             }
 
 
-
+            progress.remove()
             // API.testBox()
             // API.loadGUI()
-            CACHE.container.loadingBar.style.visibility = 'hidden'
+            // CACHE.container.loadingBar.style.visibility = 'hidden'
           })
 
 

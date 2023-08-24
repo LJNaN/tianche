@@ -2,10 +2,15 @@
 import Scene from '@/views/Scene.vue'
 import { ref } from 'vue'
 import { VUEDATA } from '@/VUEDATA.js'
+import { progress } from '@/utils/progress.js'
+
+
+progress.init()
+
+
 
 // 二维全局变量
-
-VUEDATA.chartShow = ref(true) // 二维图标显隐
+VUEDATA.deviceShow = ref(true) // 机台显隐
 VUEDATA.selectedItem = ref([]) // 二维界面图表部分显隐
 
 

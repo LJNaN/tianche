@@ -14,8 +14,8 @@ import { VUEDATA } from '@/VUEDATA'
     <!-- <img class="logo" src="/assets/3d/img/logo.png" alt="logo"> -->
     <Header></Header>
     <Compass></Compass>
-    <Right v-show="VUEDATA.chartShow.value"></Right>
-    <Bottom v-show="VUEDATA.chartShow.value"></Bottom>
+    <Right></Right>
+    <Bottom></Bottom>
     <ExtensionBtn></ExtensionBtn>
   </div>
 </template>

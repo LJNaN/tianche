@@ -1,17 +1,13 @@
 
 <template>
-  <div class="chartShow" @click="isshow()"
-    :style="{ background: `url(/assets/3d/img/${VUEDATA.chartShow.value ? 54 : 53}.png) center / 100% 100% no-repeat` }">
-  </div>
+  <div class="chartShow" @click="clickDrawer()"
+    :style="{ background: `url(/assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat` }">
 
-  <div class="drawer" @click="clickDrawer()"
-    :style="{ background: `url(/assets/3d/img/${drawerActive ? 55 : 56}.png) center / 100% 100% no-repeat` }">
-
-    <div v-show="drawerActive" class="drawer-list">
-      <div class="drawer-list-item" v-for="item in drawerList" :key="item.id" @click.stop="handleDrawerItem(item.id)"
+    <div v-show="drawerActive" class="chartShow-list">
+      <div class="chartShow-list-item" v-for="item in drawerList" :key="item.id" @click.stop="handleDrawerItem(item.id)"
         :style="{ color: item.color, textShadow: '0 3px 4px #444' }">
 
-        <div class="drawer-list-item-circular"
+        <div class="chartShow-list-item-circular"
           :style="{ background: `url(/assets/3d/img/${VUEDATA.selectedItem.value.includes(item.id) ? 58 : 57}.png) center / 100% 100% no-repeat` }">
         </div>
 
@@ -19,11 +15,18 @@
       </div>
     </div>
   </div>
+
+  <div class="deviceShow" @click="handleDeviceShow()"
+    :style="{ background: `url(/assets/3d/img/${VUEDATA.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
+
+
+  </div>
 </template>
 
 <script setup>
 import { VUEDATA } from '@/VUEDATA'
 import { ref } from 'vue'
+import { API } from '@/ktJS/API'
 
 let drawerActive = ref(false)
 const drawerList = [
@@ -40,8 +43,9 @@ const drawerList = [
 VUEDATA.selectedItem.value = drawerList.map(e => e.id)
 
 
-function isshow() {
-  VUEDATA.chartShow.value = !VUEDATA.chartShow.value;
+function handleDeviceShow() {
+  VUEDATA.deviceShow.value = !VUEDATA.deviceShow.value;
+  API.deviceShow(VUEDATA.deviceShow.value)
 }
 
 function clickDrawer() {
@@ -84,7 +88,7 @@ function handleDrawerItem(id) {
   }
 
 
-  
+
 }
 </script>
 
@@ -96,16 +100,6 @@ function handleDrawerItem(id) {
   width: 26px;
   height: 26px;
   top: 10%;
-  left: 0.9%;
-}
-
-.drawer {
-  cursor: pointer;
-  pointer-events: all;
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  top: 14%;
   left: 0.9%;
 
   &-list {
@@ -136,5 +130,17 @@ function handleDrawerItem(id) {
       }
     }
   }
+}
+
+.deviceShow {
+  cursor: pointer;
+  pointer-events: all;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 14%;
+  left: 0.9%;
+
+
 }
 </style>

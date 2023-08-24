@@ -22,3 +22,16 @@ export function OhbStorageRatio() {
 export function McsDeliveryInfo() {
   return request(`/api/MCS/McsDeliveryInfo`)
 }
+
+
+// 二维 GetMTBFInfo
+export function GetMTBFInfo() {
+  return request(`/api/EA/GetMTBFInfo`)
+}
+
+
+// 二维 GetMCBFInfo
+export function GetMCBFInfo() {
+  return request(`/api/EA/GetMCBFInfo`)
+}
+

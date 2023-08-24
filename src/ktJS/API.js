@@ -15,26 +15,26 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
   // 模拟数据
   // =======================================
 
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
+  //   i++
+  // }, 333)
 
 
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData2.length) i = 0
-    drive(mockData2[i])
-    i++
-  }, 333)
 }
 
 
@@ -782,7 +782,7 @@ class SkyCar {
             text-align: center;
             margin-top: 10%;
           ">
-            天车
+            ${this.id}
           </p>
   
           <div style="
@@ -832,7 +832,17 @@ class SkyCar {
         } else if (key === 'destport') {
           data['终点'] = res.data[key] || '--'
         } else if (key === 'status') {
-          data['当前状态'] = res.data[key] || '--'
+          if (res.data[key] === '0') {
+            data['当前状态'] = '关闭'
+          } else if (res.data[key] === '1') {
+            data['当前状态'] = '开启'
+          } else {
+            data['当前状态'] = '--'
+          }
+        } else if (key === 'alarmList') {
+          data['ALARM 情况'] = `有 ${res.data[key].length} 条报警`
+        } else if (key === 'createby') {
+          data['USER ID'] = res.data[key] || '--'
         }
       }
       init(data)
@@ -956,7 +966,7 @@ class SkyCar {
     }
 
     const nameArr = ['tianche_9', 'tianche_2', 'tianche_7', 'tianche_8', 'tianche_20']
-  
+
     if (this.alert) {
       this.skyCarMesh.traverse(e => {
         if (e.isMesh && nameArr.includes(e.name)) {
@@ -971,7 +981,7 @@ class SkyCar {
     function render() {
       if (this_.alert) {
         console.log(12)
-        requestAnimationFrame(render)      
+        requestAnimationFrame(render)
         this_.skyCarMesh.traverse(e => {
           if (e.isMesh && nameArr.includes(e.name)) {
             const redColor = Math.abs(Math.sin(STATE.clock.getElapsedTime() * 3)) + 1
@@ -1870,7 +1880,7 @@ function initShelves() {
           kaxia.userData.shelf = shelf
           kaxia.userData.shelfIndex = e
           kaxia.userData.type = 'kaxia'
-          kaxia.scale.set(15, 15, 15)
+          kaxia.scale.set(30, 30, 30)
           kaxia.rotation.y = item.rotate * Math.PI / 180 - Math.PI / 2
           kaxia.visible = true
           kaxia.traverse(e2 => {
@@ -2049,6 +2059,17 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
   });
 }
 
+// 显隐机台
+function deviceShow(type) {
+  const instancedMeshArr = CACHE.container.scene.children.filter(e => e.isInstancedMesh)
+  for (let key in DATA.deviceMap) {
+    const itemArr = instancedMeshArr.filter(e => e.name.split('_')[0] === key)
+    itemArr.forEach(e => {
+      e.visible = type
+    })
+  }
+}
+
 
 export const API = {
   ...TU,
@@ -2065,5 +2086,6 @@ export const API = {
   instantiationGroupInfo,
   instantiationSingleInfo,
   clickInstance,
-  testBox
+  testBox,
+  deviceShow
 }
