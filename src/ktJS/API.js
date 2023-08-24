@@ -15,24 +15,24 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
 
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
-  //   i++
-  // }, 333)
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
+    drive(mockData2[i])
+    i++
+  }, 333)
 
 
 }
@@ -595,6 +595,30 @@ function handleLine() {
 }
 
 
+// 计算聚焦 Tween 动画的
+function computedCameraTweenPosition(currentP, targetP, gapDistance = 100) {
+
+  // 计算点1和点2之间的距离
+  let distance = Math.sqrt((targetP.x - currentP.x) ** 2 + (targetP.y - currentP.y) ** 2 + (targetP.z - currentP.z) ** 2);
+
+
+  // 计算从点1到点2的向量，并将其标准化为单位向量
+  let vector = { x: (targetP.x - currentP.x) / distance, y: (targetP.y - currentP.y) / distance, z: (targetP.z - currentP.z) / distance };
+
+  // 将向量乘以200，以便点1向点2移动
+  let scaled_vector = { x: vector.x * gapDistance, z: vector.z * gapDistance };
+
+  // 将点1的x和z坐标设置为新位置的值，使其靠近点2
+  const computedPosition = new Bol3D.Vector3()
+  computedPosition.x = targetP.x - scaled_vector.x;
+  computedPosition.z = targetP.z - scaled_vector.z;
+  computedPosition.y = 100;
+
+  // 最终坐标[x3,y3,z3]
+  return computedPosition
+}
+
+
 // 天车类
 class SkyCar {
   coordinate = 0           // 当前坐标
@@ -709,6 +733,10 @@ class SkyCar {
       STATE.currentPopup = null
     }
 
+    CACHE.tempCameraState = {
+      position: CACHE.container.orbitCamera.position.clone(),
+      target: CACHE.container.orbitControls.target.clone()
+    }
 
     const init = (data) => {
 
@@ -806,6 +834,21 @@ class SkyCar {
           this.clickPopup.parent.remove(this.clickPopup)
           this.clickPopup = null
           STATE.currentPopup = null
+
+          new Bol3D.TWEEN.Tween(CACHE.container.orbitCamera.position)
+            .to(CACHE.tempCameraState.position, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+
+          new Bol3D.TWEEN.Tween(CACHE.container.orbitControls.target)
+            .to(CACHE.tempCameraState.target, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+            .onComplete(() => {
+              CACHE.container.orbitControls.enabled = true
+              CACHE.container.orbitControls.saveState()
+              CACHE.container.orbitControls.reset()
+            })
         })
       })
 
@@ -840,7 +883,7 @@ class SkyCar {
             data['当前状态'] = '--'
           }
         } else if (key === 'alarmList') {
-          data['ALARM 情况'] = `有 ${res.data[key].length} 条报警`
+          data['ALARM 情况'] = `有 ${res?.data[key]?.length || '--'} 条报警`
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
         }
@@ -980,7 +1023,7 @@ class SkyCar {
 
     function render() {
       if (this_.alert) {
-        console.log(12)
+
         requestAnimationFrame(render)
         this_.skyCarMesh.traverse(e => {
           if (e.isMesh && nameArr.includes(e.name)) {
@@ -1257,28 +1300,26 @@ function search(type, id) {
     // 相机移动动画
     let isCameraMoveOver = false // 动画移动完成
     const camera = CACHE.container.orbitCamera
-    const contorl = CACHE.container.orbitControls
+    const control = CACHE.container.orbitControls
     let objWorldPosition = new Bol3D.Vector3()
     obj.getWorldPosition(objWorldPosition)
 
 
+    const finalPosition = computedCameraTweenPosition(camera.position, objWorldPosition)
+
     new TWEEN.Tween(camera.position)
-      .to({
-        x: Math.abs(camera.position.x - objWorldPosition.x) > 100 ? camera.position.x - (camera.position.x - objWorldPosition.x) / 1.2 : camera.position.x,
-        y: Math.abs(camera.position.y - objWorldPosition.y) > 100 ? 100 : camera.position.y,
-        z: Math.abs(camera.position.z - objWorldPosition.z) > 100 ? camera.position.z - (camera.position.z - objWorldPosition.z) / 1.2 : camera.position.z
-      }, 800)
-      .easing(TWEEN.Easing.Quadratic.InOut)
+      .to(finalPosition, 800)
       .start()
+      .easing(TWEEN.Easing.Quadratic.InOut)
       .onUpdate(() => {
         camera.updateProjectionMatrix()
       })
 
-    new TWEEN.Tween(contorl.target)
+    new TWEEN.Tween(control.target)
       .to(objWorldPosition, 800)
+      .start()
       .dynamic(true)
       .easing(TWEEN.Easing.Quadratic.InOut)
-      .start()
       .onComplete(() => {
         isCameraMoveOver = true
       })
@@ -1289,20 +1330,54 @@ function search(type, id) {
 
     if (type === '天车') {
       const eventFunc = () => {
+        const camera = CACHE.container.orbitCamera
+        const control = CACHE.container.orbitControls
+        control.enabled = false
+        STATE.sceneList.skyCarList.forEach(e => {
+          e.popup.visible = true
+          if (e.clickPopup) {
+            if (e.clickPopup.parent) {
+              e.clickPopup.parent.remove(e.clickPopup)
+            }
+            e.clickPopup.element.remove()
+            e.clickPopup = null
+          }
+        })
         STATE.searchAnimateDesdory = true
-        CACHE.container.orbitControls.removeEventListener('start', eventFunc)
+        control.removeEventListener('start', eventFunc)
+
+
+        new Bol3D.TWEEN.Tween(camera.position)
+          .to(CACHE.tempCameraState.position, 800)
+          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+          .start()
+
+        new Bol3D.TWEEN.Tween(control.target)
+          .to(CACHE.tempCameraState.target, 800)
+          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+          .start()
+          .onComplete(() => {
+            control.enabled = true
+            control.saveState()
+            control.reset()
+          })
       }
 
       CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         if (isCameraMoveOver) {
-          contorl.target.set(objWorldPosition.x, objWorldPosition.y, objWorldPosition.z)
+          control.target.set(objWorldPosition.x, objWorldPosition.y, objWorldPosition.z)
         }
       }
 
     } else if (type === '轨道') {
       const color = obj.material.color.clone()
       obj.userData.color = color
+
+      CACHE.tempCameraState = {
+        position: camera.position.clone(),
+        target: control.target.clone()
+      }
 
 
       if (STATE.currentPopup) {
@@ -1399,6 +1474,21 @@ function search(type, id) {
           popup.element.remove()
           popup.parent.remove(popup)
           STATE.currentPopup = null
+
+          new Bol3D.TWEEN.Tween(camera.position)
+            .to(CACHE.tempCameraState.position, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+
+          new Bol3D.TWEEN.Tween(control.target)
+            .to(CACHE.tempCameraState.target, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+            .onComplete(() => {
+              control.enabled = true
+              control.saveState()
+              control.reset()
+            })
         })
       })
 
@@ -1432,6 +1522,11 @@ function search(type, id) {
         STATE.sceneList.skyCarList.forEach(e => {
           e.popup.visible = true
         })
+      }
+
+      CACHE.tempCameraState = {
+        position: camera.position.clone(),
+        target: control.target.clone()
       }
 
       let title = '卡匣'
@@ -1516,6 +1611,21 @@ function search(type, id) {
           popup.element.remove()
           popup.parent.remove(popup)
           STATE.currentPopup = null
+
+          new Bol3D.TWEEN.Tween(camera.position)
+            .to(CACHE.tempCameraState.position, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+
+          new Bol3D.TWEEN.Tween(control.target)
+            .to(CACHE.tempCameraState.target, 800)
+            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+            .start()
+            .onComplete(() => {
+              control.enabled = true
+              control.saveState()
+              control.reset()
+            })
         })
       })
 
@@ -1524,19 +1634,16 @@ function search(type, id) {
       popup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
       CACHE.container.scene.add(popup)
       STATE.currentPopup = popup
+      const finalPosition = computedCameraTweenPosition(camera.position, objWorldPosition)
 
       new TWEEN.Tween(camera.position)
-        .to({
-          x: Math.abs(camera.position.x - objWorldPosition.x) > 70 ? camera.position.x / 3 : camera.position.x,
-          y: Math.abs(camera.position.y - objWorldPosition.y) > 70 ? camera.position.y / 3 : camera.position.y,
-          z: Math.abs(camera.position.z - objWorldPosition.z) > 70 ? camera.position.z / 3 : camera.position.z
-        }, 800)
+        .to(finalPosition, 800)
         .start()
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(() => {
           camera.updateProjectionMatrix()
         })
-      new TWEEN.Tween(contorl.target)
+      new TWEEN.Tween(control.target)
         .to({
           x: objWorldPosition.x,
           y: objWorldPosition.y + 5,
@@ -1553,7 +1660,7 @@ function search(type, id) {
       CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         if (isCameraMoveOver) {
-          contorl.target.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+          control.target.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
         }
       }
 
@@ -1675,16 +1782,23 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-  console.log('obj: ', obj);
-  console.log('index: ', index);
-
-
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
+
+
+  const camera = CACHE.container.orbitCamera
+  const control = CACHE.container.orbitControls
+
+  CACHE.tempCameraState = {
+    position: camera.position.clone(),
+    target: control.target.clone()
+  }
 
   if (STATE.currentPopup) {
     STATE.currentPopup.element.remove()
-    STATE.currentPopup.parent.remove(STATE.currentPopup)
-    STATE.currentPopup = null
+    if (STATE.currentPopup.parent) {
+      STATE.currentPopup.parent.remove(STATE.currentPopup)
+      STATE.currentPopup = null
+    }
     STATE.sceneList.skyCarList.forEach(e2 => {
       e2.popup.visible = true
     })
@@ -1790,6 +1904,21 @@ function clickInstance(obj, index) {
       popup.element.remove()
       popup.parent.remove(popup)
       STATE.currentPopup = null
+
+      new Bol3D.TWEEN.Tween(camera.position)
+        .to(CACHE.tempCameraState.position, 800)
+        .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+        .start()
+
+      new Bol3D.TWEEN.Tween(control.target)
+        .to(CACHE.tempCameraState.target, 800)
+        .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+        .start()
+        .onComplete(() => {
+          control.enabled = true
+          control.saveState()
+          control.reset()
+        })
     })
   })
 
@@ -1800,14 +1929,11 @@ function clickInstance(obj, index) {
   STATE.currentPopup = popup
 
   let desdory = false
-  const camera = CACHE.container.orbitCamera
-  const contorl = CACHE.container.orbitControls
+
+
+  const finalPosition = computedCameraTweenPosition(camera.position, transformInfo.position)
   new TWEEN.Tween(camera.position)
-    .to({
-      x: Math.abs(camera.position.x - transformInfo.position.x) > 100 ? camera.position.x - (camera.position.x - transformInfo.position.x) / 1.2 : camera.position.x,
-      y: Math.abs(camera.position.y - transformInfo.position.y) > 100 ? 100 : camera.position.y,
-      z: Math.abs(camera.position.z - transformInfo.position.z) > 100 ? camera.position.z - (camera.position.z - transformInfo.position.z) / 1.2 : camera.position.z
-    }, 800)
+    .to(finalPosition, 800)
     .start()
     .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(() => {
@@ -1817,7 +1943,7 @@ function clickInstance(obj, index) {
       desdory = true
     })
 
-  new TWEEN.Tween(contorl.target)
+  new TWEEN.Tween(control.target)
     .to({
       x: transformInfo.position.x,
       y: transformInfo.position.y + 15,
