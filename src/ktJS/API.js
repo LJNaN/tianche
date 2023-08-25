@@ -15,24 +15,24 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
   // 模拟数据
   // =======================================
 
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData2.length) i = 0
-    drive(mockData2[i])
-    i++
-  }, 333)
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
+  //   i++
+  // }, 333)
 
 
 }

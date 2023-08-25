@@ -7,7 +7,7 @@ export function GetCarrierInfo() {
 
 
 // 天车弹窗信息
-export function OhtFindCmdId(id) {
+export function OhtFindCmdId(id = '') {
   return request(`/api/MOC/OhtFindCmdId/${id}`)
 }
 
