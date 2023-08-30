@@ -1128,3 +1128,4 @@ export const DATA = {
   shelvesMap,
   deviceMap
 }
+window.DATA = DATA

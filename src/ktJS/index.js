@@ -58,8 +58,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           progress.update((loadedNum / totalNum) * 100)
 
           if (!evt.sceneList) {
-            evt.sceneList = {}
-            STATE.sceneList = evt.sceneList
+            evt.sceneList = STATE.sceneList
             window.STATE = STATE
           }
           evt.sceneList[model.name] = model
@@ -135,6 +134,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
             TU.init(container, Bol3D)
             API.getData()
+            API.initKaxia()
             API.getAnimationList()
             API.handleLine()
             // API.initReflexFloor()

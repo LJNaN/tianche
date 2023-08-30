@@ -78,7 +78,7 @@ function searchCandidate(text) {
     temp = arr
 
   } else if (selected.value === '卡匣') {
-    candidateList.value = STATE.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
+    candidateList.value = STATE.sceneList.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
 
   } else if (selected.value === '设备') {
     const arr = []
@@ -189,9 +189,8 @@ select option {
 .my-ul {
   width: 23.5%;
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color: #0003;
   list-style: none;
-  background: transparent;
   color: #ffff;
   text-align: center;
   border-top: none;

@@ -6,6 +6,12 @@ export function GetCarrierInfo() {
 }
 
 
+// 卡匣弹窗信息
+export function CarrierFindCmdId(id) {
+  return request(`/api/MCS/CarrierFindCmdId/${id}`)
+}
+
+
 // 天车弹窗信息
 export function OhtFindCmdId(id = '') {
   return request(`/api/MOC/OhtFindCmdId/${id}`)

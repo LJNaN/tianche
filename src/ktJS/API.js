@@ -6,7 +6,7 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData from './js/mock'
 import mockData2 from './js/mock2'
-import { GetCarrierInfo, OhtFindCmdId } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId,CarrierFindCmdId } from '@/axios/api.js'
 
 // 获取数据
 function getData() {
@@ -145,7 +145,7 @@ function drive(wsMessage) {
               })
 
               // 查找最近的货架最近的卡匣，有就搬，没有就生成
-              const kaxia = STATE.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
+              const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
 
               const direction = shelf.direction
               const cb = () => {
@@ -293,7 +293,7 @@ function drive(wsMessage) {
                   })
 
                   skyCar.catch.parent.remove(skyCar.catch)
-                  STATE.kaxiaList.add(skyCar.catch)
+                  STATE.sceneList.kaxiaList.add(skyCar.catch)
                   skyCar.catch = null
                 }
               }
@@ -753,8 +753,8 @@ class SkyCar {
         { name: '起点', value: '--' },
         { name: '终点', value: '--' },
         { name: '优先级', value: '--' },
-        { name: '当前状态', value: DATA.skyCarStateColorMap.find(e => e.id === this.state)?.name || '--' },
-        { name: 'ALARM 情况', value: this.history.new.ohtStatus_ErrSet === '1' ? '异常' : '正常' },
+        { name: '当前状态', value: '--' },
+        { name: 'ALARM 情况', value: [] },
       ]
 
       for (let key in data) {
@@ -765,7 +765,7 @@ class SkyCar {
       }
 
       let textValue = ``
-      for (let i = 0; i < items.length; i++) {
+      for (let i = 0; i < items.length - 1; i++) {
         textValue += `
       
         <div style="
@@ -781,6 +781,32 @@ class SkyCar {
           <p style="font-size: 2vh;">${items[i].value}</p>
         </div>`
       }
+
+      let alertItem = `<div style="display:flex; flex-direction: column;overflow-y:scroll;width:50%;height:100%;pointer-events:all;">`
+      for (let i = 0; i < items[items.length - 1].value.length; i++) {
+        alertItem += `<p style="text-align:right;">
+          ${(items[items.length - 1].value[i].alarmCode || '')
+          + ' '
+          + (items[items.length - 1].value[i].alarmDescription || '--')}
+        </p>`
+      }
+      alertItem += `</div>`
+
+      let alertValue = `
+        <div style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 5%;
+          height: 8vh;
+          width: 100%;
+          background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+          ">
+          <p style="font-size: 2vh;">${items[items.length - 1].name}</p>
+          ${alertItem}
+        </div>
+      `
+
 
       const clickPopup = new Bol3D.POI.Popup3DSprite({
         value: `
@@ -821,6 +847,7 @@ class SkyCar {
             height: 100%;
           ">
           ${textValue}
+          ${alertValue}
           </div>
         </div>
       </div>
@@ -883,7 +910,7 @@ class SkyCar {
             data['当前状态'] = '--'
           }
         } else if (key === 'alarmList') {
-          data['ALARM 情况'] = `有 ${res?.data[key]?.length || '--'} 条报警`
+          data['ALARM 情况'] = res?.data[key] || []
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
         }
@@ -963,7 +990,7 @@ class SkyCar {
           x: currentPosition.x,
           y: currentPosition.y,
           z: currentPosition.z
-        }, cb ? time / 4 : time)
+        }, time)
         this.animation.start()
         this.animation.onComplete(() => {
           cb && cb()
@@ -1317,9 +1344,9 @@ function search(type, id) {
 
     new TWEEN.Tween(control.target)
       .to(objWorldPosition, 800)
-      .start()
       .dynamic(true)
       .easing(TWEEN.Easing.Quadratic.InOut)
+      .start()
       .onComplete(() => {
         isCameraMoveOver = true
       })
@@ -1533,7 +1560,7 @@ function search(type, id) {
       let height = '45vh'
       let className = 'popup3d_kaxia'
       let items = [
-        { name: '卡匣 ID', value: '--' },
+        { name: '卡匣 ID', value: obj.userData.id || '--' },
         { name: 'Command ID', value: '--' },
         { name: 'User ID', value: '--' },
         { name: '起点', value: '--' },
@@ -1665,27 +1692,26 @@ function search(type, id) {
       }
 
       // 接口
-      GetCarrierInfo().then(res => {
+      CarrierFindCmdId(obj.userData.id).then(res => {
         if (res?.data?.length) {
-          const data = res.data.find(e => e.carrierId == id)
-          if (data) {
-            popup.parent.remove(popup)
-            STATE.currentPopup.element.remove()
+          const data = res.data[0]
+          popup.parent.remove(popup)
+          STATE.currentPopup.element.remove()
 
-            let items = [
-              { name: '卡匣 ID', value: data.carrierId || '--' },
-              { name: 'Command ID', value: '--' },
-              { name: 'User ID', value: '--' },
-              { name: '起点', value: '--' },
-              { name: '终点', value: '--' },
-              { name: '优先级', value: '--' },
-              { name: '当前位置', value: data.locationId || '--' },
-              { name: '当前状态', value: data.carrierType || '--' }
-            ]
+          let items = [
+            { name: '卡匣 ID', value: obj.userData.id || '--' },
+            { name: 'Command ID', value: data.commandId || '--' },
+            { name: 'User ID', value: '--' },
+            { name: '起点', value: data.sourcePort || '--' },
+            { name: '终点', value: data.destPort || '--' },
+            { name: '优先级', value: data.priority || '--' },
+            { name: '当前位置', value: obj.userData.shelf || '--' },
+            { name: '当前状态', value: '--' }
+          ]
 
-            let textValue = ``
-            for (let i = 0; i < items.length; i++) {
-              textValue += `
+          let textValue = ``
+          for (let i = 0; i < items.length; i++) {
+            textValue += `
                   <div style="
                     display: flex;
                     justify-content: space-between;
@@ -1698,10 +1724,10 @@ function search(type, id) {
                     <p style="font-size: 2vh;">${items[i].name}</p>
                     <p style="font-size: 2vh;">${items[i].value}</p>
                   </div>`
-            }
+          }
 
-            const newPopup = new Bol3D.POI.Popup3DSprite({
-              value: `
+          const newPopup = new Bol3D.POI.Popup3DSprite({
+            value: `
                   <div style="
                     pointer-events: none;
                     margin:0;
@@ -1743,23 +1769,23 @@ function search(type, id) {
                   </div>
                 </div>
                 `,
-              position: [0, 0, 0],
-              className: `popup3dclass ${className}`,
-              closeVisible: true,
-              closeColor: "#FFFFFF",
-              closeCallback: (() => {
-                popup.element.remove()
-                STATE.currentPopup = null
-                popup.parent && popup.parent.remove(popup)
-              })
+            position: [0, 0, 0],
+            className: `popup3dclass ${className}`,
+            closeVisible: true,
+            closeColor: "#FFFFFF",
+            closeCallback: (() => {
+              popup.element.remove()
+              STATE.currentPopup = null
+              popup.parent && popup.parent.remove(popup)
             })
+          })
 
-            newPopup.scale.set(0.08, 0.08, 0.08)
-            newPopup.name = 'popup_' + obj.name
-            newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
-            CACHE.container.scene.add(newPopup)
-            STATE.currentPopup = newPopup
-          }
+          newPopup.scale.set(0.08, 0.08, 0.08)
+          newPopup.name = 'popup_' + obj.name
+          newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+          CACHE.container.scene.add(newPopup)
+          STATE.currentPopup = newPopup
+
         }
       })
     }
@@ -1997,67 +2023,26 @@ function initShelves() {
         model = STATE.sceneList.huojia2.clone()
       }
 
-      // 加一些模拟货物
-      item.fields.forEach((e, index) => {
-        const kaxia = Math.random() > 0.95 ? Math.random() > 0.5 ? STATE.sceneList.FOSB.clone() : STATE.sceneList.FOUP.clone() : null
-        if (kaxia) {
-          kaxia.userData.id = ['HX3Fdemo00000067', 'HX3Fdemo00000023', 'HX3Fdemo00000020', '845 8334 6466 5D66 F', 'HX3Fdemo00000202'][Math.floor(Math.random() * 5)]
-          kaxia.userData.area = area
-          kaxia.userData.shelf = shelf
-          kaxia.userData.shelfIndex = e
-          kaxia.userData.type = 'kaxia'
-          kaxia.scale.set(30, 30, 30)
-          kaxia.rotation.y = item.rotate * Math.PI / 180 - Math.PI / 2
-          kaxia.visible = true
-          kaxia.traverse(e2 => {
-            if (e2.isMesh) {
-              e2.userData.id = kaxia.userData.id
-              e2.userData.area = kaxia.userData.area
-              e2.userData.shelf = kaxia.userData.shelf
-              e2.userData.shelfIndex = kaxia.userData.shelfIndex
-              e2.userData.type = kaxia.userData.type
-              CACHE.container.clickObjects.push(e2)
-            }
-          })
-          if (item.fields.length === 4) {
-            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
-              kaxia.position.set(item.position[0] - 7.3 + index * 4.9, 27, item.position[2])
-            } else {
-              kaxia.position.set(item.position[0], 27, item.position[2] - 7.3 + index * 4.9)
-            }
-          } else if (item.fields.length === 2) {
-            if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(area)) {
-              kaxia.position.set(item.position[0] - 2.5 + index * 4.9, 27, item.position[2])
-            } else {
-              kaxia.position.set(item.position[0], 27, item.position[2] - 2.5 + index * 4.9)
-            }
-          }
-          STATE.kaxiaList.add(kaxia)
-
-
-          if (!STATE.shelvesList[shelf]) {
-            STATE.shelvesList[shelf] = {}
-          }
-
-          STATE.shelvesList[shelf][e] = {
-            mesh: kaxia,
-            position: [kaxia.position.x, kaxia.position.y, kaxia.position.z],
-            rotateY: kaxia.rotation.y
-          }
-        }
-      })
       model.visible = true
       model.position.set(...item.position)
       model.rotation.y = item.rotate * Math.PI / 180
       model.userData.fields = item.fields
       model.userData.name = shelf
       model.userData.area = area
+
+      // if (!STATE.shelvesList[shelf]) {
+      //   STATE.shelvesList[shelf] = {}
+      // }
+
+      // STATE.shelvesList[shelf][e] = {
+      //   mesh: null,
+      //   position: [kaxia.position.x, kaxia.position.y, kaxia.position.z],
+      //   rotateY: kaxia.rotation.y
+      // }
+
       STATE.sceneList.shelves[shelf] = model
       CACHE.container.scene.add(model)
 
-
-      CACHE.container.scene.add(STATE.kaxiaList)
-      STATE.sceneList.kaxiaList = STATE.kaxiaList
     }
   }
 }
@@ -2196,6 +2181,80 @@ function deviceShow(type) {
   }
 }
 
+// 通过 GetCarrierInfo 的locationId 找 position
+function getPositionByKaxiaLocation(location) {
+  for (let key in DATA.shelvesMap) {
+    for (let key2 in DATA.shelvesMap[key]) {
+      if (DATA.shelvesMap[key][key2].fields.includes(Number(location))) {
+
+        const item = DATA.shelvesMap[key][key2]
+        const position = new Bol3D.Vector3()
+        const index = item.fields.findIndex(e => e === Number(location))
+        if (item.fields.length === 4) {
+          if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(key)) {
+            position.set(item.position[0] - 7.3 + index * 4.9, 28, item.position[2])
+          } else {
+            position.set(item.position[0], 27, item.position[2] - 7.3 + index * 4.9)
+          }
+
+        } else if (item.fields.length === 2) {
+          if (['WBW01G01', 'WBW01G02', 'WBW01G03'].includes(key)) {
+            position.set(item.position[0] - 2.5 + index * 4.9, 28, item.position[2])
+          } else {
+            position.set(item.position[0], 27, item.position[2] - 2.5 + index * 4.9)
+          }
+        }
+
+        const res = {
+          position,
+          area: key,
+          shelf: key2,
+          shelfIndex: index
+        }
+        return res
+      }
+    }
+  }
+}
+
+// 加载卡匣
+function initKaxia() {
+  GetCarrierInfo().then(res => {
+
+    res.data.forEach(e => {
+      if (e.carrierType !== '0' && e.carrierType !== '1') {
+        return
+      }
+
+      const position = getPositionByKaxiaLocation(e.locationId)
+      const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
+      kaxia.userData.id = e.carrierId
+      kaxia.userData.area = position.area
+      kaxia.userData.shelf = position.shelf
+      kaxia.userData.shelfIndex = position.shelfIndex
+      kaxia.userData.type = 'kaxia'
+      kaxia.scale.set(30, 30, 30)
+      kaxia.position.set(position.position.x, position.position.y, position.position.z)
+      kaxia.rotation.y = DATA.shelvesMap[position.area][position.shelf].rotate * Math.PI / 180 - Math.PI / 2
+      kaxia.visible = true
+      kaxia.traverse(e2 => {
+        if (e2.isMesh) {
+          e2.userData.id = kaxia.userData.id
+          e2.userData.area = kaxia.userData.area
+          e2.userData.shelf = kaxia.userData.shelf
+          e2.userData.shelfIndex = kaxia.userData.shelfIndex
+          e2.userData.type = kaxia.userData.type
+          CACHE.container.clickObjects.push(e2)
+        }
+      })
+
+      STATE.sceneList.kaxiaList.add(kaxia)
+      CACHE.container.scene.add(STATE.sceneList.kaxiaList)
+
+    })
+  })
+}
+
 
 export const API = {
   ...TU,
@@ -2213,5 +2272,6 @@ export const API = {
   instantiationSingleInfo,
   clickInstance,
   testBox,
-  deviceShow
+  deviceShow,
+  initKaxia
 }
