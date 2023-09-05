@@ -6,7 +6,8 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData from './js/mock'
 import mockData2 from './js/mock2'
-import { GetCarrierInfo, OhtFindCmdId,CarrierFindCmdId } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId } from '@/axios/api.js'
+import { VUEDATA } from '@/VUEDATA.js'
 
 // 获取数据
 function getData() {
@@ -53,13 +54,7 @@ function drive(wsMessage) {
           }
 
         } else {
-          if (e.ohtStatus_UnLoading === '1' || e.ohtStatus_Loading === '1') { // 放货/取货中
-            if (skyCar.state != 2) {
-              skyCar.state = 2
-              skyCar.setPopupColor()
-            }
-
-          } else if (e.ohtStatus_Quhuoxing === '1') { // 取货行
+          if (e.ohtStatus_Quhuoxing === '1') { // 取货行
             if (skyCar.state != 0) {
               skyCar.state = 0
               skyCar.setPopupColor()
@@ -84,7 +79,7 @@ function drive(wsMessage) {
 
         // 处理变化
         {
-          skyCar.history.old = Object.assign({}, skyCar.history.new)
+          skyCar.history.old = JSON.parse(JSON.stringify(skyCar.history.new))
           skyCar.history.new = {
             time: new Date() * 1,
             machineTime: (new Date(e.lastTime) * 1) || (new Date() * 1),
@@ -103,11 +98,15 @@ function drive(wsMessage) {
             ohtID: e.ohtID || null
           }
 
+
+          console.log(skyCar.history.new.quhuoda, skyCar.history.old.quhuoda);
+
           if (skyCar.history.old?.position != skyCar.history.new?.position) {
             // 位置动画
             const time = skyCar.history.new.machineTime - skyCar.history.old.machineTime
             skyCar.coordinate = skyCar.history.new.position
-            skyCar.setPosition(time, onComplete)
+            skyCar.setPosition(time)
+            onComplete()
           } else {
             onComplete()
           }
@@ -117,6 +116,10 @@ function drive(wsMessage) {
             if ( // 装载开始
               (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1')
             ) {
+              if (skyCar.state != 2) {
+                skyCar.state = 2
+                skyCar.setPopupColor()
+              }
 
               // 找离天车最近的货架
               let distance = 0
@@ -151,8 +154,8 @@ function drive(wsMessage) {
               const cb = () => {
                 if (kaxia) {
                   kaxia.parent.remove(kaxia)
-                  kaxia.position.set(0, -0.25, 0)
-                  kaxia.scale.set(1.5, 1.5, 1.5)
+                  kaxia.position.set(0, -0.35, 0)
+                  kaxia.scale.set(3, 3, 3)
                   kaxia.rotation.y = -Math.PI / 2
                   const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
                   if (group) {
@@ -168,8 +171,8 @@ function drive(wsMessage) {
                   newKaxia.userData.shelf = ''
                   newKaxia.userData.shelfIndex = -1
                   newKaxia.userData.type = 'kaxia'
-                  newKaxia.scale.set(1.5, 1.5, 1.5)
-                  newKaxia.position.set(0, -0.25, 0)
+                  newKaxia.scale.set(3, 3, 3)
+                  newKaxia.position.set(0, -0.35, 0)
                   newKaxia.rotation.y = -Math.PI / 2
                   newKaxia.visible = true
                   newKaxia.traverse(e2 => {
@@ -188,6 +191,10 @@ function drive(wsMessage) {
                     skyCar.catch = newKaxia
                   }
                 }
+
+                setTimeout(() => {
+                  skyCar.up()
+                }, 1000)
               }
               skyCar.catchDirection = direction
               skyCar.down(cb)
@@ -200,12 +207,15 @@ function drive(wsMessage) {
               (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
               (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
             ) {
-              skyCar.up()
+              // skyCar.up()
 
             } else if ( // 卸货开始
               (skyCar.history.old.fanghuoda == '0' && skyCar.history.new.fanghuoda == '1')
             ) {
-
+              if (skyCar.state != 2) {
+                skyCar.state = 2
+                skyCar.setPopupColor()
+              }
               // 找离天车最近的货架
               let distance = 0
               let shelf = null
@@ -296,6 +306,9 @@ function drive(wsMessage) {
                   STATE.sceneList.kaxiaList.add(skyCar.catch)
                   skyCar.catch = null
                 }
+                setTimeout(() => {
+                  skyCar.up()
+                }, 1000)
               }
               skyCar.down(cb)
 
@@ -306,7 +319,7 @@ function drive(wsMessage) {
               (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
               (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')
             ) {
-              skyCar.up()
+              // skyCar.up()
             }
           }
         }
@@ -339,20 +352,21 @@ function drive(wsMessage) {
   }
 
   // // 处理报警
-  // if (wsMessage?.AlarmInfo?.length) {
-  //   if (STATE.alarmList) {
-  //     wsMessage.AlarmInfo.forEach(e => {
-  //       if (e.alarmType === 'set') {
-  //         STATE.alarmList.value.unshift(e)
-  //       } else if (e.alarmType === 'cancel') {
-  //         const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
-  //         if (itemIndex >= 0) {
-  //           STATE.alarmList.value.splice(itemIndex, 1)
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
+  if (wsMessage?.AlarmInfo?.length) {
+    if (STATE.alarmList) {
+      const list = wsMessage.AlarmInfo.slice(0, 20)
+      list.forEach(e => {
+        if (e.alarmType === 'set') {
+          STATE.alarmList.value.unshift(e)
+        } else if (e.alarmType === 'cancel') {
+          const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
+          if (itemIndex >= 0) {
+            STATE.alarmList.value.splice(itemIndex, 1)
+          }
+        }
+      })
+    }
+  }
 
   // 处理轨道
   if (wsMessage?.BayStateInfo?.length) {
@@ -747,7 +761,7 @@ class SkyCar {
 
       const name = 'click_popup_天车_' + this.id
       const items = [
-        { name: '卡匣ID', value: this.history.new.therfidFoup || '--' },
+        { name: '卡匣ID', value: '--' },
         { name: 'COMMAND ID', value: '--' },
         { name: 'USER ID', value: '--' },
         { name: '起点', value: '--' },
@@ -913,6 +927,8 @@ class SkyCar {
           data['ALARM 情况'] = res?.data[key] || []
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
+        } else if (key === 'carrierid') {
+          data['卡匣ID'] = res.data[key] || '--'
         }
       }
       init(data)
@@ -1280,17 +1296,47 @@ function initReflexFloor() {
 
 // 加载临时的设备
 function initDeviceByMap() {
-  for (let key in DATA.deviceMap) {
-    let arr = []
-    DATA.deviceMap[key].forEach((e, index) => {
-      const model = STATE.sceneList[key].clone()
+  if (VUEDATA.isEditorMode.value) {
+    CACHE.container.clickObjects = []
+    DATA.deviceMap.value.forEach(e => {
+      const model = STATE.sceneList[e.type].clone()
       model.visible = true
       model.position.set(...e.position)
       model.rotation.y = e.rotate * Math.PI / 180
-      arr.push(model)
+      model.userData.type = '机台'
+      model.userData.deviceType = e.type
+      model.userData.id = e.id
+      CACHE.container.scene.add(model)
+
+      model.traverse(e2 => {
+        if (e2.isMesh) {
+          e2.userData.type = '机台'
+          e2.userData.deviceType = e.type
+          e2.userData.id = e.id
+          CACHE.container.clickObjects.push(e2)
+        }
+      })
+    })
+
+  } else {
+    const deviceType = Array.from(new Set(DATA.deviceMap.value.map(e => e.type)))
+    const deviceObject = {}
+    deviceType.forEach(e => {
+      deviceObject[e] = []
+    })
+
+    DATA.deviceMap.value.forEach(e => {
+      const model = STATE.sceneList[e.type].clone()
+      model.visible = true
+      model.position.set(...e.position)
+      model.rotation.y = e.rotate * Math.PI / 180
+      deviceObject[e.type].push(model)
       CACHE.container.scene.add(model)
     })
-    instantiationGroupInfo(arr, key, CACHE.container)
+
+    deviceType.forEach(e => {
+      instantiationGroupInfo(deviceObject[e], e, CACHE.container)
+    })
   }
 }
 
@@ -2173,7 +2219,8 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
 // 显隐机台
 function deviceShow(type) {
   const instancedMeshArr = CACHE.container.scene.children.filter(e => e.isInstancedMesh)
-  for (let key in DATA.deviceMap) {
+  const keys = Array.from(new Set(DATA.deviceMap.value.map(e => e.type)))
+  for (let key in keys) {
     const itemArr = instancedMeshArr.filter(e => e.name.split('_')[0] === key)
     itemArr.forEach(e => {
       e.visible = type
@@ -2227,6 +2274,11 @@ function initKaxia() {
       }
 
       const position = getPositionByKaxiaLocation(e.locationId)
+
+      if (!position) {
+        return
+      }
+
       const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
       kaxia.userData.id = e.carrierId
       kaxia.userData.area = position.area
@@ -2254,6 +2306,9 @@ function initKaxia() {
     })
   })
 }
+
+
+
 
 
 export const API = {

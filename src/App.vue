@@ -4,14 +4,17 @@ import { ref } from 'vue'
 import { VUEDATA } from '@/VUEDATA.js'
 import { progress } from '@/utils/progress.js'
 
+if(location.hash.includes('editor')) {
+  VUEDATA.isEditorMode.value = true
+}
+
 
 progress.init()
 
 
-
 // 二维全局变量
-VUEDATA.deviceShow = ref(true) // 机台显隐
-VUEDATA.selectedItem = ref([]) // 二维界面图表部分显隐
+VUEDATA.deviceShow.value = true // 机台显隐
+VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
 
 
 

@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 
 // 坐标和轨道映射
 const pointCoordinateMap = [
@@ -168,94 +169,7 @@ const pointCoordinateMap = [
   { name: '59_60', direction: '-x', startPoint: 59, endPoint: 60, startCoordinate: 11241, endCoordinate: 12700, status: 1 }
 ]
 // 暂时摆一下设备位置
-const deviceMap = {
-  'WWATA02V': [
-    { rotate: 0, position: [82, 0, -215] },
-    { rotate: 0, position: [82, 0, -133] },
-    { rotate: 0, position: [82, 0, -92] },
-    { rotate: 0, position: [82, 0, -51] },
-    { rotate: 0, position: [82, 0, -10] },
-    { rotate: 0, position: [82, 0, 31] },
-    { rotate: 0, position: [82, 0, 72] },
-  ],
-  'WWATA03V': [
-    { rotate: 0, position: [82, 0, -174] }
-  ],
-  // 对应 cad 图上应该是 WWSP008
-  'WSSP008': [
-    // 从左到右依次排列。空行为分割
-    { rotate: 0, position: [60, 0, 92] },
-    { rotate: 0, position: [60, 0, 40] },
-    { rotate: 0, position: [60, 0, -11] },
-    { rotate: 0, position: [60, 0, -62] },
-    { rotate: 0, position: [60, 0, -113] },
-    { rotate: 0, position: [60, 0, -164] },
-    { rotate: 0, position: [60, 0, -215] },
-    { rotate: 0, position: [117, 0, -217] },
-    { rotate: 0, position: [117, 0, -169.7] },
-    { rotate: 0, position: [117, 0, -122] },
-    { rotate: 0, position: [117, 0, -75.1] },
-    { rotate: 0, position: [117, 0, -27] },
-    { rotate: 0, position: [117, 0, 19.5] },
-    { rotate: 0, position: [117, 0, 66.8] },
-    { rotate: 0, position: [117, 0, 114.1] },
-    { rotate: 0, position: [117, 0, 161] },
-    { rotate: 0, position: [117, 0, 208.7] },
-    { rotate: 180, position: [137, 0, -116] },
-    { rotate: 180, position: [137, 0, -167] },
-    { rotate: 180, position: [137, 0, -217] },
-    { rotate: 180, position: [137, 0, 180] },
-    { rotate: 180, position: [137, 0, 133] },
-    { rotate: 180, position: [137, 0, 86] },
-    { rotate: 180, position: [137, 0, 40] },
-    { rotate: 180, position: [137, 0, -7] },
-    { rotate: 180, position: [137, 0, -53] },
-    { rotate: 0, position: [175, 0, -116] },
-    { rotate: 0, position: [175, 0, -167] },
-    { rotate: 0, position: [175, 0, -217] },
-    { rotate: 0, position: [175, 0, 180] },
-    { rotate: 0, position: [175, 0, 133] },
-    { rotate: 0, position: [175, 0, 86] },
-    { rotate: 0, position: [175, 0, 40] },
-    { rotate: 0, position: [175, 0, -7] },
-    { rotate: 0, position: [175, 0, -53] },
-    { rotate: 270, position: [202, 0, 165] },
-    { rotate: 270, position: [202, 0, 122] },
-    { rotate: 270, position: [202, 0, 79] },
-    { rotate: 270, position: [202, 0, 36] },
-    { rotate: 270, position: [202, 0, -7] },
-    { rotate: 270, position: [202, 0, -49] },
-    { rotate: 270, position: [202, 0, -92] },
-    { rotate: 270, position: [202, 0, -135] },
-    { rotate: 270, position: [202, 0, -178] },
-    { rotate: 270, position: [202, 0, -220] },
-  ],
-  'WBS002': [
-    { rotate: 90, position: [-40, 0, 74] },
-    { rotate: 90, position: [-40, 0, 15] },
-    { rotate: 90, position: [-40, 0, -44] },
-    { rotate: 90, position: [-40, 0, -103] },
-    { rotate: 90, position: [-40, 0, -162] },
-    { rotate: 90, position: [-40, 0, -220] }
-  ],
-  'WHWSA01': [
-    { rotate: 90, position: [-197, 0, -176] }
-  ],
-  // 对应 cad 图上应该 WOLUS
-  'OLUS': [
-    { rotate: 0, position: [-133, 0, -60] },
-    { rotate: 0, position: [-141, 0, -60] }
-  ],
-  'WMACB03': [
-    { rotate: 180, position: [-228, 0, -62] },
-    { rotate: 180, position: [-194, 0, -62] },
-    { rotate: 0, position: [-226, 0, -7] },
-    { rotate: 0, position: [-194, 0, -7] }
-  ],
-  '2LPjitai(W01)': [
-    { rotate: 180, position: [-158, 0, -62] }
-  ]
-}
+const deviceMap = ref(window.deviceMap)
 // 模拟天车位置
 const skyCarMap = [{
   id: 'V0001',

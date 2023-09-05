@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <Dropdown></Dropdown>
+    <Dropdown v-if="!VUEDATA.isEditorMode.value"></Dropdown>
 
     <div class="right">
       <!-- <div class="right-weather">
@@ -29,6 +29,7 @@
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
+import { VUEDATA } from "@/VUEDATA";
 
 function handleFillScreen() {
   if (!document.fullscreenElement) {

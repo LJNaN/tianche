@@ -1,14 +1,14 @@
 
 <template>
   <div class="chartShow" @click="clickDrawer()"
-    :style="{ background: `url(/assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat` }">
+    :style="{ background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat` }">
 
     <div v-show="drawerActive" class="chartShow-list">
       <div class="chartShow-list-item" v-for="item in drawerList" :key="item.id" @click.stop="handleDrawerItem(item.id)"
         :style="{ color: item.color, textShadow: '0 3px 4px #444' }">
 
         <div class="chartShow-list-item-circular"
-          :style="{ background: `url(/assets/3d/img/${VUEDATA.selectedItem.value.includes(item.id) ? 58 : 57}.png) center / 100% 100% no-repeat` }">
+          :style="{ background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.includes(item.id) ? 58 : 57}.png) center / 100% 100% no-repeat` }">
         </div>
 
         {{ item.name }}
@@ -17,7 +17,7 @@
   </div>
 
   <div class="deviceShow" @click="handleDeviceShow()"
-    :style="{ background: `url(/assets/3d/img/${VUEDATA.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
+    :style="{ background: `url(./assets/3d/img/${VUEDATA.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
 
 
   </div>

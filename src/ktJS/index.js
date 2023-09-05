@@ -5,6 +5,8 @@ import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { progress } from '@/utils/progress.js'
+import { VUEDATA } from '@/VUEDATA.js'
+import bus from '@/utils/mitt.js'
 
 let container
 let loadedNum = 0
@@ -79,11 +81,11 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 左右键行为
-            CACHE.container.orbitControls.mouseButtons = {
-              LEFT: Bol3D.MOUSE.PAN,
-              MIDDLE: Bol3D.MOUSE.DOLLY,
-              RIGHT: Bol3D.MOUSE.ROTATE
-            }
+            // CACHE.container.orbitControls.mouseButtons = {
+            //   LEFT: Bol3D.MOUSE.PAN,
+            //   MIDDLE: Bol3D.MOUSE.DOLLY,
+            //   RIGHT: Bol3D.MOUSE.ROTATE
+            // }
 
 
             // 开灯开阴影
@@ -130,6 +132,12 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0
             STATE.sceneList.WBS002.children[1].position.z = 0
+
+            // editor 中 outline 处理
+            CACHE.container.outlinePass.hiddenEdgeColor = new Bol3D.Color(0.95, 0.41, 0.16)
+            CACHE.container.outlinePass.visibleEdgeColor = new Bol3D.Color(0.95, 0.41, 0.16)
+            CACHE.container.outlinePass.pulsePeriod = 1
+
 
 
             TU.init(container, Bol3D)
@@ -228,31 +236,42 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.ondblclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
-          console.log('obj: ', e.objects[0]);
-
-          if (obj.userData.type === '天车') {
-            API.search('天车', obj.userData.id)
-            const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
-            if (instance) {
-              STATE.sceneList.skyCarList.forEach(e2 => {
-                e2.popup.visible = true
-                if (e2.clickPopup) {
-                  e2.clickPopup.element.remove()
-                  e2.clickPopup.parent.remove(e2.clickPopup)
-                  e2.clickPopup = null
-                }
-              })
-              instance.initClickPopup()
+          if (VUEDATA.isEditorMode.value) {
+            if (obj.userData.type === '机台') {
+              const obj2 = CACHE.container.scene.children.find(e2 =>
+                e2.userData.id === obj.userData.id &&
+                e2.userData.deviceType === obj.userData.deviceType
+              )
+              bus.$emit('device', obj2)
             }
-          } else if (obj.userData.type === '轨道') {
-            API.search('轨道', obj.userData.id)
 
-          } else if (obj.isInstancedMesh) {
-            const index = e.objects[0].instanceId
-            API.clickInstance(obj, index)
+          } else {
 
-          } else if (obj.userData.type === 'kaxia') {
-            API.search('卡匣', obj.userData.id)
+            if (obj.userData.type === '天车') {
+              API.search('天车', obj.userData.id)
+              const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
+              if (instance) {
+                STATE.sceneList.skyCarList.forEach(e2 => {
+                  e2.popup.visible = true
+                  if (e2.clickPopup) {
+                    e2.clickPopup.element.remove()
+                    e2.clickPopup.parent.remove(e2.clickPopup)
+                    e2.clickPopup = null
+                  }
+                })
+                instance.initClickPopup()
+              }
+            } else if (obj.userData.type === '轨道') {
+              API.search('轨道', obj.userData.id)
+
+            } else if (obj.isInstancedMesh) {
+              const index = e.objects[0].instanceId
+              API.clickInstance(obj, index)
+
+            } else if (obj.userData.type === 'kaxia') {
+              API.search('卡匣', obj.userData.id)
+            }
+
           }
         }
       }

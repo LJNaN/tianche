@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { loadSceneByJSON } from "@/ktJS";
-
 const sceneContainerRef = ref(null);
 
 onMounted(() => {

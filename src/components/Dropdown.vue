@@ -82,13 +82,11 @@ function searchCandidate(text) {
 
   } else if (selected.value === '设备') {
     const arr = []
-    for (let key in DATA.deviceMap) {
-      if (key.includes(text)) {
-        DATA.deviceMap[key].forEach((e2, index) => {
-          arr.push(key + '_' + (index + 1))
-        })
+    DATA.deviceMap.value.forEach(e => {
+      if(e.type.includes(text)) {
+        arr.push(e.id)
       }
-    }
+    })
 
     candidateList.value = arr
   }

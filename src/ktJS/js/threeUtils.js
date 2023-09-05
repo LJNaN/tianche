@@ -858,6 +858,7 @@ function setModelPosition(mesh) {
     const scaleY = gui.add(mesh.scale, "y").step(0.1).onChange(val => mesh.scale.y = val).name('scaleY');
     const scaleZ = gui.add(mesh.scale, "z").step(0.1).onChange(val => mesh.scale.z = val).name('scaleZ');
     controls.attach(mesh);
+    console.log('controls: ', controls);
     controls.addEventListener("change", (e) => {
         positionX.setValue(mesh.position.x);
         positionY.setValue(mesh.position.y);
