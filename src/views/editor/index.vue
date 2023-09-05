@@ -22,9 +22,8 @@
 
     <el-form v-show="isEdit" class="form" :model="formData">
       <el-form-item label="类型" prop="deviceType" label-width="60">
-        <el-select v-model="formData.deviceType" placeholder="Activity zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
+        <el-select v-model="formData.deviceType" @change="selectChange">
+          <el-option v-for="item in modelList" :label="item.label" :value="item.modelName" />
         </el-select>
       </el-form-item>
 
@@ -42,10 +41,10 @@
       </el-form-item>
 
 
-      <el-form-item label-width="60">
-        <el-button>保存</el-button>
-        <el-button @click="isEdit = false">返回(不保存)</el-button>
-        <el-button type="danger">删除</el-button>
+      <el-form-item label-width="60" style="margin-top: 10%;">
+        <el-button @click="handleSubmit(0)">保存</el-button>
+        <el-button @click="handleSubmit(1)">返回(不保存)</el-button>
+        <el-button type="danger" @click="handleSubmit(2)">删除</el-button>
       </el-form-item>
     </el-form>
 
@@ -60,17 +59,138 @@ import { DATA } from '@/ktJS/DATA'
 import { CACHE } from '@/ktJS/CACHE'
 import { API } from '@/ktJS/API'
 import bus from '@/utils/mitt'
+import { STATE } from "@/ktJS/STATE";
 
-let control = null
-let table = ref(null)
-let isEdit = ref(false)
-let formData = reactive({
+const modelList = [
+  { label: '2LP机台(W01区域)', modelName: '2LPjitai(W01)' },
+  { label: 'FOSB', modelName: 'FOSB' },
+  { label: 'FOUP', modelName: 'FOUP' },
+  { label: 'OLUS', modelName: 'OLUS' },
+  { label: 'WBS002', modelName: 'WBS002' },
+  { label: 'WHWSA01', modelName: 'WHWSA01' },
+  { label: 'WMACB03', modelName: 'WMACB03' },
+  { label: 'WS0RA01(I01)', modelName: 'WS0RA01(I01)' },
+  { label: 'WS0RA01(I02)', modelName: 'WS0RA01(I02)' },
+  { label: 'WS0RA01', modelName: 'WS0RA01' },
+  { label: 'WSSP008', modelName: 'WSSP008' },
+  { label: 'WTSTK01', modelName: 'WTSTK01' },
+  { label: 'WWATA02V', modelName: 'WWATA02V' },
+  { label: 'WWATA03V', modelName: 'WWATA03V' },
+]
+
+let control = null          // transform 控制器
+let table = ref(null)       // 表格 ref dom
+let isEdit = ref(false)     // 是否进入编辑模式
+let oldVal = null           // 原始模型的数据
+let oldModel = null         // 原始模型
+let tempModel = null        // 编辑类型时的临时模型
+let formData = reactive({   // 关联 table 和 form 的对象
   deviceType: '',
   id: '',
   x: 0,
   z: 0,
   rotate: 0
 })
+console.log('formData: ', formData);
+
+
+
+// 0-保存 1-返回 2-删除
+function handleSubmit(type) {
+  if (type === 0) {
+    const obj = control.object
+    control.removeEventListener("change", changeListener)
+    control.detach()
+
+    // 新模型
+    if (tempModel) {
+      const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+      if (index >= 0) {
+        DATA.deviceMap.value.splice(index, 1)
+      }
+      oldModel.parent.remove(oldModel)
+      oldModel = null
+      DATA.deviceMap.value.push({
+        id: formData.id,
+        type: formData.deviceType,
+        position: [obj.position.x, obj.position.y, obj.position.z],
+        rotate: formData.rotate
+      })
+
+      obj.traverse(e => {
+        if (e.isMesh) {
+          e.userData.type = '机台'
+          e.userData.deviceType = formData.deviceType
+          e.userData.id = formData.id
+          CACHE.container.clickObjects.push(e)
+        }
+      })
+
+    // 模型没变
+    } else {
+      const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+      console.log('data: ', data);
+      if (data) {
+        data.id = formData.id
+        data.type = formData.deviceType
+        data.position[0] = Number(formData.x.toFixed(1))
+        data.position[2] = Number(formData.z.toFixed(1))
+        data.rotate = formData.rotate
+      }
+    }
+    isEdit.value = false
+
+  } else if (type === 1) {
+    control.removeEventListener("change", changeListener)
+    control.detach()
+    oldModel.position.x = oldVal.x
+    oldModel.position.z = oldVal.z
+    oldModel.rotation.y = oldVal.rotate * Math.PI / 180
+    oldModel.visible = true
+    if (tempModel) {
+      tempModel.parent.remove(tempModel)
+    }
+    isEdit.value = false
+
+  } else if (type === 2) {
+    control.removeEventListener("change", changeListener)
+    control.detach()
+    CACHE.container.outlineObjects = []
+
+    oldModel.parent.remove(oldModel)
+    const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+    if (index >= 0) {
+      DATA.deviceMap.value.splice(index, 1)
+    }
+
+    oldModel = null
+    isEdit.value = false
+  }
+
+  oldVal = null
+  oldModel = null
+  tempModel = null
+}
+
+function selectChange(e) {
+  if (e === oldVal.deviceType) return
+
+  if (tempModel) {
+    tempModel.parent.remove(tempModel)
+    tempModel = null
+  }
+
+  oldModel.visible = false
+  const model = STATE.sceneList[e].clone()
+  model.position.x = formData.x
+  model.position.z = formData.z
+  model.rotation.y = formData.rotate * Math.PI / 180
+  model.visible = true
+  tempModel = model
+
+  CACHE.container.scene.add(model)
+  control.object = model
+}
 
 function clickRow(e) {
   CACHE.container.outlineObjects = []
@@ -129,9 +249,6 @@ function editorControls(mesh) {
   controls.rotationSnap = Math.PI / 8
   controls.showY = false
 
-  if (controls.object) {
-    controls.detach()
-  }
   controls.attach(mesh);
 
   const dataIndex = DATA.deviceMap.value.findIndex(e => e.type === mesh.userData.deviceType && e.id === mesh.userData.id)
@@ -139,22 +256,28 @@ function editorControls(mesh) {
     return
   }
 
-  controls.addEventListener("change", () => {
-    // DATA.deviceMap.value[dataIndex].position = [Number(mesh.position.x.toFixed(1)), mesh.position.y, Number(mesh.position.z.toFixed(1))]
-    // DATA.deviceMap.value[dataIndex].rotate = mesh.rotation.y * 180 / Math.PI
-    formData.x = Number(mesh.position.x.toFixed(1))
-    formData.z = Number(mesh.position.z.toFixed(1))
-    formData.rotate = Number((mesh.rotation.y * 180 / Math.PI).toFixed(1))
-  })
   return controls
 }
 
+function changeListener() {
+  formData.x = Number(control.object.position.x.toFixed(1))
+  formData.z = Number(control.object.position.z.toFixed(1))
+  formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
+}
+
 function clickEdit(scope) {
-  console.log('scope: ', scope.row);
   const model = CACHE.container.scene.children.find(e => e.userData.deviceType === scope.row.type && e.userData.id === scope.row.id)
   if (!model) return
-  const controls = editorControls(model)
-  control = controls
+
+  if (control) {
+    control.attach(model)
+    control.object = model
+  } else {
+    const controls = editorControls(model)
+    control = controls
+  }
+  control.addEventListener("change", changeListener)
+
 
   isEdit.value = true
   formData.deviceType = scope.row.type
@@ -162,6 +285,9 @@ function clickEdit(scope) {
   formData.x = scope.row.position[0]
   formData.z = scope.row.position[2]
   formData.rotate = scope.row.rotate
+
+  oldVal = JSON.parse(JSON.stringify(formData))
+  oldModel = model
 
 }
 

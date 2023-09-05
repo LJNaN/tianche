@@ -16,26 +16,23 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
-
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
-  //   i++
-  // }, 333)
-
-
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
+    drive(mockData2[i])
+    i++
+  }, 333)
 }
 
 
@@ -99,8 +96,6 @@ function drive(wsMessage) {
           }
 
 
-          console.log(skyCar.history.new.quhuoda, skyCar.history.old.quhuoda);
-
           if (skyCar.history.old?.position != skyCar.history.new?.position) {
             // 位置动画
             const time = skyCar.history.new.machineTime - skyCar.history.old.machineTime
@@ -114,7 +109,7 @@ function drive(wsMessage) {
           function onComplete() {
             // 处理状态
             if ( // 装载开始
-              (skyCar.history.old.quhuoda == '0' && skyCar.history.new.quhuoda == '1')
+              (skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1')
             ) {
               if (skyCar.state != 2) {
                 skyCar.state = 2
@@ -201,16 +196,12 @@ function drive(wsMessage) {
 
 
             } else if ( // 装载结束
-              (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
-              (skyCar.history.old.isHaveFoup == '0' && skyCar.history.new.isHaveFoup == '1') &&
-              (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') &&
-              (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
-              (skyCar.history.old.quhuoda == '1' && skyCar.history.new.quhuoda == '0')
+              (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0')
             ) {
               // skyCar.up()
 
             } else if ( // 卸货开始
-              (skyCar.history.old.fanghuoda == '0' && skyCar.history.new.fanghuoda == '1')
+              (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1')
             ) {
               if (skyCar.state != 2) {
                 skyCar.state = 2
@@ -313,10 +304,6 @@ function drive(wsMessage) {
               skyCar.down(cb)
 
             } else if ( // 卸货结束
-              (skyCar.history.old.fanghuoda == '1' && skyCar.history.new.fanghuoda == '0') &&
-              (skyCar.history.old.idle == '0' && skyCar.history.new.idle == '1') &&
-              (skyCar.history.old.isHaveFoup == '1' && skyCar.history.new.isHaveFoup == '0') &&
-              (skyCar.history.old.moveEnable == '0' && skyCar.history.new.moveEnable == '1') &&
               (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')
             ) {
               // skyCar.up()
