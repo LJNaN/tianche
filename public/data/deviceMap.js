@@ -1,2 +1,80 @@
-const deviceMap = [{"type":"WWATA02V","id":"WWATA02V_1","rotate":0,"position":[82,0,-215]},{"type":"WWATA02V","id":"WWATA02V_2","rotate":0,"position":[82,0,-133]},{"type":"WWATA02V","id":"WWATA02V_3","rotate":0,"position":[82,0,-92]},{"type":"WWATA02V","id":"WWATA02V_4","rotate":0,"position":[-73.5,0,33.3]},{"type":"WWATA02V","id":"WWATA02V_5","rotate":0,"position":[82,0,-10]},{"type":"WWATA02V","id":"WWATA02V_6","rotate":0,"position":[82,0,31]},{"type":"WWATA02V","id":"WWATA02V_7","rotate":0,"position":[82,0,72]},{"type":"WWATA03V","id":"WWATA03V_1","rotate":0,"position":[82,0,-174]},{"type":"WSSP008","id":"WSSP008_1","rotate":0,"position":[60,0,92]},{"type":"WSSP008","id":"WSSP008_2","rotate":0,"position":[-80.6,0,81.4]},{"type":"WSSP008","id":"WSSP008_3","rotate":0,"position":[60,0,-11]},{"type":"WSSP008","id":"WSSP008_4","rotate":-90,"position":[27.2,0,93.7]},{"type":"WSSP008","id":"WSSP008_6","rotate":0,"position":[60,0,-164]},{"type":"WSSP008","id":"WSSP008_7","rotate":0,"position":[60,0,-215]},{"type":"WSSP008","id":"WSSP008_8","rotate":0,"position":[117,0,-217]},{"type":"WSSP008","id":"WSSP008_9","rotate":0,"position":[117,0,-169.7]},{"type":"WSSP008","id":"WSSP008_10","rotate":0,"position":[117,0,-122]},{"type":"WSSP008","id":"WSSP008_11","rotate":0,"position":[117,0,-75.1]},{"type":"WSSP008","id":"WSSP008_12","rotate":0,"position":[117,0,-27]},{"type":"WSSP008","id":"WSSP008_13","rotate":0,"position":[117,0,19.5]},{"type":"WSSP008","id":"WSSP008_14","rotate":0,"position":[117,0,66.8]},{"type":"WSSP008","id":"WSSP008_15","rotate":0,"position":[117,0,114.1]},{"type":"WSSP008","id":"WSSP008_16","rotate":0,"position":[117,0,161]},{"type":"WSSP008","id":"WSSP008_17","rotate":0,"position":[117,0,208.7]},{"type":"WSSP008","id":"WSSP008_18","rotate":180,"position":[137,0,-116]},{"type":"WSSP008","id":"WSSP008_19","rotate":180,"position":[137,0,-167]},{"type":"WSSP008","id":"WSSP008_20","rotate":180,"position":[137,0,-217]},{"type":"WSSP008","id":"WSSP008_21","rotate":180,"position":[137,0,180]},{"type":"WSSP008","id":"WSSP008_22","rotate":180,"position":[137,0,133]},{"type":"WSSP008","id":"WSSP008_23","rotate":180,"position":[137,0,86]},{"type":"WSSP008","id":"WSSP008_24","rotate":180,"position":[137,0,40]},{"type":"WSSP008","id":"WSSP008_25","rotate":180,"position":[137,0,-7]},{"type":"WSSP008","id":"WSSP008_26","rotate":180,"position":[137,0,-53]},{"type":"WSSP008","id":"WSSP008_27","rotate":0,"position":[175,0,-116]},{"type":"WSSP008","id":"WSSP008_28","rotate":0,"position":[175,0,-167]},{"type":"WSSP008","id":"WSSP008_29","rotate":0,"position":[175,0,-217]},{"type":"WSSP008","id":"WSSP008_30","rotate":0,"position":[175,0,180]},{"type":"WSSP008","id":"WSSP008_31","rotate":0,"position":[175,0,133]},{"type":"WSSP008","id":"WSSP008_32","rotate":0,"position":[175,0,86]},{"type":"WSSP008","id":"WSSP008_33","rotate":0,"position":[175,0,40]},{"type":"WSSP008","id":"WSSP008_34","rotate":0,"position":[175,0,-7]},{"type":"WSSP008","id":"WSSP008_35","rotate":0,"position":[175,0,-53]},{"type":"WSSP008","id":"WSSP008_36","rotate":270,"position":[202,0,165]},{"type":"WSSP008","id":"WSSP008_37","rotate":270,"position":[202,0,122]},{"type":"WSSP008","id":"WSSP008_38","rotate":270,"position":[202,0,79]},{"type":"WSSP008","id":"WSSP008_39","rotate":270,"position":[202,0,36]},{"type":"WSSP008","id":"WSSP008_40","rotate":270,"position":[202,0,-7]},{"type":"WSSP008","id":"WSSP008_41","rotate":270,"position":[202,0,-49]},{"type":"WSSP008","id":"WSSP008_42","rotate":270,"position":[202,0,-92]},{"type":"WSSP008","id":"WSSP008_43","rotate":270,"position":[202,0,-135]},{"type":"WSSP008","id":"WSSP008_44","rotate":0,"position":[-53.3,0,265.6]},{"type":"WBS002","id":"WBS002_1","rotate":90,"position":[-40,0,74]},{"type":"WBS002","id":"WBS002_2","rotate":90,"position":[-40,0,15]},{"type":"WBS002","id":"WBS002_4","rotate":90,"position":[-40,0,-103]},{"type":"WBS002","id":"WBS002_5","rotate":90,"position":[-40,0,-162]},{"type":"WBS002","id":"WBS002_6","rotate":90,"position":[-40,0,-220]},{"type":"WHWSA01","id":"WHWSA01_1","rotate":90,"position":[-188.4,0,88.8]},{"type":"OLUS","id":"OLUS_1","rotate":0,"position":[-133,0,-60]},{"type":"OLUS","id":"OLUS_2","rotate":0,"position":[-141,0,-60]},{"type":"WMACB03","id":"WMACB03_1","rotate":180,"position":[-228,0,-62]},{"type":"WMACB03","id":"WMACB03_2","rotate":180,"position":[-194,0,-62]},{"type":"WMACB03","id":"WMACB03_3","rotate":0,"position":[-226,0,-7]},{"type":"WMACB03","id":"WMACB03_4","rotate":0,"position":[-194,0,-7]},{"type":"2LPjitai(W01)","id":"2LPjitai(W01)_1","rotate":180,"position":[-158,0,-62]},{"id":"test","type":"WHWSA01","position":[-69.8,0,-110.7],"rotate":22.5}]
- window.deviceMap = deviceMap
+const deviceMap = [
+  { type: 'WWATA02V', id: 'WWATA02V_1', rotate: 0, position: [82, 0, -215] },
+  { type: 'WWATA02V', id: 'WWATA02V_2', rotate: 0, position: [82, 0, -133] },
+  { type: 'WWATA02V', id: 'WWATA02V_3', rotate: 0, position: [82, 0, -92] },
+  { type: 'WWATA02V', id: 'WWATA02V_4', rotate: 0, position: [82, 0, -51] },
+  { type: 'WWATA02V', id: 'WWATA02V_5', rotate: 0, position: [82, 0, -10] },
+  { type: 'WWATA02V', id: 'WWATA02V_6', rotate: 0, position: [82, 0, 31] },
+  { type: 'WWATA02V', id: 'WWATA02V_7', rotate: 0, position: [82, 0, 72] },
+
+  { type: 'WWATA03V', id: 'WWATA03V_1', rotate: 0, position: [82, 0, -174] },
+  // 对应 cad 图上应该是 WWSP008
+
+  // 从左到右依次排列。空行为分割
+  { type: 'WSSP008', id: 'WSSP008_1', rotate: 0, position: [60, 0, 92] },
+  { type: 'WSSP008', id: 'WSSP008_2', rotate: 0, position: [60, 0, 40] },
+  { type: 'WSSP008', id: 'WSSP008_3', rotate: 0, position: [60, 0, -11] },
+  { type: 'WSSP008', id: 'WSSP008_4', rotate: 0, position: [60, 0, -62] },
+  { type: 'WSSP008', id: 'WSSP008_5', rotate: 0, position: [60, 0, -113] },
+  { type: 'WSSP008', id: 'WSSP008_6', rotate: 0, position: [60, 0, -164] },
+  { type: 'WSSP008', id: 'WSSP008_7', rotate: 0, position: [60, 0, -215] },
+  { type: 'WSSP008', id: 'WSSP008_8', rotate: 0, position: [117, 0, -217] },
+  { type: 'WSSP008', id: 'WSSP008_9', rotate: 0, position: [117, 0, -169.7] },
+  { type: 'WSSP008', id: 'WSSP008_10', rotate: 0, position: [117, 0, -122] },
+  { type: 'WSSP008', id: 'WSSP008_11', rotate: 0, position: [117, 0, -75.1] },
+  { type: 'WSSP008', id: 'WSSP008_12', rotate: 0, position: [117, 0, -27] },
+  { type: 'WSSP008', id: 'WSSP008_13', rotate: 0, position: [117, 0, 19.5] },
+  { type: 'WSSP008', id: 'WSSP008_14', rotate: 0, position: [117, 0, 66.8] },
+  { type: 'WSSP008', id: 'WSSP008_15', rotate: 0, position: [117, 0, 114.1] },
+  { type: 'WSSP008', id: 'WSSP008_16', rotate: 0, position: [117, 0, 161] },
+  { type: 'WSSP008', id: 'WSSP008_17', rotate: 0, position: [117, 0, 208.7] },
+  { type: 'WSSP008', id: 'WSSP008_18', rotate: 180, position: [137, 0, -116] },
+  { type: 'WSSP008', id: 'WSSP008_19', rotate: 180, position: [137, 0, -167] },
+  { type: 'WSSP008', id: 'WSSP008_20', rotate: 180, position: [137, 0, -217] },
+  { type: 'WSSP008', id: 'WSSP008_21', rotate: 180, position: [137, 0, 180] },
+  { type: 'WSSP008', id: 'WSSP008_22', rotate: 180, position: [137, 0, 133] },
+  { type: 'WSSP008', id: 'WSSP008_23', rotate: 180, position: [137, 0, 86] },
+  { type: 'WSSP008', id: 'WSSP008_24', rotate: 180, position: [137, 0, 40] },
+  { type: 'WSSP008', id: 'WSSP008_25', rotate: 180, position: [137, 0, -7] },
+  { type: 'WSSP008', id: 'WSSP008_26', rotate: 180, position: [137, 0, -53] },
+  { type: 'WSSP008', id: 'WSSP008_27', rotate: 0, position: [175, 0, -116] },
+  { type: 'WSSP008', id: 'WSSP008_28', rotate: 0, position: [175, 0, -167] },
+  { type: 'WSSP008', id: 'WSSP008_29', rotate: 0, position: [175, 0, -217] },
+  { type: 'WSSP008', id: 'WSSP008_30', rotate: 0, position: [175, 0, 180] },
+  { type: 'WSSP008', id: 'WSSP008_31', rotate: 0, position: [175, 0, 133] },
+  { type: 'WSSP008', id: 'WSSP008_32', rotate: 0, position: [175, 0, 86] },
+  { type: 'WSSP008', id: 'WSSP008_33', rotate: 0, position: [175, 0, 40] },
+  { type: 'WSSP008', id: 'WSSP008_34', rotate: 0, position: [175, 0, -7] },
+  { type: 'WSSP008', id: 'WSSP008_35', rotate: 0, position: [175, 0, -53] },
+  { type: 'WSSP008', id: 'WSSP008_36', rotate: 270, position: [202, 0, 165] },
+  { type: 'WSSP008', id: 'WSSP008_37', rotate: 270, position: [202, 0, 122] },
+  { type: 'WSSP008', id: 'WSSP008_38', rotate: 270, position: [202, 0, 79] },
+  { type: 'WSSP008', id: 'WSSP008_39', rotate: 270, position: [202, 0, 36] },
+  { type: 'WSSP008', id: 'WSSP008_40', rotate: 270, position: [202, 0, -7] },
+  { type: 'WSSP008', id: 'WSSP008_41', rotate: 270, position: [202, 0, -49] },
+  { type: 'WSSP008', id: 'WSSP008_42', rotate: 270, position: [202, 0, -92] },
+  { type: 'WSSP008', id: 'WSSP008_43', rotate: 270, position: [202, 0, -135] },
+  { type: 'WSSP008', id: 'WSSP008_44', rotate: 270, position: [202, 0, -178] },
+  { type: 'WSSP008', id: 'WSSP008_45', rotate: 270, position: [202, 0, -220] },
+
+  { type: 'WBS002', id: 'WBS002_1', rotate: 90, position: [-40, 0, 74] },
+  { type: 'WBS002', id: 'WBS002_2', rotate: 90, position: [-40, 0, 15] },
+  { type: 'WBS002', id: 'WBS002_3', rotate: 90, position: [-40, 0, -44] },
+  { type: 'WBS002', id: 'WBS002_4', rotate: 90, position: [-40, 0, -103] },
+  { type: 'WBS002', id: 'WBS002_5', rotate: 90, position: [-40, 0, -162] },
+  { type: 'WBS002', id: 'WBS002_6', rotate: 90, position: [-40, 0, -220] },
+
+  { type: 'WHWSA01', id: 'WHWSA01_1', rotate: 90, position: [-197, 0, -176] },
+  // 对应 cad 图上应该 WOLUS
+
+  { type: 'OLUS', id: 'OLUS_1', rotate: 0, position: [-133, 0, -60] },
+  { type: 'OLUS', id: 'OLUS_2', rotate: 0, position: [-141, 0, -60] },
+
+  { type: 'WMACB03', id: 'WMACB03_1', rotate: 180, position: [-228, 0, -62] },
+  { type: 'WMACB03', id: 'WMACB03_2', rotate: 180, position: [-194, 0, -62] },
+  { type: 'WMACB03', id: 'WMACB03_3', rotate: 0, position: [-226, 0, -7] },
+  { type: 'WMACB03', id: 'WMACB03_4', rotate: 0, position: [-194, 0, -7] },
+
+  { type: '2LPjitai(W01)',id:'2LPjitai(W01)_1', rotate: 180, position: [-158, 0, -62] }
+]
+window.deviceMap = deviceMap
