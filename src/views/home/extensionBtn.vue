@@ -40,7 +40,8 @@ const drawerList = [
 ]
 
 // 二维界面图表部分显隐
-VUEDATA.selectedItem.value = drawerList.map(e => e.id)
+VUEDATA.selectedItem.value = []
+// VUEDATA.selectedItem.value = drawerList.map(e => e.id)
 
 
 function handleDeviceShow() {

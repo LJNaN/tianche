@@ -9,11 +9,12 @@
   </div>
 
   <div class="my-p">
-    <input type="text" class="my-p-input" placeholder="请输入关键字..." v-model="searchText" />
+    <input type="text" class="my-p-input" placeholder="请输入关键字..." v-model="searchText" @focus="inputFocus(true)"
+      @blur="inputFocus(false)" />
     <div class="search" @click="API.search(selected, searchText)"></div>
   </div>
 
-  <el-scrollbar class="candidate" v-show="candidateList.length && searchText">
+  <el-scrollbar class="candidate" v-show="candidateShow">
     <div class="candidate-item" v-for="item in candidateList" @click="handleItem(item)">
       {{ item }}
     </div>
@@ -33,14 +34,27 @@ let selected = ref(options.value[0]);
 let searchText = ref('')
 let showDropdown = ref(false);
 let candidateList = ref([])
+let candidateShow = ref(false)
 let temp = null
 
 watch(
   () => searchText.value,
   ((val) => {
+    candidateShow.value = true
     searchCandidate(val)
   })
 )
+
+function inputFocus(type) {
+  if (type) {
+    candidateShow.value = true
+    searchCandidate(searchText.value)
+  } else {
+    setTimeout(() => {
+      candidateShow.value = false
+    }, 150)
+  }
+}
 
 
 function selects() {
@@ -83,7 +97,7 @@ function searchCandidate(text) {
   } else if (selected.value === '设备') {
     const arr = []
     DATA.deviceMap.value.forEach(e => {
-      if(e.type.includes(text)) {
+      if (e.type.includes(text)) {
         arr.push(e.id)
       }
     })
@@ -94,6 +108,7 @@ function searchCandidate(text) {
 
 
 function handleItem(item) {
+  console.log(item)
   if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB' || selected.value === '卡匣' || selected.value === '设备') {
     searchText.value = item
   }
@@ -128,7 +143,7 @@ function handleItem(item) {
         e.isInstancedMesh
         && e.name.split('_')[0] === itemSplitArr[0]
       )
-      
+
       if (instanceMesh) {
         const index = itemSplitArr[itemSplitArr.length - 1] - 1
         API.clickInstance(instanceMesh, index)
@@ -267,7 +282,7 @@ p {
     align-items: center;
     overflow: hidden;
     height: 30px;
-    padding: 12px;
+    padding-left: 12px;
     cursor: pointer;
   }
 

@@ -18,23 +18,23 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // setInterval(() => {
-  //   if (i >= mockData4.length) i = 0
-  //   drive(mockData4[i])
-  //   i++
-  // }, 333)
+  let i = 0
+  setInterval(() => {
+    if (i >= mockData4.length) i = 0
+    drive(mockData4[i])
+    i++
+  }, 333)
 
   // function aaa() {
   //   drive(mockData3[i])
@@ -255,7 +255,7 @@ function drive(wsMessage) {
               skyCar.acceptData = true
             }
 
-            if(skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.history.new.loading != '1') {
+            if (skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.history.new.loading != '1') {
               skyCar.catch.parent.remove(skyCar.catch)
               skyCar.catch = null
             }
@@ -1336,11 +1336,14 @@ function search(type, id) {
   }
 
   if (obj) {
-
     // 相机移动动画
     let isCameraMoveOver = false // 动画移动完成
     const camera = CACHE.container.orbitCamera
     const control = CACHE.container.orbitControls
+    CACHE.tempCameraState = {
+      position: camera.position.clone(),
+      target: control.target.clone()
+    }
     let objWorldPosition = new Bol3D.Vector3()
     obj.getWorldPosition(objWorldPosition)
 

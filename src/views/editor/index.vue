@@ -5,7 +5,10 @@
   </div>
 
   <div class="editor">
-    <el-button class="output" @click="clickOutput">导出机台配置 (替换 '根目录/data/deviceMap.js')</el-button>
+    <div class="output">
+      <el-button @click="clickInsert" v-show="!isInsertMode && !isEdit">新增</el-button>
+      <el-button @click="clickOutput">导出配置(替换"根目录/data/deviceMap.js")</el-button>
+    </div>
 
     <el-table v-show="!isEdit" :data="DATA.deviceMap.value" class="table" @row-click="clickRow" ref="table"
       highlight-current-row border>
@@ -42,9 +45,9 @@
 
 
       <el-form-item label-width="60" style="margin-top: 10%;">
-        <el-button @click="handleSubmit(0)">保存</el-button>
-        <el-button @click="handleSubmit(1)">返回(不保存)</el-button>
-        <el-button type="danger" @click="handleSubmit(2)">删除</el-button>
+        <el-button @click="isInsertMode ? insertSubmit(0) : handleSubmit(0)">保存</el-button>
+        <el-button @click="isInsertMode ? insertSubmit(1) : handleSubmit(1)">返回(不保存)</el-button>
+        <el-button type="danger" @click="handleSubmit(2)" v-show="!isInsertMode">删除</el-button>
       </el-form-item>
     </el-form>
 
@@ -60,6 +63,7 @@ import { CACHE } from '@/ktJS/CACHE'
 import { API } from '@/ktJS/API'
 import bus from '@/utils/mitt'
 import { STATE } from "@/ktJS/STATE";
+import { ElMessage } from 'element-plus'
 
 const modelList = [
   { label: '2LP机台(W01区域)', modelName: '2LPjitai(W01)' },
@@ -78,21 +82,27 @@ const modelList = [
   { label: 'WWATA03V', modelName: 'WWATA03V' },
 ]
 
-let control = null          // transform 控制器
-let table = ref(null)       // 表格 ref dom
-let isEdit = ref(false)     // 是否进入编辑模式
-let oldVal = null           // 原始模型的数据
-let oldModel = null         // 原始模型
-let tempModel = null        // 编辑类型时的临时模型
-let formData = reactive({   // 关联 table 和 form 的对象
+let control = null            // transform 控制器
+let table = ref(null)         // 表格 ref dom
+let isEdit = ref(false)       // 是否进入编辑模式
+let isInsertMode = ref(false) // 新增模式
+let oldVal = null             // 原始模型的数据
+let oldModel = null           // 原始模型
+let tempModel = null          // 编辑类型时的临时模型
+let formData = reactive({     // 关联 table 和 form 的对象
   deviceType: '',
   id: '',
   x: 0,
   z: 0,
   rotate: 0
 })
-console.log('formData: ', formData);
 
+
+function changeListener() {
+  formData.x = Number(control.object.position.x.toFixed(1))
+  formData.z = Number(control.object.position.z.toFixed(1))
+  formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
+}
 
 
 // 0-保存 1-返回 2-删除
@@ -126,10 +136,10 @@ function handleSubmit(type) {
         }
       })
 
-    // 模型没变
+      // 模型没变
     } else {
       const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
-      console.log('data: ', data);
+      
       if (data) {
         data.id = formData.id
         data.type = formData.deviceType
@@ -172,24 +182,113 @@ function handleSubmit(type) {
   tempModel = null
 }
 
+function insertSubmit(type) {
+  if (type === 0) {
+
+    const data = DATA.deviceMap.value.find(e => e.id === formData.id)
+    if (data) {
+      ElMessage({
+        message: 'ID 重复，请更改 ID',
+        type: 'warning',
+      })
+      return
+    }
+
+    DATA.deviceMap.value.push({
+      id: formData.id,
+      type: formData.deviceType,
+      position: [tempModel.position.x, tempModel.position.y, tempModel.position.z],
+      rotate: formData.rotate
+    })
+
+    tempModel.userData.deviceType = formData.deviceType
+    tempModel.userData.id = formData.id
+    tempModel.traverse(e => {
+      if (e.isMesh) {
+        e.userData.type = '机台'
+        e.userData.deviceType = formData.deviceType
+        e.userData.id = formData.id
+        CACHE.container.clickObjects.push(e)
+      }
+    })
+
+  } else {
+    tempModel.parent.remove(tempModel)
+  }
+
+
+  CACHE.container.outlineObjects = []
+  control.removeEventListener("change", changeListener)
+  control.detach()
+  isInsertMode.value = false
+  isEdit.value = false
+  oldVal = {}
+  tempModel = null
+}
+
 function selectChange(e) {
   if (e === oldVal.deviceType) return
+  console.log(1)
 
   if (tempModel) {
+    if (isInsertMode.value) {
+      control.removeEventListener("change", changeListener)
+      control.detach()
+    }
     tempModel.parent.remove(tempModel)
     tempModel = null
   }
 
-  oldModel.visible = false
-  const model = STATE.sceneList[e].clone()
-  model.position.x = formData.x
-  model.position.z = formData.z
-  model.rotation.y = formData.rotate * Math.PI / 180
-  model.visible = true
-  tempModel = model
+  if (isInsertMode.value) {
+    
+    const originModel = STATE.sceneList[e]
+    
+    if (!originModel) return
 
-  CACHE.container.scene.add(model)
-  control.object = model
+    
+    const model = originModel.clone()
+    model.position.set(formData.x, 0, formData.z)
+    model.rotation.y = Math.PI / 180 * formData.rotate
+    model.visible = true
+    CACHE.container.scene.add(model)
+    CACHE.container.outlineObjects = []
+    model.traverse(e => {
+      if (e.isMesh) {
+        CACHE.container.outlineObjects.push(e)
+      }
+    })
+
+    if (control) {
+      
+      control.attach(model)
+      control.object = model
+    } else {
+      const controls = editorControls(model)
+      control = controls
+    }
+    control.addEventListener("change", changeListener)
+
+    formData.id = e + '_1'
+    formData.x = model.position.x
+    formData.z = model.position.z
+    formData.rotate = model.rotation.y
+
+    oldVal = JSON.parse(JSON.stringify(formData))
+    tempModel = model
+
+
+  } else {
+    oldModel.visible = false
+    const model = STATE.sceneList[e].clone()
+    model.position.x = formData.x
+    model.position.z = formData.z
+    model.rotation.y = formData.rotate * Math.PI / 180
+    model.visible = true
+    tempModel = model
+
+    CACHE.container.scene.add(model)
+    control.object = model
+  }
 }
 
 function clickRow(e) {
@@ -208,6 +307,16 @@ function clickRow(e) {
 onMounted(() => {
   bus.$on('device', data => {
     if (data) {
+
+      if (isEdit.value) {
+        ElMessage({
+          message: '请先完成当前编辑',
+          type: 'warning',
+        })
+        return
+      }
+
+
       CACHE.container.outlineObjects = []
       data.traverse(e => {
         if (e.isMesh) {
@@ -241,6 +350,47 @@ function clickOutput() {
   link.click()
 }
 
+function clickInsert() {
+  isInsertMode.value = true
+  isEdit.value = true
+
+  const originModel = STATE.sceneList[modelList[0]?.modelName]
+  if (!originModel) return
+
+  const model = originModel.clone()
+  model.position.set(0, 0, 0)
+  model.rotation.y = 0
+  model.visible = true
+  model.userData.deviceType = modelList[0]?.modelName
+  model.userData.id = modelList[0]?.modelName + '_1'
+  CACHE.container.scene.add(model)
+  CACHE.container.outlineObjects = []
+  model.traverse(e => {
+    if (e.isMesh) {
+      CACHE.container.outlineObjects.push(e)
+    }
+  })
+
+  
+  if (control) {
+    control.attach(model)
+    control.object = model
+  } else {
+    const controls = editorControls(model)
+    control = controls
+  }
+  control.addEventListener("change", changeListener)
+
+  formData.deviceType = model.userData.deviceType
+  formData.id = model.userData.id
+  formData.x = model.position.x
+  formData.z = model.position.z
+  formData.rotate = model.rotation.y
+
+  oldVal = JSON.parse(JSON.stringify(formData))
+  tempModel = model
+}
+
 // transform
 function editorControls(mesh) {
   CACHE.container.bloomPass.enabled = false
@@ -251,19 +401,15 @@ function editorControls(mesh) {
 
   controls.attach(mesh);
 
-  const dataIndex = DATA.deviceMap.value.findIndex(e => e.type === mesh.userData.deviceType && e.id === mesh.userData.id)
-  if (dataIndex === -1) {
-    return
-  }
+  // const dataIndex = DATA.deviceMap.value.findIndex(e => e.type === mesh.userData.deviceType && e.id === mesh.userData.id)
+  // if (dataIndex === -1) {
+  //   return
+  // }
 
   return controls
 }
 
-function changeListener() {
-  formData.x = Number(control.object.position.x.toFixed(1))
-  formData.z = Number(control.object.position.z.toFixed(1))
-  formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
-}
+
 
 function clickEdit(scope) {
   const model = CACHE.container.scene.children.find(e => e.userData.deviceType === scope.row.type && e.userData.id === scope.row.id)
@@ -288,7 +434,6 @@ function clickEdit(scope) {
 
   oldVal = JSON.parse(JSON.stringify(formData))
   oldModel = model
-
 }
 
 function handleInput(type) {
@@ -329,13 +474,23 @@ onBeforeMount(() => {
 }
 
 .editor {
+  height: 100vh;
+  position: relative;
+
   .output {
+    display: flex;
+    justify-content: flex-start;
     pointer-events: all;
     position: absolute;
     z-index: 2;
     right: 26vw;
     transform: translateX(100%);
     top: 25%;
+
+    .el-button {
+      margin-left: 0;
+      margin-right: 12px;
+    }
   }
 
   .table {
