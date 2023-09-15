@@ -8,7 +8,7 @@ import mockData from './js/mock'
 import mockData2 from './js/mock2'
 import mockData3 from './js/mock3'
 import mockData4 from './js/mock4'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpInfoById } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
 // 获取数据
@@ -18,23 +18,23 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
   // 模拟数据
   // =======================================
-  let i = 0
-  setInterval(() => {
-    if (i >= mockData4.length) i = 0
-    drive(mockData4[i])
-    i++
-  }, 333)
+  // let i = 0
+  // setInterval(() => {
+  //   if (i >= mockData4.length) i = 0
+  //   drive(mockData4[i])
+  //   i++
+  // }, 333)
 
   // function aaa() {
   //   drive(mockData3[i])
@@ -1261,7 +1261,7 @@ function initReflexFloor() {
 
 }
 
-// 加载临时的设备
+// 加载设备
 function initDeviceByMap() {
   if (VUEDATA.isEditorMode.value) {
     CACHE.container.clickObjects = []
@@ -1297,9 +1297,12 @@ function initDeviceByMap() {
       model.visible = true
       model.position.set(...e.position)
       model.rotation.y = e.rotate * Math.PI / 180
+      model.userData.id = e.id
+      model.userData.type = '机台'
       deviceObject[e.type].push(model)
       CACHE.container.scene.add(model)
     })
+
 
     deviceType.forEach(e => {
       instantiationGroupInfo(deviceObject[e], e, CACHE.container)
@@ -1824,7 +1827,10 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
+
+
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
+
 
 
   const camera = CACHE.container.orbitCamera
@@ -1864,12 +1870,14 @@ function clickInstance(obj, index) {
     className = 'popup3d_shalves'
 
   } else {
+    const deviceId = CACHE.instanceNameMap[obj.name.split('_')[0]][index].id
+
     title = '机台'
     items = [
-      { name: '机台ID', value: '09728' },
-      { name: '机台Type', value: '57129' },
-      { name: '机台状态', value: 'Enable' },
-      { name: '在线状态', value: '在线' }
+      { name: '机台ID', value: deviceId },
+      { name: '机台Type', value: '--' },
+      { name: '机台状态', value: '--' },
+      { name: '在线状态', value: '--' }
     ]
     height = '30vh'
     className = 'popup3d_jitai'
@@ -2003,6 +2011,108 @@ function clickInstance(obj, index) {
       requestAnimationFrame(render)
     }
   }
+
+
+  // 接口
+  if (title === '机台') {
+    const deviceId = items.find(e => e.name === '机台ID').value
+    GetEqpInfoById(deviceId).then(res => {
+      // if (res?.data?.length) {
+      //   const data = res.data[0]
+      //   popup.parent.remove(popup)
+      //   STATE.currentPopup.element.remove()
+
+      //   let items = [
+      //     { name: '卡匣 ID', value: obj.userData.id || '--' },
+      //     { name: 'Command ID', value: data.commandId || '--' },
+      //     { name: 'User ID', value: '--' },
+      //     { name: '起点', value: data.sourcePort || '--' },
+      //     { name: '终点', value: data.destPort || '--' },
+      //     { name: '优先级', value: data.priority || '--' },
+      //     { name: '当前位置', value: obj.userData.shelf || '--' },
+      //     { name: '当前状态', value: '--' }
+      //   ]
+
+      //   let textValue = ``
+      //   for (let i = 0; i < items.length; i++) {
+      //     textValue += `
+      //               <div style="
+      //                 display: flex;
+      //                 justify-content: space-between;
+      //                 align-items: center;
+      //                 padding: 0 5%;
+      //                 height: 4vh;
+      //                 width: 100%;
+      //                 background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+      //                 ">
+      //                 <p style="font-size: 2vh;">${items[i].name}</p>
+      //                 <p style="font-size: 2vh;">${items[i].value}</p>
+      //               </div>`
+      //   }
+
+      //   const newPopup = new Bol3D.POI.Popup3DSprite({
+      //     value: `
+      //               <div style="
+      //                 pointer-events: none;
+      //                 margin:0;
+      //                 color: #ffffff;
+      //               ">
+  
+      //               <div style="
+      //                   position: absolute;
+      //                   background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+      //                   width: 25vw;
+      //                   height: ${height};
+      //                   transform: translate(-50%, -50%);
+      //                   display: flex;
+      //                   flex-direction: column;
+      //                   left: 50%;
+      //                   top: 50%;
+      //                   z-index: 2;
+      //                 ">
+      //                 <p style="
+      //                   font-size: 2vh;
+      //                   font-weight: bold;
+      //                   letter-spacing: 8px;
+      //                   margin-left: 4px;
+      //                   text-align: center;
+      //                   margin-top: 10%;
+      //                 ">
+      //                   ${title}
+      //                 </p>
+  
+      //                 <div style="
+      //                   display: flex;
+      //                   flex-direction: column;
+      //                   width: 85%;
+      //                   margin: 4% auto 0 auto;
+      //                   height: 100%;
+      //                 ">
+      //                 ${textValue}
+      //                 </div>
+      //               </div>
+      //             </div>
+      //             `,
+      //     position: [0, 0, 0],
+      //     className: `popup3dclass ${className}`,
+      //     closeVisible: true,
+      //     closeColor: "#FFFFFF",
+      //     closeCallback: (() => {
+      //       popup.element.remove()
+      //       STATE.currentPopup = null
+      //       popup.parent && popup.parent.remove(popup)
+      //     })
+      //   })
+
+      //   newPopup.scale.set(0.08, 0.08, 0.08)
+      //   newPopup.name = 'popup_' + obj.name
+      //   newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+      //   CACHE.container.scene.add(newPopup)
+      //   STATE.currentPopup = newPopup
+
+      // }
+    })
+  }
 }
 
 
@@ -2070,9 +2180,15 @@ function initShelves() {
  * @param {Object} evt container
  */
 function instantiationGroupInfo(arr, name, evt) {
-  // const randomNum = Math.floor(Math.random() * 10000)
 
   arr.forEach((item) => {
+    if (item.userData.type === '机台') {
+      if (!CACHE.instanceNameMap[item.name]) {
+        CACHE.instanceNameMap[item.name] = [];
+      }
+      CACHE.instanceNameMap[item.name].push({ index: CACHE.instanceNameMap[item.name].length, id: item.userData.id })
+    }
+
     item.traverse(child => {
       if (child.isMesh) {
         let position = new Bol3D.Vector3()
@@ -2099,6 +2215,7 @@ function instantiationGroupInfo(arr, name, evt) {
             CACHE.instanceNameMap[item.name] = [];
           }
           CACHE.instanceNameMap[item.name].push({ index: CACHE.instanceNameMap[item.name].length, name: item.userData.name })
+
         }
 
         if (!CACHE.instanceMeshInfo[instanceName])

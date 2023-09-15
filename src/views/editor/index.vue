@@ -67,8 +67,6 @@ import { ElMessage } from 'element-plus'
 
 const modelList = [
   { label: '2LP机台(W01区域)', modelName: '2LPjitai(W01)' },
-  { label: 'FOSB', modelName: 'FOSB' },
-  { label: 'FOUP', modelName: 'FOUP' },
   { label: 'OLUS', modelName: 'OLUS' },
   { label: 'WBS002', modelName: 'WBS002' },
   { label: 'WHWSA01', modelName: 'WHWSA01' },
@@ -139,7 +137,7 @@ function handleSubmit(type) {
       // 模型没变
     } else {
       const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
-      
+
       if (data) {
         data.id = formData.id
         data.type = formData.deviceType
@@ -197,7 +195,7 @@ function insertSubmit(type) {
     DATA.deviceMap.value.push({
       id: formData.id,
       type: formData.deviceType,
-      position: [tempModel.position.x, tempModel.position.y, tempModel.position.z],
+      position: [Number((tempModel.position.x).toFixed(1)), tempModel.position.y, Number((tempModel.position.z).toFixed(1))],
       rotate: formData.rotate
     })
 
@@ -240,12 +238,12 @@ function selectChange(e) {
   }
 
   if (isInsertMode.value) {
-    
+
     const originModel = STATE.sceneList[e]
-    
+
     if (!originModel) return
 
-    
+
     const model = originModel.clone()
     model.position.set(formData.x, 0, formData.z)
     model.rotation.y = Math.PI / 180 * formData.rotate
@@ -259,7 +257,7 @@ function selectChange(e) {
     })
 
     if (control) {
-      
+
       control.attach(model)
       control.object = model
     } else {
@@ -371,7 +369,7 @@ function clickInsert() {
     }
   })
 
-  
+
   if (control) {
     control.attach(model)
     control.object = model

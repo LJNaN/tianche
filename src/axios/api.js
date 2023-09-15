@@ -18,6 +18,12 @@ export function OhtFindCmdId(id = '') {
 }
 
 
+// 机台弹窗信息
+export function GetEqpInfoById(id = '') {
+  return request(`/api/MCS/GetEqpInfoByID/${id}`)
+}
+
+
 // 二维 OHB Storage Ratio
 export function OhbStorageRatio() {
   return request(`/api/MCS/OhbStorageRatio`)
