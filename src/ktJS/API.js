@@ -8,7 +8,7 @@ import mockData from './js/mock'
 import mockData2 from './js/mock2'
 import mockData3 from './js/mock3'
 import mockData4 from './js/mock4'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpInfoById } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetRealTimeEqpState,GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
 // 获取数据
@@ -2016,101 +2016,118 @@ function clickInstance(obj, index) {
   // 接口
   if (title === '机台') {
     const deviceId = items.find(e => e.name === '机台ID').value
-    GetEqpInfoById(deviceId).then(res => {
-      // if (res?.data?.length) {
-      //   const data = res.data[0]
-      //   popup.parent.remove(popup)
-      //   STATE.currentPopup.element.remove()
+    GetRealTimeEqpState(deviceId).then(res => {
+      if (res?.data?.length) {
+        const data = res.data[0]
+        const type = data?.equipmentType == 0 ? 'VEHICLE' : data?.equipmentType == 1 ? 'EQP' : data?.equipmentType == 2 ? 'STC' : data?.equipmentType == 3 ? 'OLUS' : ''
+        const enable = data?.enable == 0 ? '禁用' : data?.enable == 1 ? '启用' : ''
+        const isOnlineState = data?.isOnlineState == 0 ? '离线' : data?.isOnlineState == 1 ? '在线' : ''
 
-      //   let items = [
-      //     { name: '卡匣 ID', value: obj.userData.id || '--' },
-      //     { name: 'Command ID', value: data.commandId || '--' },
-      //     { name: 'User ID', value: '--' },
-      //     { name: '起点', value: data.sourcePort || '--' },
-      //     { name: '终点', value: data.destPort || '--' },
-      //     { name: '优先级', value: data.priority || '--' },
-      //     { name: '当前位置', value: obj.userData.shelf || '--' },
-      //     { name: '当前状态', value: '--' }
-      //   ]
+        popup.parent.remove(popup)
+        STATE.currentPopup.element.remove()
 
-      //   let textValue = ``
-      //   for (let i = 0; i < items.length; i++) {
-      //     textValue += `
-      //               <div style="
-      //                 display: flex;
-      //                 justify-content: space-between;
-      //                 align-items: center;
-      //                 padding: 0 5%;
-      //                 height: 4vh;
-      //                 width: 100%;
-      //                 background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
-      //                 ">
-      //                 <p style="font-size: 2vh;">${items[i].name}</p>
-      //                 <p style="font-size: 2vh;">${items[i].value}</p>
-      //               </div>`
-      //   }
+        let items = [
+          { name: '机台ID', value: deviceId },
+          { name: '机台Type', value: type || '--' },
+          { name: '机台状态', value: enable || '--' },
+          { name: '在线状态', value: isOnlineState || '--' }
+        ]
 
-      //   const newPopup = new Bol3D.POI.Popup3DSprite({
-      //     value: `
-      //               <div style="
-      //                 pointer-events: none;
-      //                 margin:0;
-      //                 color: #ffffff;
-      //               ">
-  
-      //               <div style="
-      //                   position: absolute;
-      //                   background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
-      //                   width: 25vw;
-      //                   height: ${height};
-      //                   transform: translate(-50%, -50%);
-      //                   display: flex;
-      //                   flex-direction: column;
-      //                   left: 50%;
-      //                   top: 50%;
-      //                   z-index: 2;
-      //                 ">
-      //                 <p style="
-      //                   font-size: 2vh;
-      //                   font-weight: bold;
-      //                   letter-spacing: 8px;
-      //                   margin-left: 4px;
-      //                   text-align: center;
-      //                   margin-top: 10%;
-      //                 ">
-      //                   ${title}
-      //                 </p>
-  
-      //                 <div style="
-      //                   display: flex;
-      //                   flex-direction: column;
-      //                   width: 85%;
-      //                   margin: 4% auto 0 auto;
-      //                   height: 100%;
-      //                 ">
-      //                 ${textValue}
-      //                 </div>
-      //               </div>
-      //             </div>
-      //             `,
-      //     position: [0, 0, 0],
-      //     className: `popup3dclass ${className}`,
-      //     closeVisible: true,
-      //     closeColor: "#FFFFFF",
-      //     closeCallback: (() => {
-      //       popup.element.remove()
-      //       STATE.currentPopup = null
-      //       popup.parent && popup.parent.remove(popup)
-      //     })
-      //   })
 
-      //   newPopup.scale.set(0.08, 0.08, 0.08)
-      //   newPopup.name = 'popup_' + obj.name
-      //   newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
-      //   CACHE.container.scene.add(newPopup)
-      //   STATE.currentPopup = newPopup
+        let textValue = ``
+        for (let i = 0; i < items.length; i++) {
+          textValue += `
+      <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        height: 4vh;
+        width: 100%;
+        background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+        ">
+        <p style="font-size: 2vh;">${items[i].name}</p>
+        <p style="font-size: 2vh;">${items[i].value}</p>
+      </div>`
+        }
 
-      // }
+        const newPopup = new Bol3D.POI.Popup3DSprite({
+          value: `
+      <div style="
+        pointer-events: none;
+        margin:0;
+        color: #ffffff;
+      ">
+
+      <div style="
+          position: absolute;
+          background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+          width: 25vw;
+          height: ${height};
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          left: 50%;
+          top: 50%;
+          z-index: 2;
+        ">
+        <p style="
+          font-size: 2vh;
+          font-weight: bold;
+          letter-spacing: 8px;
+          margin-left: 4px;
+          text-align: center;
+          margin-top: 10%;
+        ">
+          ${title}
+        </p>
+
+        <div style="
+          display: flex;
+          flex-direction: column;
+          width: 85%;
+          margin: 4% auto 0 auto;
+          height: 100%;
+        ">
+        ${textValue}
+        </div>
+      </div>
+    </div>
+    `,
+          position: [0, 0, 0],
+          className: `popup3dclass ${className}`,
+          closeVisible: true,
+          closeColor: "#FFFFFF",
+          closeCallback: (() => {
+            popup.element.remove()
+            popup.parent.remove(popup)
+            STATE.currentPopup = null
+
+            new Bol3D.TWEEN.Tween(camera.position)
+              .to(CACHE.tempCameraState.position, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
+
+            new Bol3D.TWEEN.Tween(control.target)
+              .to(CACHE.tempCameraState.target, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
+              .onComplete(() => {
+                control.enabled = true
+                control.saveState()
+                control.reset()
+              })
+          })
+        })
+
+        newPopup.scale.set(0.08, 0.08, 0.08)
+        newPopup.name = 'popup_' + obj.name
+        newPopup.name = name
+        newPopup.position.set(transformInfo.position.x, transformInfo.position.y + 15, transformInfo.position.z)
+        CACHE.container.scene.add(newPopup)
+        STATE.currentPopup = newPopup
+
+      }
     })
   }
 }

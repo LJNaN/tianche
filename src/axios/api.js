@@ -18,9 +18,15 @@ export function OhtFindCmdId(id = '') {
 }
 
 
-// 机台弹窗信息
-export function GetEqpInfoById(id = '') {
-  return request(`/api/MCS/GetEqpInfoByID/${id}`)
+// 实时指令接口
+export function GetRealTimeCmd() {
+  return request(`/api/MOC/GetRealTimeCmd`)
+}
+
+
+// 机台弹窗接口、实时状态接口
+export function GetRealTimeEqpState(id = '') {
+  return request(`/api/MCS/GetRealTimeEqpState/${id}`)
 }
 
 

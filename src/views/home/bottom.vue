@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom">
+  <div class="bottom" :style="{ background: `url('/assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
 
     <div v-if="VUEDATA.selectedItem.value.includes(1)" class="leftdiv">
       <div class="zuyoutp"></div>
@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref, reactive, computed } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { STATE } from '@/ktJS/STATE.js'
@@ -55,6 +55,18 @@ import { API } from '@/ktJS/API.js'
 import { get15Day } from '@/utils/get15Day'
 import { McsDeliveryInfo } from '@/axios/api'
 import { VUEDATA } from '@/VUEDATA'
+
+const bgImg = computed(() => {
+  let imgUrl = ''
+  const targetElements = [1, 2, 3]
+  const matchingElements = VUEDATA.selectedItem.value.filter(e => targetElements.includes(e))
+  if (matchingElements.length === 0) imgUrl = '3'
+  else if (matchingElements.length === 1) imgUrl = '61'
+  else if (matchingElements.length === 2) imgUrl = '62'
+  else if (matchingElements.length === 3) imgUrl = '3'
+
+  return imgUrl
+})
 
 const title = ["报警代码", "异常描述", "天车", "创建时间"];
 
@@ -476,13 +488,12 @@ function getData() {
 
 setInterval(() => {
   getData()
-}, 60 * 1000 * 10);
+}, 30 * 1000);
 
 </script>
 
 <style lang='less' scoped>
 .bottom {
-  background: url("/assets/3d/img/3.png") center / 100% 100% no-repeat;
   word-break: break-all;
   position: absolute;
   display: flex;
@@ -530,6 +541,7 @@ setInterval(() => {
       top: 10%;
       z-index: 2;
       color: #65e019;
+      font-weight: bold;
     }
 
     .table-title {
@@ -578,6 +590,7 @@ setInterval(() => {
       top: 10%;
       z-index: 2;
       color: #f64c3f;
+      font-weight: bold;
     }
   }
 
@@ -606,6 +619,7 @@ setInterval(() => {
       top: 10%;
       z-index: 2;
       color: #f99004;
+      font-weight: bold;
     }
   }
 

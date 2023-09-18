@@ -1,5 +1,5 @@
 <template>
-  <div class="right">
+  <div class="right" :style="{ background: `url('/assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
     <div v-if="VUEDATA.selectedItem.value.includes(5)" class="topdiv">
       <div class="zuyoutp"></div>
       <div class="youtu"></div>
@@ -26,12 +26,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref, reactive, computed } from "vue";
 import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { get15Day } from '@/utils/get15Day'
 import { OhbStorageRatio, GetMTBFInfo, GetMCBFInfo } from '@/axios/api'
 import { VUEDATA } from '@/VUEDATA'
+
+const bgImg = computed(() => {
+  let imgUrl = ''
+  const targetElements = [4, 5, 6]
+  const matchingElements = VUEDATA.selectedItem.value.filter(e => targetElements.includes(e))
+  if (matchingElements.length === 0) imgUrl = '28'
+  else if (matchingElements.length === 1) imgUrl = '59'
+  else if (matchingElements.length === 2) imgUrl = '60'
+  else if (matchingElements.length === 3) imgUrl = '28'
+
+  return imgUrl
+})
 
 const option = reactive({
   backgroundColor: "",
@@ -583,14 +595,13 @@ setInterval(() => {
   //   }
   //   return arr
   // })()
-}, 60 * 1000 * 10);
+}, 30 * 1000);
 
 onMounted(() => { });
 </script>
 
 <style lang="less" scoped>
 .right {
-  background: url("/assets/3d/img/28.png") center / 100% 100% no-repeat;
   word-break: break-all;
   position: absolute;
   right: 0.5%;
@@ -623,6 +634,7 @@ onMounted(() => { });
       top: -12%;
       z-index: 2;
       color: #f64c3f;
+      font-weight: bold;
     }
 
     .youtu {
@@ -662,6 +674,7 @@ onMounted(() => { });
       top: -5%;
       z-index: 2;
       color: #f99004;
+      font-weight: bold;
     }
 
     .inttu {
@@ -699,6 +712,7 @@ onMounted(() => { });
       top: -6%;
       z-index: 2;
       color: #5bae2a;
+      font-weight: bold;
     }
 
     .undertu {

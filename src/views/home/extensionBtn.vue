@@ -37,11 +37,13 @@ const drawerList = [
   { id: 4, name: 'MTBF', color: '#5aac2a' },
   { id: 5, name: 'OHB Storage Ratio', color: '#ce4239' },
   { id: 6, name: 'MCBF', color: '#f99004' },
+  { id: 7, name: '实时指令', color: '#ce4239' },
+  { id: 8, name: '实时设备状态', color: '#f99004' }
 ]
 
 // 二维界面图表部分显隐
-VUEDATA.selectedItem.value = []
-// VUEDATA.selectedItem.value = drawerList.map(e => e.id)
+// VUEDATA.selectedItem.value = []
+VUEDATA.selectedItem.value = drawerList.map(e => e.id)
 
 
 function handleDeviceShow() {
@@ -95,6 +97,7 @@ function handleDrawerItem(id) {
 
 <style lang="less" scoped>
 .chartShow {
+  z-index: 2;
   cursor: pointer;
   pointer-events: all;
   position: absolute;
@@ -109,9 +112,9 @@ function handleDrawerItem(id) {
     margin-left: 150%;
     width: 14vw;
     min-width: 250px;
-    height: 20vh;
     display: flex;
     flex-direction: column;
+    background-color: #0009;
 
     &-item {
       display: flex;
