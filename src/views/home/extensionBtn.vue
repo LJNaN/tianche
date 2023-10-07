@@ -97,7 +97,6 @@ function handleDrawerItem(id) {
 
 <style lang="less" scoped>
 .chartShow {
-  z-index: 2;
   cursor: pointer;
   pointer-events: all;
   position: absolute;
@@ -122,10 +121,11 @@ function handleDrawerItem(id) {
       color: #FFF;
       width: 100%;
       height: 20%;
-      min-height: 24px;
+      min-height: 20px;
       font-weight: bold;
       font-family: Arial, Helvetica, sans-serif;
       letter-spacing: 2px;
+      font-size: 14px;
 
       &-circular {
         width: 14px;

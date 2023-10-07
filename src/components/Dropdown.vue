@@ -97,7 +97,7 @@ function searchCandidate(text) {
   } else if (selected.value === '设备') {
     const arr = []
     DATA.deviceMap.value.forEach(e => {
-      if (e.type.includes(text)) {
+      if (e.id.includes(text)) {
         arr.push(e.id)
       }
     })
@@ -108,7 +108,6 @@ function searchCandidate(text) {
 
 
 function handleItem(item) {
-  console.log(item)
   if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB' || selected.value === '卡匣' || selected.value === '设备') {
     searchText.value = item
   }
@@ -138,15 +137,26 @@ function handleItem(item) {
       API.search(selected.value, searchText.value)
 
     } else if (selected.value === '设备') {
-      const itemSplitArr = item.split('_')
+      
+      let objMap = null
+      let objType = null
+      for (let key in CACHE.instanceNameMap) {
+        const findObj = CACHE.instanceNameMap[key].find(e => e.id === item)
+        if (findObj) {
+          objMap = findObj
+          objType = key
+          break
+        }
+      }
+
       const instanceMesh = CACHE.container.scene.children.find(e =>
         e.isInstancedMesh
-        && e.name.split('_')[0] === itemSplitArr[0]
+        && e.name.split('_')[0] === objType
       )
+      
 
       if (instanceMesh) {
-        const index = itemSplitArr[itemSplitArr.length - 1] - 1
-        API.clickInstance(instanceMesh, index)
+        API.clickInstance(instanceMesh, objMap.index)
       }
     }
   }, 100)
@@ -169,6 +179,7 @@ select option {
   z-index: 2;
   bottom: 1%;
   left: 1%;
+  z-index: 2;
   pointer-events: all;
 }
 
@@ -202,7 +213,7 @@ select option {
 .my-ul {
   width: 23.5%;
   border: 1px solid #ccc;
-  background-color: #0003;
+  background-color: #0009;
   list-style: none;
   color: #ffff;
   text-align: center;
@@ -216,7 +227,6 @@ select option {
   padding: 8px;
   font-size: 14px;
   cursor: pointer;
-  background: transparent;
   border-bottom: 1px solid #bfbfbf;
 
   .li::after {

@@ -1827,11 +1827,9 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-
+  
 
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
-
-
 
   const camera = CACHE.container.orbitCamera
   const control = CACHE.container.orbitControls

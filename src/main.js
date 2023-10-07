@@ -12,11 +12,12 @@ import App from './App.vue'
 import router from "./router/index.js"
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import '@/utils/dateFormat.js'
 
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(router)
 
-if(new Date() * 1 < new Date('2023-9-20') * 1) {
+// if(new Date() * 1 < new Date('2023-10-11') * 1) {
   app.mount('#app')
-}
+// }

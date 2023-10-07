@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom" :style="{ background: `url('/assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
+  <div class="bottom" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
 
     <div v-if="VUEDATA.selectedItem.value.includes(1)" class="leftdiv">
       <div class="zuyoutp"></div>
@@ -483,7 +483,7 @@ function getData() {
     option3.series[0].data = CycleCount
     option3.series[1].data = MFGCount
 
-  })
+  }).catch(() => {})
 }
 
 setInterval(() => {

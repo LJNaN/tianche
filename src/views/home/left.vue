@@ -1,5 +1,5 @@
 <template>
-  <div class="left" :style="{ background: `url('/assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
+  <div class="left" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
     <div v-if="VUEDATA.selectedItem.value.includes(7)" class="cmd">
       <div class="cmd-content">
         <p class="cmd-title">实时指令</p>
@@ -28,8 +28,8 @@
               <p :title="item.destport">
                 <span>{{ item.destport || '--' }}</span>
               </p>
-              <p :title="item.create_time">
-                <span>{{ item.create_time || '--' }}</span>
+              <p :title="item.createTime">
+                <span>{{ item.createTime || '--' }}</span>
               </p>
             </div>
           </el-scrollbar>
@@ -105,12 +105,12 @@ function getData() {
           vehicle: e.vehicle || '--',
           sourceport: e.sourceport || '--',
           destport: e.destport || '--',
-          create_time: e.create_time || '--'
+          createTime: e.createTime ? new Date(e.createTime).format('YYYY-MM-DD hh:mm:ss') : '--'
         })
       })
       cmdList.value = list
     }
-  })
+  }).catch(() => { })
 
   GetRealTimeEqpState().then(res => {
     if (res?.data?.length) {
@@ -125,7 +125,7 @@ function getData() {
       })
       stateList.value = list
     }
-  })
+  }).catch(() => { })
 }
 
 
@@ -143,8 +143,6 @@ onMounted(() => { });
   left: 0.5%;
   top: 19%;
   width: 24.8%;
-  z-index: 2;
-  height: 48%;
 
   .cmd,
   .state {

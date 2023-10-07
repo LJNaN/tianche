@@ -1,5 +1,5 @@
 <template>
-  <div class="right" :style="{ background: `url('/assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
+  <div class="right" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
     <div v-if="VUEDATA.selectedItem.value.includes(5)" class="topdiv">
       <div class="zuyoutp"></div>
       <div class="youtu"></div>
@@ -545,7 +545,7 @@ function getData() {
     option.series[0].data = capacity
     option.series[1].data = used
     option.series[2].data = ohbRatio
-  })
+  }).catch(() => { })
 
   GetMTBFInfo().then(res => {
     const splitArr = res.data.slice(0, 15)
@@ -559,7 +559,7 @@ function getData() {
 
     option2.xAxis[0].data = xAxis
     option2.series[0].data = value
-  })
+  }).catch(() => { })
 
   GetMCBFInfo().then(res => {
     const splitArr = res.data.slice(0, 15)
@@ -573,7 +573,7 @@ function getData() {
 
     option3.xAxis[0].data = xAxis
     option3.series[0].data = value
-  })
+  }).catch(() => { })
 }
 
 
