@@ -81,11 +81,11 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 左右键行为
-            CACHE.container.orbitControls.mouseButtons = {
-             LEFT: Bol3D.MOUSE.PAN,
-            MIDDLE: Bol3D.MOUSE.DOLLY,
-              RIGHT: Bol3D.MOUSE.ROTATE
-            }
+            // CACHE.container.orbitControls.mouseButtons = {
+            //   LEFT: Bol3D.MOUSE.PAN,
+            //   MIDDLE: Bol3D.MOUSE.DOLLY,
+            //   RIGHT: Bol3D.MOUSE.ROTATE
+            // }
 
 
             // 开灯开阴影
@@ -236,7 +236,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.ondblclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
-          
+
           if (VUEDATA.isEditorMode.value) {
             if (obj.userData.type === '机台') {
               const obj2 = CACHE.container.scene.children.find(e2 =>

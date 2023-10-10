@@ -1,0 +1,107 @@
+<template>
+  <div class="slider">
+    <span class="demonstration">小车坐标</span>
+    <el-slider v-model="value1" :min="0" :max="1570000" @input="sliderChange" />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+let car = null
+
+setTimeout(() => {
+  aaa({ "VehicleInfo": [{ "currentSpeed": "400", "distance": "4999", "lastTime": new Date().format('YYYY-MM-DD hh:mm:ss'), "loadE84Error": "0", "loadFoupEmpty": "0", "location": "0", "ohtID": "V0001", "ohtIP": "192.168.150.133", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "0", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "port": "8085", "position": 100000, "rfidMisMatch": "0", "rfidReadError": "1", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "845 8334 6466 5D66 F", "totalExceptionStopCnt": "871", "totalExceptionTime": "155987", "totalMile": "0", "totalPowerOnCnt": "459", "totalPowerOnTime": "9962041", "totalTaskCnt": "64249", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] })
+  car = STATE.sceneList.skyCarList[0]
+}, 5000);
+
+function sliderChange(val) {
+  // const data = { "VehicleInfo": [{ "currentSpeed": "400", "distance": "4999", "lastTime": new Date().format('YYYY-MM-DD hh:mm:ss'), "loadE84Error": "0", "loadFoupEmpty": "0", "location": "0", "ohtID": "V0001", "ohtIP": "192.168.150.133", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "0", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "port": "8085", "position": e, "rfidMisMatch": "0", "rfidReadError": "1", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "845 8334 6466 5D66 F", "totalExceptionStopCnt": "871", "totalExceptionTime": "155987", "totalMile": "0", "totalPowerOnCnt": "459", "totalPowerOnTime": "9962041", "totalTaskCnt": "64249", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] }
+  // aaa(data)
+
+  // 查找起始点、起始坐标
+  car.coordinate = val
+  const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < car.coordinate && e.endCoordinate > car.coordinate)
+  if (!map) {
+    car.acceptData = true
+    return
+  }
+
+  // 坐标区间
+  const mapLong = map.endCoordinate - map.startCoordinate
+  // 查找对应线段
+  const line = CACHE.container.sceneList.guidao.children.find(e => {
+    if (e.name.includes('-')) {
+      const split = e.name.split('-')
+      const start = split[0]
+      const end = split[1]
+      if (start == map.startPoint && end == map.endPoint) {
+        return e
+      }
+    }
+  })
+
+  if (!line) {
+    car.acceptData = true
+    return
+  }
+
+  const { direction, worldPosition, long } = line.userData
+  const longToStart = car.coordinate - map.startCoordinate
+  const longToEnd = map.endCoordinate - car.coordinate
+
+  const currentPosition = new Bol3D.Vector3(0, 0, 0)
+  const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
+  if (direction === 'x') {
+    const moveDirection = map.direction === 'x' ? -1 : 1
+    currentPosition.x = worldPosition.x + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
+    currentPosition.y = worldPosition.y - 9.3
+    currentPosition.z = worldPosition.z
+  } else if (direction === 'z') {
+    const moveDirection = map.direction === 'z' ? -1 : 1
+    currentPosition.x = worldPosition.x
+    currentPosition.y = worldPosition.y - 9.3
+    currentPosition.z = worldPosition.z + (moveDirection * long / 2) - (moveDirection * long * longToStart / (mapLong || 1))
+  }
+
+  lookAtPosition.x = currentPosition.x
+  lookAtPosition.y = currentPosition.y
+  lookAtPosition.z = currentPosition.z
+
+  car.skyCarMesh.lookAt(lookAtPosition)
+
+  if (car.animation) {
+    car.animation.stop()
+    car.animation = null
+  }
+
+  car.animation = new Bol3D.TWEEN.Tween(car.skyCarMesh.position)
+  car.animation.to({
+    x: currentPosition.x,
+    y: currentPosition.y,
+    z: currentPosition.z
+  }, 5000)
+  car.animation.start()
+  car.animation.onComplete(() => {
+    car.acceptData = true
+  })
+
+}
+
+const value1 = ref(0)
+</script>
+
+<style lang="less" scoped>
+.slider {
+  position: absolute;
+  left: 25%;
+  top: 5%;
+  z-index: 4;
+  pointer-events: all;
+  width: 70%;
+
+  .demonstration {
+    color: white;
+  }
+}
+</style>

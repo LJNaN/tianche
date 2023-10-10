@@ -8,7 +8,8 @@ import mockData from './js/mock'
 import mockData2 from './js/mock2'
 import mockData3 from './js/mock3'
 import mockData4 from './js/mock4'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetRealTimeEqpState,GetRealTimeCmd } from '@/axios/api.js'
+import mockData5 from './js/mock5'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
 // 获取数据
@@ -31,14 +32,13 @@ function getData() {
   // =======================================
   // let i = 0
   // setInterval(() => {
-  //   if (i >= mockData4.length) i = 0
-  //   drive(mockData4[i])
+  //   if (i >= mockData5.length) i = 0
+  //   drive(mockData5[i])
   //   i++
   // }, 333)
 
-  // function aaa() {
-  //   drive(mockData3[i])
-  //   i++
+  // function aaa(data) {
+  //   drive(data)
   // }
   // window.aaa = aaa
 }
@@ -61,6 +61,18 @@ function drive(wsMessage) {
             skyCar.setPopupColor()
           }
 
+        } else if (e.ohtStatus_ErrSet === '1') { // 故障
+          if (skyCar.state != 2) {
+            skyCar.state = 2
+            skyCar.setPopupColor()
+          }
+
+        } else if (e.ohtStatus_Roaming === '1') { // 漫游
+          if (skyCar.state != 3) {
+            skyCar.state = 3
+            skyCar.setPopupColor()
+          }
+
         } else if (e.ohtStatus_Quhuoxing === '1') { // 取货行
           if (skyCar.state != 0) {
             skyCar.state = 0
@@ -73,14 +85,6 @@ function drive(wsMessage) {
             skyCar.setPopupColor()
           }
 
-        } else if (e.ohtStatus_Loading === '0' && skyCar.state === 2) { // 完成取货/放货
-          skyCar.state = 1
-
-        } else { // 漫游
-          if (skyCar.state != 3) {
-            skyCar.state = 3
-            skyCar.setPopupColor()
-          }
         }
 
         // 处理变化
@@ -88,7 +92,7 @@ function drive(wsMessage) {
           skyCar.history.old = JSON.parse(JSON.stringify(skyCar.history.new))
           skyCar.history.new = {
             time: new Date() * 1,
-            machineTime: (new Date(e.lastTime) * 1) || (new Date() * 1),
+            machineTime: e.lastTime ? (new Date(e.lastTime) * 1) : (new Date() * 1),
             position: e.position || null,
             location: e.location || null,
             loading: e.ohtStatus_Loading || null,
@@ -104,8 +108,9 @@ function drive(wsMessage) {
             ohtID: e.ohtID || null
           }
 
+          
+          // 除了position改变，有没有动画要放
           let haveAnimation = false
-
           if ((skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1')
             || (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0')
             || (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1')
@@ -284,6 +289,7 @@ function drive(wsMessage) {
         STATE.sceneList.skyCarList.push(newCar)
         newCar.history.new = {
           time: new Date() * 1,
+          machineTime: e.lastTime ? (new Date(e.lastTime) * 1) : (new Date() * 1),
           position: e.position || null,
           location: e.location || null,
           loading: e.ohtStatus_Loading || null,
@@ -302,6 +308,57 @@ function drive(wsMessage) {
         newCar.history.old = Object.assign({}, newCar.history.new)
         newCar.coordinate = e.position
         newCar.setPosition(0)
+
+        if (e.ohtStatus_IsHaveFoup === '1') {
+          OhtFindCmdId(newCar.id).then(res => {
+            const kaxiaId = res.data.carrierid
+            if (!kaxiaId) {
+              return
+            }
+
+            const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === kaxiaId)
+            if (kaxia) {
+              kaxia.parent.remove(kaxia)
+              kaxia.position.set(0, -0.35, 0)
+              kaxia.scale.set(3, 3, 3)
+              kaxia.rotation.y = -Math.PI / 2
+              const group = newCar.skyCarMesh.children.find(e => e.name === 'tianche02')
+              if (group) {
+                group.add(kaxia)
+                newCar.catch = kaxia
+              }
+              kaxia.area = ''
+              kaxia.shelf = ''
+              kaxia.shelfIndex = -1
+            } else {
+              const newKaxia = STATE.sceneList.FOUP.clone()
+              newKaxia.userData.area = ''
+              newKaxia.userData.shelf = ''
+              newKaxia.userData.shelfIndex = -1
+              newKaxia.userData.type = 'kaxia'
+              newKaxia.scale.set(3, 3, 3)
+              newKaxia.position.set(0, -0.35, 0)
+              newKaxia.rotation.y = -Math.PI / 2
+              newKaxia.visible = true
+              newKaxia.traverse(e2 => {
+                if (e2.isMesh) {
+                  e2.userData.id = newKaxia.userData.id
+                  e2.userData.area = newKaxia.userData.area
+                  e2.userData.shelf = newKaxia.userData.shelf
+                  e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+                  e2.userData.type = newKaxia.userData.type
+                  CACHE.container.clickObjects.push(e2)
+                }
+              })
+              const group = newCar.skyCarMesh.children.find(e => e.name === 'tianche02')
+              if (group) {
+                group.add(newKaxia)
+                newCar.catch = newKaxia
+              }
+            }
+            console.log('11')
+          })
+        }
       }
     })
   }
@@ -873,9 +930,11 @@ class SkyCar {
           data['终点'] = res.data[key] || '--'
         } else if (key === 'status') {
           if (res.data[key] === '0') {
-            data['当前状态'] = '关闭'
+            // data['当前状态'] = '关闭'
+            data['当前状态'] = DATA.skyCarStateColorMap.find(e => e.id === this.state).name
           } else if (res.data[key] === '1') {
-            data['当前状态'] = '开启'
+            // data['当前状态'] = '开启'
+            data['当前状态'] = DATA.skyCarStateColorMap.find(e => e.id === this.state).name
           } else {
             data['当前状态'] = '--'
           }
@@ -968,13 +1027,16 @@ class SkyCar {
 
     if (this.animation) {
       this.animation.stop()
+      this.animation = null
+
     }
+
     this.animation = new Bol3D.TWEEN.Tween(this.skyCarMesh.position)
     this.animation.to({
       x: currentPosition.x,
       y: currentPosition.y,
       z: currentPosition.z
-    }, haveAnimation ? 500 / 4 : 500)
+    }, haveAnimation ? time / 4 : time)
     this.animation.start()
     this.animation.onComplete(() => {
       cb && cb()
@@ -1088,7 +1150,7 @@ class SkyCar {
 
     this.mixer.addEventListener('finished', function finished_shen(e) {
       if (e.action.name === 'shen' || e.action.name === 'shen1') {
-        if (this.catchDirection === 'right') {
+        if (this_.catchDirection === 'right') {
           this_.actions.shen.enabled = false
           this_.actions.fang.enabled = true
           this_.actions.fang.time = 0
@@ -1143,7 +1205,7 @@ class SkyCar {
 
       this.actions.shou.paused = false
       this.actions.shou.reset()
-      this.actions.shou.time = 2.2
+      this.actions.shou.time = 2.9
       this.actions.shou.play()
     } else {
       this.actions.shou.enabled = false
@@ -1827,7 +1889,7 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-  
+
 
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
 
@@ -2370,6 +2432,9 @@ function getPositionByKaxiaLocation(location) {
 function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
   GetCarrierInfo().then(res => {
+    if (!res?.data) {
+      return
+    }
 
     res.data.forEach(e => {
       if (e.carrierType !== '0' && e.carrierType !== '1') {

@@ -5,6 +5,7 @@ import Header from '@/components/header.vue'
 import Right from './right.vue'
 import Left from './left.vue'
 import Bottom from './bottom.vue'
+import Test from './test.vue'
 import ExtensionBtn from './extensionBtn.vue'
 import Compass from '@/components/compass.vue';
 import { VUEDATA } from '@/VUEDATA'
@@ -19,6 +20,7 @@ import { VUEDATA } from '@/VUEDATA'
     <Right></Right>
     <Bottom></Bottom>
     <ExtensionBtn></ExtensionBtn>
+    <!-- <Test></Test> -->
   </div>
 </template>
 

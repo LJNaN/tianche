@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 // 坐标和轨道映射
 const pointCoordinateMap = [
-  { name: '14_13', direction: 'x', startPoint: 14, endPoint: 13, startCoordinate: 171829, endCoordinate: 174100, status: 1 },
+  { name: '14_13', direction: '-x', startPoint: 14, endPoint: 13, startCoordinate: 171829, endCoordinate: 174100, status: 1 },
   { name: '14_15', direction: '-z', startPoint: 14, endPoint: 15, startCoordinate: 171600, endCoordinate: 171828, status: 1 },
   { name: '16_17', direction: 'z', startPoint: 16, endPoint: 17, startCoordinate: 180000, endCoordinate: 180900, status: 1 },
   { name: '18_17', direction: '-x', startPoint: 18, endPoint: 17, startCoordinate: 274340, endCoordinate: 276160, status: 1 },
@@ -42,7 +42,6 @@ const pointCoordinateMap = [
   { name: '47_48', direction: 'x', startPoint: 47, endPoint: 48, startCoordinate: 416220, endCoordinate: 420020, status: 1 },
   { name: '48_49', direction: 'x', startPoint: 48, endPoint: 49, startCoordinate: 420100, endCoordinate: 424340, status: 1 },
   { name: '49_50', direction: '-z', startPoint: 49, endPoint: 50, startCoordinate: 841000, endCoordinate: 841580, status: 1 },
-  { name: '50_37', direction: '', startPoint: 50, endPoint: 37, startCoordinate: 384000, endCoordinate: 391520, status: 1 },
   { name: '41_42', direction: 'x', startPoint: 41, endPoint: 42, startCoordinate: 829000, endCoordinate: 834720, status: 1 },
   { name: '45_46', direction: 'x', startPoint: 45, endPoint: 46, startCoordinate: 834900, endCoordinate: 840820, status: 1 },
   { name: '29_51', direction: '-x', startPoint: 29, endPoint: 51, startCoordinate: 281000, endCoordinate: 287060, status: 1 },
@@ -61,7 +60,7 @@ const pointCoordinateMap = [
   { name: '66_67', direction: '-x', startPoint: 66, endPoint: 67, startCoordinate: 19981, endCoordinate: 30800, status: 1 },
   { name: '67_68', direction: 'z', startPoint: 67, endPoint: 68, startCoordinate: 30801, endCoordinate: 34600, status: 1 },
   { name: '68_69', direction: 'x', startPoint: 68, endPoint: 69, startCoordinate: 34601, endCoordinate: 37400, status: 1 },
-  { name: '69_70', direction: '-x', startPoint: 69, endPoint: 70, startCoordinate: 37401, endCoordinate: 39020, status: 1 },
+  { name: '69_70', direction: '-z', startPoint: 69, endPoint: 70, startCoordinate: 37401, endCoordinate: 39020, status: 1 },
   { name: '70_64', direction: 'x', startPoint: 70, endPoint: 64, startCoordinate: 39021, endCoordinate: 42360, status: 1 },
   { name: '64_63', direction: 'x', startPoint: 64, endPoint: 63, startCoordinate: 42440, endCoordinate: 43420, status: 1 },
   { name: '63_65', direction: 'x', startPoint: 63, endPoint: 65, startCoordinate: 43540, endCoordinate: 45060, status: 1 },
@@ -75,12 +74,11 @@ const pointCoordinateMap = [
   { name: '12_15', direction: 'x', startPoint: 12, endPoint: 15, startCoordinate: 921121, endCoordinate: 924080, status: 1 },
   { name: '15_16', direction: 'x', startPoint: 15, endPoint: 16, startCoordinate: 924180, endCoordinate: 929300, status: 1 },
   { name: '16_19', direction: 'x', startPoint: 16, endPoint: 19, startCoordinate: 929301, endCoordinate: 931800, status: 1 },
-  { name: '19_20', direction: '', startPoint: 19, endPoint: 20, startCoordinate: 931900, endCoordinate: 945540, status: 1 },
   { name: '20_1', direction: '-z', startPoint: 20, endPoint: 1, startCoordinate: 852700, endCoordinate: 853280, status: 1 },
   { name: '2_3', direction: '-x', startPoint: 2, endPoint: 3, startCoordinate: 842000, endCoordinate: 846640, status: 1 },
   { name: '6_7', direction: '-x', startPoint: 6, endPoint: 7, startCoordinate: 846800, endCoordinate: 851720, status: 1 },
   { name: '12_13', direction: 'z', startPoint: 12, endPoint: 13, startCoordinate: 78000, endCoordinate: 79000, status: 1 },
-  { name: '65_66', direction: '-x', startPoint: 65, endPoint: 66, startCoordinate: 46140, endCoordinate: 47340, status: 1 },
+  { name: '65_66', direction: '-z', startPoint: 65, endPoint: 66, startCoordinate: 46140, endCoordinate: 47340, status: 1 },
   { name: '65_71', direction: 'x', startPoint: 65, endPoint: 71, startCoordinate: 45061, endCoordinate: 46060, status: 1 },
   { name: '73_75', direction: '-x', startPoint: 73, endPoint: 75, startCoordinate: 48000, endCoordinate: 48160, status: 1 },
   { name: '75_76', direction: '-x', startPoint: 75, endPoint: 76, startCoordinate: 48161, endCoordinate: 49680, status: 1 },
@@ -90,7 +88,7 @@ const pointCoordinateMap = [
   { name: '79_80', direction: 'x', startPoint: 79, endPoint: 80, startCoordinate: 63701, endCoordinate: 75200, status: 1 },
   { name: '80_75', direction: '-z', startPoint: 80, endPoint: 75, startCoordinate: 75520, endCoordinate: 77180, status: 1 },
   { name: '80_74', direction: 'x', startPoint: 80, endPoint: 74, startCoordinate: 75201, endCoordinate: 75420, status: 1 },
-  { name: '4_2', direction: '-x', startPoint: 4, endPoint: 2, startCoordinate: 0, endCoordinate: 0, status: 1 },
+  { name: '4_2', direction: '-z', startPoint: 4, endPoint: 2, startCoordinate: 0, endCoordinate: 0, status: 1 },
   { name: '46_48', direction: '-z', startPoint: 46, endPoint: 48, startCoordinate: 0, endCoordinate: 0, status: 1 },
   { name: '3_5', direction: 'z', startPoint: 3, endPoint: 5, startCoordinate: 0, endCoordinate: 0, status: 1 },
   { name: '8_6', direction: '-x', startPoint: 8, endPoint: 6, startCoordinate: 0, endCoordinate: 0, status: 1 },
@@ -168,8 +166,10 @@ const pointCoordinateMap = [
   { name: '105_106', direction: 'x', startPoint: 105, endPoint: 106, startCoordinate: 1437000, endCoordinate: 1438840, status: 1 },
   { name: '59_60', direction: '-x', startPoint: 59, endPoint: 60, startCoordinate: 11241, endCoordinate: 12700, status: 1 }
 ]
-// 暂时摆一下设备位置
+
+// 摆设备位置
 const deviceMap = ref(window.deviceMap)
+
 // 模拟天车位置
 const skyCarMap = [{
   id: 'V0001',
@@ -217,6 +217,7 @@ const skyCarMap = [{
   id: 'V0015',
   coordinate: Math.floor(Math.random() * 1500000)
 }]
+
 // 天车弹窗的状态、颜色、图片状态
 const skyCarStateColorMap = [
   { id: 0, name: '小车去起始地取货走行中', color: '#00fbf8', img: [39, 40, 12] },
@@ -226,6 +227,7 @@ const skyCarStateColorMap = [
   { id: 4, name: '小车发生故障', color: '#fd0100', img: [31, 32, 13] },
   { id: 5, name: '小车上线前状态', color: '#7d7d7d', img: [41, 42, 12] }
 ]
+
 // OHB 货架
 const shelvesMap = {
   "WBW01G01": {
