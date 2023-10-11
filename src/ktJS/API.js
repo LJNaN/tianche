@@ -4,11 +4,8 @@ import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
-import mockData from './js/mock'
+import mockData1 from './js/mock1'
 import mockData2 from './js/mock2'
-import mockData3 from './js/mock3'
-import mockData4 from './js/mock4'
-import mockData5 from './js/mock5'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
@@ -19,12 +16,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -37,10 +34,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // function aaa(data) {
-  //   drive(data)
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData1[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -49,7 +48,7 @@ function drive(wsMessage) {
   // 处理天车
   if (wsMessage?.VehicleInfo?.length) {
     wsMessage.VehicleInfo.forEach(e => {
-      const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
+      let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
 
       if (skyCar) {
         if (!skyCar.acceptData) return
@@ -62,14 +61,20 @@ function drive(wsMessage) {
           }
 
         } else if (e.ohtStatus_ErrSet === '1') { // 故障
-          if (skyCar.state != 2) {
-            skyCar.state = 2
+          if (skyCar.state != 4) {
+            skyCar.state = 4
             skyCar.setPopupColor()
           }
 
         } else if (e.ohtStatus_Roaming === '1') { // 漫游
           if (skyCar.state != 3) {
             skyCar.state = 3
+            skyCar.setPopupColor()
+          }
+
+        } else if (e.ohtStatus_Loading === '1' || e.ohtStatus_UnLoading === '1') { // 取货、放货中
+          if (skyCar.state != 2) {
+            skyCar.state = 2
             skyCar.setPopupColor()
           }
 
@@ -108,7 +113,7 @@ function drive(wsMessage) {
             ohtID: e.ohtID || null
           }
 
-          
+
           // 除了position改变，有没有动画要放
           let haveAnimation = false
           if ((skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1')
@@ -121,11 +126,6 @@ function drive(wsMessage) {
           function onComplete() {
             // 处理状态
             if (skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1') { // 装载开始
-              if (skyCar.state != 2) {
-                skyCar.state = 2
-                skyCar.setPopupColor()
-              }
-
               // 找离天车最近的货架
               let distance = 0
               let shelf = null
@@ -207,11 +207,6 @@ function drive(wsMessage) {
               skyCar.up(cb)
 
             } else if (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1') { // 卸货开始
-              if (skyCar.state != 2) {
-                skyCar.state = 2
-                skyCar.setPopupColor()
-              }
-
               const cb = () => {
                 if (skyCar.catch) {
                   const positionData = getPositionByKaxiaLocation(skyCar.location)
@@ -308,62 +303,69 @@ function drive(wsMessage) {
         newCar.history.old = Object.assign({}, newCar.history.new)
         newCar.coordinate = e.position
         newCar.setPosition(0)
+        skyCar = newCar
+      }
 
-        if (e.ohtStatus_IsHaveFoup === '1') {
-          OhtFindCmdId(newCar.id).then(res => {
+
+      // 单独依据 IsHaveFoup 来给所有其值为 1 的天车绑上 FOUP
+      if (e.ohtStatus_IsHaveFoup === '1') {
+        if (!skyCar.catch) {
+          const newKaxia = STATE.sceneList.FOUP.clone()
+          newKaxia.userData.area = ''
+          newKaxia.userData.shelf = ''
+          newKaxia.userData.shelfIndex = -1
+          newKaxia.userData.type = 'kaxia'
+          newKaxia.userData.id = '00000000'
+          newKaxia.scale.set(3, 3, 3)
+          newKaxia.position.set(0, -0.35, 0)
+          newKaxia.rotation.y = -Math.PI / 2
+          newKaxia.visible = true
+          STATE.sceneList.kaxiaList.children.push(newKaxia)
+          skyCar.catch = newKaxia
+
+          const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
+          group.add(newKaxia)
+
+          newKaxia.traverse(e2 => {
+            if (e2.isMesh) {
+              e2.userData.id = '00000000'
+              e2.userData.area = newKaxia.userData.area
+              e2.userData.shelf = newKaxia.userData.shelf
+              e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+              e2.userData.type = newKaxia.userData.type
+              CACHE.container.clickObjects.push(e2)
+            }
+          })
+
+          OhtFindCmdId(skyCar.id).then(res => {
             const kaxiaId = res.data.carrierid
             if (!kaxiaId) {
               return
             }
 
-            const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === kaxiaId)
-            if (kaxia) {
-              kaxia.parent.remove(kaxia)
-              kaxia.position.set(0, -0.35, 0)
-              kaxia.scale.set(3, 3, 3)
-              kaxia.rotation.y = -Math.PI / 2
-              const group = newCar.skyCarMesh.children.find(e => e.name === 'tianche02')
-              if (group) {
-                group.add(kaxia)
-                newCar.catch = kaxia
-              }
-              kaxia.area = ''
-              kaxia.shelf = ''
-              kaxia.shelfIndex = -1
-            } else {
-              const newKaxia = STATE.sceneList.FOUP.clone()
-              newKaxia.userData.area = ''
-              newKaxia.userData.shelf = ''
-              newKaxia.userData.shelfIndex = -1
-              newKaxia.userData.type = 'kaxia'
-              newKaxia.scale.set(3, 3, 3)
-              newKaxia.position.set(0, -0.35, 0)
-              newKaxia.rotation.y = -Math.PI / 2
-              newKaxia.visible = true
-              newKaxia.traverse(e2 => {
-                if (e2.isMesh) {
-                  e2.userData.id = newKaxia.userData.id
-                  e2.userData.area = newKaxia.userData.area
-                  e2.userData.shelf = newKaxia.userData.shelf
-                  e2.userData.shelfIndex = newKaxia.userData.shelfIndex
-                  e2.userData.type = newKaxia.userData.type
-                  CACHE.container.clickObjects.push(e2)
-                }
-              })
-              const group = newCar.skyCarMesh.children.find(e => e.name === 'tianche02')
-              if (group) {
-                group.add(newKaxia)
-                newCar.catch = newKaxia
-              }
+            const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
+            if (kaxiaIndex >= 0) {
+              STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
+              STATE.sceneList.kaxiaList.splice(kaxiaIndex, 1)
             }
-            console.log('11')
+
+            newKaxia.userData.id = kaxiaId
+            newKaxia.traverse(e2 => {
+              if (e2.isMesh) {
+                e2.userData.id = kaxiaId
+                e2.userData.area = newKaxia.userData.area
+                e2.userData.shelf = newKaxia.userData.shelf
+                e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+                e2.userData.type = newKaxia.userData.type
+              }
+            })
           })
         }
       }
     })
   }
 
-  // // 处理报警
+  // 处理报警
   if (wsMessage?.AlarmInfo?.length) {
     if (STATE.alarmList) {
       const list = wsMessage.AlarmInfo.slice(0, 20)
