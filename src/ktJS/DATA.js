@@ -1037,6 +1037,7 @@ const shelvesDirection = {
     'W05-01'
   ]
 }
+
 export const DATA = {
   pointCoordinateMap,
   skyCarMap,

@@ -29,14 +29,14 @@ function getData() {
   // =======================================
   // let i = 0
   // setInterval(() => {
-  //   if (i >= mockData5.length) i = 0
-  //   drive(mockData5[i])
+  //   if (i >= mockData1.length) i = 0
+  //   drive(mockData1[i])
   //   i++
   // }, 333)
 
   let i = 0
   function aaa() {
-    drive(mockData1[i])
+    drive(mockData2[i])
     i++
   }
   window.aaa = aaa
@@ -255,7 +255,7 @@ function drive(wsMessage) {
               skyCar.acceptData = true
             }
 
-            if (skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.history.new.loading != '1') {
+            if (skyCar.history.new.isHaveFoup === '0' && skyCar.catch) {
               skyCar.catch.parent.remove(skyCar.catch)
               skyCar.catch = null
             }
@@ -265,6 +265,9 @@ function drive(wsMessage) {
           if ((skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') || (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')) {
             const time = skyCar.history.new.machineTime - skyCar.history.old.machineTime
             skyCar.acceptData = false
+            setTimeout(() => {
+              skyCar.acceptData = true
+            }, 3000)
             skyCar.setPosition(time, onComplete, true, haveAnimation)
 
           } else if (skyCar.history.old?.position != skyCar.history.new?.position) {
@@ -272,9 +275,15 @@ function drive(wsMessage) {
             const time = skyCar.history.new.machineTime - skyCar.history.old.machineTime
             skyCar.coordinate = skyCar.history.new.position
             skyCar.acceptData = false
+            setTimeout(() => {
+              skyCar.acceptData = true
+            }, 3000)
             skyCar.setPosition(time, onComplete, false, haveAnimation)
           } else {
             skyCar.acceptData = false
+            setTimeout(() => {
+              skyCar.acceptData = true
+            }, 3000)
             onComplete()
           }
         }
@@ -359,7 +368,12 @@ function drive(wsMessage) {
                 e2.userData.type = newKaxia.userData.type
               }
             })
-          })
+          }).catch(() => { })
+        }
+      } else {
+        if (skyCar.catch) {
+          skyCar.catch.parent.remove(skyCar.catch)
+          skyCar.catch = null
         }
       }
     })
@@ -592,28 +606,42 @@ function testBox() {
 
 // 算所有线段的中心点及长度等
 function handleLine() {
-  STATE.sceneList.guidao.traverse(child => {
-    if (child.isMesh && child.name.includes('-')) {
-      child.geometry.computeBoundingBox()
-      child.geometry.computeBoundingSphere()
-      // const { center, radius } = child.geometry.boundingSphere
-      const { max, min } = child.geometry.boundingBox
-      const size = new Bol3D.Vector3((max.x - min.x) * STATE.sceneScale, (max.y - min.y) * STATE.sceneScale, (max.z - min.z) * STATE.sceneScale)
+  STATE.sceneList.guidao.children.forEach(e => {
+    if (e.name.includes('X-')) {
+      e.visible = true
+      e.geometry.computeBoundingBox()
+      e.geometry.computeBoundingSphere()
+      const { max, min } = e.geometry.boundingBox
+      const size = new Bol3D.Vector3((max.x - min.x) * STATE.sceneScale, 0, (max.z - min.z) * STATE.sceneScale)
       // 查找x,z最长的  作为运动方向
       const long = Math.max(size.x, size.z)
       const direction = long === size.x ? 'x' : 'z'
+      e.userData.direction = direction
+      e.userData.long = long
 
-      // 计算线段的世界坐标
-      const lineWorldPosition = new Bol3D.Vector3()
-      child.getWorldPosition(lineWorldPosition)
+      const { array } = e.geometry.attributes.position
+      const arr = []
+      for (let i = 0; i < array.length; i++) {
+        const point = array.slice(i, i + 3)
+        if (point[1] > 0.0428 && point[1] < 0.0429) {
+          // point[0] += e.position.x
+          // point[1] += e.position.y
+          // point[2] += e.position.z
+          arr.push(point)
+        }
+      }
+      STATE.sceneList.linePosition[e.name.split('X-')[1]] = arr
+
+    }
+  })
+
+
+
+  STATE.sceneList.guidao.traverse(child => {
+    if (child.isMesh && child.name.includes('-') && !child.name.includes('X-')) {
       CACHE.container.clickObjects.push(child)
-
-      child.userData.direction = direction
-      child.userData.worldPosition = lineWorldPosition
-      child.userData.long = long
       child.userData.id = child.name.replace('-', '_')
       child.userData.type = '轨道'
-
       if (!STATE.sceneList.lineList) {
         STATE.sceneList.lineList = []
       }
@@ -714,11 +742,12 @@ class SkyCar {
           background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[1]}.png') center / 100% 100% no-repeat;
           width: 8vw;
           height: 10vh;
-          animation: arrowJump 1s linear infinite;
+          transform: translate(-50%,60%);
         ">
         </div>
       </div>
     `,
+      // animation: arrowJump 1s linear infinite;
       position: [0, 0, 0],
       className: 'popup3dclass popup3d_tianche',
       closeVisible: false
@@ -1002,6 +1031,38 @@ class SkyCar {
       cb && cb()
       return
     }
+
+
+    // 查找一下history.old的线段。是不是跟我们新对应到的线段接壤的
+    if (this.history?.old?.position) {
+      const oldMap = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.history.old.position && e.endCoordinate > this.history.old.position)
+      if (!oldMap) {
+        time = 0
+
+      } else {
+        // 如果不在同一根轨道上
+        if (oldMap != map) {
+          const oldLine = CACHE.container.sceneList.guidao.children.find(e => {
+            if (e.name.includes('-')) {
+              const split = e.name.split('-')
+              const start = split[0]
+              const end = split[1]
+              if (start == oldMap.startPoint && end == oldMap.endPoint) {
+                return e
+              }
+            }
+          })
+
+          // 旧轨道的终点点位 不等于 新轨道的起点点位 那么就瞬移
+          if (oldLine.name.split('-')[1] != line.name.split('-')[0]) {
+            time = 0
+          }
+        }
+      }
+    }
+
+
+
 
     const { direction, worldPosition, long } = line.userData
     const longToStart = this.coordinate - map.startCoordinate

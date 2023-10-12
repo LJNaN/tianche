@@ -204,7 +204,6 @@ const option2 = reactive({
   },
   yAxis: [
     {
-      max: 300,
       type: "value",
       nameTextStyle: {
         color: "#fff",

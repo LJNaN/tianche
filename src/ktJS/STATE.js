@@ -10,7 +10,8 @@ const sceneScale = 10 // 场景放大10倍
 
 const sceneList = {
   shelvesList: [], // 货架状态表
-  kaxiaList: new Bol3D.Group() // 卡匣状态表
+  kaxiaList: new Bol3D.Group(), // 卡匣状态表
+  linePosition: {}
 }
 
 const clock = new Bol3D.Clock()
