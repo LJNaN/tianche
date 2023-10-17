@@ -1,7 +1,7 @@
 <template>
   <div class="slider">
     <span class="demonstration">小车坐标</span>
-    <el-slider v-model="value1" :min="1500000" :max="1800000" @input="sliderChange" />
+    <el-slider v-model="value1" :min="854000" :max="869240" @input="sliderChange" />
   </div>
 </template>
 
@@ -58,7 +58,7 @@ function sliderChange(val) {
   const process = longToStart / mapLong
 
   const currentPositionArray = linePosition[Math.floor(linePosition.length * process)]
-  const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 27.3, currentPositionArray[2] * STATE.sceneScale)
+  const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 28.3, currentPositionArray[2] * STATE.sceneScale)
   const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
 
   lookAtPosition.x = currentPosition.x

@@ -29,8 +29,8 @@ function getData() {
   // =======================================
   // let i = 0
   // setInterval(() => {
-  //   if (i >= mockData1.length) i = 0
-  //   drive(mockData1[i])
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
   //   i++
   // }, 333)
 
@@ -629,8 +629,8 @@ function handleLine() {
       }
 
 
-      const reserveList = ['66-67','57-58','58-59','68-69','69-70','70-64','63-65','65-71','75-76','77-78','79-80','13-21','21-25','25-29','30-31','31-32','31-34','21-22','16-17','17-23','27-35','35-36','35-38','23-24','56-91','90-95','95-96','55-73','74-72','71-53','53-52','53-54','114-37','36-33','32-39','39-40','40-43','44-47','47-78','48-49','50-119','118-115','41-42','45-46','49-50','2-3','6-7','10-11','1-4','4-5','5-8','9-10','10-81','81-82','82-83','86-89','11-12','12-15','15-16','19-97','100-101','104-20','98-105','105-109','109-113','113-116','105-106','102-107','111-117','111-107','107-108','84-87','87-88','88-85','93-94','73-75','43-41','42-44','47-45','46-48','117-120','47-48','53-54','80-74']
-      if(reserveList.includes(e.name.split('X-')[1])) {
+      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '114-37', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '111-107', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74']
+      if (reserveList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
 
@@ -683,6 +683,7 @@ class SkyCar {
   coordinate = 0           // 当前坐标
   history = {}             // 两条历史数据 new/old
   state = 0                // 状态
+  oldClock = 0             // 上一次刷新时的 clock.elapsedTime()
   id = ''                  // id
   skyCarMesh = null        // 天车模型
   popup = null             // 默认弹窗
@@ -694,7 +695,8 @@ class SkyCar {
   catchDirection = 'left'  // 抓取方向
   alert = false            // 是否为报警状态
   run = true               // 天车是否可以走
-  runSpeed = 1             // 天车行走的速度
+  runSpeed = 2             // 天车行走的速度
+  quickenSpeedTimes = 2    // 天车追赶时的倍速
   line = ''                // 是在哪一根线上
   lineIndex = 0            // 当前线上面的索引
 
@@ -1009,6 +1011,13 @@ class SkyCar {
 
   runRender() {
     requestAnimationFrame(this.runRender.bind(this))
+    const t = STATE.clock.getElapsedTime()
+    const frameRate = 1 / (t - this.oldClock)
+    this.oldClock = t
+
+    this.runSpeed = Math.round((1 / (frameRate / 60)) * 2)
+    console.log('this.runSpeed: ', this.runSpeed);
+
 
     if (!this.run) return
 
@@ -1020,6 +1029,7 @@ class SkyCar {
     }
 
     // 如果前面还有路，就往前走
+
     if (this.lineIndex < STATE.sceneList.linePosition[this.line].length - this.runSpeed) {
       this.lineIndex += this.runSpeed
       this.setPosition()
@@ -1093,11 +1103,8 @@ class SkyCar {
         go()
 
       } else if (oldLine === lineInfo.line && oldLineIndex < lineInfo.lineIndex) {
-        this.runSpeed = 5
+        this.runSpeed *= this.quickenSpeedTimes
         go()
-
-      } else {
-        this.runSpeed = 1
       }
 
     } else {
@@ -1113,7 +1120,7 @@ class SkyCar {
         const currentPositionArray = linePosition[this_.lineIndex]
         if (!currentPositionArray) return
 
-        const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 27.3, currentPositionArray[2] * STATE.sceneScale)
+        const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 28.3, currentPositionArray[2] * STATE.sceneScale)
         const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
 
         lookAtPosition.x = currentPosition.x
@@ -1465,7 +1472,7 @@ function initDeviceByMap() {
 function search(type, id) {
 
   // 恢复动画销毁为false
-  STATE.searchAnimateDesdory = false
+  STATE.searchAnimateDestroy = false
 
   // 找到当前 obj
   let obj = null
@@ -1539,7 +1546,7 @@ function search(type, id) {
             e.clickPopup = null
           }
         })
-        STATE.searchAnimateDesdory = true
+        STATE.searchAnimateDestroy = true
         control.removeEventListener('start', eventFunc)
 
 
@@ -1696,7 +1703,7 @@ function search(type, id) {
 
 
       const eventFunc = () => {
-        STATE.searchAnimateDesdory = true
+        STATE.searchAnimateDestroy = true
         obj.material.color = color
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
@@ -1849,7 +1856,7 @@ function search(type, id) {
         .start()
 
       const eventFunc = () => {
-        STATE.searchAnimateDesdory = true
+        STATE.searchAnimateDestroy = true
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
 
@@ -1965,7 +1972,7 @@ function search(type, id) {
       obj.getWorldPosition(objWorldPosition)
 
       TWEEN.update();
-      if (STATE.searchAnimateDesdory) {
+      if (STATE.searchAnimateDestroy) {
         return
       } else {
         animate()

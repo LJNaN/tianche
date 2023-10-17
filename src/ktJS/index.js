@@ -104,6 +104,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             //   }
             // })
 
+
+
             container.orbitCamera.position.set(STATE.initialState.position.x, STATE.initialState.position.y, STATE.initialState.position.z)
             container.orbitControls.target.set(STATE.initialState.target.x, STATE.initialState.target.y, STATE.initialState.target.z)
 
@@ -119,15 +121,20 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             })
 
             // 主场景处理
-            STATE.sceneList.guidao.traverse(e => {
-              if (e.isMesh && e.name === 'di') {
-                // 地板马赛克处理
-                // const map = e.material.map.clone()
-                e.material = new Bol3D.MeshLambertMaterial({ color: '#717880' })
-                // e.material.map = map
-                // e.material.map.needsUpdate = true
-              }
-            })
+            setTimeout(() => [
+              STATE.sceneList.guidao.traverse(e => {
+                if (e.isMesh && e.name === 'di') {
+                  // 地板马赛克处理
+                  // const map = e.material.map.clone()
+                  e.material = new Bol3D.MeshLambertMaterial({ color: '#717880' })
+                  // e.material.map = map
+                  // e.material.map.needsUpdate = true
+  
+                } else if (e.name.includes('X-')) { // 隐藏红线
+                  e.visible = false
+                }
+              })
+            ], 0)
 
             // WBS002 处理
             STATE.sceneList.WBS002.children[1].position.x = 0

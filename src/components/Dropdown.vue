@@ -112,7 +112,7 @@ function handleItem(item) {
     searchText.value = item
   }
 
-  STATE.searchAnimateDesdory = true
+  STATE.searchAnimateDestroy = true
   setTimeout(() => {
     if (selected.value === '轨道' || selected.value === '天车') {
       API.search(selected.value, searchText.value)

@@ -62,8 +62,10 @@ const deviceMap = [
   { type: "OLUS", id: "WOLUS03", rotate: 0, position: [-133, 0, -60] },
   { type: "OLUS", id: "WWS037", rotate: 0, position: [-141, 0, -60] },
   { type: "WMACB03", id: "WWS037", rotate: 180, position: [-228, 0, -62] },
+  { type: "WMACB03", id: "WTSTK01", rotate: 0, position: [-20, 0, 256] },
+  { type: "WMACB03", id: "WTSTK02", rotate: 0, position: [105, 0, 256] },
   { type: "WMACB03", id: "WTSTK03", rotate: 180, position: [-194, 0, -62] },
-  { type: "WMACB03", id: "WTSTK02", rotate: 0, position: [-226, 0, -7] },
+  { type: "WMACB03", id: "WTSTK04", rotate: 0, position: [-226, 0, -7] },
   { type: "WMACB03", id: "WWS010", rotate: 0, position: [-194, 0, -7] },
   { type: "2LPjitai(W01)", id: "WWS035", rotate: 180, position: [-158, 0, -62] }
 ]
