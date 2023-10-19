@@ -29,8 +29,8 @@ function getData() {
   // =======================================
   // let i = 0
   // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
+  //   if (i >= mockData1.length) i = 0
+  //   drive(mockData1[i])
   //   i++
   // }, 333)
 
@@ -48,6 +48,8 @@ function drive(wsMessage) {
   // 处理天车
   if (wsMessage?.VehicleInfo?.length) {
     wsMessage.VehicleInfo.forEach(e => {
+      if (!e.ohtID) return
+
       let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
 
       if (skyCar) {
@@ -123,18 +125,22 @@ function drive(wsMessage) {
           }
 
           // 常态化清空 FOUP
-          if (!haveAnimation && skyCar.history.new.isHaveFoup === '0' && skyCar.catch) {
+          if (!haveAnimation && skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.run) {
             skyCar.catch.parent.remove(skyCar.catch)
             skyCar.catch = null
           }
 
           // 两个先行动画，光执行，不移动
           function beforeComplete() {
+            const cb = () => {
+              skyCar.run = true
+            }
+
             if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') { // 装载结束
-              skyCar.up()
+              skyCar.up(cb)
 
             } else if (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0') { // 卸货结束
-              skyCar.up()
+              skyCar.up(cb)
             }
           }
 
@@ -175,7 +181,6 @@ function drive(wsMessage) {
 
               const direction = shelf.direction
               const cb = () => {
-                skyCar.run = true
                 if (kaxia) {
                   kaxia.parent.remove(kaxia)
                   kaxia.position.set(0, -0.35, 0)
@@ -214,6 +219,8 @@ function drive(wsMessage) {
                     group.add(newKaxia)
                     skyCar.catch = newKaxia
                   }
+
+
                 }
               }
               skyCar.catchDirection = direction
@@ -226,7 +233,6 @@ function drive(wsMessage) {
 
               const cb = () => {
                 if (skyCar.catch) {
-                  skyCar.run = true
                   const positionData = getPositionByKaxiaLocation(skyCar.location)
                   if (!positionData) {
                     skyCar.catch.parent.remove(skyCar.catch)
@@ -281,6 +287,13 @@ function drive(wsMessage) {
             // 改变位置的情况
             skyCar.coordinate = skyCar.history.new.position
             skyCar.setPosition(true, onComplete)
+
+            // 卸货开始
+          } else if (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1') {
+
+            skyCar.coordinate = skyCar.history.new.position
+            skyCar.setPosition(true, onComplete)
+
           }
         }
 
@@ -314,7 +327,7 @@ function drive(wsMessage) {
 
 
       // 单独依据 IsHaveFoup 来给所有其值为 1 的天车绑上 FOUP
-      if (e.ohtStatus_IsHaveFoup === '1') {
+      if (e.ohtStatus_IsHaveFoup === '1' && skyCar.run) {
         if (!skyCar.catch) {
           const newKaxia = STATE.sceneList.FOUP.clone()
           newKaxia.userData.area = ''
@@ -366,11 +379,6 @@ function drive(wsMessage) {
               }
             })
           }).catch(() => { })
-        }
-      } else {
-        if (skyCar.catch) {
-          skyCar.catch.parent.remove(skyCar.catch)
-          skyCar.catch = null
         }
       }
     })
@@ -695,7 +703,8 @@ class SkyCar {
   catchDirection = 'left'  // 抓取方向
   alert = false            // 是否为报警状态
   run = true               // 天车是否可以走
-  runSpeed = 2             // 天车行走的速度
+  runBaseSpeed = 2         // 天车基础行走速度
+  runSpeed = 2             // 天车实际行走的速度
   quickenSpeedTimes = 2    // 天车追赶时的倍速
   line = ''                // 是在哪一根线上
   lineIndex = 0            // 当前线上面的索引
@@ -1015,8 +1024,8 @@ class SkyCar {
     const frameRate = 1 / (t - this.oldClock)
     this.oldClock = t
 
-    this.runSpeed = Math.round((1 / (frameRate / 60)) * 2)
-    console.log('this.runSpeed: ', this.runSpeed);
+    this.runSpeed = Math.round(((1 / (frameRate / 60)) * 2) * this.quickenSpeedTimes)
+
 
 
     if (!this.run) return
@@ -1028,32 +1037,7 @@ class SkyCar {
       return
     }
 
-    // 如果前面还有路，就往前走
-
-    if (this.lineIndex < STATE.sceneList.linePosition[this.line].length - this.runSpeed) {
-      this.lineIndex += this.runSpeed
-      this.setPosition()
-
-    } else {
-      // 如果这根线到尽头了，就随便找一根接壤的轨道走
-      const endP = this.line.split('-')[1]
-
-      let isFind = false
-      for (let key in STATE.sceneList.linePosition) {
-        if (key.split('-')[0] === endP) {
-          this.line = key
-          this.lineIndex = 0
-          isFind = true
-          break
-        }
-      }
-
-      // 找个长一点的轨道
-      if (!isFind) {
-        this.line = '10-81'
-        this.lineIndex = 0
-      }
-    }
+    this.setPosition()
   }
 
   findLine() {
@@ -1095,15 +1079,49 @@ class SkyCar {
   setPosition(byCoordinate = false, cb) {
     const this_ = this
 
+
+
+
+    // 如果本次接收到坐标
     if (byCoordinate) {
       const oldLine = this.line
       const oldLineIndex = this.lineIndex
+
+      // 通过坐标点的 最新的坐标对应的line数据
       const lineInfo = this.findLine()
+
+      // 如果没有线路就初始化线路
       if (!lineInfo) {
         go()
 
-      } else if (oldLine === lineInfo.line && oldLineIndex < lineInfo.lineIndex) {
-        this.runSpeed *= this.quickenSpeedTimes
+        // 如果新旧两条线是同一根，就变速行驶，为了跟实时数据靠近
+      } else if (oldLine === lineInfo.line) {
+        if (oldLineIndex < lineInfo.lineIndex) {
+          this.quickenSpeedTimes = 1.3
+          go()
+
+        } else {
+          this.quickenSpeedTimes = 0.5
+          go()
+        }
+
+        // 跳到新的路线了
+      } else {
+        const oldLinePoint = oldLine.split('-')
+        const linePoint = lineInfo.line.split('-')
+
+        // 此时两根轨道是接壤的，就不要跳跃了
+        if (linePoint.includes(oldLinePoint[0]) || linePoint.includes(oldLinePoint[1])) {
+          this.quickenSpeedTimes = 1.3
+          go()
+
+
+        } else {
+          this.line = lineInfo.line
+          this.lineIndex = lineInfo.lineIndex
+          this.quickenSpeedTimes = 1
+        }
+
         go()
       }
 
@@ -1113,6 +1131,44 @@ class SkyCar {
 
     function go() {
       if (this_.run) {
+
+        // 如果前面还有路，就往前走
+        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
+
+          this_.lineIndex += this_.runSpeed
+
+        } else {
+          // 如果这根线到尽头了，就随便找一根接壤的轨道走
+          const endP = this_.line.split('-')[1]
+
+          let isFind = false
+
+          for (let key in STATE.sceneList.linePosition) {
+            if (key.split('-')[0] === endP) {
+              this_.line = key
+              this_.lineIndex = 0
+              isFind = true
+              break
+            }
+          }
+
+          // 随便找一根轨道
+          if (!isFind) {
+            const lineList = []
+            for (let key in STATE.sceneList.linePosition) {
+              if (key != '002') {
+                lineList.push(key)
+              }
+            }
+
+            this_.line = lineList[Math.floor(Math.random() * (lineList.length - 1))]
+            this_.lineIndex = 0
+          }
+        }
+
+
+
+
         // 沿着轨道往前走
         const linePosition = STATE.sceneList.linePosition[this_.line]
         if (!linePosition) return

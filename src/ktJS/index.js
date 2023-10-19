@@ -111,6 +111,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
             // 天车不知道为什么放大不了，手动放大
             STATE.sceneList.tianche.scale.set(10, 10, 10)
+            STATE.sceneList.tianche.visible = false
             // OLUS放大
             STATE.sceneList.OLUS.scale.set(30, 30, 30)
 
