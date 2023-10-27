@@ -16,12 +16,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -34,12 +34,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // let i = 0
-  // function aaa() {
-  //   drive(mockData2[i])
-  //   i++
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData2[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -136,12 +136,12 @@ function drive(wsMessage) {
               skyCar.run = true
             }
 
-            if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') { // 装载结束
-              skyCar.up(cb)
+            // if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') { // 装载结束
+            //   skyCar.up(cb)
 
-            } else if (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0') { // 卸货结束
-              skyCar.up(cb)
-            }
+            // } else if (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0') { // 卸货结束
+            //   skyCar.up(cb)
+            // }
           }
 
           // 两个后行动画，先移动，再执行
@@ -688,31 +688,29 @@ function computedCameraTweenPosition(currentP, targetP, gapDistance = 100) {
 
 // 天车类
 class SkyCar {
-  coordinate = 0           // 当前坐标
-  history = {}             // 两条历史数据 new/old
-  state = 0                // 状态
-  oldClock = 0             // 上一次刷新时的 clock.elapsedTime()
-  id = ''                  // id
-  skyCarMesh = null        // 天车模型
-  popup = null             // 默认弹窗
-  clickPopup = null        // 点击之后的弹窗
-  mixer = null             // 模型动画管理器
-  actions = null           // 模型动画
-  animationSpeed = 0.05    // 模型动画速度
-  catch = null             // 当前抓取的卡匣
-  catchDirection = 'left'  // 抓取方向
-  alert = false            // 是否为报警状态
-  run = true               // 天车是否可以走
-  runBaseSpeed = 2         // 天车基础行走速度
-  runSpeed = 2             // 天车实际行走的速度
-  quickenSpeedTimes = 2    // 天车追赶时的倍速
-  line = ''                // 是在哪一根线上
-  lineIndex = 0            // 当前线上面的索引
+  coordinate = 0              // 当前坐标
+  history = {}                // 两条历史数据 new/old
+  state = 0                   // 状态
+  id = ''                     // id
+  skyCarMesh = null           // 天车模型
+  popup = null                // 默认弹窗
+  clickPopup = null           // 点击之后的弹窗
+  mixer = null                // 模型动画管理器
+  actions = null              // 模型动画
+  animationSpeed = 1          // 模型动画速度
+  animationSpeedTimes = 0.05  // 模型动画速度的倍速
+  catch = null                // 当前抓取的卡匣
+  catchDirection = 'left'     // 抓取方向
+  alert = false               // 是否为报警状态
+  run = true                  // 天车是否可以走
+  runSpeed = 2                // 天车实际行走的速度
+  quickenSpeedTimes = 2       // 天车追赶时的倍速
+  line = ''                   // 是在哪一根线上
+  lineIndex = 0               // 当前线上面的索引
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
     if (opt.id != undefined) this.id = opt.id
-    if (opt.animationSpeed != undefined) this.animationSpeed = opt.animationSpeed
     this.initSkyCar()
     this.initPopup()
     this.setAnimation()
@@ -1020,13 +1018,7 @@ class SkyCar {
 
   runRender() {
     requestAnimationFrame(this.runRender.bind(this))
-    const t = STATE.clock.getElapsedTime()
-    const frameRate = 1 / (t - this.oldClock)
-    this.oldClock = t
-
-    this.runSpeed = Math.round(((1 / (frameRate / 60)) * 2) * this.quickenSpeedTimes)
-
-
+    this.runSpeed = Math.round(((1 / (STATE.frameRate / 60)) * 1) * this.quickenSpeedTimes)
 
     if (!this.run) return
 
@@ -1214,8 +1206,11 @@ class SkyCar {
 
     animate()
     function animate() {
-      this_.mixer.update(this_.animationSpeed)
       requestAnimationFrame(animate)
+
+      this_.animationSpeed = (1 / (STATE.frameRate / 60)) * this_.animationSpeedTimes
+
+      this_.mixer.update(this_.animationSpeed)
     }
   }
 
@@ -1268,6 +1263,7 @@ class SkyCar {
   // 设置伸缩方法
   down(cb) {
     const this_ = this
+    this.animationSpeedTimes = 0.06
     if (this.catchDirection === 'right') {
       this.actions.shen1.enabled = false
       this.actions.suo1.enabled = false
@@ -1301,6 +1297,7 @@ class SkyCar {
 
     this.mixer.addEventListener('finished', function finished_shen(e) {
       if (e.action.name === 'shen' || e.action.name === 'shen1') {
+        this_.animationSpeedTimes = 0.0018
         if (this_.catchDirection === 'right') {
           this_.actions.shen.enabled = false
           this_.actions.fang.enabled = true
@@ -1319,20 +1316,28 @@ class SkyCar {
           if (renderFlag) {
             requestAnimationFrame(render)
             if (this_.catchDirection === 'right') {
-              if (this_.actions.fang.time > 0.3) {
-                this_.actions.fang.time = 0.3
+              if (this_.actions.fang.time > 0.32) {
+                this_.actions.fang.time = 0.32
                 this_.actions.fang.paused = true
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
+                setTimeout(() => {
+                  this_.up()
+                }, 300)
+                  
               }
             } else {
-              if (this_.actions.fang1.time > 0.3) {
-                this_.actions.fang1.time = 0.3
+              if (this_.actions.fang1.time > 0.32) {
+                this_.actions.fang1.time = 0.32
                 this_.actions.fang1.paused = true
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
+                setTimeout(() => {
+                  this_.up()
+                }, 300)
+                  
               }
             }
           }
@@ -1343,6 +1348,7 @@ class SkyCar {
 
   up(cb) {
     const this_ = this
+    this.animationSpeedTimes = 0.002
     if (this.catchDirection === 'right') {
       this.actions.shou1.enabled = false
       this.actions.fang1.enabled = false
@@ -1356,7 +1362,7 @@ class SkyCar {
 
       this.actions.shou.paused = false
       this.actions.shou.reset()
-      this.actions.shou.time = 2.9
+      this.actions.shou.time = 2.41
       this.actions.shou.play()
     } else {
       this.actions.shou.enabled = false
@@ -1371,14 +1377,14 @@ class SkyCar {
 
       this.actions.shou1.paused = false
       this.actions.shou1.reset()
-      this.actions.shou1.time = 2.2
+      this.actions.shou1.time = 2.41
       this.actions.shou1.play()
     }
 
 
     this.mixer.addEventListener('finished', function finished_suo(e) {
       if (e.action.name === 'shou' || e.action.name === 'shou1') {
-
+        this_.animationSpeedTimes = 0.06
         if (this_.catchDirection === 'right') {
           this_.actions.shou.enabled = false
           this_.actions.suo.enabled = true
@@ -1398,6 +1404,8 @@ class SkyCar {
     })
   }
 }
+
+
 
 // 加载模拟天车
 function initSkyCar() {
@@ -1489,6 +1497,7 @@ function initDeviceByMap() {
       CACHE.container.scene.add(model)
 
       model.traverse(e2 => {
+        e2.visible = true
         if (e2.isMesh) {
           e2.userData.type = '机台'
           e2.userData.deviceType = e.type
@@ -1515,8 +1524,6 @@ function initDeviceByMap() {
       deviceObject[e.type].push(model)
       CACHE.container.scene.add(model)
     })
-
-
     deviceType.forEach(e => {
       instantiationGroupInfo(deviceObject[e], e, CACHE.container)
     })
@@ -2622,6 +2629,19 @@ function initKaxia() {
       STATE.sceneList.kaxiaList.add(kaxia)
     })
   })
+}
+
+
+// render
+render()
+function render() {
+  requestAnimationFrame(render)
+
+  // 更新当前帧率
+  const t = STATE.clock.getElapsedTime()
+  const frameRate = 1 / (t - CACHE.oldClock)
+  STATE.frameRate = frameRate
+  CACHE.oldClock = t
 }
 
 

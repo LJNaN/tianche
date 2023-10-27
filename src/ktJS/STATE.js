@@ -27,6 +27,7 @@ let alarmList = null
 // 当前弹窗(除了天车)
 const currentPopup = null
 
+let frameRate = 60 // 帧率
 
 export const STATE = {
   initialState,
@@ -36,5 +37,6 @@ export const STATE = {
   searchAnimateDestroy,
   alarmList,
   currentPopup,
+  frameRate,
   PUBLIC_PATH
 }

@@ -8,6 +8,8 @@ const removed = {}
 
 const goods = []
 
+let oldClock = 0
+
 export const CACHE = {
   container,
   instanceTransformInfo,
@@ -15,5 +17,6 @@ export const CACHE = {
   instanceNameMap,
   tempCameraState,
   goods,
+  oldClock,
   removed
 }

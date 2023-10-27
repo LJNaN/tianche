@@ -244,6 +244,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.ondblclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
+          console.log('obj: ', obj);
 
           if (VUEDATA.isEditorMode.value) {
             if (obj.userData.type === '机台') {
