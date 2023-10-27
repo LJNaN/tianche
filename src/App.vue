@@ -23,6 +23,7 @@ VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
 <template>
   <Scene />
   <router-view></router-view>
+  <p class="version">Version 1.5.0</p>
 </template>
 
 <style scoped>
@@ -31,5 +32,14 @@ VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
   height: 100%;
   background-color: #999;
   pointer-events: none;
+}
+
+.version {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: #dbdbdb;
+  font-size: 12px;
+  z-index: 2;
 }
 </style>

@@ -16,12 +16,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -34,12 +34,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  let i = 0
-  function aaa() {
-    drive(mockData2[i])
-    i++
-  }
-  window.aaa = aaa
+  // let i = 0
+  // function aaa() {
+  //   drive(mockData2[i])
+  //   i++
+  // }
+  // window.aaa = aaa
 }
 
 
@@ -1325,7 +1325,7 @@ class SkyCar {
                 setTimeout(() => {
                   this_.up()
                 }, 300)
-                  
+
               }
             } else {
               if (this_.actions.fang1.time > 0.32) {
@@ -1337,7 +1337,7 @@ class SkyCar {
                 setTimeout(() => {
                   this_.up()
                 }, 300)
-                  
+
               }
             }
           }
@@ -1636,7 +1636,7 @@ function search(type, id) {
         }
       }
 
-    } else if (type === '轨道') {
+    } else if (type === '卡匣') {
       const color = obj.material.color.clone()
       obj.userData.color = color
 
@@ -1777,7 +1777,7 @@ function search(type, id) {
         obj.material.color.r = color.r + mixColor * 0.95
         obj.material.color.g = color.g + mixColor * 0.41
       }
-    } else if (type === '卡匣') {
+    } else if (type === '轨道') {
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
           STATE.currentPopup.parent.remove(STATE.currentPopup)
@@ -1800,6 +1800,8 @@ function search(type, id) {
       let className = 'popup3d_kaxia'
       let items = [
         { name: '卡匣 ID', value: obj.userData.id || '--' },
+        { name: 'carrierType', value: '--' },
+        { name: 'locationId', value: '--' },
         { name: 'Command ID', value: '--' },
         { name: 'User ID', value: '--' },
         { name: '起点', value: '--' },
@@ -1933,12 +1935,15 @@ function search(type, id) {
       // 接口
       CarrierFindCmdId(obj.userData.id).then(res => {
         if (res?.data?.length) {
+          
           const data = res.data[0]
           popup.parent.remove(popup)
           STATE.currentPopup.element.remove()
 
           let items = [
             { name: '卡匣 ID', value: obj.userData.id || '--' },
+            { name: 'carrierType', value: '--' },
+            { name: 'locationId', value: '--' },
             { name: 'Command ID', value: data.commandId || '--' },
             { name: 'User ID', value: '--' },
             { name: '起点', value: data.sourcePort || '--' },
@@ -2077,14 +2082,26 @@ function clickInstance(obj, index) {
 
   if (obj.name.includes('shalves2')) {
     title = 'OHB'
-    items = [{ name: 'shelf ID', value: STATE.sceneList.shelves2Arr[index].area + '_' + STATE.sceneList.shelves2Arr[index].fields[0] + '_' + STATE.sceneList.shelves2Arr[index].fields[1] }]
+    items = [
+      { name: 'OHB Group', value: STATE.sceneList.shelves2Arr[index].area },
+      { name: 'Remark', value: STATE.sceneList.shelves2Arr[index].shelf },
+      { name: 'OHTPort1', value: STATE.sceneList.shelves2Arr[index].fields[0] },
+      { name: 'OHTPort2', value: STATE.sceneList.shelves2Arr[index].fields[1] }
+    ]
     height = '16vh'
     className = 'popup3d_shalves'
 
   } else if (obj.name.includes('shalves4')) {
     title = 'OHB'
-    items = [{ name: 'shelf ID', value: STATE.sceneList.shelves4Arr[index].area + '_' + STATE.sceneList.shelves4Arr[index].fields[0] + '_' + STATE.sceneList.shelves4Arr[index].fields[3] }]
-    height = '16vh'
+    items = [
+      { name: 'OHB Group', value: STATE.sceneList.shelves4Arr[index].area },
+      { name: 'Remark', value: STATE.sceneList.shelves4Arr[index].shelf },
+      { name: 'OHTPort1', value: STATE.sceneList.shelves4Arr[index].fields[0] },
+      { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[1] },
+      { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[2] },
+      { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[3] }
+    ]
+    height = '38vh'
     className = 'popup3d_shalves'
 
   } else {
