@@ -1636,7 +1636,7 @@ function search(type, id) {
         }
       }
 
-    } else if (type === '卡匣') {
+    } else if (type === '轨道') {
       const color = obj.material.color.clone()
       obj.userData.color = color
 
@@ -1777,7 +1777,7 @@ function search(type, id) {
         obj.material.color.r = color.r + mixColor * 0.95
         obj.material.color.g = color.g + mixColor * 0.41
       }
-    } else if (type === '轨道') {
+    } else if (type === '卡匣') {
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
           STATE.currentPopup.parent.remove(STATE.currentPopup)
@@ -1796,7 +1796,7 @@ function search(type, id) {
       }
 
       let title = '卡匣'
-      let height = '45vh'
+      let height = '54vh'
       let className = 'popup3d_kaxia'
       let items = [
         { name: '卡匣 ID', value: obj.userData.id || '--' },
@@ -1935,7 +1935,7 @@ function search(type, id) {
       // 接口
       CarrierFindCmdId(obj.userData.id).then(res => {
         if (res?.data?.length) {
-          
+
           const data = res.data[0]
           popup.parent.remove(popup)
           STATE.currentPopup.element.remove()
@@ -2607,6 +2607,7 @@ function getPositionByKaxiaLocation(location) {
 function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
   GetCarrierInfo().then(res => {
+    console.log('res: ', res);
     if (!res?.data) {
       return
     }

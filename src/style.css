@@ -87,7 +87,7 @@ body {
 .popup3d_kaxia .popup-close {
   scale: 2;
   right: -11vw !important;
-  top: -20vh !important;
+  top: -24vh !important;
 }
 
 @keyframes arrowJump {
