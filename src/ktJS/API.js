@@ -29,8 +29,8 @@ function getData() {
   // =======================================
   // let i = 0
   // setInterval(() => {
-  //   if (i >= mockData1.length) i = 0
-  //   drive(mockData1[i])
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
   //   i++
   // }, 333)
 
@@ -233,7 +233,8 @@ function drive(wsMessage) {
 
               const cb = () => {
                 if (skyCar.catch) {
-                  const positionData = getPositionByKaxiaLocation(skyCar.location)
+                  const positionData = getPositionByKaxiaLocation(skyCar.history.new.location)
+                  console.log('positionData: ', positionData);
                   if (!positionData) {
                     skyCar.catch.parent.remove(skyCar.catch)
                     skyCar.catch = null
@@ -242,8 +243,11 @@ function drive(wsMessage) {
                     skyCar.catch.position.x = positionData.position.x
                     skyCar.catch.position.y = positionData.position.y
                     skyCar.catch.position.z = positionData.position.z
+                    skyCar.catch.userData.locationId = skyCar.history.new.location
+                    skyCar.catch.userData.carrierType = 'FOUP'
                     skyCar.catch.userData.area = positionData.area
                     skyCar.catch.userData.shelf = positionData.shelf
+                    skyCar.catch.userData.shelfIndex = positionData.shelfIndex
                     skyCar.catch.userData.type = 'kaxia'
                     skyCar.catch.scale.set(30, 30, 30)
                     skyCar.catch.rotation.y = DATA.shelvesMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
@@ -253,6 +257,8 @@ function drive(wsMessage) {
                     skyCar.catch.traverse(e2 => {
                       if (e2.isMesh) {
                         e2.userData.id = skyCar.catch.userData.id
+                        e2.userData.locationId = skyCar.catch.userData.locationId
+                        e2.userData.carrierType = skyCar.catch.userData.carrierType
                         e2.userData.area = skyCar.catch.userData.area
                         e2.userData.shelf = skyCar.catch.userData.shelf
                         e2.userData.shelfIndex = skyCar.catch.userData.shelfIndex
@@ -321,7 +327,9 @@ function drive(wsMessage) {
 
         newCar.history.old = Object.assign({}, newCar.history.new)
         newCar.coordinate = e.position
-        newCar.setPosition(0)
+        newCar.skyCarMesh.position.set(235, 28.3, 231)
+        newCar.skyCarMesh.rotation.y = Math.PI / 2
+        newCar.setPosition()
         skyCar = newCar
       }
 
@@ -707,6 +715,7 @@ class SkyCar {
   quickenSpeedTimes = 2       // 天车追赶时的倍速
   line = ''                   // 是在哪一根线上
   lineIndex = 0               // 当前线上面的索引
+  oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -1175,8 +1184,13 @@ class SkyCar {
         lookAtPosition.y = currentPosition.y
         lookAtPosition.z = currentPosition.z
 
-        this_.skyCarMesh.lookAt(lookAtPosition)
-        this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
+
+        // 解决闪烁问题
+        if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x ||currentPosition.z != this_.oldPosition.z) {
+          this_.skyCarMesh.lookAt(lookAtPosition)
+          this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
+        }
+        this_.oldPosition = currentPosition
         cb && cb()
 
       } else {
@@ -1796,18 +1810,17 @@ function search(type, id) {
       }
 
       let title = '卡匣'
-      let height = '54vh'
+      let height = '49vh'
       let className = 'popup3d_kaxia'
       let items = [
         { name: '卡匣 ID', value: obj.userData.id || '--' },
-        { name: 'carrierType', value: '--' },
-        { name: 'locationId', value: '--' },
+        { name: 'carrierType', value: obj.userData.carrierType || '--' },
+        { name: 'location ID', value: obj.userData.locationId || '--' },
         { name: 'Command ID', value: '--' },
         { name: 'User ID', value: '--' },
         { name: '起点', value: '--' },
         { name: '终点', value: '--' },
         { name: '优先级', value: '--' },
-        { name: '当前位置', value: '--' },
         { name: '当前状态', value: '--' }
       ]
 
@@ -1942,14 +1955,13 @@ function search(type, id) {
 
           let items = [
             { name: '卡匣 ID', value: obj.userData.id || '--' },
-            { name: 'carrierType', value: '--' },
-            { name: 'locationId', value: '--' },
+            { name: 'carrierType', value: obj.userData.carrierType || '--' },
+            { name: 'location ID', value: obj.userData.locationId || '--' },
             { name: 'Command ID', value: data.commandId || '--' },
             { name: 'User ID', value: '--' },
             { name: '起点', value: data.sourcePort || '--' },
             { name: '终点', value: data.destPort || '--' },
             { name: '优先级', value: data.priority || '--' },
-            { name: '当前位置', value: obj.userData.shelf || '--' },
             { name: '当前状态', value: '--' }
           ]
 
@@ -2607,24 +2619,19 @@ function getPositionByKaxiaLocation(location) {
 function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
   GetCarrierInfo().then(res => {
-    console.log('res: ', res);
-    if (!res?.data) {
-      return
-    }
+    if (!res?.data) return
 
     res.data.forEach(e => {
-      if (e.carrierType !== '0' && e.carrierType !== '1') {
-        return
-      }
+      if (e.carrierType !== '0' && e.carrierType !== '1') return
 
       const position = getPositionByKaxiaLocation(e.locationId)
 
-      if (!position) {
-        return
-      }
+      if (!position) return
 
       const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
       kaxia.userData.id = e.carrierId
+      kaxia.userData.locationId = e.locationId
+      kaxia.userData.carrierType = e.carrierType === '0' ? 'FOUP' : e.carrierType === '1' ? 'FOSB' : e.carrierType === '2' ? 'POD' : ''
       kaxia.userData.area = position.area
       kaxia.userData.shelf = position.shelf
       kaxia.userData.shelfIndex = position.shelfIndex
@@ -2636,6 +2643,8 @@ function initKaxia() {
       kaxia.traverse(e2 => {
         if (e2.isMesh) {
           e2.userData.id = kaxia.userData.id
+          e2.userData.locationId = kaxia.userData.locationId
+          e2.userData.carrierType = kaxia.userData.carrierType
           e2.userData.area = kaxia.userData.area
           e2.userData.shelf = kaxia.userData.shelf
           e2.userData.shelfIndex = kaxia.userData.shelfIndex
@@ -2683,5 +2692,6 @@ export const API = {
   clickInstance,
   testBox,
   deviceShow,
+  getPositionByKaxiaLocation,
   initKaxia
 }
