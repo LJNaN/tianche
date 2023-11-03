@@ -1,5 +1,7 @@
 <template>
   <div class="header">
+    <p class="title">{{ title }}</p>
+
     <Dropdown v-if="!VUEDATA.isEditorMode.value"></Dropdown>
 
     <div class="right">
@@ -30,6 +32,8 @@
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
 import { VUEDATA } from "@/VUEDATA";
+
+const title = window.title
 
 function handleFillScreen() {
   if (!document.fullscreenElement) {
@@ -70,6 +74,18 @@ p {
   height: 8%;
   z-index: 2;
   pointer-events: all;
+
+  .title {
+    position: absolute;
+    color: #ffffff;
+    font-size: 1.5vw;
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    font-family: Microsoft YaHei;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 2px #0005;
+  }
 
   .right {
     position: absolute;

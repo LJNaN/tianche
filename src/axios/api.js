@@ -24,6 +24,11 @@ export function GetRealTimeCmd() {
 }
 
 
+// 机台弹窗接口
+export function GetEqpStateInfo() {
+  return request(`/api/MCS/GetEqpStateInfo`)
+}
+
 // 机台弹窗接口、实时状态接口
 export function GetRealTimeEqpState(id = '') {
   return request(`/api/MCS/GetRealTimeEqpState/${id}`)

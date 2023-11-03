@@ -6,7 +6,7 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData1 from './js/mock1'
 import mockData2 from './js/mock2'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
 // 获取数据
@@ -234,7 +234,7 @@ function drive(wsMessage) {
               const cb = () => {
                 if (skyCar.catch) {
                   const positionData = getPositionByKaxiaLocation(skyCar.history.new.location)
-                  console.log('positionData: ', positionData);
+
                   if (!positionData) {
                     skyCar.catch.parent.remove(skyCar.catch)
                     skyCar.catch = null
@@ -644,8 +644,8 @@ function handleLine() {
         }
       }
 
-
-      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '114-37', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '111-107', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74']
+      // 有些轨道的索引是反的，需要反转一下
+      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '114-37', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74']
       if (reserveList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
@@ -1186,7 +1186,7 @@ class SkyCar {
 
 
         // 解决闪烁问题
-        if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x ||currentPosition.z != this_.oldPosition.z) {
+        if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
           this_.skyCarMesh.lookAt(lookAtPosition)
           this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
         }
@@ -1496,8 +1496,8 @@ function initReflexFloor() {
 
 }
 
-// 加载设备
-function initDeviceByMap() {
+// 加载机台
+async function initDeviceByMap() {
   if (VUEDATA.isEditorMode.value) {
     CACHE.container.clickObjects = []
     DATA.deviceMap.value.forEach(e => {
@@ -1522,6 +1522,7 @@ function initDeviceByMap() {
     })
 
   } else {
+
     const deviceType = Array.from(new Set(DATA.deviceMap.value.map(e => e.type)))
     const deviceObject = {}
     deviceType.forEach(e => {
@@ -1530,17 +1531,23 @@ function initDeviceByMap() {
 
     DATA.deviceMap.value.forEach(e => {
       const model = STATE.sceneList[e.type].clone()
+
       model.visible = true
       model.position.set(...e.position)
       model.rotation.y = e.rotate * Math.PI / 180
       model.userData.id = e.id
       model.userData.type = '机台'
+      model.userData.enabled = ''
+      model.userData.eqptype = ''
       deviceObject[e.type].push(model)
       CACHE.container.scene.add(model)
     })
+
+
     deviceType.forEach(e => {
       instantiationGroupInfo(deviceObject[e], e, CACHE.container)
     })
+
   }
 }
 
@@ -2064,8 +2071,6 @@ function search(type, id) {
 
 // 实例化点击
 function clickInstance(obj, index) {
-
-
   const transformInfo = CACHE.instanceTransformInfo[obj.name][index]
 
   const camera = CACHE.container.orbitCamera
@@ -2117,16 +2122,21 @@ function clickInstance(obj, index) {
     className = 'popup3d_shalves'
 
   } else {
-    const deviceId = CACHE.instanceNameMap[obj.name.split('_')[0]][index].id
+    const deviceItem = CACHE.instanceNameMap[obj.name.split('_')[0]][index]
 
     title = '机台'
     items = [
-      { name: '机台ID', value: deviceId },
+      { name: '机台ID', value: deviceItem?.id || '--' },
       { name: '机台Type', value: '--' },
       { name: '机台状态', value: '--' },
-      { name: '在线状态', value: '--' }
+      { name: 'isOnline', value: '--' },
+      { name: 'Bay', value: '--' },
+      { name: 'Port1', value: '--' },
+      { name: 'Port2', value: '--' },
+      { name: 'Port3', value: '--' },
+      { name: 'Port4', value: '--' }
     ]
-    height = '30vh'
+    height = '49vh'
     className = 'popup3d_jitai'
   }
 
@@ -2260,7 +2270,6 @@ function clickInstance(obj, index) {
   }
 
 
-  // 接口
   if (title === '机台') {
     const deviceId = items.find(e => e.name === '机台ID').value
     GetRealTimeEqpState(deviceId).then(res => {
@@ -2274,10 +2283,15 @@ function clickInstance(obj, index) {
         STATE.currentPopup.element.remove()
 
         let items = [
-          { name: '机台ID', value: deviceId },
+          { name: '机台ID', value: deviceId || '--' },
           { name: '机台Type', value: type || '--' },
           { name: '机台状态', value: enable || '--' },
-          { name: '在线状态', value: isOnlineState || '--' }
+          { name: 'isOnline', value: isOnlineState || '--' },
+          { name: 'Bay', value: '--' },
+          { name: 'Port1', value: '--' },
+          { name: 'Port2', value: '--' },
+          { name: 'Port3', value: '--' },
+          { name: 'Port4', value: '--' }
         ]
 
 
