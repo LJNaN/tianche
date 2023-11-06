@@ -6,6 +6,8 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import mockData1 from './js/mock1'
 import mockData2 from './js/mock2'
+import mockData3 from './js/mock3'
+import mockData4 from './js/mock4'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 
@@ -28,16 +30,20 @@ function getData() {
   // 模拟数据
   // =======================================
   // let i = 0
+  // window.aa = () => {
+  //   console.log(i)
+  // }
   // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
+  //   if (i >= mockData3.length) i = 0
+  //   drive(mockData3[i])
   //   i++
   // }, 333)
 
   // let i = 0
   // function aaa() {
-  //   drive(mockData2[i])
+  //   drive(mockData4[i])
   //   i++
+
   // }
   // window.aaa = aaa
 }
@@ -125,7 +131,8 @@ function drive(wsMessage) {
           }
 
           // 常态化清空 FOUP
-          if (!haveAnimation && skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.run) {
+          if (!haveAnimation && skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.run && (skyCar.history.new.time - 5000) > skyCar.clearImmunityTime) {
+            console.log('清空')
             skyCar.catch.parent.remove(skyCar.catch)
             skyCar.catch = null
           }
@@ -145,10 +152,13 @@ function drive(wsMessage) {
           }
 
           // 两个后行动画，先移动，再执行
-          function onComplete() {
-            if (skyCar.history.old.loading == '0' && skyCar.history.new.loading == '1') { // 装载开始
+          function onComplete(newHistory, oldHistory) {
+
+            if (oldHistory.loading == '0' && newHistory.loading == '1') { // 装载开始
+              console.log('装载开始')
+
               skyCar.run = false
-              setTimeout(() => { skyCar.run = true }, 10000)
+              // setTimeout(() => { skyCar.run = true }, 10000)
 
               // 找离天车最近的货架
               let distance = 0
@@ -177,7 +187,7 @@ function drive(wsMessage) {
               })
 
               // 查找最近的货架最近的卡匣，有就搬，没有就生成
-              const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === skyCar.history.new.therfidFoup)
+              const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === newHistory.therfidFoup)
 
               const direction = shelf.direction
               const cb = () => {
@@ -227,13 +237,14 @@ function drive(wsMessage) {
               skyCar.down(cb)
 
 
-            } else if (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1') { // 卸货开始
+            } else if (oldHistory.unLoading == '0' && newHistory.unLoading == '1') { // 卸货开始
+              console.log('卸货开始')
               skyCar.run = false
-              setTimeout(() => { skyCar.run = true }, 10000)
+              // setTimeout(() => { skyCar.run = true }, 10000)
 
               const cb = () => {
                 if (skyCar.catch) {
-                  const positionData = getPositionByKaxiaLocation(skyCar.history.new.location)
+                  const positionData = getPositionByKaxiaLocation(newHistory.location)
 
                   if (!positionData) {
                     skyCar.catch.parent.remove(skyCar.catch)
@@ -243,7 +254,7 @@ function drive(wsMessage) {
                     skyCar.catch.position.x = positionData.position.x
                     skyCar.catch.position.y = positionData.position.y
                     skyCar.catch.position.z = positionData.position.z
-                    skyCar.catch.userData.locationId = skyCar.history.new.location
+                    skyCar.catch.userData.locationId = newHistory.location
                     skyCar.catch.userData.carrierType = 'FOUP'
                     skyCar.catch.userData.area = positionData.area
                     skyCar.catch.userData.shelf = positionData.shelf
@@ -271,6 +282,7 @@ function drive(wsMessage) {
                     skyCar.catch = null
 
                   }
+
                 }
               }
               skyCar.down(cb)
@@ -278,28 +290,28 @@ function drive(wsMessage) {
           }
 
 
-          // 不改变位置的情况 装货结束、卸货结束
-          if (
-            (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') ||
-            (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0')
-          ) {
+          // 不改变位置的情况 装货结束
+          if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') {
+            console.log('装货结束')
+            skyCar.run = true
 
-            // 不要动
-            skyCar.run = false
-            setTimeout(() => { skyCar.run = true }, 10000)
-            beforeComplete()
+          } else if (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0') {
+            console.log('卸货结束')
+            skyCar.run = true
+            skyCar.clearImmunityTime = skyCar.history.new.time
 
           } else if (skyCar.history.old?.position != skyCar.history.new?.position) {
             // 改变位置的情况
             skyCar.coordinate = skyCar.history.new.position
-            skyCar.setPosition(true, onComplete)
+            const oldHistory = Object.assign({}, skyCar.history.old)
+            const newHistory = Object.assign({}, skyCar.history.new)
+            skyCar.setPosition(true, onComplete(newHistory, oldHistory))
 
-            // 卸货开始
-          } else if (skyCar.history.old.unLoading == '0' && skyCar.history.new.unLoading == '1') {
-
+          } else {
             skyCar.coordinate = skyCar.history.new.position
-            skyCar.setPosition(true, onComplete)
-
+            const oldHistory = Object.assign({}, skyCar.history.old)
+            const newHistory = Object.assign({}, skyCar.history.new)
+            skyCar.setPosition(true, onComplete(newHistory, oldHistory))
           }
         }
 
@@ -645,7 +657,7 @@ function handleLine() {
       }
 
       // 有些轨道的索引是反的，需要反转一下
-      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '114-37', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74']
+      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '114-37', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74','12-13']
       if (reserveList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
@@ -716,6 +728,8 @@ class SkyCar {
   line = ''                   // 是在哪一根线上
   lineIndex = 0               // 当前线上面的索引
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
+  clearImmunityTime = 0       // 常态化清空FOUP免疫时间
+  animationOver = true        // 动画执行完毕
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -1029,10 +1043,12 @@ class SkyCar {
     requestAnimationFrame(this.runRender.bind(this))
     this.runSpeed = Math.round(((1 / (STATE.frameRate / 60)) * 1) * this.quickenSpeedTimes)
 
-    if (!this.run) return
+    if (!this.run || !this.animationOver) return
 
     if (!this.line) {
       const lineInfo = this.findLine()
+      if (!lineInfo) return
+
       this.line = lineInfo.line
       this.lineIndex = lineInfo.lineIndex
       return
@@ -1075,13 +1091,11 @@ class SkyCar {
     }
   }
 
+
   // byCoordinate 是否是按照坐标来驱动的
   // cb 回调 后执行
   setPosition(byCoordinate = false, cb) {
     const this_ = this
-
-
-
 
     // 如果本次接收到坐标
     if (byCoordinate) {
@@ -1097,7 +1111,12 @@ class SkyCar {
 
         // 如果新旧两条线是同一根，就变速行驶，为了跟实时数据靠近
       } else if (oldLine === lineInfo.line) {
-        if (oldLineIndex < lineInfo.lineIndex) {
+
+        // 起始端、末端减速
+        if (oldLineIndex < STATE.sceneList.linePosition[oldLine].length * 0.1 || oldLineIndex > STATE.sceneList.linePosition[oldLine].length * 0.9) {
+          this.quickenSpeedTimes = 0.25
+
+        } else if (oldLineIndex < lineInfo.lineIndex) {
           this.quickenSpeedTimes = 1.3
           go()
 
@@ -1127,47 +1146,52 @@ class SkyCar {
       }
 
     } else {
+      if (this.line) {
+        if (this.lineIndex < STATE.sceneList.linePosition[this.line].length * 0.1 || this.lineIndex > STATE.sceneList.linePosition[this.line].length * 0.9) {
+          this.quickenSpeedTimes = 0.5
+        }
+      }
       go()
     }
 
     function go() {
       if (this_.run) {
 
-        // 如果前面还有路，就往前走
-        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
+        if (this_.line && STATE.sceneList.linePosition[this_.line]) {
+          // 如果前面还有路，就往前走
+          if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
 
-          this_.lineIndex += this_.runSpeed
+            this_.lineIndex += this_.runSpeed
 
-        } else {
-          // 如果这根线到尽头了，就随便找一根接壤的轨道走
-          const endP = this_.line.split('-')[1]
+          } else {
+            // 如果这根线到尽头了，就随便找一根接壤的轨道走
+            const endP = this_.line.split('-')[1]
 
-          let isFind = false
+            let isFind = false
 
-          for (let key in STATE.sceneList.linePosition) {
-            if (key.split('-')[0] === endP) {
-              this_.line = key
-              this_.lineIndex = 0
-              isFind = true
-              break
-            }
-          }
-
-          // 随便找一根轨道
-          if (!isFind) {
-            const lineList = []
             for (let key in STATE.sceneList.linePosition) {
-              if (key != '002') {
-                lineList.push(key)
+              if (key.split('-')[0] === endP) {
+                this_.line = key
+                this_.lineIndex = 0
+                isFind = true
+                break
               }
             }
 
-            this_.line = lineList[Math.floor(Math.random() * (lineList.length - 1))]
-            this_.lineIndex = 0
+            // 随便找一根轨道
+            if (!isFind) {
+              const lineList = []
+              for (let key in STATE.sceneList.linePosition) {
+                if (key != '002') {
+                  lineList.push(key)
+                }
+              }
+
+              this_.line = lineList[Math.floor(Math.random() * (lineList.length - 1))]
+              this_.lineIndex = 0
+            }
           }
         }
-
-
 
 
         // 沿着轨道往前走
@@ -1274,9 +1298,11 @@ class SkyCar {
     }
   }
 
+
   // 设置伸缩方法
   down(cb) {
     const this_ = this
+    this.animationOver = false
     this.animationSpeedTimes = 0.06
     if (this.catchDirection === 'right') {
       this.actions.shen1.enabled = false
@@ -1336,8 +1362,11 @@ class SkyCar {
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
+
                 setTimeout(() => {
-                  this_.up()
+                  this_.up(() => {
+                    this_.animationOver = true
+                  })
                 }, 300)
 
               }
@@ -1348,10 +1377,12 @@ class SkyCar {
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
-                setTimeout(() => {
-                  this_.up()
-                }, 300)
 
+                setTimeout(() => {
+                  this_.up(() => {
+                    this_.animationOver = true
+                  })
+                }, 300)
               }
             }
           }
@@ -1376,7 +1407,7 @@ class SkyCar {
 
       this.actions.shou.paused = false
       this.actions.shou.reset()
-      this.actions.shou.time = 2.41
+      this.actions.shou.time = 2.9
       this.actions.shou.play()
     } else {
       this.actions.shou.enabled = false
@@ -1413,6 +1444,7 @@ class SkyCar {
 
       } else if (e.action.name === 'suo' || e.action.name === 'suo1') {
         this_.mixer.removeEventListener('finished', finished_suo)
+        this_.clearImmunityTime = this_.history.new.time
         cb && cb()
       }
     })
