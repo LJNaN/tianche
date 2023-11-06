@@ -18,12 +18,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+    const api = window.wsAPI
+    const ws = new WebSocket(api)
+    ws.onmessage = (info) => {
+      wsMessage = JSON.parse(info.data)
+      drive(wsMessage)
+    }
 
 
 
@@ -31,7 +31,7 @@ function getData() {
   // =======================================
   // let i = 0
   // window.aa = () => {
-  //   console.log(i)
+    
   // }
   // setInterval(() => {
   //   if (i >= mockData3.length) i = 0
@@ -120,6 +120,10 @@ function drive(wsMessage) {
             ohtID: e.ohtID || null
           }
 
+          if(e.ohtID === 'C0081') {
+            console.log(e.position)
+          }
+
 
           // 除了position改变，有没有动画要放
           let haveAnimation = false
@@ -132,7 +136,7 @@ function drive(wsMessage) {
 
           // 常态化清空 FOUP
           if (!haveAnimation && skyCar.history.new.isHaveFoup === '0' && skyCar.catch && skyCar.run && (skyCar.history.new.time - 5000) > skyCar.clearImmunityTime) {
-            console.log('清空')
+            
             skyCar.catch.parent.remove(skyCar.catch)
             skyCar.catch = null
           }
@@ -155,7 +159,7 @@ function drive(wsMessage) {
           function onComplete(newHistory, oldHistory) {
 
             if (oldHistory.loading == '0' && newHistory.loading == '1') { // 装载开始
-              console.log('装载开始')
+              
 
               skyCar.run = false
               // setTimeout(() => { skyCar.run = true }, 10000)
@@ -238,7 +242,7 @@ function drive(wsMessage) {
 
 
             } else if (oldHistory.unLoading == '0' && newHistory.unLoading == '1') { // 卸货开始
-              console.log('卸货开始')
+              
               skyCar.run = false
               // setTimeout(() => { skyCar.run = true }, 10000)
 
@@ -292,11 +296,11 @@ function drive(wsMessage) {
 
           // 不改变位置的情况 装货结束
           if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') {
-            console.log('装货结束')
+            
             skyCar.run = true
 
           } else if (skyCar.history.old.unLoading == '1' && skyCar.history.new.unLoading == '0') {
-            console.log('卸货结束')
+            
             skyCar.run = true
             skyCar.clearImmunityTime = skyCar.history.new.time
 
