@@ -1,9 +1,10 @@
 import { VUEDATA } from "@/VUEDATA"
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 
 // 天车类
 export default class SkyCar {
   coordinate = 0              // 当前坐标
-  history = []                // 20条历史数据
+  history = []                // 10条历史数据
   state = 0                   // 状态
   id = ''                     // id
   skyCarMesh = null           // 天车模型
@@ -21,10 +22,11 @@ export default class SkyCar {
   quickenSpeedTimes = 2       // 天车追赶时的倍速
   line = ''                   // 是在哪一根线上
   lineIndex = 0               // 当前线上面的索引
-  nextLine = ''               // 下一根要走的轨道
-  oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
-  clearImmunityTime = 0       // 常态化清空FOUP免疫时间
+  nextLine = []               // 下几根要走的轨道
   animationOver = true        // 动画执行完毕
+  isAnimateSoon = false       // 即将有动画
+  oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
+
 
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
@@ -387,105 +389,91 @@ export default class SkyCar {
   }
 
 
-  // byCoordinate 是否是按照坐标来驱动的
   // cb 回调 后执行
-  setPosition(byCoordinate = false, cb) {
+  setPosition(cb) {
     const this_ = this
 
-    if (this.history.length < 20) { return }
+    if (this.history.length < VUEDATA.messageLen) { return }
 
-    // 如果本次接收到坐标
-    if (byCoordinate) {
-      const oldLine = this.line
-      const oldLineIndex = this.lineIndex
+    // 变速
+    // 有特殊事件时
+    if (this.isAnimateSoon) {
+      this.isAnimateSoon = false
+      const animateTargetMsg = this.history[Math.floor(VUEDATA.messageLen / 2)]
+      const { position } = animateTargetMsg
+      const line = DATA.pointCoordinateMap.find(e => e.startCoordinate < position && e.endCoordinate > position)
+      if (!line) return
 
-      // 通过坐标点的 最新的坐标对应的line数据
-      const lineInfo = this.findLine()
+      const lineName = line.name.replace('_', '-')
+      if (this.line === lineName) {
+        const process1 = this.lineIndex / STATE.sceneList.linePosition[this.line].length
+        const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate)
+        const processDifference = process2 - process1
+        const timeDifference = this.history[Math.floor(VUEDATA.messageLen / 2)].time - this.history[VUEDATA.messageLen - 1].time
 
-      // 如果没有线路就初始化线路
-      if (!lineInfo) {
-        go()
 
-        // 如果新旧两条线是同一根，就变速行驶，为了跟实时数据靠近
-      } else if (oldLine === lineInfo.line) {
-        // if (oldLineIndex < lineInfo.lineIndex) {
-        //   this.quickenSpeedTimes = 1.3
-        //   go()
-
-        // } else {
-        //   this.quickenSpeedTimes = 0.5
-        //   go()
-        // }
-
-        // 跳到新的路线了
-      } else {
-        const oldLinePoint = oldLine.split('-')
-        const linePoint = lineInfo.line.split('-')
-
-        // 此时两根轨道是接壤的，就不要跳跃了
-        if (linePoint.includes(oldLinePoint[0]) || linePoint.includes(oldLinePoint[1])) {
-          this.quickenSpeedTimes = 1.3
-          go()
-
+        if (processDifference < 0) {
+          this.quickenSpeedTimes = 0
 
         } else {
-          this.line = lineInfo.line
-          this.lineIndex = lineInfo.lineIndex
-          this.quickenSpeedTimes = 1
+          const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length
+          this.quickenSpeedTimes = (catchUpIndex / STATE.frameRate) / (timeDifference / 1000)
         }
 
-        go()
+      } else {
+        this.quickenSpeedTimes = 3
       }
 
     } else {
-      go()
+      let totalIndex = (STATE.sceneList.linePosition[this.line]?.length - this.lineIndex) || 0
+      this.nextLine.forEach(e => {
+        const item = STATE.sceneList.linePosition[e.replace('_', '-')]
+        if (!item) return
+        totalIndex += item.length
+      })
+      this.quickenSpeedTimes = totalIndex > 1000 ? 3 : 1
     }
 
-    function go() {
-      if (this_.run) {
-        if (this_.line && STATE.sceneList.linePosition[this_.line]) {
-          // 如果前面还有路，就往前走
-          if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
 
-            this_.lineIndex += this_.runSpeed
+    if (this_.run && this_.animationOver) {
+      if (this_.line && STATE.sceneList.linePosition[this_.line]) {
+        // 如果前面还有路，就往前走
+        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
+          this_.lineIndex += this_.runSpeed
 
-          } else {
-            // 如果这根线到尽头了，找nextLine
-            if (this_.nextLine) {
-              this_.line = this_.nextLine
-              this_.lineIndex = 0
-            }
-          }
+          // 如果这根线到尽头了，找nextLine
+        } else if (this_.nextLine.length) {
+          this_.line = this_.nextLine[0].replace('_', '-')
+          this_.lineIndex = 0
+          this_.nextLine.splice(0, 1)
         }
-
-        // 沿着轨道往前走
-        const linePosition = STATE.sceneList.linePosition[this_.line]
-        if (!linePosition) return
-
-        const currentPositionArray = linePosition[this_.lineIndex]
-        if (!currentPositionArray) return
-
-        const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 28.3, currentPositionArray[2] * STATE.sceneScale)
-        const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
-
-        lookAtPosition.x = currentPosition.x
-        lookAtPosition.y = currentPosition.y
-        lookAtPosition.z = currentPosition.z
-
-
-        // 解决闪烁问题
-        if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
-          this_.skyCarMesh.lookAt(lookAtPosition)
-          this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
-        }
-        this_.oldPosition = currentPosition
-        cb && cb()
-
-      } else {
-        cb && cb()
       }
-    }
 
+      // 沿着轨道往前走
+      const linePosition = STATE.sceneList.linePosition[this_.line]
+      if (!linePosition) return
+
+      const currentPositionArray = linePosition[this_.lineIndex]
+      if (!currentPositionArray) return
+
+      const currentPosition = new Bol3D.Vector3(currentPositionArray[0] * STATE.sceneScale, 28.3, currentPositionArray[2] * STATE.sceneScale)
+      const lookAtPosition = new Bol3D.Vector3(0, 0, 0)
+
+      lookAtPosition.x = currentPosition.x
+      lookAtPosition.y = currentPosition.y
+      lookAtPosition.z = currentPosition.z
+
+      // 解决闪烁问题
+      if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
+        this_.skyCarMesh.lookAt(lookAtPosition)
+        this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
+      }
+      this_.oldPosition = currentPosition
+      cb && cb()
+
+    } else {
+      cb && cb()
+    }
   }
 
 
@@ -708,7 +696,6 @@ export default class SkyCar {
 
       } else if (e.action.name === 'suo' || e.action.name === 'suo1') {
         this_.mixer.removeEventListener('finished', finished_suo)
-        this_.clearImmunityTime = this_.history[VUEDATA.messageLen - 2].time
         cb && cb()
       }
     })

@@ -15,44 +15,6 @@ export default function drive(wsMessage) {
       let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
 
       if (skyCar) {
-        // 处理颜色
-        if (e.ohtStatus_OnlineControl === '0') { // 离线
-          if (skyCar.state != 5) {
-            skyCar.state = 5
-            skyCar.setPopupColor()
-          }
-
-        } else if (e.ohtStatus_ErrSet === '1') { // 故障
-          if (skyCar.state != 4) {
-            skyCar.state = 4
-            skyCar.setPopupColor()
-          }
-
-        } else if (e.ohtStatus_Roaming === '1') { // 漫游
-          if (skyCar.state != 3) {
-            skyCar.state = 3
-            skyCar.setPopupColor()
-          }
-
-        } else if (e.ohtStatus_Loading === '1' || e.ohtStatus_UnLoading === '1') { // 取货、放货中
-          if (skyCar.state != 2) {
-            skyCar.state = 2
-            skyCar.setPopupColor()
-          }
-
-        } else if (e.ohtStatus_Quhuoxing === '1') { // 取货行
-          if (skyCar.state != 0) {
-            skyCar.state = 0
-            skyCar.setPopupColor()
-          }
-
-        } else if (e.ohtStatus_Fanghuoxing === '1') { // 放货行
-          if (skyCar.state != 1) {
-            skyCar.state = 1
-            skyCar.setPopupColor()
-          }
-        }
-
         // 处理变化
         // 去个重
         if (skyCar.history.length) {
@@ -93,9 +55,53 @@ export default function drive(wsMessage) {
         })
 
 
-        // 保持去重后的数据在20条
+        // 保持去重后的数据在10条
         if (skyCar.history.length < VUEDATA.messageLen + 1) { return }
         skyCar.history.splice(VUEDATA.messageLen, 1)
+
+
+        // 处理颜色
+        if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
+          if (skyCar.state != 5) {
+            skyCar.state = 5
+            skyCar.setPopupColor()
+          }
+
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
+          if (skyCar.state != 4) {
+            skyCar.state = 4
+            skyCar.setPopupColor()
+          }
+
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
+          if (skyCar.state != 3) {
+            skyCar.state = 3
+            skyCar.setPopupColor()
+          }
+
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
+          if (skyCar.state != 2) {
+            skyCar.state = 2
+            skyCar.setPopupColor()
+          }
+
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1') { // 取货行
+          if (skyCar.state != 0) {
+            skyCar.state = 0
+            skyCar.setPopupColor()
+          }
+
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoxing === '1') { // 放货行
+          if (skyCar.state != 1) {
+            skyCar.state = 1
+            skyCar.setPopupColor()
+          }
+        } else {
+          if (skyCar.state != 3) {
+            skyCar.state = 3
+            skyCar.setPopupColor()
+          }
+        }
 
         // 找一下 nextLine
         const thisPosition = skyCar.history[VUEDATA.messageLen - 1].position
@@ -103,11 +109,13 @@ export default function drive(wsMessage) {
         for (let i = 1; i <= VUEDATA.messageLen - 1; i++) {
           const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.history[VUEDATA.messageLen - 1 - i].position && e.endCoordinate > skyCar.history[VUEDATA.messageLen - 1 - i].position)
           if (nextLine && thisLine && nextLine.name != thisLine.name) {
-            console.log('当前位置是' + thisPosition + ' 在' + thisLine.name + ' 准备去' + nextLine.name)
-            skyCar.nextLine = nextLine.name
+            if ((!skyCar.nextLine.length || skyCar.nextLine[skyCar.nextLine.length - 1] != nextLine.name) && skyCar.line != nextLine.name.replace('_', '-')) {
+              skyCar.nextLine.push(nextLine.name)
+            }
             break
           }
         }
+
 
         // 除了position改变，有没有动画要放
         let haveAnimation = false
@@ -119,7 +127,7 @@ export default function drive(wsMessage) {
         }
 
         // 常态化清空 FOUP
-        if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run && (skyCar.history[VUEDATA.messageLen - 1].time - 5000) > skyCar.clearImmunityTime) {
+        if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run) {
 
           skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
@@ -141,12 +149,10 @@ export default function drive(wsMessage) {
 
         // 两个后行动画，先移动，再执行
         function onComplete(newHistory, oldHistory) {
+          if (!skyCar.animationOver) return
 
           if (oldHistory.loading == '0' && newHistory.loading == '1') { // 装载开始
-
-
             skyCar.run = false
-            // setTimeout(() => { skyCar.run = true }, 10000)
 
             // 找离天车最近的货架
             let distance = 0
@@ -281,23 +287,30 @@ export default function drive(wsMessage) {
         // 不改变位置的情况 装货结束
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
+          // skyCar.isAnimateSoon = false
 
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
-          skyCar.clearImmunityTime = skyCar.history[VUEDATA.messageLen - 2].time
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
           // 改变位置的情况
           skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
           const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
           const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
-          skyCar.setPosition(true, onComplete(newHistory, oldHistory))
+          skyCar.setPosition(onComplete(newHistory, oldHistory))
 
         } else {
           skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
           const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
           const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
-          skyCar.setPosition(true, onComplete(newHistory, oldHistory))
+          skyCar.setPosition(onComplete(newHistory, oldHistory))
+        }
+
+
+        // 判断一下是否即将有动画
+        const animateTargetMsg = skyCar.history[Math.floor(VUEDATA.messageLen / 2)]
+        if (animateTargetMsg && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
+          skyCar.isAnimateSoon = true
         }
 
 
