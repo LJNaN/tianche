@@ -9,7 +9,7 @@ export default function drive(wsMessage) {
   if (wsMessage?.VehicleInfo?.length) {
     wsMessage.VehicleInfo.forEach(e => {
       if (!e.ohtID) return
-      const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = e
+      const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming,ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = e
 
 
       let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
@@ -44,6 +44,7 @@ export default function drive(wsMessage) {
           ohtStatus_Loading,
           ohtStatus_Quhuoda,
           ohtStatus_Roaming,
+          ohtStatus_Quhuoxing,
           ohtStatus_Idle,
           ohtStatus_IsHaveFoup,
           therfidFoup,
@@ -61,6 +62,7 @@ export default function drive(wsMessage) {
 
 
         // 处理颜色
+        
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
           if (skyCar.state != 5) {
             skyCar.state = 5
@@ -86,6 +88,7 @@ export default function drive(wsMessage) {
           }
 
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1') { // 取货行
+          
           if (skyCar.state != 0) {
             skyCar.state = 0
             skyCar.setPopupColor()
@@ -185,7 +188,7 @@ export default function drive(wsMessage) {
 
             const direction = shelf.direction
             const cb = () => {
-              if (kaxia) {
+              if (kaxia && kaxia.parent) {
                 kaxia.parent.remove(kaxia)
                 kaxia.position.set(0, -0.35, 0)
                 kaxia.scale.set(3, 3, 3)
