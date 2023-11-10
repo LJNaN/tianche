@@ -108,7 +108,7 @@ export default class SkyCar {
         }
       })
 
-      search('天车', this.id)
+      API.search('天车', this.id)
       this.initClickPopup()
     }))
 

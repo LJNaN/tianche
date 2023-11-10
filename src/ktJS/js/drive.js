@@ -151,7 +151,7 @@ export default function drive(wsMessage) {
         function onComplete(newHistory, oldHistory) {
           if (!skyCar.animationOver) return
 
-          if (oldHistory.loading == '0' && newHistory.loading == '1') { // 装载开始
+          if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') { // 装载开始
             skyCar.run = false
 
             // 找离天车最近的货架
