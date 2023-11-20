@@ -12,10 +12,10 @@
 
       <div class="right-time">
         <div>
-          <p>{{ currentDateStr }}</p>
+          <!-- <p>{{ currentDateStr }}</p> -->
         </div>
         <div>
-          <p>{{ "星期" + num }}</p>
+          <!-- <p>{{ "星期" + num }}</p> -->
         </div>
       </div>
 
@@ -56,7 +56,7 @@ const day = currentDate.getDate();
 const week = currentDate.getDay();
 const weekStr = convertWeekToChinese(week);
 const num = `${weekStr}`;
-const currentDateStr = `${year}/${month}/${day}`;
+// const currentDateStr = `${year}/${month}/${day}`;
 let qb = ref("./assets/3d/img/5.png");
 </script>
 

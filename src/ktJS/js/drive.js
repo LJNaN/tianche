@@ -9,7 +9,7 @@ export default function drive(wsMessage) {
   if (wsMessage?.VehicleInfo?.length) {
     wsMessage.VehicleInfo.forEach(e => {
       if (!e.ohtID) return
-      const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming,ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = e
+      const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = e
 
 
       let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
@@ -56,13 +56,13 @@ export default function drive(wsMessage) {
         })
 
 
-        // 保持去重后的数据在10条
+        // 保持去重后的数据在X条
         if (skyCar.history.length < VUEDATA.messageLen + 1) { return }
         skyCar.history.splice(VUEDATA.messageLen, 1)
 
 
         // 处理颜色
-        
+
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
           if (skyCar.state != 5) {
             skyCar.state = 5
@@ -88,7 +88,7 @@ export default function drive(wsMessage) {
           }
 
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1') { // 取货行
-          
+
           if (skyCar.state != 0) {
             skyCar.state = 0
             skyCar.setPopupColor()
@@ -135,6 +135,20 @@ export default function drive(wsMessage) {
           skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
         }
+
+        // 强制清除取货行中的FOUP
+        if (skyCar.state === 0 && !skyCar.catch) {
+          skyCar.skyCarMesh.traverse(e => {
+            if (e.isGroup && e.userData.type === 'kaxia') {
+              e.parent && e.parent.remove(e)
+              const itemIndex = STATE.sceneList.kaxiaList.children.findIndex(e2 => e2 === e)
+              if (itemIndex >= 0) {
+                STATE.sceneList.kaxiaList.children.splice(itemIndex, 1)
+              }
+            }
+          })
+        }
+
 
         // 两个先行动画，光执行，不移动
         function beforeComplete() {
