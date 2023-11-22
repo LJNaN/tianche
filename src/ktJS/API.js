@@ -397,7 +397,9 @@ async function initDeviceByMap() {
     CACHE.container.clickObjects = []
     DATA.deviceMap.value.forEach(e => {
       const model = STATE.sceneList[e.type].clone()
-      model.visible = true
+      setTimeout(() => {
+        model.visible = e.visible
+      }, 0)
       model.position.set(...e.position)
       model.rotation.y = e.rotate * Math.PI / 180
       model.userData.type = '机台'

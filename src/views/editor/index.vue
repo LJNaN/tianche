@@ -12,13 +12,14 @@
 
     <el-table v-show="!isEdit" :data="DATA.deviceMap.value" class="table" @row-click="clickRow" ref="table"
       highlight-current-row border>
-      <el-table-column prop="type" label="类型" width="120" />
-      <el-table-column prop="id" label="ID" width="120" />
+      <el-table-column prop="type" label="类型" width="100" />
+      <el-table-column prop="id" label="ID" width="100" />
       <el-table-column prop="rotate" label="旋转" width="60" />
       <el-table-column prop="position" label="位置" />
+      <el-table-column prop="visible" label="显示" width="60" />
       <el-table-column label="操作" width="60">
         <template #default="scope">
-          <el-button link type="primary" size="small" @click="clickEdit(scope)">编辑</el-button>
+          <el-button link size="small" style="color: #f1682a;" @click="clickEdit(scope)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -41,6 +42,10 @@
 
       <el-form-item label="旋转" prop="rotate" label-width="60">
         <el-input v-model="formData.rotate" @focus="handleInput('rotate')" style="width:30%" />
+      </el-form-item>
+
+      <el-form-item label="显示" prop="visible" label-width="60">
+        <el-switch v-model="formData.visible" @click="handleVisible" style="--el-switch-on-color: #f1682a; width:30%" />
       </el-form-item>
 
 
@@ -92,7 +97,8 @@ let formData = reactive({     // 关联 table 和 form 的对象
   id: '',
   x: 0,
   z: 0,
-  rotate: 0
+  rotate: 0,
+  visible: true
 })
 
 
@@ -106,12 +112,14 @@ function changeListener() {
 // 0-保存 1-返回 2-删除
 function handleSubmit(type) {
   if (type === 0) {
+    
     const obj = control.object
     control.removeEventListener("change", changeListener)
     control.detach()
 
     // 新模型
     if (tempModel) {
+      
       const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
       if (index >= 0) {
         DATA.deviceMap.value.splice(index, 1)
@@ -122,7 +130,8 @@ function handleSubmit(type) {
         id: formData.id,
         type: formData.deviceType,
         position: [obj.position.x, obj.position.y, obj.position.z],
-        rotate: formData.rotate
+        rotate: formData.rotate,
+        visible: formData.visible
       })
 
       obj.traverse(e => {
@@ -138,12 +147,14 @@ function handleSubmit(type) {
     } else {
       const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
 
+      
       if (data) {
         data.id = formData.id
         data.type = formData.deviceType
         data.position[0] = Number(formData.x.toFixed(1))
         data.position[2] = Number(formData.z.toFixed(1))
         data.rotate = formData.rotate
+        data.visible = formData.visible
       }
     }
     isEdit.value = false
@@ -154,7 +165,7 @@ function handleSubmit(type) {
     oldModel.position.x = oldVal.x
     oldModel.position.z = oldVal.z
     oldModel.rotation.y = oldVal.rotate * Math.PI / 180
-    oldModel.visible = true
+    oldModel.visible = oldVal.visible
     if (tempModel) {
       tempModel.parent.remove(tempModel)
     }
@@ -180,6 +191,7 @@ function handleSubmit(type) {
   tempModel = null
 }
 
+// 新增提交
 function insertSubmit(type) {
   if (type === 0) {
 
@@ -196,7 +208,8 @@ function insertSubmit(type) {
       id: formData.id,
       type: formData.deviceType,
       position: [Number((tempModel.position.x).toFixed(1)), tempModel.position.y, Number((tempModel.position.z).toFixed(1))],
-      rotate: formData.rotate
+      rotate: formData.rotate,
+      visible: formData.visible
     })
 
     tempModel.userData.deviceType = formData.deviceType
@@ -226,7 +239,7 @@ function insertSubmit(type) {
 
 function selectChange(e) {
   if (e === oldVal.deviceType) return
-  console.log(1)
+
 
   if (tempModel) {
     if (isInsertMode.value) {
@@ -270,6 +283,7 @@ function selectChange(e) {
     formData.x = model.position.x
     formData.z = model.position.z
     formData.rotate = model.rotation.y
+    formData.visible = true
 
     oldVal = JSON.parse(JSON.stringify(formData))
     tempModel = model
@@ -348,6 +362,7 @@ function clickOutput() {
   link.click()
 }
 
+// 新增模型
 function clickInsert() {
   isInsertMode.value = true
   isEdit.value = true
@@ -384,6 +399,8 @@ function clickInsert() {
   formData.x = model.position.x
   formData.z = model.position.z
   formData.rotate = model.rotation.y
+  formData.visible = true
+  
 
   oldVal = JSON.parse(JSON.stringify(formData))
   tempModel = model
@@ -424,11 +441,13 @@ function clickEdit(scope) {
 
 
   isEdit.value = true
+
   formData.deviceType = scope.row.type
   formData.id = scope.row.id
   formData.x = scope.row.position[0]
   formData.z = scope.row.position[2]
   formData.rotate = scope.row.rotate
+  formData.visible = scope.row.visible
 
   oldVal = JSON.parse(JSON.stringify(formData))
   oldModel = model
@@ -445,6 +464,17 @@ function handleInput(type) {
     control.showX = false
     control.showY = true
     control.showZ = false
+  }
+}
+
+function handleVisible() {
+  if(isInsertMode.value) {
+    console.log(tempModel)
+    tempModel.visible = formData.visible
+
+
+  } else {
+    oldModel.visible = formData.visible
   }
 }
 
@@ -481,7 +511,7 @@ onBeforeMount(() => {
     pointer-events: all;
     position: absolute;
     z-index: 2;
-    right: 26vw;
+    right: 28vw;
     transform: translateX(100%);
     top: 25%;
 
@@ -497,7 +527,7 @@ onBeforeMount(() => {
     right: 1%;
     top: 30%;
     height: 60vh;
-    width: 25vw;
+    width: 27vw;
     z-index: 2;
     border-radius: 4px;
   }
@@ -509,7 +539,7 @@ onBeforeMount(() => {
     position: absolute;
     right: 1%;
     top: 30%;
-    width: 25vw;
+    width: 27vw;
     z-index: 2;
     background-color: #fff;
   }
