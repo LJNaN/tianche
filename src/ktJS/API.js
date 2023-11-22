@@ -429,15 +429,17 @@ async function initDeviceByMap() {
     DATA.deviceMap.value.forEach(e => {
       const model = STATE.sceneList[e.type].clone()
 
-      model.visible = true
-      model.position.set(...e.position)
-      model.rotation.y = e.rotate * Math.PI / 180
-      model.userData.id = e.id
-      model.userData.type = '机台'
-      model.userData.enabled = ''
-      model.userData.eqptype = ''
-      deviceObject[e.type].push(model)
-      CACHE.container.scene.add(model)
+      if (e.visible) {
+        model.visible = true
+        model.position.set(...e.position)
+        model.rotation.y = e.rotate * Math.PI / 180
+        model.userData.id = e.id
+        model.userData.type = '机台'
+        model.userData.enabled = ''
+        model.userData.eqptype = ''
+        deviceObject[e.type].push(model)
+        CACHE.container.scene.add(model)
+      }
     })
 
 
