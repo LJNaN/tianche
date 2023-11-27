@@ -112,14 +112,14 @@ function changeListener() {
 // 0-保存 1-返回 2-删除
 function handleSubmit(type) {
   if (type === 0) {
-    
+
     const obj = control.object
     control.removeEventListener("change", changeListener)
     control.detach()
 
     // 新模型
     if (tempModel) {
-      
+
       const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
       if (index >= 0) {
         DATA.deviceMap.value.splice(index, 1)
@@ -134,6 +134,8 @@ function handleSubmit(type) {
         visible: formData.visible
       })
 
+      obj.userData.deviceType = formData.deviceType
+      obj.userData.id = formData.id
       obj.traverse(e => {
         if (e.isMesh) {
           e.userData.type = '机台'
@@ -145,9 +147,11 @@ function handleSubmit(type) {
 
       // 模型没变
     } else {
+      console.log(111)
       const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+      console.log('data: ', data);
+      console.log('obj: ', obj);
 
-      
       if (data) {
         data.id = formData.id
         data.type = formData.deviceType
@@ -156,6 +160,16 @@ function handleSubmit(type) {
         data.rotate = formData.rotate
         data.visible = formData.visible
       }
+
+      obj.userData.deviceType = formData.deviceType
+      obj.userData.id = formData.id
+      obj.traverse(e => {
+        if (e.isMesh) {
+          e.userData.type = '机台'
+          e.userData.deviceType = formData.deviceType
+          e.userData.id = formData.id
+        }
+      })
     }
     isEdit.value = false
 
@@ -237,6 +251,8 @@ function insertSubmit(type) {
   tempModel = null
 }
 
+
+// 机台类型改变
 function selectChange(e) {
   if (e === oldVal.deviceType) return
 
@@ -252,10 +268,10 @@ function selectChange(e) {
 
   if (isInsertMode.value) {
 
+
     const originModel = STATE.sceneList[e]
 
     if (!originModel) return
-
 
     const model = originModel.clone()
     model.position.set(formData.x, 0, formData.z)
@@ -290,6 +306,7 @@ function selectChange(e) {
 
 
   } else {
+
     oldModel.visible = false
     const model = STATE.sceneList[e].clone()
     model.position.x = formData.x
@@ -299,6 +316,12 @@ function selectChange(e) {
     tempModel = model
 
     CACHE.container.scene.add(model)
+    CACHE.container.outlineObjects = []
+    model.traverse(e => {
+      if (e.isMesh) {
+        CACHE.container.outlineObjects.push(e)
+      }
+    })
     control.object = model
   }
 }
@@ -400,7 +423,7 @@ function clickInsert() {
   formData.z = model.position.z
   formData.rotate = model.rotation.y
   formData.visible = true
-  
+
 
   oldVal = JSON.parse(JSON.stringify(formData))
   tempModel = model
@@ -442,6 +465,7 @@ function clickEdit(scope) {
 
   isEdit.value = true
 
+
   formData.deviceType = scope.row.type
   formData.id = scope.row.id
   formData.x = scope.row.position[0]
@@ -468,8 +492,8 @@ function handleInput(type) {
 }
 
 function handleVisible() {
-  if(isInsertMode.value) {
-    console.log(tempModel)
+  if (isInsertMode.value) {
+
     tempModel.visible = formData.visible
 
 

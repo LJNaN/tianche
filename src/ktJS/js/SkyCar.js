@@ -39,6 +39,8 @@ export default class SkyCar {
 
   initSkyCar() {
     this.skyCarMesh = STATE.sceneList.tianche.clone()
+    this.skyCarMesh.position.set(235, 28.3, 231)
+    this.skyCarMesh.rotation.y = -Math.PI / 2
     this.skyCarMesh.visible = true
     CACHE.container.scene.add(this.skyCarMesh)
 
