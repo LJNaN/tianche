@@ -10,12 +10,14 @@
       <el-button @click="clickOutput">导出配置(替换"根目录/data/deviceMap.js")</el-button>
     </div>
 
-    <el-table v-show="!isEdit" :data="DATA.deviceMap.value" class="table" @row-click="clickRow" ref="table"
+    <el-table v-show="!isEdit" :data="deviceMapArray" class="table" @row-click="clickRow" ref="table"
       highlight-current-row border>
-      <el-table-column prop="type" label="类型" width="100" />
+      <el-table-column prop="modelType" label="模型" width="80" />
       <el-table-column prop="id" label="ID" width="100" />
       <el-table-column prop="rotate" label="旋转" width="60" />
       <el-table-column prop="position" label="位置" />
+      <el-table-column prop="type" label="机台类型" width="60" />
+      <el-table-column prop="bay" label="Bay" width="60" />
       <el-table-column prop="visible" label="显示" width="60" />
       <el-table-column label="操作" width="60">
         <template #default="scope">
@@ -25,9 +27,9 @@
     </el-table>
 
     <el-form v-show="isEdit" class="form" :model="formData">
-      <el-form-item label="类型" prop="deviceType" label-width="60">
-        <el-select v-model="formData.deviceType" @change="selectChange">
-          <el-option v-for="item in modelList" :label="item.label" :value="item.modelName" />
+      <el-form-item label="模型" prop="modelType" label-width="60">
+        <el-select v-model="formData.modelType" @change="selectChange">
+          <el-option v-for="item in modelList" :label="item.label" :value="item.label" :disabled="item.disabled" />
         </el-select>
       </el-form-item>
 
@@ -42,6 +44,21 @@
 
       <el-form-item label="旋转" prop="rotate" label-width="60">
         <el-input v-model="formData.rotate" @focus="handleInput('rotate')" style="width:30%" />
+      </el-form-item>
+
+      <el-form-item label="类型" prop="type" label-width="60">
+        <el-input v-model="formData.type" style="width:30%" />
+      </el-form-item>
+
+      <el-form-item label="Bay" prop="bay" label-width="60">
+        <el-input v-model="formData.bay" style="width:30%" />
+      </el-form-item>
+
+      <el-form-item label="货位" prop="fields" label-width="60">
+        <el-input v-model="formData.fields[0]" style="width:25%" />
+        <el-input v-model="formData.fields[1]" style="width:25%" />
+        <el-input v-model="formData.fields[2]" style="width:25%" />
+        <el-input v-model="formData.fields[3]" style="width:25%" />
       </el-form-item>
 
       <el-form-item label="显示" prop="visible" label-width="60">
@@ -70,20 +87,22 @@ import bus from '@/utils/mitt'
 import { STATE } from "@/ktJS/STATE";
 import { ElMessage } from 'element-plus'
 
-const modelList = [
-  { label: '2LP机台(W01区域)', modelName: '2LPjitai(W01)' },
-  { label: 'OLUS', modelName: 'OLUS' },
-  { label: 'WBS002', modelName: 'WBS002' },
-  { label: 'WHWSA01', modelName: 'WHWSA01' },
-  { label: 'WMACB03', modelName: 'WMACB03' },
-  { label: 'WS0RA01(I01)', modelName: 'WS0RA01(I01)' },
-  { label: 'WS0RA01(I02)', modelName: 'WS0RA01(I02)' },
-  { label: 'WS0RA01', modelName: 'WS0RA01' },
-  { label: 'WSSP008', modelName: 'WSSP008' },
-  { label: 'WTSTK01', modelName: 'WTSTK01' },
-  { label: 'WWATA02V', modelName: 'WWATA02V' },
-  { label: 'WWATA03V', modelName: 'WWATA03V' },
-]
+const deviceMapArray = []
+for (let key in DATA.deviceMap) {
+  for (let key2 in DATA.deviceMap[key]) {
+    const data = DATA.deviceMap[key][key2]
+    data.modelType = key
+    data.id = key2
+    deviceMapArray.push(data)
+  }
+}
+
+
+
+
+const modelList = JSON.parse(JSON.stringify(DATA.deviceTypeMap))
+modelList.forEach(e => e.disabled = e.modelName ? false : true)
+
 
 let control = null            // transform 控制器
 let table = ref(null)         // 表格 ref dom
@@ -93,13 +112,18 @@ let oldVal = null             // 原始模型的数据
 let oldModel = null           // 原始模型
 let tempModel = null          // 编辑类型时的临时模型
 let formData = reactive({     // 关联 table 和 form 的对象
-  deviceType: '',
+  modelType: '',
+  type: '',
+  bay: '',
   id: '',
   x: 0,
   z: 0,
   rotate: 0,
+  fields: [],
   visible: true
 })
+
+
 
 
 function changeListener() {
@@ -114,32 +138,60 @@ function handleSubmit(type) {
   if (type === 0) {
 
     const obj = control.object
+
     control.removeEventListener("change", changeListener)
     control.detach()
 
     // 新模型
     if (tempModel) {
-
-      const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+      const index = deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
       if (index >= 0) {
-        DATA.deviceMap.value.splice(index, 1)
+        deviceMapArray.splice(index, 1)
       }
+
+      for (let key in DATA.deviceMap) {
+        for (let key2 in DATA.deviceMap[key]) {
+          if (key2 === oldModel.userData.id) {
+            delete DATA.deviceMap[key][key2]
+          }
+        }
+      }
+
       oldModel.parent.remove(oldModel)
       oldModel = null
-      DATA.deviceMap.value.push({
+
+      deviceMapArray.push({
         id: formData.id,
-        type: formData.deviceType,
+        modelType: formData.modelType,
+        type: formData.type,
         position: [obj.position.x, obj.position.y, obj.position.z],
         rotate: formData.rotate,
-        visible: formData.visible
+        visible: formData.visible,
+        bay: formData.bay,
+        fields: formData.fields.map(e => Number(e))
       })
 
-      obj.userData.deviceType = formData.deviceType
+
+      if (!DATA.deviceMap[formData.modelType]) {
+        DATA.deviceMap[formData.modelType] = {}
+      }
+      DATA.deviceMap[formData.modelType][formData.id] = {
+        id: formData.id,
+        modelType: formData.modelType,
+        type: formData.type,
+        position: [obj.position.x, obj.position.y, obj.position.z],
+        rotate: formData.rotate,
+        visible: formData.visible,
+        bay: formData.bay,
+        fields: formData.fields.map(e => Number(e))
+      }
+
+      obj.userData.deviceType = formData.type
       obj.userData.id = formData.id
       obj.traverse(e => {
         if (e.isMesh) {
           e.userData.type = '机台'
-          e.userData.deviceType = formData.deviceType
+          e.userData.deviceType = formData.type
           e.userData.id = formData.id
           CACHE.container.clickObjects.push(e)
         }
@@ -147,26 +199,44 @@ function handleSubmit(type) {
 
       // 模型没变
     } else {
-      console.log(111)
-      const data = DATA.deviceMap.value.find(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
-      console.log('data: ', data);
-      console.log('obj: ', obj);
+      if (!DATA.deviceMap[oldModel.userData.modelType]) {
+        DATA.deviceMap[oldModel.userData.modelType] = {}
+      }
+      const data = DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id]
 
       if (data) {
         data.id = formData.id
-        data.type = formData.deviceType
+        data.type = formData.type
+        data.modelType = formData.modelType
         data.position[0] = Number(formData.x.toFixed(1))
         data.position[2] = Number(formData.z.toFixed(1))
         data.rotate = formData.rotate
         data.visible = formData.visible
+        data.bay = formData.bay
+        data.fields = formData.fields.map(e => Number(e))
       }
 
-      obj.userData.deviceType = formData.deviceType
+      const item = deviceMapArray.find(e => e.id === formData.id)
+      if (item) {
+        item.id = formData.id
+        item.type = formData.type
+        item.modelType = formData.modelType
+        item.position[0] = Number(formData.x.toFixed(1))
+        item.position[2] = Number(formData.z.toFixed(1))
+        item.rotate = formData.rotate
+        item.visible = formData.visible
+        item.bay = formData.bay
+        item.fields = formData.fields.map(e => Number(e))
+      }
+
+      obj.userData.deviceType = formData.type
+      obj.userData.modelType = formData.modelType
       obj.userData.id = formData.id
       obj.traverse(e => {
         if (e.isMesh) {
           e.userData.type = '机台'
-          e.userData.deviceType = formData.deviceType
+          e.userData.deviceType = formData.type
+          e.userData.modelType = formData.modelType
           e.userData.id = formData.id
         }
       })
@@ -191,9 +261,18 @@ function handleSubmit(type) {
     CACHE.container.outlineObjects = []
 
     oldModel.parent.remove(oldModel)
-    const index = DATA.deviceMap.value.findIndex(e => e.type === oldModel.userData.deviceType && e.id === oldModel.userData.id)
+
+    const index = deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
     if (index >= 0) {
-      DATA.deviceMap.value.splice(index, 1)
+      deviceMapArray.splice(index, 1)
+    }
+
+    for (let key in DATA.deviceMap) {
+      for (let key2 in DATA.deviceMap[key]) {
+        if (key2 === oldModel.userData.id) {
+          delete DATA.deviceMap[key][key2]
+        }
+      }
     }
 
     oldModel = null
@@ -209,29 +288,51 @@ function handleSubmit(type) {
 function insertSubmit(type) {
   if (type === 0) {
 
-    const data = DATA.deviceMap.value.find(e => e.id === formData.id)
-    if (data) {
-      ElMessage({
-        message: 'ID 重复，请更改 ID',
-        type: 'warning',
-      })
-      return
+    for (let key in DATA.deviceMap) {
+      for (let key2 in DATA.deviceMap[key]) {
+        if (key2 === formData.id) {
+          ElMessage({
+            message: 'ID 重复，请更改 ID',
+            type: 'warning',
+          })
+          return
+        }
+      }
     }
 
-    DATA.deviceMap.value.push({
+    deviceMapArray.push({
       id: formData.id,
-      type: formData.deviceType,
+      type: formData.type,
+      modelType: formData.modelType,
+      bay: formData.bay,
       position: [Number((tempModel.position.x).toFixed(1)), tempModel.position.y, Number((tempModel.position.z).toFixed(1))],
       rotate: formData.rotate,
+      fields: formData.fields.map(e => Number(e)),
       visible: formData.visible
     })
 
-    tempModel.userData.deviceType = formData.deviceType
+    if (!DATA.deviceMap[formData.deviceType]) {
+      DATA.deviceMap[formData.deviceType] = {}
+    }
+    DATA.deviceMap[formData.deviceType][formData.id] = {
+      id: formData.id,
+      type: formData.type,
+      modelType: formData.modelType,
+      bay: formData.bay,
+      position: [Number((tempModel.position.x).toFixed(1)), tempModel.position.y, Number((tempModel.position.z).toFixed(1))],
+      rotate: formData.rotate,
+      fields: formData.fields.map(e => Number(e)),
+      visible: formData.visible
+    }
+
+    tempModel.userData.deviceType = formData.type
+    tempModel.userData.modelType = formData.modelType
     tempModel.userData.id = formData.id
     tempModel.traverse(e => {
       if (e.isMesh) {
         e.userData.type = '机台'
-        e.userData.deviceType = formData.deviceType
+        e.userData.deviceType = formData.type
+        e.userData.modelType = formData.modelType
         e.userData.id = formData.id
         CACHE.container.clickObjects.push(e)
       }
@@ -254,8 +355,6 @@ function insertSubmit(type) {
 
 // 机台类型改变
 function selectChange(e) {
-  if (e === oldVal.deviceType) return
-
 
   if (tempModel) {
     if (isInsertMode.value) {
@@ -267,26 +366,23 @@ function selectChange(e) {
   }
 
   if (isInsertMode.value) {
-
-
     const originModel = STATE.sceneList[e]
 
     if (!originModel) return
-
     const model = originModel.clone()
     model.position.set(formData.x, 0, formData.z)
     model.rotation.y = Math.PI / 180 * formData.rotate
     model.visible = true
     CACHE.container.scene.add(model)
     CACHE.container.outlineObjects = []
-    model.traverse(e => {
-      if (e.isMesh) {
-        CACHE.container.outlineObjects.push(e)
+    model.traverse(e2 => {
+      e2.visible = true
+      if (e2.isMesh) {
+        CACHE.container.outlineObjects.push(e2)
       }
     })
 
     if (control) {
-
       control.attach(model)
       control.object = model
     } else {
@@ -295,10 +391,14 @@ function selectChange(e) {
     }
     control.addEventListener("change", changeListener)
 
-    formData.id = e + '_1'
+    formData.id = e + '01'
     formData.x = model.position.x
     formData.z = model.position.z
     formData.rotate = model.rotation.y
+    formData.bay = ''
+    formData.modelType = e
+    formData.fields = []
+    formData.type = ''
     formData.visible = true
 
     oldVal = JSON.parse(JSON.stringify(formData))
@@ -308,7 +408,8 @@ function selectChange(e) {
   } else {
 
     oldModel.visible = false
-    const model = STATE.sceneList[e].clone()
+    const map = modelList.find(e2 => e2.label === e)
+    const model = STATE.sceneList[map.modelName].clone()
     model.position.x = formData.x
     model.position.z = formData.z
     model.rotation.y = formData.rotate * Math.PI / 180
@@ -318,6 +419,7 @@ function selectChange(e) {
     CACHE.container.scene.add(model)
     CACHE.container.outlineObjects = []
     model.traverse(e => {
+      e.visible = true
       if (e.isMesh) {
         CACHE.container.outlineObjects.push(e)
       }
@@ -343,6 +445,7 @@ onMounted(() => {
   bus.$on('device', data => {
     if (data) {
 
+
       if (isEdit.value) {
         ElMessage({
           message: '请先完成当前编辑',
@@ -362,13 +465,9 @@ onMounted(() => {
       // 操，具体细节我就不说了，功能是双击模型，然后 element table 进行对应跳转
       const tableBody = table.value.$el.children[0].children[2].children[0].children[0].children[0].children[0].children[1]
       for (let i = 0; i < tableBody.children.length; i++) {
-        if (tableBody.children[i].children[0].children[0].innerText === data.userData.deviceType
-          && tableBody.children[i].children[1].children[0].innerText === data.userData.id) {
-          const rowIndex = DATA.deviceMap.value.findIndex(e =>
-            e.type === data.userData.deviceType
-            && e.id === data.userData.id
-          )
-          table.value.setCurrentRow(DATA.deviceMap.value[rowIndex])
+        if (tableBody.children[i].children[1].children[0].innerText === data.userData.id) {
+          const rowIndex = deviceMapArray.findIndex(e => e.id === data.userData.id)
+          table.value.setCurrentRow(deviceMapArray[rowIndex])
           table.value.scrollTo({ top: tableBody.children[i].offsetTop, behavior: 'smooth' })
           break
         }
@@ -380,7 +479,7 @@ onMounted(() => {
 function clickOutput() {
   const link = document.createElement('a')
   link.download = 'deviceMap.js'
-  const outDeviceMap = DATA.deviceMap.value
+  const outDeviceMap = DATA.deviceMap
   link.href = `data:text/plain,const deviceMap = ${JSON.stringify(outDeviceMap)}\n window.deviceMap = deviceMap`
   link.click()
 }
@@ -390,7 +489,7 @@ function clickInsert() {
   isInsertMode.value = true
   isEdit.value = true
 
-  const originModel = STATE.sceneList[modelList[0]?.modelName]
+  const originModel = STATE.sceneList[DATA.deviceTypeMap[0].modelName]
   if (!originModel) return
 
   const model = originModel.clone()
@@ -417,11 +516,15 @@ function clickInsert() {
   }
   control.addEventListener("change", changeListener)
 
-  formData.deviceType = model.userData.deviceType
+  formData.type = model.userData.deviceType
   formData.id = model.userData.id
   formData.x = model.position.x
   formData.z = model.position.z
   formData.rotate = model.rotation.y
+  formData.rotate = model.rotation.y
+  formData.fields = []
+  formData.bay = ''
+  formData.modelType = DATA.deviceTypeMap[0].label
   formData.visible = true
 
 
@@ -437,18 +540,12 @@ function editorControls(mesh) {
   controls.rotationSnap = Math.PI / 8
   controls.showY = false
 
-  controls.attach(mesh);
-
-  // const dataIndex = DATA.deviceMap.value.findIndex(e => e.type === mesh.userData.deviceType && e.id === mesh.userData.id)
-  // if (dataIndex === -1) {
-  //   return
-  // }
-
+  controls.attach(mesh)
   return controls
 }
 
 
-
+// 点击编辑按钮
 function clickEdit(scope) {
   const model = CACHE.container.scene.children.find(e => e.userData.deviceType === scope.row.type && e.userData.id === scope.row.id)
   if (!model) return
@@ -462,14 +559,14 @@ function clickEdit(scope) {
   }
   control.addEventListener("change", changeListener)
 
-
   isEdit.value = true
-
-
-  formData.deviceType = scope.row.type
+  formData.type = scope.row.type
   formData.id = scope.row.id
   formData.x = scope.row.position[0]
   formData.z = scope.row.position[2]
+  formData.fields = scope.row.fields
+  formData.bay = scope.row.bay
+  formData.modelType = scope.row.modelType
   formData.rotate = scope.row.rotate
   formData.visible = scope.row.visible
 
@@ -493,9 +590,7 @@ function handleInput(type) {
 
 function handleVisible() {
   if (isInsertMode.value) {
-
     tempModel.visible = formData.visible
-
 
   } else {
     oldModel.visible = formData.visible
@@ -535,7 +630,7 @@ onBeforeMount(() => {
     pointer-events: all;
     position: absolute;
     z-index: 2;
-    right: 28vw;
+    right: 32vw;
     transform: translateX(100%);
     top: 25%;
 
@@ -551,7 +646,7 @@ onBeforeMount(() => {
     right: 1%;
     top: 30%;
     height: 60vh;
-    width: 27vw;
+    width: 31vw;
     z-index: 2;
     border-radius: 4px;
   }
@@ -563,7 +658,7 @@ onBeforeMount(() => {
     position: absolute;
     right: 1%;
     top: 30%;
-    width: 27vw;
+    width: 31vw;
     z-index: 2;
     background-color: #fff;
   }

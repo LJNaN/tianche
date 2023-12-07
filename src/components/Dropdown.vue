@@ -96,11 +96,13 @@ function searchCandidate(text) {
 
   } else if (selected.value === '设备') {
     const arr = []
-    DATA.deviceMap.value.forEach(e => {
-      if (e.id.includes(text)) {
-        arr.push(e.id)
+    for(let key in DATA.deviceMap) {
+      for(let key2 in DATA.deviceMap[key]) {
+        if(key2.includes(text)) {
+          arr.push(key2)
+        }
       }
-    })
+    }
 
     candidateList.value = arr
   }

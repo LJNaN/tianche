@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -40,12 +40,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // let i = 0
-  // function aaa() {
-  //   drive(mockData5[i])
-  //   i++
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData5[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -394,52 +394,69 @@ function initReflexFloor() {
 async function initDeviceByMap() {
   if (VUEDATA.isEditorMode.value) {
     CACHE.container.clickObjects = []
-    DATA.deviceMap.value.forEach(e => {
-      const model = STATE.sceneList[e.type].clone()
-      setTimeout(() => {
-        model.visible = e.visible
-      }, 0)
-      model.position.set(...e.position)
-      model.rotation.y = e.rotate * Math.PI / 180
-      model.userData.type = '机台'
-      model.userData.deviceType = e.type
-      model.userData.id = e.id
-      CACHE.container.scene.add(model)
+    for (let key in DATA.deviceMap) {
+      const map = DATA.deviceTypeMap.find(e => e.label === key)
+      if (!map || !map.modelName) continue
 
-      model.traverse(e2 => {
-        e2.visible = true
-        if (e2.isMesh) {
-          e2.userData.type = '机台'
-          e2.userData.deviceType = e.type
-          e2.userData.id = e.id
-          CACHE.container.clickObjects.push(e2)
-        }
-      })
-    })
+      for (let key2 in DATA.deviceMap[key]) {
+        const model = STATE.sceneList[map.modelName].clone()
+        setTimeout(() => {
+          model.visible = DATA.deviceMap[key][key2].visible
+        }, 0)
+        model.position.set(...DATA.deviceMap[key][key2].position)
+        model.rotation.y = DATA.deviceMap[key][key2].rotate * Math.PI / 180
+        model.userData.type = '机台'
+        model.userData.deviceType = DATA.deviceMap[key][key2].type
+        model.userData.modelType = key
+        model.userData.bay = DATA.deviceMap[key][key2].bay
+        model.userData.id = key2
+        CACHE.container.scene.add(model)
+
+        model.traverse(e => {
+          e.visible = true
+          if (e.isMesh) {
+            e.userData.type = '机台'
+            e.userData.deviceType = DATA.deviceMap[key][key2].type
+            e.userData.modelType = key
+            e.userData.bay = DATA.deviceMap[key][key2].bay
+            e.userData.id = key2
+            CACHE.container.clickObjects.push(e)
+          }
+        })
+      }
+    }
 
   } else {
-
-    const deviceType = Array.from(new Set(DATA.deviceMap.value.map(e => e.type)))
+    const deviceType = []
+    for (let key in DATA.deviceMap) {
+      deviceType.push(key)
+    }
     const deviceObject = {}
     deviceType.forEach(e => {
       deviceObject[e] = []
     })
 
-    DATA.deviceMap.value.forEach(e => {
-      const model = STATE.sceneList[e.type].clone()
+    for (let key in DATA.deviceMap) {
+      const map = DATA.deviceTypeMap.find(e => e.label === key)
+      if (!map || !map.modelName) continue
+      for (let key2 in DATA.deviceMap[key]) {
+        const model = STATE.sceneList[map.modelName].clone()
 
-      if (e.visible) {
-        model.visible = true
-        model.position.set(...e.position)
-        model.rotation.y = e.rotate * Math.PI / 180
-        model.userData.id = e.id
-        model.userData.type = '机台'
-        model.userData.enabled = ''
-        model.userData.eqptype = ''
-        deviceObject[e.type].push(model)
-        CACHE.container.scene.add(model)
+        if (DATA.deviceMap[key][key2].visible) {
+          model.visible = true
+          model.position.set(...DATA.deviceMap[key][key2].position)
+          model.rotation.y = DATA.deviceMap[key][key2].rotate * Math.PI / 180
+          model.userData.id = DATA.deviceMap[key][key2].id
+          model.userData.type = '机台'
+          model.userData.enabled = ''
+          model.userData.deviceType = DATA.deviceMap[key][key2].type
+          model.userData.modelType = key
+          model.userData.bay = DATA.deviceMap[key][key2].bay
+          deviceObject[key].push(model)
+          CACHE.container.scene.add(model)
+        }
       }
-    })
+    }
 
 
     deviceType.forEach(e => {
@@ -1020,19 +1037,31 @@ function clickInstance(obj, index) {
     className = 'popup3d_shalves'
 
   } else {
-    const deviceItem = CACHE.instanceNameMap[obj.name.split('_')[0]][index]
+    const map = DATA.deviceTypeMap.find(e => e.label === obj.name.split('_')[0])
+    if (!map) return
+    const deviceItem = CACHE.instanceNameMap[map.modelName][index]
+
+    let thisDevice = null
+    for (let key in DATA.deviceMap) {
+      for (let key2 in DATA.deviceMap[key]) {
+        if (deviceItem?.id === key2) {
+          thisDevice = DATA.deviceMap[key][key2]
+        }
+      }
+    }
+    console.log('thisDevice: ', thisDevice);
 
     title = '机台'
     items = [
       { name: '机台ID', value: deviceItem?.id || '--' },
-      { name: '机台Type', value: '--' },
+      { name: '机台Type', value: thisDevice.type || '--' },
       { name: '机台状态', value: '--' },
       { name: 'isOnline', value: '--' },
-      { name: 'Bay', value: '--' },
-      { name: 'Port1', value: '--' },
-      { name: 'Port2', value: '--' },
-      { name: 'Port3', value: '--' },
-      { name: 'Port4', value: '--' }
+      { name: 'Bay', value: thisDevice.bay || '--' },
+      { name: 'Port1', value: thisDevice.fields[0] || '--' },
+      { name: 'Port2', value: thisDevice.fields[1] || '--' },
+      { name: 'Port3', value: thisDevice.fields[2] || '--' },
+      { name: 'Port4', value: thisDevice.fields[3] || '--' }
     ]
     height = '49vh'
     className = 'popup3d_jitai'
@@ -1185,11 +1214,11 @@ function clickInstance(obj, index) {
           { name: '机台Type', value: type || '--' },
           { name: '机台状态', value: enable || '--' },
           { name: 'isOnline', value: isOnlineState || '--' },
-          { name: 'Bay', value: '--' },
-          { name: 'Port1', value: '--' },
-          { name: 'Port2', value: '--' },
-          { name: 'Port3', value: '--' },
-          { name: 'Port4', value: '--' }
+          { name: 'Bay', value: thisDevice.bay || '--' },
+          { name: 'Port1', value: thisDevice.fields[0] || '--' },
+          { name: 'Port2', value: thisDevice.fields[1] || '--' },
+          { name: 'Port3', value: thisDevice.fields[2] || '--' },
+          { name: 'Port4', value: thisDevice.fields[3] || '--' }
         ]
 
 
@@ -1482,7 +1511,10 @@ function instantiationSingleInfo(identicalMeshArray, name, evt) {
 // 显隐机台
 function deviceShow(type) {
   const instancedMeshArr = CACHE.container.scene.children.filter(e => e.isInstancedMesh)
-  const keys = Array.from(new Set(DATA.deviceMap.value.map(e => e.type)))
+  const keys = []
+  for (let key in DATA.deviceMap) {
+    keys.push(key)
+  }
   keys.forEach(key => {
     const itemArr = instancedMeshArr.filter(e => e.name.split('_')[0] === key)
     itemArr.forEach(e => {

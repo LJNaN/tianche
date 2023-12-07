@@ -1,7 +1,7 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 // 摆设备位置
-const deviceMap = ref(window.deviceMap)
+const deviceMap = reactive(window.deviceMap)
 
 // 模拟天车位置
 const skyCarMap = [{
@@ -871,6 +871,116 @@ const shelvesDirection = {
   ]
 }
 
+// EQP 机台位置
+const EQPMap = [
+  { modelType: "WSORA", name: "WSORA01_P1", port: 5001, Bay: "I02", type: "EQP", position: 921267 },
+  { modelType: "WSORA", name: "WSORA01_P2", port: 5002, Bay: "I02", type: "EQP", position: 920763 },
+  { modelType: "WSORA", name: "WSORA01_P3", port: 5003, Bay: "I02", type: "EQP", position: 920256 },
+  { modelType: "WSORA", name: "WSORA01_P4", port: 5004, Bay: "I02", type: "EQP", position: 919756 },
+  { modelType: "WSORA", name: "WSORA02_P1", port: 5005, Bay: "I02", type: "EQP", position: 929409 },
+  { modelType: "WSORA", name: "WSORA02_P2", port: 5006, Bay: "I02", type: "EQP", position: 928899 },
+  { modelType: "WSORA", name: "WSORA02_P3", port: 5007, Bay: "I02", type: "EQP", position: 928392 },
+  { modelType: "WSORA", name: "WSORA02_P4", port: 5008, Bay: "I02", type: "EQP", position: 927888 },
+  { modelType: "WMACB", name: "WMACB01_P1", port: 5101, Bay: "W01", type: "EQP", position: 30602 },
+  { modelType: "WMACB", name: "WMACB01_P2", port: 5102, Bay: "W01", type: "EQP", position: 30089 },
+  { modelType: "WMACB", name: "WMACB01_P3", port: 5103, Bay: "W01", type: "EQP", position: 29577 },
+  { modelType: "WMACB", name: "WMACB02_P1", port: 5104, Bay: "W01", type: "EQP", position: 27237 },
+  { modelType: "WMACB", name: "WMACB02_P2", port: 5105, Bay: "W01", type: "EQP", position: 26729 },
+  { modelType: "WMACB", name: "WMACB02_P3", port: 5106, Bay: "W01", type: "EQP", position: 26218 },
+  { modelType: "WMACB", name: "WMACB03_P1", port: 5107, Bay: "W01", type: "EQP", position: 65548 },
+  { modelType: "WMACB", name: "WMACB03_P2", port: 5108, Bay: "W01", type: "EQP", position: 65037 },
+  { modelType: "WMACB", name: "WMACB03_P3", port: 5109, Bay: "W01", type: "EQP", position: 64535 },
+  { modelType: "WMACB", name: "WMACB04_P1", port: 5110, Bay: "W01", type: "", position: 0 },
+  { modelType: "WMACB", name: "WMACB04_P2", port: 5111, Bay: "W01", type: "", position: 0 },
+  { modelType: "WMACB", name: "WMACB04_P3", port: 5112, Bay: "W01", type: "", position: 0 },
+  { modelType: "WROMA", name: "WROMA02_P1", port: 5113, Bay: "W01", type: "", position: 0 },
+  { modelType: "WROMA", name: "WROMA02_P2", port: 5114, Bay: "W01", type: "", position: 0 },
+  { modelType: "WOLUS", name: "WOLUS01_P41", port: 5115, Bay: "W01", type: "OLUS", position: 74045 },
+  { modelType: "WOLUS", name: "WOLUS02_P42", port: 5116, Bay: "W01", type: "OLUS", position: 73268 },
+  { modelType: "WMACB", name: "WMACB05_P1", port: 5117, Bay: "W01", type: "", position: 0 },
+  { modelType: "WMACB", name: "WMACB05_P2", port: 5118, Bay: "W01", type: "", position: 0 },
+  { modelType: "WMACB", name: "WMACB05_P3", port: 5119, Bay: "W01", type: "", position: 0 },
+  { modelType: "WSORB", name: "WSORB01_P1", port: 5121, Bay: "W01_3", type: "EQP", position: 899335 },
+  { modelType: "WSORB", name: "WSORB01_P2", port: 5122, Bay: "W01_3", type: "EQP", position: 898829 },
+  { modelType: "WHWSA", name: "WHWSA01_P1", port: 5123, Bay: "W01_3", type: "EQP", position: 1549635 },
+  { modelType: "WHWSA", name: "WHWSA01_P2", port: 5124, Bay: "W01_3", type: "EQP", position: 1550138 },
+  { modelType: "WHWSA", name: "WHWSA01_P3", port: 5125, Bay: "W01_3", type: "EQP", position: 1552770 },
+  { modelType: "WHWSA", name: "WHWSA01_P4", port: 5126, Bay: "W01_3", type: "EQP", position: 1553273 },
+  { modelType: "WBS", name: "WBS002_P1", port: 5204, Bay: "W02", type: "EQP", position: 87598 },
+  { modelType: "WBS", name: "WBS002_P2", port: 5205, Bay: "W02", type: "EQP", position: 87002 },
+  { modelType: "WBS", name: "WBS002_P3", port: 5206, Bay: "W02", type: "EQP", position: 86409 },
+  { modelType: "WBS", name: "WBS003_P1", port: 5207, Bay: "W02", type: "EQP", position: 92161 },
+  { modelType: "WBS", name: "WBS003_P2", port: 5208, Bay: "W02", type: "EQP", position: 91567 },
+  { modelType: "WBS", name: "WBS003_P3", port: 5209, Bay: "W02", type: "EQP", position: 90976 },
+  { modelType: "WBS", name: "WBS004_P1", port: 5210, Bay: "W02", type: "EQP", position: 96722 },
+  { modelType: "WBS", name: "WBS004_P2", port: 5211, Bay: "W02", type: "EQP", position: 96127 },
+  { modelType: "WBS", name: "WBS004_P3", port: 5212, Bay: "W02", type: "EQP", position: 95536 },
+  { modelType: "WBS", name: "WBS005_P1", port: 5213, Bay: "W02", type: "", position: 0 },
+  { modelType: "WBS", name: "WBS005_P2", port: 5214, Bay: "W02", type: "", position: 0 },
+  { modelType: "WBS", name: "WBS005_P3", port: 5215, Bay: "W02", type: "", position: 0 },
+  { modelType: "WBS", name: "WBS006_P1", port: 5216, Bay: "W02", type: "", position: 0 },
+  { modelType: "WBS", name: "WBS006_P2", port: 5217, Bay: "W02", type: "", position: 0 },
+  { modelType: "WBS", name: "WBS006_P3", port: 5218, Bay: "W02", type: "", position: 0 },
+  { modelType: "WOLUS", name: "WOLUS03_P41", port: 5219, Bay: "W02", type: "OLUS", position: 121820 },
+  { modelType: "WOLUS", name: "WOLUS04_P42", port: 5220, Bay: "W02", type: "OLUS", position: 121050 },
+  { modelType: "WWSP", name: "WWSP010", port: 5221, Bay: "W02", type: "EQP", position: 168497 },
+  { modelType: "WWSPP", name: "WWSPP02_P1", port: 5222, Bay: "W02", type: "", position: 0 },
+  { modelType: "WWSPP", name: "WWSPP02_P2", port: 5223, Bay: "W02", type: "", position: 0 },
+  { modelType: "WWSPP", name: "WWSPP01_P1", port: 5224, Bay: "W02", type: "", position: 0 },
+  { modelType: "WWSPP", name: "WWSPP01_P2", port: 5225, Bay: "W02", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS011", port: 5226, Bay: "W02", type: "EQP", position: 135453 },
+  { modelType: "WWS", name: "WWS013", port: 5227, Bay: "W02", type: "EQP", position: 132206 },
+  { modelType: "WWS", name: "WWS014", port: 5228, Bay: "W02", type: "EQP", position: 128770 },
+  { modelType: "WWS", name: "WWS001", port: 5301, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS002", port: 5302, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS003", port: 5303, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS004", port: 5304, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS005", port: 5305, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS006", port: 5306, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS007", port: 5307, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS0015", port: 5308, Bay: "W03", type: "EQP", position: 216610 },
+  { modelType: "WWS", name: "WWS0017", port: 5309, Bay: "W03", type: "EQP", position: 221866 },
+  { modelType: "WWATA02V", name: "WWATA02V_P1", port: 5310, Bay: "W03", type: "EQP", position: 271729 },
+  { modelType: "WWATA03V", name: "WWATA03V_P1", port: 5311, Bay: "W03", type: "EQP", position: 267421 },
+  { modelType: "WWAPA", name: "WWAPA04", port: 5312, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWATA05V", name: "WWATA05V_P1", port: 5313, Bay: "W03", type: "EQP", position: 259334 },
+  { modelType: "WWAPA", name: "WWAPA06", port: 5314, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWAPA", name: "WWAPA07", port: 5315, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWAPA", name: "WWAPA08", port: 5316, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWAPA", name: "WWAPA09", port: 5317, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS0018", port: 5318, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS0019", port: 5319, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWS", name: "WWS0020", port: 5320, Bay: "W03", type: "", position: 0 },
+  { modelType: "WTSTK", name: "WTSTK01_P46", port: 5050, Bay: "W02", type: "STOCKER", position: 831148 },
+  { modelType: "WTSTK", name: "WTSTK01_P45", port: 5051, Bay: "W02", type: "STOCKER", position: 832149 },
+  { modelType: "WWSP", name: "WWSP0019", port: 5319, Bay: "W03", type: "", position: 0 },
+  { modelType: "WWSP", name: "WWSP0020", port: 5320, Bay: "W03", type: "", position: 0 },
+  { modelType: "WTSTK", name: "WTSTK01_P46", port: 5050, Bay: "I01", type: "STOCKER", position: 831148 },
+  { modelType: "WTSTK", name: "WTSTK01_P45", port: 5051, Bay: "I01", type: "STOCKER", position: 832149 },
+  { modelType: "WTSTK", name: "WTSTK02_P46", port: 5052, Bay: "I01", type: "STOCKER", position: 837229 },
+  { modelType: "WTSTK", name: "WTSTK02_P45", port: 5053, Bay: "I01", type: "STOCKER", position: 838235 },
+  { modelType: "WWSP", name: "WWSP008", port: 5351, Bay: "W04", type: "EQP", position: 1341593 },
+  { modelType: "WWSP", name: "WWSP009", port: 5352, Bay: "W04", type: "EQP", position: 1346161 },
+  { modelType: "WWSP", name: "WWSP012", port: 5353, Bay: "W04", type: "EQP", position: 1350736 },
+  { modelType: "WWSP", name: "WWSP016", port: 5354, Bay: "W04", type: "EQP", position: 1355320 }
+]
+
+const deviceTypeMap = [
+  { label: 'WSORA', modelName: 'WS0RA01' },
+  { label: 'WMACB', modelName: 'WMACB03' },
+  { label: 'WROMA', modelName: '2LPjitai(W01)' },
+  { label: 'WHWSA', modelName: 'WHWSA01' },
+  { label: 'WBS', modelName: 'WBS002' },
+  { label: 'WWSP', modelName: 'WSSP008' },
+  { label: 'WWATA', modelName: 'WWATA02V' },
+  { label: 'WTSTK', modelName: 'WTSTK01' },
+  { label: 'WOLUS', modelName: 'OLUS' },
+  { label: 'WSORB', modelName: '' },
+  { label: 'WWSPP', modelName: '' },
+  { label: 'WWS', modelName: '' },
+  { label: 'WWAPA', modelName: '' }
+]
+
 const pointCoordinateMap = window.pointCoordinateMap
 
 export const DATA = {
@@ -878,6 +988,8 @@ export const DATA = {
   skyCarMap,
   skyCarStateColorMap,
   shelvesMap,
-  deviceMap
+  deviceMap,
+  EQPMap,
+  deviceTypeMap
 }
 window.DATA = DATA
