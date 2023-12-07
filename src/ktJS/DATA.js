@@ -975,7 +975,7 @@ const deviceTypeMap = [
   { label: 'WWATA', modelName: 'WWATA02V' },
   { label: 'WTSTK', modelName: 'WTSTK01' },
   { label: 'WOLUS', modelName: 'OLUS' },
-  { label: 'WSORB', modelName: '' },
+  { label: 'WSORB', modelName: 'WTSTK01' },
   { label: 'WWSPP', modelName: '' },
   { label: 'WWS', modelName: '' },
   { label: 'WWAPA', modelName: '' }

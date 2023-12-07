@@ -1524,7 +1524,130 @@ function deviceShow(type) {
 }
 
 // 通过 GetCarrierInfo 的locationId 找 position
+// 史
 function getPositionByKaxiaLocation(location) {
+  // 先判断机台
+  for (let key in DATA.deviceMap) {
+    for (let key2 in DATA.deviceMap[key]) {
+      if (DATA.deviceMap[key][key2].fields.includes(Number(location))) {
+
+        const item = DATA.deviceMap[key][key2]
+        const position = new Bol3D.Vector3()
+        const index = item.fields.findIndex(e => e === Number(location))
+        if (key === 'WSORA') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 6 + index * 5.07, 12, item.position[2] + 6.3)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 6.3, 12, item.position[2] - 6 + index * 5.07)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 6 - index * 5.07, 12, item.position[2] - 6.3)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 6.3, 12, item.position[2] + 6 - index * 5.07)
+          }
+
+        } else if (key === 'WMACB') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 9 + index * 5.3, 11, item.position[2] + 10)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 10, 11, item.position[2] - 9 + index * 5.3)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 9 - index * 5.3, 11, item.position[2] - 10)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 10, 11, item.position[2] + 9 - index * 5.3)
+          }
+
+        } else if (key === 'WROMA') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 1.2 + index * 5.3, 11, item.position[2] + 12.5)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 12.5, 11, item.position[2] - 1.2 + index * 5.3)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 1.2 - index * 5.3, 11, item.position[2] - 12.5)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 12.5, 11, item.position[2] + 1.2 - index * 5.3)
+          }
+
+        } else if (key === 'WHWSA') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(index < 2 ? (item.position[2] + 6 + index * 5.3) : (item.position[2] + 26 + index * 5.3), 11, item.position[0] + 6)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 28, 11, index < 2 ? (item.position[2] + 15 - index * 5.3) : (item.position[2] - 5 - index * 5.3))
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(index < 2 ? (item.position[2] + 37 - index * 5.3) : (item.position[2] + 16 - index * 5.3), 11, item.position[0] - 49)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 28, 11, index < 2 ? (item.position[2] - 15 + index * 5.3) : (item.position[2] + 5 + index * 5.3))
+          }
+
+        } else if (key === 'WBS') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 1.2 + index * 5.3, 11, item.position[2] + 12.5)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 12.5, 11, item.position[2] - 1.2 + index * 5.3)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 1.2 - index * 5.3, 11, item.position[2] - 12.5)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 12.5, 11, item.position[2] + 1.2 - index * 5.3)
+          }
+
+        } else if (key === 'WWSP') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 9, 11, item.position[2] + 11)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 11, 11, item.position[2] + 9)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 9, 11, item.position[2] - 11)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 11, 11, item.position[2] - 9)
+          }
+
+        } else if (key === 'WWATA') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 10, 11, item.position[2] + 11)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 11, 11, item.position[2] + 10)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 10, 11, item.position[2] - 11)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 11, 11, item.position[2] - 10)
+          }
+
+        } else if (key === 'WTSTK') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0] - 4 + index * 7.8, 20, item.position[2] + 3)
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0] + 3, 20, item.position[2] - 4 + index * 7.8)
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0] + 4 - index * 7.8, 20, item.position[2] - 3)
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0] - 3, 20, item.position[2] + 4 - index * 7.8)
+          }
+
+        } else if (key === 'WOLUS') {
+          if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
+            position.set(item.position[0], 10.5, item.position[2])
+          } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
+            position.set(item.position[0], 10.5, item.position[2])
+          } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
+            position.set(item.position[0], 10.5, item.position[2])
+          } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
+            position.set(item.position[0], 10.5, item.position[2])
+          }
+        }
+
+
+        const res = {
+          type: '在机台上',
+          position,
+          area: key,
+          shelf: key2,
+          shelfIndex: index
+        }
+        return res
+      }
+    }
+  }
+
+  // 再判断货架
   for (let key in DATA.shelvesMap) {
     for (let key2 in DATA.shelvesMap[key]) {
       if (DATA.shelvesMap[key][key2].fields.includes(Number(location))) {
@@ -1548,6 +1671,7 @@ function getPositionByKaxiaLocation(location) {
         }
 
         const res = {
+          type: '在货架上',
           position,
           area: key,
           shelf: key2,
@@ -1562,44 +1686,364 @@ function getPositionByKaxiaLocation(location) {
 // 加载卡匣
 function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
-  GetCarrierInfo().then(res => {
-    if (!res?.data) return
+  // GetCarrierInfo().then(res => {
 
-    res.data.forEach(e => {
-      if (e.carrierType !== '0' && e.carrierType !== '1') return
 
-      const position = getPositionByKaxiaLocation(e.locationId)
+  const res = {
+    "code": 0,
+    "msg": "",
+    "data": [
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5001
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5002
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5003
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5004
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5005
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5006
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5007
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5008
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5101
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5102
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5103
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5104
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5105
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5106
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5107
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5108
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5109
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5115
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5116
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5219
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5220
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5121
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5122
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5123
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5124
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5125
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5126
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5204
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5205
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5206
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5207
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5208
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5209
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5210
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5211
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5212
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5221
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5351
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5352
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5353
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5354
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5226
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5227
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5228
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5308
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5309
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5310
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5311
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5313
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5050
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5051
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5052
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 5053
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6001
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6002
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6003
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6004
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6005
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6006
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6007
+      },
+      {
+        "carrierId": "1",
+        "carrierType": "0",
+        "locationId": 6008
+      }
+    ],
+    "count": 2
+  }
+  if (!res?.data) return
 
-      if (!position) return
+  res.data.forEach(e => {
+    if (e.carrierType !== '0' && e.carrierType !== '1') return
 
-      const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
-      kaxia.userData.id = e.carrierId
-      kaxia.userData.locationId = e.locationId
-      kaxia.userData.carrierType = e.carrierType === '0' ? 'FOUP' : e.carrierType === '1' ? 'FOSB' : e.carrierType === '2' ? 'POD' : ''
-      kaxia.userData.area = position.area
-      kaxia.userData.shelf = position.shelf
-      kaxia.userData.shelfIndex = position.shelfIndex
-      kaxia.userData.type = 'kaxia'
-      kaxia.scale.set(30, 30, 30)
-      kaxia.position.set(position.position.x, position.position.y, position.position.z)
+    const position = getPositionByKaxiaLocation(e.locationId)
+
+    if (!position) return
+
+    const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
+    kaxia.userData.id = e.carrierId
+    kaxia.userData.locationId = e.locationId
+    kaxia.userData.carrierType = e.carrierType === '0' ? 'FOUP' : e.carrierType === '1' ? 'FOSB' : e.carrierType === '2' ? 'POD' : ''
+    kaxia.userData.where = position.type
+    kaxia.userData.area = position.area
+    kaxia.userData.shelf = position.shelf
+    kaxia.userData.shelfIndex = position.shelfIndex
+    kaxia.userData.type = 'kaxia'
+    kaxia.scale.set(30, 30, 30)
+    kaxia.position.set(position.position.x, position.position.y, position.position.z)
+    if (position.type === '在货架上') {
       kaxia.rotation.y = DATA.shelvesMap[position.area][position.shelf].rotate * Math.PI / 180 - Math.PI / 2
-      kaxia.visible = true
-      kaxia.traverse(e2 => {
-        if (e2.isMesh) {
-          e2.userData.id = kaxia.userData.id
-          e2.userData.locationId = kaxia.userData.locationId
-          e2.userData.carrierType = kaxia.userData.carrierType
-          e2.userData.area = kaxia.userData.area
-          e2.userData.shelf = kaxia.userData.shelf
-          e2.userData.shelfIndex = kaxia.userData.shelfIndex
-          e2.userData.type = kaxia.userData.type
-          CACHE.container.clickObjects.push(e2)
-        }
-      })
-
-      STATE.sceneList.kaxiaList.add(kaxia)
+    } else if (position.type === '在机台上') {
+      kaxia.rotation.y = DATA.deviceMap[position.area][position.shelf].rotate * Math.PI / 180
+    }
+    kaxia.visible = true
+    kaxia.traverse(e2 => {
+      if (e2.isMesh) {
+        e2.userData.id = kaxia.userData.id
+        e2.userData.locationId = kaxia.userData.locationId
+        e2.userData.carrierType = kaxia.userData.carrierType
+        e2.userData.where = kaxia.userData.type
+        e2.userData.area = kaxia.userData.area
+        e2.userData.shelf = kaxia.userData.shelf
+        e2.userData.shelfIndex = kaxia.userData.shelfIndex
+        e2.userData.type = kaxia.userData.type
+        CACHE.container.clickObjects.push(e2)
+      }
     })
+
+    STATE.sceneList.kaxiaList.add(kaxia)
   })
+  // })
 }
 
 

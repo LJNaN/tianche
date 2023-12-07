@@ -365,8 +365,10 @@ function selectChange(e) {
     tempModel = null
   }
 
+  
+  const map = modelList.find(e2 => e2.label === e)
   if (isInsertMode.value) {
-    const originModel = STATE.sceneList[e]
+    const originModel = STATE.sceneList[map.modelName]
 
     if (!originModel) return
     const model = originModel.clone()
@@ -390,6 +392,7 @@ function selectChange(e) {
       control = controls
     }
     control.addEventListener("change", changeListener)
+    console.log('control: ', control);
 
     formData.id = e + '01'
     formData.x = model.position.x
@@ -408,7 +411,6 @@ function selectChange(e) {
   } else {
 
     oldModel.visible = false
-    const map = modelList.find(e2 => e2.label === e)
     const model = STATE.sceneList[map.modelName].clone()
     model.position.x = formData.x
     model.position.z = formData.z
@@ -537,7 +539,7 @@ function editorControls(mesh) {
   CACHE.container.bloomPass.enabled = false
   const controls = CACHE.container.transformControl;
   controls.translationSnap = 0.1
-  controls.rotationSnap = Math.PI / 8
+  controls.rotationSnap = Math.PI / 2
   controls.showY = false
 
   controls.attach(mesh)

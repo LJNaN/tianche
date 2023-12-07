@@ -267,6 +267,7 @@ export default function drive(wsMessage) {
                   skyCar.catch.position.z = positionData.position.z
                   skyCar.catch.userData.locationId = newHistory.location
                   skyCar.catch.userData.carrierType = 'FOUP'
+                  skyCar.catch.userData.where = positionData.type
                   skyCar.catch.userData.area = positionData.area
                   skyCar.catch.userData.shelf = positionData.shelf
                   skyCar.catch.userData.shelfIndex = positionData.shelfIndex
@@ -281,6 +282,7 @@ export default function drive(wsMessage) {
                       e2.userData.id = skyCar.catch.userData.id
                       e2.userData.locationId = skyCar.catch.userData.locationId
                       e2.userData.carrierType = skyCar.catch.userData.carrierType
+                      e2.userData.where = skyCar.catch.userData.where
                       e2.userData.area = skyCar.catch.userData.area
                       e2.userData.shelf = skyCar.catch.userData.shelf
                       e2.userData.shelfIndex = skyCar.catch.userData.shelfIndex
