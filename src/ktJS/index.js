@@ -218,7 +218,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
 
             progress.remove()
-            API.testBox()
+            // API.testBox()
             // API.loadGUI()
             // CACHE.container.loadingBar.style.visibility = 'hidden'
           })

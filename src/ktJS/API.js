@@ -5,10 +5,10 @@ import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 // import mockData1 from './js/mock1'
-// import mockData2 from './js/mock2'
+import mockData2 from './js/mock2'
 // import mockData3 from './js/mock3'
 // import mockData4 from './js/mock4'
-import mockData5 from './js/mock5'
+// import mockData5 from './js/mock5'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -35,20 +35,18 @@ function getData() {
   // let i = 0
   // window.aa = () => { }
   // setInterval(() => {
-  //   if (i >= mockData5.length) i = 0
-  //   drive(mockData5[i])
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
   //   i++
   // }, 333)
 
-  let i = 0
-  function aaa() {
-    drive(mockData5[i])
-    i++
-  }
-  window.aaa = aaa
+  // let i = 0
+  // function aaa() {
+  //   drive(mockData5[i])
+  //   i++
+  // }
+  // window.aaa = aaa
 }
-
-
 
 
 // 相机动画（传指定state）
@@ -1580,13 +1578,13 @@ function getPositionByKaxiaLocation(location) {
 
         } else if (key === 'WBS') {
           if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
-            position.set(item.position[0] - 1.2 + index * 5.3, 11, item.position[2] + 12.5)
+            position.set(item.position[0] - 4 + index * 5.3, 11, item.position[2] + 12.5)
           } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
-            position.set(item.position[0] + 12.5, 11, item.position[2] - 1.2 + index * 5.3)
+            position.set(item.position[0] + 12.5, 11, item.position[2] - 4 + index * 5.3)
           } else if (Math.abs(DATA.deviceMap[key][key2].rotate) === 180) {
-            position.set(item.position[0] + 1.2 - index * 5.3, 11, item.position[2] - 12.5)
+            position.set(item.position[0] + 4 - index * 5.3, 11, item.position[2] - 12.5)
           } else if (DATA.deviceMap[key][key2].rotate === -90 || DATA.deviceMap[key][key2].rotate === 270) {
-            position.set(item.position[0] - 12.5, 11, item.position[2] + 1.2 - index * 5.3)
+            position.set(item.position[0] - 12.5, 11, item.position[2] + 4 - index * 5.3)
           }
 
         } else if (key === 'WWSP') {
@@ -1686,364 +1684,59 @@ function getPositionByKaxiaLocation(location) {
 // 加载卡匣
 function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
-  // GetCarrierInfo().then(res => {
+  GetCarrierInfo().then(res => {
 
+    // const res = {
+    //   data: [{
+    //     carrierType: '0',
+    //     carrierId: '845 8334 6466 5D66 F',
+    //     locationId: '5101'
+    //   }]
+    // }
 
-  const res = {
-    "code": 0,
-    "msg": "",
-    "data": [
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5001
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5002
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5003
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5004
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5005
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5006
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5007
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5008
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5101
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5102
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5103
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5104
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5105
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5106
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5107
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5108
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5109
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5115
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5116
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5219
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5220
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5121
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5122
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5123
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5124
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5125
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5126
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5204
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5205
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5206
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5207
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5208
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5209
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5210
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5211
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5212
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5221
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5351
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5352
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5353
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5354
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5226
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5227
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5228
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5308
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5309
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5310
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5311
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5313
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5050
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5051
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5052
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 5053
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6001
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6002
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6003
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6004
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6005
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6006
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6007
-      },
-      {
-        "carrierId": "1",
-        "carrierType": "0",
-        "locationId": 6008
+    if (!res?.data) return
+
+    res.data.forEach(e => {
+      if (e.carrierType !== '0' && e.carrierType !== '1') return
+
+      const position = getPositionByKaxiaLocation(e.locationId)
+
+      if (!position) return
+
+      const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
+      kaxia.userData.id = e.carrierId
+      kaxia.userData.locationId = e.locationId
+      kaxia.userData.carrierType = e.carrierType === '0' ? 'FOUP' : e.carrierType === '1' ? 'FOSB' : e.carrierType === '2' ? 'POD' : ''
+      kaxia.userData.where = position.type
+      kaxia.userData.area = position.area
+      kaxia.userData.shelf = position.shelf
+      kaxia.userData.shelfIndex = position.shelfIndex
+      kaxia.userData.type = 'kaxia'
+      kaxia.scale.set(30, 30, 30)
+      kaxia.position.set(position.position.x, position.position.y, position.position.z)
+      if (position.type === '在货架上') {
+        kaxia.rotation.y = DATA.shelvesMap[position.area][position.shelf].rotate * Math.PI / 180 - Math.PI / 2
+      } else if (position.type === '在机台上') {
+        kaxia.rotation.y = DATA.deviceMap[position.area][position.shelf].rotate * Math.PI / 180
       }
-    ],
-    "count": 2
-  }
-  if (!res?.data) return
+      kaxia.visible = true
+      kaxia.traverse(e2 => {
+        if (e2.isMesh) {
+          e2.userData.id = kaxia.userData.id
+          e2.userData.locationId = kaxia.userData.locationId
+          e2.userData.carrierType = kaxia.userData.carrierType
+          e2.userData.where = kaxia.userData.type
+          e2.userData.area = kaxia.userData.area
+          e2.userData.shelf = kaxia.userData.shelf
+          e2.userData.shelfIndex = kaxia.userData.shelfIndex
+          e2.userData.type = kaxia.userData.type
+          CACHE.container.clickObjects.push(e2)
+        }
+      })
 
-  res.data.forEach(e => {
-    if (e.carrierType !== '0' && e.carrierType !== '1') return
-
-    const position = getPositionByKaxiaLocation(e.locationId)
-
-    if (!position) return
-
-    const kaxia = e.carrierType === '0' ? STATE.sceneList.FOUP.clone() : STATE.sceneList.FOSB.clone()
-    kaxia.userData.id = e.carrierId
-    kaxia.userData.locationId = e.locationId
-    kaxia.userData.carrierType = e.carrierType === '0' ? 'FOUP' : e.carrierType === '1' ? 'FOSB' : e.carrierType === '2' ? 'POD' : ''
-    kaxia.userData.where = position.type
-    kaxia.userData.area = position.area
-    kaxia.userData.shelf = position.shelf
-    kaxia.userData.shelfIndex = position.shelfIndex
-    kaxia.userData.type = 'kaxia'
-    kaxia.scale.set(30, 30, 30)
-    kaxia.position.set(position.position.x, position.position.y, position.position.z)
-    if (position.type === '在货架上') {
-      kaxia.rotation.y = DATA.shelvesMap[position.area][position.shelf].rotate * Math.PI / 180 - Math.PI / 2
-    } else if (position.type === '在机台上') {
-      kaxia.rotation.y = DATA.deviceMap[position.area][position.shelf].rotate * Math.PI / 180
-    }
-    kaxia.visible = true
-    kaxia.traverse(e2 => {
-      if (e2.isMesh) {
-        e2.userData.id = kaxia.userData.id
-        e2.userData.locationId = kaxia.userData.locationId
-        e2.userData.carrierType = kaxia.userData.carrierType
-        e2.userData.where = kaxia.userData.type
-        e2.userData.area = kaxia.userData.area
-        e2.userData.shelf = kaxia.userData.shelf
-        e2.userData.shelfIndex = kaxia.userData.shelfIndex
-        e2.userData.type = kaxia.userData.type
-        CACHE.container.clickObjects.push(e2)
-      }
+      STATE.sceneList.kaxiaList.add(kaxia)
     })
-
-    STATE.sceneList.kaxiaList.add(kaxia)
   })
-  // })
 }
 
 

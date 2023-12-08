@@ -5,12 +5,12 @@
   </div>
 
   <div class="editor">
-    <div class="output">
-      <el-button @click="clickInsert" v-show="!isInsertMode && !isEdit">新增</el-button>
+    <div class="output" v-show="!isInsertMode && !isEdit">
+      <el-button @click="clickInsert" >新增</el-button>
       <el-button @click="clickOutput">导出配置(替换"根目录/data/deviceMap.js")</el-button>
     </div>
 
-    <el-table v-show="!isEdit" :data="deviceMapArray" class="table" @row-click="clickRow" ref="table"
+    <el-table v-show="!isEdit" :data="DATA.deviceMapArray" class="table" @row-click="clickRow" ref="table"
       highlight-current-row border>
       <el-table-column prop="modelType" label="模型" width="80" />
       <el-table-column prop="id" label="ID" width="100" />
@@ -87,17 +87,6 @@ import bus from '@/utils/mitt'
 import { STATE } from "@/ktJS/STATE";
 import { ElMessage } from 'element-plus'
 
-const deviceMapArray = []
-for (let key in DATA.deviceMap) {
-  for (let key2 in DATA.deviceMap[key]) {
-    const data = DATA.deviceMap[key][key2]
-    data.modelType = key
-    data.id = key2
-    deviceMapArray.push(data)
-  }
-}
-
-
 
 
 const modelList = JSON.parse(JSON.stringify(DATA.deviceTypeMap))
@@ -126,6 +115,7 @@ let formData = reactive({     // 关联 table 和 form 的对象
 
 
 
+
 function changeListener() {
   formData.x = Number(control.object.position.x.toFixed(1))
   formData.z = Number(control.object.position.z.toFixed(1))
@@ -144,9 +134,9 @@ function handleSubmit(type) {
 
     // 新模型
     if (tempModel) {
-      const index = deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
+      const index = DATA.deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
       if (index >= 0) {
-        deviceMapArray.splice(index, 1)
+        DATA.deviceMapArray.splice(index, 1)
       }
 
       for (let key in DATA.deviceMap) {
@@ -160,7 +150,7 @@ function handleSubmit(type) {
       oldModel.parent.remove(oldModel)
       oldModel = null
 
-      deviceMapArray.push({
+      DATA.deviceMapArray.push({
         id: formData.id,
         modelType: formData.modelType,
         type: formData.type,
@@ -216,7 +206,7 @@ function handleSubmit(type) {
         data.fields = formData.fields.map(e => Number(e))
       }
 
-      const item = deviceMapArray.find(e => e.id === formData.id)
+      const item = DATA.deviceMapArray.find(e => e.id === formData.id)
       if (item) {
         item.id = formData.id
         item.type = formData.type
@@ -262,9 +252,9 @@ function handleSubmit(type) {
 
     oldModel.parent.remove(oldModel)
 
-    const index = deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
+    const index = DATA.deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
     if (index >= 0) {
-      deviceMapArray.splice(index, 1)
+      DATA.deviceMapArray.splice(index, 1)
     }
 
     for (let key in DATA.deviceMap) {
@@ -300,7 +290,7 @@ function insertSubmit(type) {
       }
     }
 
-    deviceMapArray.push({
+    DATA.deviceMapArray.push({
       id: formData.id,
       type: formData.type,
       modelType: formData.modelType,
@@ -311,10 +301,10 @@ function insertSubmit(type) {
       visible: formData.visible
     })
 
-    if (!DATA.deviceMap[formData.deviceType]) {
-      DATA.deviceMap[formData.deviceType] = {}
+    if (!DATA.deviceMap[formData.modelType]) {
+      DATA.deviceMap[formData.modelType] = {}
     }
-    DATA.deviceMap[formData.deviceType][formData.id] = {
+    DATA.deviceMap[formData.modelType][formData.id] = {
       id: formData.id,
       type: formData.type,
       modelType: formData.modelType,
@@ -365,7 +355,7 @@ function selectChange(e) {
     tempModel = null
   }
 
-  
+
   const map = modelList.find(e2 => e2.label === e)
   if (isInsertMode.value) {
     const originModel = STATE.sceneList[map.modelName]
@@ -392,7 +382,7 @@ function selectChange(e) {
       control = controls
     }
     control.addEventListener("change", changeListener)
-    console.log('control: ', control);
+    
 
     formData.id = e + '01'
     formData.x = model.position.x
@@ -468,8 +458,8 @@ onMounted(() => {
       const tableBody = table.value.$el.children[0].children[2].children[0].children[0].children[0].children[0].children[1]
       for (let i = 0; i < tableBody.children.length; i++) {
         if (tableBody.children[i].children[1].children[0].innerText === data.userData.id) {
-          const rowIndex = deviceMapArray.findIndex(e => e.id === data.userData.id)
-          table.value.setCurrentRow(deviceMapArray[rowIndex])
+          const rowIndex = DATA.deviceMapArray.findIndex(e => e.id === data.userData.id)
+          table.value.setCurrentRow(DATA.deviceMapArray[rowIndex])
           table.value.scrollTo({ top: tableBody.children[i].offsetTop, behavior: 'smooth' })
           break
         }

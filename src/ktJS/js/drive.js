@@ -113,7 +113,14 @@ export default function drive(wsMessage) {
           const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.history[VUEDATA.messageLen - 1 - i].position && e.endCoordinate > skyCar.history[VUEDATA.messageLen - 1 - i].position)
           if (nextLine && thisLine && nextLine.name != thisLine.name) {
             if ((!skyCar.nextLine.length || skyCar.nextLine[skyCar.nextLine.length - 1] != nextLine.name) && skyCar.line != nextLine.name.replace('_', '-')) {
-              skyCar.nextLine.push(nextLine.name)
+              if (skyCar.nextLine.length > 2) {
+                if (skyCar.nextLine[skyCar.nextLine.length - 2] === nextLine.name) {
+                  skyCar.nextLine.splice(skyCar.nextLine.length - 1, 1)
+                  skyCar.nextLine.push(nextLine.name)
+                }
+              } else {
+                skyCar.nextLine.push(nextLine.name)
+              }
             }
             break
           }
@@ -171,31 +178,49 @@ export default function drive(wsMessage) {
           if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') { // 装载开始
             skyCar.run = false
 
-            // 找离天车最近的货架
+            // 找离天车最近的机台或者货架
             let distance = 0
             let shelf = null
-            STATE.sceneList.shelves2Arr.forEach(e => {
-              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
-              if (distance === 0) {
-                distance = dis
-                shelf = e
-              }
-              else if (dis < distance) {
-                distance = dis
-                shelf = e
-              }
-            })
-            STATE.sceneList.shelves4Arr.forEach(e => {
-              const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
-              if (distance === 0) {
-                distance = dis
-                shelf = e
-              }
-              else if (dis < distance) {
-                distance = dis
-                shelf = e
-              }
-            })
+
+            const positionData = API.getPositionByKaxiaLocation(newHistory.location)
+            if (positionData.where === '在机台上') {
+              DATA.deviceMapArray.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                }
+                else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+
+            } else {
+              STATE.sceneList.shelves2Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                }
+                else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+              STATE.sceneList.shelves4Arr.forEach(e => {
+                const dis = Math.sqrt((e.position[0] - skyCar.skyCarMesh.position.x) ** 2 + (e.position[2] - skyCar.skyCarMesh.position.z) ** 2)
+                if (distance === 0) {
+                  distance = dis
+                  shelf = e
+                }
+                else if (dis < distance) {
+                  distance = dis
+                  shelf = e
+                }
+              })
+            }
+
 
             // 查找最近的货架最近的卡匣，有就搬，没有就生成
             const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === newHistory.therfidFoup)
@@ -273,7 +298,11 @@ export default function drive(wsMessage) {
                   skyCar.catch.userData.shelfIndex = positionData.shelfIndex
                   skyCar.catch.userData.type = 'kaxia'
                   skyCar.catch.scale.set(30, 30, 30)
-                  skyCar.catch.rotation.y = DATA.shelvesMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
+                  if (positionData.where === '在机台上') {
+                    skyCar.catch.rotation.y = DATA.deviceMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
+                  } else if (positionData.where === '在货架上') {
+                    skyCar.catch.rotation.y = DATA.shelvesMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
+                  }
                   skyCar.catch.visible = true
                   skyCar.catch.parent.remove(skyCar.catch)
 
@@ -308,7 +337,7 @@ export default function drive(wsMessage) {
           skyCar.run = true
           // skyCar.isAnimateSoon = false
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
+        } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
