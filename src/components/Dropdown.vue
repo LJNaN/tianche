@@ -96,9 +96,9 @@ function searchCandidate(text) {
 
   } else if (selected.value === '设备') {
     const arr = []
-    for(let key in DATA.deviceMap) {
-      for(let key2 in DATA.deviceMap[key]) {
-        if(key2.includes(text)) {
+    for (let key in DATA.deviceMap) {
+      for (let key2 in DATA.deviceMap[key]) {
+        if (key2.includes(text)) {
           arr.push(key2)
         }
       }
@@ -150,11 +150,14 @@ function handleItem(item) {
           break
         }
       }
+      
+      
+      const deviceDetail = DATA.deviceMapArray.find(e => e.id === item)
 
       const instanceMesh = CACHE.container.scene.children.find(e =>
-        e.isInstancedMesh
-        && e.name.split('_')[0] === objType
+        e.isInstancedMesh && e.name.split('_')[0] === deviceDetail?.modelType
       )
+
       
 
       if (instanceMesh) {

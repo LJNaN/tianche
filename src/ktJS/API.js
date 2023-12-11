@@ -989,6 +989,8 @@ function clickInstance(obj, index) {
   const camera = CACHE.container.orbitCamera
   const control = CACHE.container.orbitControls
 
+  let thisDevice = null
+
   CACHE.tempCameraState = {
     position: camera.position.clone(),
     target: control.target.clone()
@@ -1039,7 +1041,6 @@ function clickInstance(obj, index) {
     if (!map) return
     const deviceItem = CACHE.instanceNameMap[map.modelName][index]
 
-    let thisDevice = null
     for (let key in DATA.deviceMap) {
       for (let key2 in DATA.deviceMap[key]) {
         if (deviceItem?.id === key2) {
@@ -1047,7 +1048,6 @@ function clickInstance(obj, index) {
         }
       }
     }
-    console.log('thisDevice: ', thisDevice);
 
     title = '机台'
     items = [
@@ -1198,11 +1198,13 @@ function clickInstance(obj, index) {
   if (title === '机台') {
     const deviceId = items.find(e => e.name === '机台ID').value
     GetRealTimeEqpState(deviceId).then(res => {
+      
       if (res?.data?.length) {
         const data = res.data[0]
         const type = data?.equipmentType == 0 ? 'VEHICLE' : data?.equipmentType == 1 ? 'EQP' : data?.equipmentType == 2 ? 'STC' : data?.equipmentType == 3 ? 'OLUS' : ''
         const enable = data?.enable == 0 ? '禁用' : data?.enable == 1 ? '启用' : ''
         const isOnlineState = data?.isOnlineState == 0 ? '离线' : data?.isOnlineState == 1 ? '在线' : ''
+
 
         popup.parent.remove(popup)
         STATE.currentPopup.element.remove()
