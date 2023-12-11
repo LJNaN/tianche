@@ -76,7 +76,7 @@
   </div>
 
 
-  <Test></Test>
+  <!-- <Test></Test> -->
 </template>
 
 <script setup>
@@ -203,8 +203,7 @@ function handleSubmit(type) {
         DATA.deviceMap[oldModel.userData.modelType] = {}
       }
       const data = DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id]
-      console.log('oldModel.userData.modelType: ', oldModel.userData.modelType);
-      console.log('oldModel.userData.id: ', oldModel.userData.id);
+      
 
       if (data) {
         const oldPosition = DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id].position

@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -40,12 +40,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  let i = 0
-  function aaa() {
-    drive(mockData2[i])
-    i++
-  }
-  window.aaa = aaa
+  // let i = 0
+  // function aaa() {
+  //   drive(mockData2[i])
+  //   i++
+  // }
+  // window.aaa = aaa
 }
 
 
