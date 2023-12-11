@@ -11,7 +11,7 @@
   <div class="my-p">
     <input type="text" class="my-p-input" placeholder="请输入关键字..." v-model="searchText" @focus="inputFocus(true)"
       @blur="inputFocus(false)" />
-    <div class="search" @click="API.search(selected, searchText)"></div>
+    <div class="search" @click="handleSearch"></div>
   </div>
 
   <el-scrollbar class="candidate" v-show="candidateShow">
@@ -76,6 +76,7 @@ function selectItem(item) {
 
 
 
+
 function searchCandidate(text) {
   candidateList.value = []
   if (selected.value === '轨道') {
@@ -108,6 +109,10 @@ function searchCandidate(text) {
   }
 }
 
+
+function handleSearch() {
+  handleItem(searchText.value)
+}
 
 function handleItem(item) {
   if (selected.value === '轨道' || selected.value === '天车' || selected.value === 'OHB' || selected.value === '卡匣' || selected.value === '设备') {

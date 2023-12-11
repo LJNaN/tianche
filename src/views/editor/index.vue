@@ -76,7 +76,7 @@
   </div>
 
 
-  <!-- <Test></Test> -->
+  <Test></Test>
 </template>
 
 <script setup>
@@ -129,7 +129,7 @@ function changeListener() {
   } else {
     formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
   }
-  
+
 }
 
 
@@ -203,30 +203,40 @@ function handleSubmit(type) {
         DATA.deviceMap[oldModel.userData.modelType] = {}
       }
       const data = DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id]
+      console.log('oldModel.userData.modelType: ', oldModel.userData.modelType);
+      console.log('oldModel.userData.id: ', oldModel.userData.id);
 
       if (data) {
-        data.id = formData.id
-        data.type = formData.type
-        data.modelType = formData.modelType
-        data.position[0] = Number(formData.x.toFixed(1))
-        data.position[2] = Number(formData.z.toFixed(1))
-        data.rotate = formData.rotate
-        data.visible = formData.visible
-        data.bay = formData.bay
-        data.fields = formData.fields.map(e => Number(e))
+        const oldPosition = DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id].position
+        delete DATA.deviceMap[oldModel.userData.modelType][oldModel.userData.id]
+
+        DATA.deviceMap[oldModel.userData.modelType][formData.id] = {
+          id: formData.id,
+          type: formData.type,
+          modelType: formData.modelType,
+          position: [Number(formData.x.toFixed(1)), oldPosition[1], Number(formData.z.toFixed(1))],
+          rotate: formData.rotate,
+          visible: formData.visible,
+          bay: formData.bay,
+          fields: formData.fields.map(e => Number(e))
+        }
+
       }
 
-      const item = DATA.deviceMapArray.find(e => e.id === formData.id)
-      if (item) {
-        item.id = formData.id
-        item.type = formData.type
-        item.modelType = formData.modelType
-        item.position[0] = Number(formData.x.toFixed(1))
-        item.position[2] = Number(formData.z.toFixed(1))
-        item.rotate = formData.rotate
-        item.visible = formData.visible
-        item.bay = formData.bay
-        item.fields = formData.fields.map(e => Number(e))
+      const itemIndex = DATA.deviceMapArray.findIndex(e => e.id === oldModel.userData.id)
+      if (itemIndex >= 0) {
+        const oldPosition = DATA.deviceMapArray[itemIndex].position
+        DATA.deviceMapArray.splice(itemIndex, 1)
+        DATA.deviceMapArray.push({
+          id: formData.id,
+          type: formData.type,
+          modelType: formData.modelType,
+          position: [Number(formData.x.toFixed(1)), oldPosition[1], Number(formData.z.toFixed(1))],
+          rotate: formData.rotate,
+          visible: formData.visible,
+          bay: formData.bay,
+          fields: formData.fields.map(e => Number(e))
+        })
       }
 
       obj.userData.deviceType = formData.type

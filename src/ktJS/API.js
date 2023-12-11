@@ -8,7 +8,7 @@ import * as TWEEN from '@tweenjs/tween.js'
 import mockData2 from './js/mock2'
 // import mockData3 from './js/mock3'
 // import mockData4 from './js/mock4'
-// import mockData5 from './js/mock5'
+// import mockData5 from './js/mock5' 
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -40,12 +40,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // let i = 0
-  // function aaa() {
-  //   drive(mockData2[i])
-  //   i++
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData2[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -1020,7 +1020,7 @@ function clickInstance(obj, index) {
       { name: 'OHTPort1', value: STATE.sceneList.shelves2Arr[index].fields[0] },
       { name: 'OHTPort2', value: STATE.sceneList.shelves2Arr[index].fields[1] }
     ]
-    height = '16vh'
+    height = '38vh'
     className = 'popup3d_shalves'
 
   } else if (obj.name.includes('shalves4')) {
