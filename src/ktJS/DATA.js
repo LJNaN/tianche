@@ -887,13 +887,12 @@ const deviceTypeMap = [
   { label: 'WROMA', modelName: '2LPjitai(W01)' },
   { label: 'WHWSA', modelName: 'WHWSA01' },
   { label: 'WBS', modelName: 'WBS002' },
-  { label: 'WWSP', modelName: 'WSSP008' },
+  { label: 'WWS', modelName: 'WSSP008' },
   { label: 'WWATA', modelName: 'WWATA02V' },
   { label: 'WTSTK', modelName: 'WTSTK01' },
   { label: 'WOLUS', modelName: 'OLUS' },
   { label: 'WSORB', modelName: 'WTSTK01' },
   { label: 'WWSPP', modelName: '' },
-  { label: 'WWS', modelName: '' },
   { label: 'WWAPA', modelName: '' }
 ]
 

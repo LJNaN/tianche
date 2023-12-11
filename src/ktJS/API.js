@@ -42,7 +42,7 @@ function getData() {
 
   // let i = 0
   // function aaa() {
-  //   drive(mockData5[i])
+  //   drive(mockData2[i])
   //   i++
   // }
   // window.aaa = aaa
@@ -1587,7 +1587,7 @@ function getPositionByKaxiaLocation(location) {
             position.set(item.position[0] - 12.5, 11, item.position[2] + 4 - index * 5.3)
           }
 
-        } else if (key === 'WWSP') {
+        } else if (key === 'WWS') {
           if (Math.abs(DATA.deviceMap[key][key2].rotate % 360) === 0) {
             position.set(item.position[0] - 9, 11, item.position[2] + 11)
           } else if (DATA.deviceMap[key][key2].rotate === 90 || DATA.deviceMap[key][key2].rotate === -270) {
@@ -1687,11 +1687,278 @@ function initKaxia() {
   GetCarrierInfo().then(res => {
 
     // const res = {
-    //   data: [{
-    //     carrierType: '0',
-    //     carrierId: '845 8334 6466 5D66 F',
-    //     locationId: '5101'
-    //   }]
+    //   data: [
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5201
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5202
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5203
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5204
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5205
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5206
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5207
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5208
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5209
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5210
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5211
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5212
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5213
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5214
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5215
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5216
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5217
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5218
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5101
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5102
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5103
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5104
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5105
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5106
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5107
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5108
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5109
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5115
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5116
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5219
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5220
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5221
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5301
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5303
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5304
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5305
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5308
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5309
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5318
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5319
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5226
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5227
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5228
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5351
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5352
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5353
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5354
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5310
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5311
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5313
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5050
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5051
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5052
+    //     },
+    //     {
+    //         "carrierType": "0",
+    //         "carrierId": "845 8334 6466 5D66 F",
+    //         "locationId": 5053
+    //     }
+    // ]
     // }
 
     if (!res?.data) return

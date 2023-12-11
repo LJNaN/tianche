@@ -6,7 +6,7 @@
 
   <div class="editor">
     <div class="output" v-show="!isInsertMode && !isEdit">
-      <el-button @click="clickInsert" >新增</el-button>
+      <el-button @click="clickInsert">新增</el-button>
       <el-button @click="clickOutput">导出配置(替换"根目录/data/deviceMap.js")</el-button>
     </div>
 
@@ -74,10 +74,14 @@
     </el-form>
 
   </div>
+
+
+  <!-- <Test></Test> -->
 </template>
 
 <script setup>
 import { onMounted, ref, onBeforeMount, reactive } from "vue";
+import Test from '../home/test.vue'
 import Header from '@/components/header.vue'
 import Compass from '@/components/compass.vue';
 import { DATA } from '@/ktJS/DATA'
@@ -119,7 +123,13 @@ let formData = reactive({     // 关联 table 和 form 的对象
 function changeListener() {
   formData.x = Number(control.object.position.x.toFixed(1))
   formData.z = Number(control.object.position.z.toFixed(1))
-  formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
+
+  if (control.object.rotation.x < -3.14 && control.object.rotation.x > -3.15 && control.object.rotation.z < -3.14 && control.object.rotation.z > -3.15 && control.object.rotation.y > -0.1 && control.object.rotation.y < 0.1) {
+    formData.rotate = 180
+  } else {
+    formData.rotate = Number((control.object.rotation.y * 180 / Math.PI).toFixed(1))
+  }
+  
 }
 
 
@@ -382,7 +392,7 @@ function selectChange(e) {
       control = controls
     }
     control.addEventListener("change", changeListener)
-    
+
 
     formData.id = e + '01'
     formData.x = model.position.x
