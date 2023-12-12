@@ -563,7 +563,8 @@ function search(type, id) {
           })
       }
 
-      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      // CACHE.container.orbitControls.addEventListener('start', eventFunc)
+
       animate = () => {
         if (isCameraMoveOver) {
           control.target.set(objWorldPosition.x, objWorldPosition.y, objWorldPosition.z)
@@ -574,10 +575,6 @@ function search(type, id) {
       const color = obj.material.color.clone()
       obj.userData.color = color
 
-      CACHE.tempCameraState = {
-        position: camera.position.clone(),
-        target: control.target.clone()
-      }
 
 
       if (STATE.currentPopup) {
@@ -675,20 +672,24 @@ function search(type, id) {
           popup.parent.remove(popup)
           STATE.currentPopup = null
 
-          new Bol3D.TWEEN.Tween(camera.position)
-            .to(CACHE.tempCameraState.position, 800)
-            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-            .start()
+          if (CACHE.tempCameraState.position) {
+            new Bol3D.TWEEN.Tween(camera.position)
+              .to(CACHE.tempCameraState.position, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
 
-          new Bol3D.TWEEN.Tween(control.target)
-            .to(CACHE.tempCameraState.target, 800)
-            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-            .start()
-            .onComplete(() => {
-              control.enabled = true
-              control.saveState()
-              control.reset()
-            })
+            new Bol3D.TWEEN.Tween(control.target)
+              .to(CACHE.tempCameraState.target, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
+              .onComplete(() => {
+                control.enabled = true
+                control.saveState()
+                control.reset()
+              })
+
+            CACHE.tempCameraState = {}
+          }
         })
       })
 
@@ -704,7 +705,7 @@ function search(type, id) {
         obj.material.color = color
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
-      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      // CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         const dt = STATE.clock.getElapsedTime()
         const mixColor = Math.abs(Math.sin(dt * 2))
@@ -724,10 +725,10 @@ function search(type, id) {
         })
       }
 
-      CACHE.tempCameraState = {
-        position: camera.position.clone(),
-        target: control.target.clone()
-      }
+      // CACHE.tempCameraState = {
+      //   position: camera.position.clone(),
+      //   target: control.target.clone()
+      // }
 
       let title = '卡匣'
       let height = '49vh'
@@ -813,20 +814,24 @@ function search(type, id) {
           popup.parent.remove(popup)
           STATE.currentPopup = null
 
-          new Bol3D.TWEEN.Tween(camera.position)
-            .to(CACHE.tempCameraState.position, 800)
-            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-            .start()
+          if (CACHE.tempCameraState.position) {
+            new Bol3D.TWEEN.Tween(camera.position)
+              .to(CACHE.tempCameraState.position, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
 
-          new Bol3D.TWEEN.Tween(control.target)
-            .to(CACHE.tempCameraState.target, 800)
-            .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-            .start()
-            .onComplete(() => {
-              control.enabled = true
-              control.saveState()
-              control.reset()
-            })
+            new Bol3D.TWEEN.Tween(control.target)
+              .to(CACHE.tempCameraState.target, 800)
+              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+              .start()
+              .onComplete(() => {
+                control.enabled = true
+                control.saveState()
+                control.reset()
+              })
+
+            CACHE.tempCameraState = {}
+          }
         })
       })
 
@@ -858,7 +863,7 @@ function search(type, id) {
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
 
-      CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      // CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         if (isCameraMoveOver) {
           control.target.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
@@ -953,6 +958,25 @@ function search(type, id) {
               popup.element.remove()
               STATE.currentPopup = null
               popup.parent && popup.parent.remove(popup)
+
+              if (CACHE.tempCameraState.position) {
+                new Bol3D.TWEEN.Tween(camera.position)
+                  .to(CACHE.tempCameraState.position, 800)
+                  .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                  .start()
+
+                new Bol3D.TWEEN.Tween(control.target)
+                  .to(CACHE.tempCameraState.target, 800)
+                  .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                  .start()
+                  .onComplete(() => {
+                    control.enabled = true
+                    control.saveState()
+                    control.reset()
+                  })
+
+                CACHE.tempCameraState = {}
+              }
             })
           })
 
@@ -1137,20 +1161,24 @@ function clickInstance(obj, index) {
       popup.parent.remove(popup)
       STATE.currentPopup = null
 
-      new Bol3D.TWEEN.Tween(camera.position)
-        .to(CACHE.tempCameraState.position, 800)
-        .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-        .start()
+      if (CACHE.tempCameraState.position) {
+        new Bol3D.TWEEN.Tween(camera.position)
+          .to(CACHE.tempCameraState.position, 800)
+          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+          .start()
 
-      new Bol3D.TWEEN.Tween(control.target)
-        .to(CACHE.tempCameraState.target, 800)
-        .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-        .start()
-        .onComplete(() => {
-          control.enabled = true
-          control.saveState()
-          control.reset()
-        })
+        new Bol3D.TWEEN.Tween(control.target)
+          .to(CACHE.tempCameraState.target, 800)
+          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+          .start()
+          .onComplete(() => {
+            control.enabled = true
+            control.saveState()
+            control.reset()
+          })
+
+        CACHE.tempCameraState = {}
+      }
     })
   })
 
@@ -1198,7 +1226,7 @@ function clickInstance(obj, index) {
   if (title === '机台') {
     const deviceId = items.find(e => e.name === '机台ID').value
     GetRealTimeEqpState(deviceId).then(res => {
-      
+
       if (res?.data?.length) {
         const data = res.data[0]
         const type = data?.equipmentType == 0 ? 'VEHICLE' : data?.equipmentType == 1 ? 'EQP' : data?.equipmentType == 2 ? 'STC' : data?.equipmentType == 3 ? 'OLUS' : ''
@@ -1291,20 +1319,24 @@ function clickInstance(obj, index) {
             popup.parent.remove(popup)
             STATE.currentPopup = null
 
-            new Bol3D.TWEEN.Tween(camera.position)
-              .to(CACHE.tempCameraState.position, 800)
-              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-              .start()
+            if (CACHE.tempCameraState.position) {
+              new Bol3D.TWEEN.Tween(camera.position)
+                .to(CACHE.tempCameraState.position, 800)
+                .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                .start()
 
-            new Bol3D.TWEEN.Tween(control.target)
-              .to(CACHE.tempCameraState.target, 800)
-              .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-              .start()
-              .onComplete(() => {
-                control.enabled = true
-                control.saveState()
-                control.reset()
-              })
+              new Bol3D.TWEEN.Tween(control.target)
+                .to(CACHE.tempCameraState.target, 800)
+                .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                .start()
+                .onComplete(() => {
+                  control.enabled = true
+                  control.saveState()
+                  control.reset()
+                })
+
+              CACHE.tempCameraState = {}
+            }
           })
         })
 

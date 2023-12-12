@@ -164,7 +164,7 @@ function handleSubmit(type) {
         id: formData.id,
         modelType: formData.modelType,
         type: formData.type,
-        position: [obj.position.x, obj.position.y, obj.position.z],
+        position: [Number(obj.position.x.toFixed(1)), obj.position.y, Number(obj.position.z.toFixed(1))],
         rotate: formData.rotate,
         visible: formData.visible,
         bay: formData.bay,
@@ -179,7 +179,7 @@ function handleSubmit(type) {
         id: formData.id,
         modelType: formData.modelType,
         type: formData.type,
-        position: [obj.position.x, obj.position.y, obj.position.z],
+        position: [Number(obj.position.x.toFixed(1)), obj.position.y, Number(obj.position.z.toFixed(1))],
         rotate: formData.rotate,
         visible: formData.visible,
         bay: formData.bay,
@@ -213,7 +213,7 @@ function handleSubmit(type) {
           id: formData.id,
           type: formData.type,
           modelType: formData.modelType,
-          position: [Number(formData.x.toFixed(1)), oldPosition[1], Number(formData.z.toFixed(1))],
+          position: [Number(Number(formData.x).toFixed(1)), oldPosition[1], Number(Number(formData.z).toFixed(1))],
           rotate: formData.rotate,
           visible: formData.visible,
           bay: formData.bay,
@@ -508,7 +508,7 @@ function clickInsert() {
   model.rotation.y = 0
   model.visible = true
   model.userData.deviceType = modelList[0]?.modelName
-  model.userData.id = modelList[0]?.modelName + '_1'
+  model.userData.id = modelList[0]?.modelName
   CACHE.container.scene.add(model)
   CACHE.container.outlineObjects = []
   model.traverse(e => {
@@ -535,7 +535,7 @@ function clickInsert() {
   formData.rotate = model.rotation.y
   formData.fields = []
   formData.bay = ''
-  formData.modelType = DATA.deviceTypeMap[0].label
+  formData.modelType = 'EQP '
   formData.visible = true
 
 
