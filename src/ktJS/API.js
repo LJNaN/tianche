@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -40,12 +40,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // let i = 0
-  // function aaa() {
-  //   drive(mockData2[i])
-  //   i++
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData2[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -669,7 +669,9 @@ function search(type, id) {
         closeColor: "#FFFFFF",
         closeCallback: (() => {
           popup.element.remove()
-          popup.parent.remove(popup)
+          if(popup.parent) {
+            popup.parent.remove(popup)
+          }
           STATE.currentPopup = null
 
           if (CACHE.tempCameraState.position) {
@@ -811,7 +813,9 @@ function search(type, id) {
         closeColor: "#FFFFFF",
         closeCallback: (() => {
           popup.element.remove()
-          popup.parent.remove(popup)
+          if(popup.parent) {
+            popup.parent.remove(popup)
+          }
           STATE.currentPopup = null
 
           if (CACHE.tempCameraState.position) {
@@ -875,7 +879,10 @@ function search(type, id) {
         if (res?.data?.length) {
 
           const data = res.data[0]
-          popup.parent.remove(popup)
+          if(popup.parent) {
+            popup.parent.remove(popup)
+          }
+            
           STATE.currentPopup.element.remove()
 
           let items = [
@@ -957,7 +964,9 @@ function search(type, id) {
             closeCallback: (() => {
               popup.element.remove()
               STATE.currentPopup = null
-              popup.parent && popup.parent.remove(popup)
+              if(popup.parent) {
+                popup.parent.remove(popup)
+              }
 
               if (CACHE.tempCameraState.position) {
                 new Bol3D.TWEEN.Tween(camera.position)
@@ -1158,7 +1167,9 @@ function clickInstance(obj, index) {
     closeColor: "#FFFFFF",
     closeCallback: (() => {
       popup.element.remove()
-      popup.parent.remove(popup)
+      if(popup.parent) {
+        popup.parent.remove(popup)
+      }
       STATE.currentPopup = null
 
       if (CACHE.tempCameraState.position) {
@@ -1233,8 +1244,9 @@ function clickInstance(obj, index) {
         const enable = data?.enable == 0 ? '禁用' : data?.enable == 1 ? '启用' : ''
         const isOnlineState = data?.isOnlineState == 0 ? '离线' : data?.isOnlineState == 1 ? '在线' : ''
 
-
-        popup.parent.remove(popup)
+        if(popup.parent) {
+          popup.parent.remove(popup)
+        }
         STATE.currentPopup.element.remove()
 
         let items = [
@@ -1316,7 +1328,9 @@ function clickInstance(obj, index) {
           closeColor: "#FFFFFF",
           closeCallback: (() => {
             popup.element.remove()
-            popup.parent.remove(popup)
+            if(popup.parent) {
+              popup.parent.remove(popup)
+            }
             STATE.currentPopup = null
 
             if (CACHE.tempCameraState.position) {

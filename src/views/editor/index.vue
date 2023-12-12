@@ -76,7 +76,7 @@
   </div>
 
 
-  <!-- <Test></Test> -->
+  <Test></Test>
 </template>
 
 <script setup>
@@ -527,7 +527,7 @@ function clickInsert() {
   }
   control.addEventListener("change", changeListener)
 
-  formData.type = model.userData.deviceType
+  formData.type = 'EQP'
   formData.id = model.userData.id
   formData.x = model.position.x
   formData.z = model.position.z
@@ -535,7 +535,7 @@ function clickInsert() {
   formData.rotate = model.rotation.y
   formData.fields = []
   formData.bay = ''
-  formData.modelType = 'EQP '
+  formData.modelType = model.userData.deviceType
   formData.visible = true
 
 
