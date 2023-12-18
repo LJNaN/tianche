@@ -156,6 +156,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.initKaxia()
             API.getAnimationList()
             API.handleLine()
+            API.getBayState()
             // API.initReflexFloor()
             // API.initSkyCar()
             API.initDeviceByMap()

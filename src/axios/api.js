@@ -58,3 +58,7 @@ export function GetMCBFInfo() {
   return request(`/api/EA/GetMCBFInfo`)
 }
 
+// 轨道状态接口 刷新页面调用  带参是单个 点击轨道弹窗使用
+export function GetBayStateInfo(id = '') {
+  return request(`/api/MOC/GetBayStateInfo/${id}`)
+}

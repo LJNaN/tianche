@@ -242,6 +242,7 @@ export default function drive(wsMessage) {
                 kaxia.shelfIndex = -1
               } else {
                 const newKaxia = STATE.sceneList.FOUP.clone()
+                newKaxia.userData.id = newHistory.therfidFoup
                 newKaxia.userData.area = ''
                 newKaxia.userData.shelf = ''
                 newKaxia.userData.shelfIndex = -1
@@ -265,8 +266,6 @@ export default function drive(wsMessage) {
                   group.add(newKaxia)
                   skyCar.catch = newKaxia
                 }
-
-
               }
             }
             skyCar.catchDirection = direction
@@ -396,11 +395,12 @@ export default function drive(wsMessage) {
       if (e.ohtStatus_IsHaveFoup === '1' && skyCar.run) {
         if (!skyCar.catch) {
           const newKaxia = STATE.sceneList.FOUP.clone()
+          const kaxiaId = e.therfidFoup
           newKaxia.userData.area = ''
           newKaxia.userData.shelf = ''
           newKaxia.userData.shelfIndex = -1
           newKaxia.userData.type = 'kaxia'
-          newKaxia.userData.id = '00000000'
+          newKaxia.userData.id = kaxiaId || '--'
           newKaxia.scale.set(3, 3, 3)
           newKaxia.position.set(0, -0.35, 0)
           newKaxia.rotation.y = -Math.PI / 2
@@ -410,41 +410,22 @@ export default function drive(wsMessage) {
 
           const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
           group.add(newKaxia)
+          
+          const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
+          if (kaxiaIndex >= 0) {
+            STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
+            STATE.sceneList.kaxiaList.splice(kaxiaIndex, 1)
+          }
 
           newKaxia.traverse(e2 => {
             if (e2.isMesh) {
-              e2.userData.id = '00000000'
+              e2.userData.id = kaxiaId
               e2.userData.area = newKaxia.userData.area
               e2.userData.shelf = newKaxia.userData.shelf
               e2.userData.shelfIndex = newKaxia.userData.shelfIndex
               e2.userData.type = newKaxia.userData.type
-              CACHE.container.clickObjects.push(e2)
             }
           })
-
-          OhtFindCmdId(skyCar.id).then(res => {
-            const kaxiaId = res.data.carrierid
-            if (!kaxiaId) {
-              return
-            }
-
-            const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
-            if (kaxiaIndex >= 0) {
-              STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
-              STATE.sceneList.kaxiaList.splice(kaxiaIndex, 1)
-            }
-
-            newKaxia.userData.id = kaxiaId
-            newKaxia.traverse(e2 => {
-              if (e2.isMesh) {
-                e2.userData.id = kaxiaId
-                e2.userData.area = newKaxia.userData.area
-                e2.userData.shelf = newKaxia.userData.shelf
-                e2.userData.shelfIndex = newKaxia.userData.shelfIndex
-                e2.userData.type = newKaxia.userData.type
-              }
-            })
-          }).catch(() => { })
         }
       }
     })

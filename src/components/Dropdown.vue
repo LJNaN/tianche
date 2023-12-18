@@ -93,7 +93,14 @@ function searchCandidate(text) {
     temp = arr
 
   } else if (selected.value === '卡匣') {
-    candidateList.value = STATE.sceneList.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
+    const list1 = STATE.sceneList.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
+    const list2 = []
+    STATE.sceneList.skyCarList.forEach(e => {
+      if(e.catch) {
+        list2.push(e.catch.userData.id)
+      }
+    })
+    candidateList.value = list1.concat(list2)
 
   } else if (selected.value === '设备') {
     const arr = []

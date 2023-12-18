@@ -150,7 +150,7 @@ export default class SkyCar {
         { name: '终点', value: '--' },
         { name: '优先级', value: '--' },
         { name: '当前状态', value: '--' },
-        { name: 'ALARM 情况', value: [] },
+        { name: 'ALARM 情况', value: [] }
       ]
 
       for (let key in data) {
@@ -178,12 +178,26 @@ export default class SkyCar {
         </div>`
       }
 
-      let alertItem = `<div style="display:flex; flex-direction: column;overflow-y:scroll;width:50%;height:100%;pointer-events:all;">`
+      textValue += `<div style="
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 5%;
+        height: 4vh;
+        width: 100%;
+        background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+        ">
+        <p style="font-size: 2vh;">ALARM 情况</p>
+      </div>`
+
+      let alertItem = `<div style="display:flex; flex-direction: column;overflow-y:scroll;height:75%;pointer-events:all;">`
       for (let i = 0; i < items[items.length - 1].value.length; i++) {
-        alertItem += `<p style="text-align:right;">
-          ${(items[items.length - 1].value[i].alarmCode || '')
-          + ' '
-          + (items[items.length - 1].value[i].alarmDescription || '--')}
+        alertItem += `<p>
+          ${(items[items.length - 1].value[i].alarmId || '--') + '/'
+          + (items[items.length - 1].value[i].alarmCode || '--') + '/'
+          + (items[items.length - 1].value[i].alarmData || '--') + '/'
+          + (items[items.length - 1].value[i].alarmDescription || '--')
+          }
         </p>`
       }
       alertItem += `</div>`
@@ -198,7 +212,6 @@ export default class SkyCar {
           width: 100%;
           background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
           ">
-          <p style="font-size: 2vh;">${items[items.length - 1].name}</p>
           ${alertItem}
         </div>
       `
@@ -215,8 +228,8 @@ export default class SkyCar {
         <div style="
             position: absolute;
             background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
-            width: 25vw;
-            height: 47vh;
+            width: 28vw;
+            height: 52vh;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;

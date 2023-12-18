@@ -62,8 +62,8 @@ body {
 
 .popup3d_tianche .popup-close {
   scale: 2;
-  right: -11vw !important;
-  top: -20vh !important;
+  right: -12vw !important;
+  top: -23vh !important;
 }
 
 .popup3d_jitai .popup-close {
@@ -81,7 +81,7 @@ body {
 .popup3d_guidao .popup-close {
   scale: 2;
   right: -11vw !important;
-  top: -16vh !important;
+  top: -14vh !important;
 }
 
 .popup3d_kaxia .popup-close {

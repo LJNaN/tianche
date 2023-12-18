@@ -9,7 +9,7 @@ import mockData2 from './js/mock2'
 // import mockData3 from './js/mock3'
 // import mockData4 from './js/mock4'
 // import mockData5 from './js/mock5' 
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
+import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd, GetBayStateInfo } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
 import drive from './js/drive.js'
@@ -21,12 +21,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
@@ -40,12 +40,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  let i = 0
-  function aaa() {
-    drive(mockData2[i])
-    i++
-  }
-  window.aaa = aaa
+  // let i = 0
+  // function aaa() {
+  //   drive(mockData2[i])
+  //   i++
+  // }
+  // window.aaa = aaa
 }
 
 
@@ -233,6 +233,21 @@ function testBox() {
     }
   }
   waitContainerLoad()
+}
+
+// 全部轨道状态
+function getBayState() {
+  GetBayStateInfo().then(res => {
+    if (res?.data?.length) {
+      res.data.forEach(e => {
+        const line = STATE.sceneList.lineList.find(e2 => e2.name.replace('-', '_') === e.mapId)
+        if (line) {
+          
+          line.material.color.set(e.status === '0' ? '#333333' : '#b3b3b3')
+        }
+      })
+    }
+  })
 }
 
 // 算所有线段的中心点及长度等
@@ -480,16 +495,27 @@ function search(type, id) {
   } else if (type === '轨道') {
     const line = STATE.sceneList.lineList.find(e => e.userData.id === id)
     if (line) obj = line
-    if (obj) {
-      STATE.sceneList.lineList.forEach(e => {
-        if (e.userData.color) {
-          e.material.color = e.userData.color
-        }
-      })
-    }
+    // if (obj) {
+    //   STATE.sceneList.lineList.forEach(e => {
+    //     if (e.userData.color) {
+    //       e.material.color = e.userData.color
+    //     }
+    //   })
+    // }
   } else if (type === '卡匣') {
     const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === id)
-    if (kaxia) obj = kaxia
+
+    if (kaxia) {
+      obj = kaxia
+
+    } else {
+      for (let i = 0; i < STATE.sceneList.skyCarList.length; i++) {
+        if (STATE.sceneList.skyCarList[i].catch && STATE.sceneList.skyCarList[i].catch.userData.id === id) {
+          obj = STATE.sceneList.skyCarList[i].catch
+          break
+        }
+      }
+    }
   }
 
   if (obj) {
@@ -532,38 +558,39 @@ function search(type, id) {
       const eventFunc = () => {
         const camera = CACHE.container.orbitCamera
         const control = CACHE.container.orbitControls
-        control.enabled = false
-        STATE.sceneList.skyCarList.forEach(e => {
-          e.popup.visible = true
-          if (e.clickPopup) {
-            if (e.clickPopup.parent) {
-              e.clickPopup.parent.remove(e.clickPopup)
-            }
-            e.clickPopup.element.remove()
-            e.clickPopup = null
-          }
-        })
-        STATE.searchAnimateDestroy = true
+        isCameraMoveOver = false
+        // control.enabled = false
+        // STATE.sceneList.skyCarList.forEach(e => {
+        //   e.popup.visible = true
+        //   if (e.clickPopup) {
+        //     if (e.clickPopup.parent) {
+        //       e.clickPopup.parent.remove(e.clickPopup)
+        //     }
+        //     e.clickPopup.element.remove()
+        //     e.clickPopup = null
+        //   }
+        // })
+        // STATE.searchAnimateDestroy = true
         control.removeEventListener('start', eventFunc)
 
 
-        new Bol3D.TWEEN.Tween(camera.position)
-          .to(CACHE.tempCameraState.position, 800)
-          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-          .start()
+        // new Bol3D.TWEEN.Tween(camera.position)
+        //   .to(CACHE.tempCameraState.position, 800)
+        //   .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+        //   .start()
 
-        new Bol3D.TWEEN.Tween(control.target)
-          .to(CACHE.tempCameraState.target, 800)
-          .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
-          .start()
-          .onComplete(() => {
-            control.enabled = true
-            control.saveState()
-            control.reset()
-          })
+        // new Bol3D.TWEEN.Tween(control.target)
+        //   .to(CACHE.tempCameraState.target, 800)
+        //   .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+        //   .start()
+        //   .onComplete(() => {
+        //     control.enabled = true
+        //     control.saveState()
+        //     control.reset()
+        //   })
       }
 
-      // CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      CACHE.container.orbitControls.addEventListener('start', eventFunc)
 
       animate = () => {
         if (isCameraMoveOver) {
@@ -572,10 +599,8 @@ function search(type, id) {
       }
 
     } else if (type === '轨道') {
-      const color = obj.material.color.clone()
-      obj.userData.color = color
-
-
+      // const color = obj.material.color.clone()
+      // obj.userData.color = color
 
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
@@ -592,15 +617,14 @@ function search(type, id) {
       const lineData = DATA.pointCoordinateMap.find(e => e.name === obj.userData.id)
 
       let title = '轨道'
-      let height = '37vh'
+      let height = '32vh'
       let className = 'popup3d_guidao'
       let items = [
         { name: '起点节点', value: lineData?.startPoint },
         { name: '起点坐标', value: lineData?.startCoordinate },
         { name: '终点节点', value: lineData?.endPoint },
         { name: '终点坐标', value: lineData?.endCoordinate },
-        { name: '轨道状态', value: (lineData?.status === '1' ? '释放' : '锁定') },
-        { name: 'Alarm 情况', value: '无' }
+        { name: '轨道状态', value: (lineData?.status === '1' ? '启用' : '锁定') }
       ]
 
       let textValue = ``
@@ -669,7 +693,7 @@ function search(type, id) {
         closeColor: "#FFFFFF",
         closeCallback: (() => {
           popup.element.remove()
-          if(popup.parent) {
+          if (popup.parent) {
             popup.parent.remove(popup)
           }
           STATE.currentPopup = null
@@ -697,24 +721,149 @@ function search(type, id) {
 
       popup.scale.set(0.08, 0.08, 0.08)
       popup.name = 'popup_' + obj.name
-      popup.position.set(objWorldPosition.x, objWorldPosition.y + 30, objWorldPosition.z)
+      popup.position.set(objWorldPosition.x, objWorldPosition.y + 10, objWorldPosition.z)
       CACHE.container.scene.add(popup)
       STATE.currentPopup = popup
 
 
-      const eventFunc = () => {
-        STATE.searchAnimateDestroy = true
-        obj.material.color = color
-        CACHE.container.orbitControls.removeEventListener('start', eventFunc)
-      }
+      // const eventFunc = () => {
+      //   STATE.searchAnimateDestroy = true
+      //   obj.material.color = color
+      //   CACHE.container.orbitControls.removeEventListener('start', eventFunc)
+      // }
       // CACHE.container.orbitControls.addEventListener('start', eventFunc)
-      animate = () => {
-        const dt = STATE.clock.getElapsedTime()
-        const mixColor = Math.abs(Math.sin(dt * 2))
-        obj.material.color.r = color.r + mixColor * 0.95
-        obj.material.color.g = color.g + mixColor * 0.41
-      }
+      // animate = () => {
+      //   const dt = STATE.clock.getElapsedTime()
+      //   const mixColor = Math.abs(Math.sin(dt * 2))
+      //   obj.material.color.r = color.r + mixColor * 0.95
+      //   obj.material.color.g = color.g + mixColor * 0.41
+      // }
+
+
+
+      // 接口
+      GetBayStateInfo(`${lineData.startPoint}_${lineData.endPoint}`).then(res => {
+        if (res?.data) {
+
+          const data = res.data
+          if (popup.parent) {
+            popup.parent.remove(popup)
+          }
+
+          STATE.currentPopup.element.remove()
+
+          let items = [
+            { name: '起点节点', value: data.point || '--' },
+            { name: '起点坐标', value: data.startPosition || '--' },
+            { name: '终点节点', value: data.ntPoint || '--' },
+            { name: '终点坐标', value: data.endPosition || '--' },
+            { name: '轨道状态', value: (data?.status === '1' ? '启用' : '锁定') }
+          ]
+
+          let textValue = ``
+          for (let i = 0; i < items.length; i++) {
+            textValue += `
+            <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 5%;
+              height: 4vh;
+              width: 100%;
+              background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
+              ">
+              <p style="font-size: 2vh;">${items[i].name}</p>
+              <p style="font-size: 2vh;">${items[i].value}</p>
+            </div>`
+          }
+
+          const newPopup = new Bol3D.POI.Popup3DSprite({
+            value: `
+                <div style="
+                  pointer-events: none;
+                  margin:0;
+                  color: #ffffff;
+                ">
+    
+                <div style="
+                    position: absolute;
+                    background: url('./assets/3d/img/47.png') center / 100% 100% no-repeat;
+                    width: 25vw;
+                    height: ${height};
+                    transform: translate(-50%, -50%);
+                    display: flex;
+                    flex-direction: column;
+                    left: 50%;
+                    top: 50%;
+                    z-index: 2;
+                  ">
+                  <p style="
+                    font-size: 2vh;
+                    font-weight: bold;
+                    letter-spacing: 8px;
+                    margin-left: 4px;
+                    text-align: center;
+                    margin-top: 10%;
+                  ">
+                    ${title}
+                  </p>
+    
+                  <div style="
+                    display: flex;
+                    flex-direction: column;
+                    width: 85%;
+                    margin: 4% auto 0 auto;
+                    height: 100%;
+                  ">
+                  ${textValue}
+                  </div>
+                </div>
+              </div>
+              `,
+            position: [0, 0, 0],
+            className: `popup3dclass ${className}`,
+            closeVisible: true,
+            closeColor: "#FFFFFF",
+            closeCallback: (() => {
+              popup.element.remove()
+              if (popup.parent) {
+                popup.parent.remove(popup)
+              }
+              STATE.currentPopup = null
+
+              if (CACHE.tempCameraState.position) {
+                new Bol3D.TWEEN.Tween(camera.position)
+                  .to(CACHE.tempCameraState.position, 800)
+                  .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                  .start()
+
+                new Bol3D.TWEEN.Tween(control.target)
+                  .to(CACHE.tempCameraState.target, 800)
+                  .easing(Bol3D.TWEEN.Easing.Quadratic.InOut)
+                  .start()
+                  .onComplete(() => {
+                    control.enabled = true
+                    control.saveState()
+                    control.reset()
+                  })
+
+                CACHE.tempCameraState = {}
+              }
+            })
+          })
+
+          newPopup.scale.set(0.08, 0.08, 0.08)
+          newPopup.name = 'popup_' + obj.name
+          newPopup.position.set(objWorldPosition.x, objWorldPosition.y + 10, objWorldPosition.z)
+          CACHE.container.scene.add(newPopup)
+          STATE.currentPopup = newPopup
+
+          obj.material.color.set(data.status === '0' ? '#333333' : '#b3b3b3')
+        }
+      })
+
     } else if (type === '卡匣') {
+
       if (STATE.currentPopup) {
         if (STATE.currentPopup.parent) {
           STATE.currentPopup.parent.remove(STATE.currentPopup)
@@ -722,10 +871,12 @@ function search(type, id) {
         STATE.currentPopup.element.remove()
         STATE.currentPopup = null
 
+
         STATE.sceneList.skyCarList.forEach(e => {
           e.popup.visible = true
         })
       }
+
 
       // CACHE.tempCameraState = {
       //   position: camera.position.clone(),
@@ -812,8 +963,14 @@ function search(type, id) {
         closeVisible: true,
         closeColor: "#FFFFFF",
         closeCallback: (() => {
+          if (obj.parent.name === 'tianche02') {
+            STATE.sceneList.skyCarList.forEach(e => {
+              e.skyCarMesh.userData.popup.visible = true
+            })
+          }
+
           popup.element.remove()
-          if(popup.parent) {
+          if (popup.parent) {
             popup.parent.remove(popup)
           }
           STATE.currentPopup = null
@@ -836,13 +993,22 @@ function search(type, id) {
 
             CACHE.tempCameraState = {}
           }
+
         })
       })
 
       popup.scale.set(0.08, 0.08, 0.08)
       popup.name = 'popup_' + obj.name
-      popup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
-      CACHE.container.scene.add(popup)
+
+      if (obj.parent.name === 'tianche02') {
+        popup.position.set(0, 0, 0)
+        obj.parent.parent.add(popup)
+        obj.parent.parent.userData.popup.visible = false
+
+      } else {
+        popup.position.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
+        CACHE.container.scene.add(popup)
+      }
       STATE.currentPopup = popup
       const finalPosition = computedCameraTweenPosition(camera.position, objWorldPosition)
 
@@ -863,11 +1029,12 @@ function search(type, id) {
         .start()
 
       const eventFunc = () => {
+        isCameraMoveOver = false
         STATE.searchAnimateDestroy = true
         CACHE.container.orbitControls.removeEventListener('start', eventFunc)
       }
 
-      // CACHE.container.orbitControls.addEventListener('start', eventFunc)
+      CACHE.container.orbitControls.addEventListener('start', eventFunc)
       animate = () => {
         if (isCameraMoveOver) {
           control.target.set(objWorldPosition.x, objWorldPosition.y + 5, objWorldPosition.z)
@@ -879,10 +1046,10 @@ function search(type, id) {
         if (res?.data?.length) {
 
           const data = res.data[0]
-          if(popup.parent) {
+          if (popup.parent) {
             popup.parent.remove(popup)
           }
-            
+
           STATE.currentPopup.element.remove()
 
           let items = [
@@ -964,7 +1131,7 @@ function search(type, id) {
             closeCallback: (() => {
               popup.element.remove()
               STATE.currentPopup = null
-              if(popup.parent) {
+              if (popup.parent) {
                 popup.parent.remove(popup)
               }
 
@@ -1167,7 +1334,7 @@ function clickInstance(obj, index) {
     closeColor: "#FFFFFF",
     closeCallback: (() => {
       popup.element.remove()
-      if(popup.parent) {
+      if (popup.parent) {
         popup.parent.remove(popup)
       }
       STATE.currentPopup = null
@@ -1244,7 +1411,7 @@ function clickInstance(obj, index) {
         const enable = data?.enable == 0 ? '禁用' : data?.enable == 1 ? '启用' : ''
         const isOnlineState = data?.isOnlineState == 0 ? '离线' : data?.isOnlineState == 1 ? '在线' : ''
 
-        if(popup.parent) {
+        if (popup.parent) {
           popup.parent.remove(popup)
         }
         STATE.currentPopup.element.remove()
@@ -1328,7 +1495,7 @@ function clickInstance(obj, index) {
           closeColor: "#FFFFFF",
           closeCallback: (() => {
             popup.element.remove()
-            if(popup.parent) {
+            if (popup.parent) {
               popup.parent.remove(popup)
             }
             STATE.currentPopup = null
@@ -2089,5 +2256,6 @@ export const API = {
   testBox,
   deviceShow,
   getPositionByKaxiaLocation,
-  initKaxia
+  initKaxia,
+  getBayState
 }
