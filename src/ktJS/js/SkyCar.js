@@ -150,7 +150,7 @@ export default class SkyCar {
         { name: '终点', value: '--' },
         { name: '优先级', value: '--' },
         { name: '当前状态', value: '--' },
-        { name: 'ALARM 情况', value: [] }
+        { name: 'Alarm List:', value: [] }
       ]
 
       for (let key in data) {
@@ -187,34 +187,21 @@ export default class SkyCar {
         width: 100%;
         background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
-        <p style="font-size: 2vh;">ALARM 情况</p>
+        <p style="font-size: 2vh;">Alarm List:</p>
       </div>`
 
-      let alertItem = `<div style="display:flex; flex-direction: column;overflow-y:scroll;height:75%;pointer-events:all;">`
+      let alertValue = `<div style="display:flex; flex-direction: column;overflow-y:scroll;height:10vh;pointer-events:all;padding:0 5%;">`
       for (let i = 0; i < items[items.length - 1].value.length; i++) {
-        alertItem += `<p>
-          ${(items[items.length - 1].value[i].alarmId || '--') + '/'
+        alertValue += `<p style="word-break: break-all;user-select:text;">
+          ${('NO' + (i + 1) + ': ')
+          + (items[items.length - 1].value[i].alarmId || '--') + '/'
           + (items[items.length - 1].value[i].alarmCode || '--') + '/'
           + (items[items.length - 1].value[i].alarmData || '--') + '/'
           + (items[items.length - 1].value[i].alarmDescription || '--')
           }
         </p>`
       }
-      alertItem += `</div>`
-
-      let alertValue = `
-        <div style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 5%;
-          height: 8vh;
-          width: 100%;
-          background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
-          ">
-          ${alertItem}
-        </div>
-      `
+      alertValue += `</div>`
 
 
       const clickPopup = new Bol3D.POI.Popup3DSprite({
@@ -228,8 +215,8 @@ export default class SkyCar {
         <div style="
             position: absolute;
             background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
-            width: 28vw;
-            height: 52vh;
+            width: 30vw;
+            height: 56vh;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
@@ -321,7 +308,7 @@ export default class SkyCar {
             data['当前状态'] = '--'
           }
         } else if (key === 'alarmList') {
-          data['ALARM 情况'] = res?.data[key] || []
+          data['Alarm List:'] = res?.data[key] || []
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
         } else if (key === 'carrierid') {
@@ -567,7 +554,7 @@ export default class SkyCar {
 
 
   // 设置伸缩方法
-  down(cb) {
+  down(where = '在货架上', cb) {
     const this_ = this
     this.animationOver = false
     this.animationSpeedTimes = 0.06
@@ -604,7 +591,7 @@ export default class SkyCar {
 
     this.mixer.addEventListener('finished', function finished_shen(e) {
       if (e.action.name === 'shen' || e.action.name === 'shen1') {
-        this_.animationSpeedTimes = 0.0018
+        this_.animationSpeedTimes = (where === '在机台上' ? 0.01 : 0.0018)
         if (this_.catchDirection === 'right') {
           this_.actions.shen.enabled = false
           this_.actions.fang.enabled = true
@@ -623,30 +610,30 @@ export default class SkyCar {
           if (renderFlag) {
             requestAnimationFrame(render)
             if (this_.catchDirection === 'right') {
-              if (this_.actions.fang.time > 0.32) {
-                this_.actions.fang.time = 0.32
+              if (this_.actions.fang.time > (where === '在机台上' ? 2.3 : 0.32)) {
+                this_.actions.fang.time = (where === '在机台上' ? 2.3 : 0.32)
                 this_.actions.fang.paused = true
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
 
                 setTimeout(() => {
-                  this_.up(() => {
+                  this_.up(where,() => {
                     this_.animationOver = true
                   })
                 }, 300)
 
               }
             } else {
-              if (this_.actions.fang1.time > 0.32) {
-                this_.actions.fang1.time = 0.32
+              if (this_.actions.fang1.time > (where === '在机台上' ? 2.3 : 0.32)) {
+                this_.actions.fang1.time = (where === '在机台上' ? 2.3 : 0.32)
                 this_.actions.fang1.paused = true
                 this_.mixer.removeEventListener('finished', finished_shen)
                 renderFlag = false
                 cb && cb()
 
                 setTimeout(() => {
-                  this_.up(() => {
+                  this_.up(where,() => {
                     this_.animationOver = true
                   })
                 }, 300)
@@ -658,9 +645,9 @@ export default class SkyCar {
     })
   }
 
-  up(cb) {
+  up(where = '在机台上', cb) {
     const this_ = this
-    this.animationSpeedTimes = 0.002
+    this.animationSpeedTimes = (where === '在机台上' ? 0.01 : 0.002)
     if (this.catchDirection === 'right') {
       this.actions.shou1.enabled = false
       this.actions.fang1.enabled = false
@@ -674,7 +661,7 @@ export default class SkyCar {
 
       this.actions.shou.paused = false
       this.actions.shou.reset()
-      this.actions.shou.time = 2.9
+      this.actions.shou.time = (where === '在机台上' ? 0.87 : 2.9)
       this.actions.shou.play()
     } else {
       this.actions.shou.enabled = false
@@ -689,7 +676,7 @@ export default class SkyCar {
 
       this.actions.shou1.paused = false
       this.actions.shou1.reset()
-      this.actions.shou1.time = 2.41
+      this.actions.shou1.time = (where === '在机台上' ? 0.87 : 2.41)
       this.actions.shou1.play()
     }
 
