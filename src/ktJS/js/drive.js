@@ -175,9 +175,14 @@ export default function drive(wsMessage) {
         function onComplete(newHistory, oldHistory) {
           if (!skyCar.animationOver) return
 
-          console.log('newHistory.location: ', newHistory.location);
-          const positionData = API.getPositionByKaxiaLocation(newHistory.location)
-          console.log('positionData: ', positionData);
+
+          let positionData = API.getPositionByKaxiaLocation(newHistory.location)
+          if (!positionData) {
+            positionData = {
+              type: '在货架上'
+            }
+          }
+
           if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') { // 装载开始
             skyCar.run = false
 
@@ -281,9 +286,8 @@ export default function drive(wsMessage) {
 
             const cb = () => {
               if (skyCar.catch) {
-                const positionData = API.getPositionByKaxiaLocation(newHistory.location)
 
-                if (!positionData) {
+                if (!positionData.position) {
                   skyCar.catch.parent.remove(skyCar.catch)
                   skyCar.catch = null
 
@@ -328,7 +332,7 @@ export default function drive(wsMessage) {
 
               }
             }
-            skyCar.down(positionData.type,cb)
+            skyCar.down(positionData.type, cb)
           }
         }
 

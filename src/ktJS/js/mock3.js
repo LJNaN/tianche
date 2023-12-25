@@ -1,3037 +1,370 @@
 const mockData3 = [
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:38",
-        "ohtID": "C0087",
-        "position": "290393",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:38",
-        "ohtID": "C0087",
-        "position": "290393",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:38",
-        "ohtID": "C0087",
-        "position": "290393",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:39",
-        "ohtID": "C0087",
-        "position": "290873",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:39",
-        "ohtID": "C0087",
-        "position": "290873",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:40",
-        "ohtID": "C0087",
-        "position": "293092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:40",
-        "ohtID": "C0087",
-        "position": "293092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:40",
-        "ohtID": "C0087",
-        "position": "293092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:41",
-        "ohtID": "C0087",
-        "position": "294692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:41",
-        "ohtID": "C0087",
-        "position": "294692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:41",
-        "ohtID": "C0087",
-        "position": "294692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:42",
-        "ohtID": "C0087",
-        "position": "296292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:42",
-        "ohtID": "C0087",
-        "position": "296292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:42",
-        "ohtID": "C0087",
-        "position": "297892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:42",
-        "ohtID": "C0087",
-        "position": "297892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:43",
-        "ohtID": "C0087",
-        "position": "298692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:43",
-        "ohtID": "C0087",
-        "position": "299492",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:43",
-        "ohtID": "C0087",
-        "position": "299492",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:43",
-        "ohtID": "C0087",
-        "position": "299492",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:44",
-        "ohtID": "C0087",
-        "position": "301092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:45",
-        "ohtID": "C0087",
-        "position": "302692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:45",
-        "ohtID": "C0087",
-        "position": "302692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:45",
-        "ohtID": "C0087",
-        "position": "303492",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:45",
-        "ohtID": "C0087",
-        "position": "303492",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:46",
-        "ohtID": "C0087",
-        "position": "305092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:46",
-        "ohtID": "C0087",
-        "position": "305092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:46",
-        "ohtID": "C0087",
-        "position": "305092",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:47",
-        "ohtID": "C0087",
-        "position": "306692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:47",
-        "ohtID": "C0087",
-        "position": "306692",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:48",
-        "ohtID": "C0087",
-        "position": "308292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:48",
-        "ohtID": "C0087",
-        "position": "308292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:48",
-        "ohtID": "C0087",
-        "position": "308292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:49",
-        "ohtID": "C0087",
-        "position": "309892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:49",
-        "ohtID": "C0087",
-        "position": "309892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:49",
-        "ohtID": "C0087",
-        "position": "309892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:49",
-        "ohtID": "C0087",
-        "position": "309892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:50",
-        "ohtID": "C0087",
-        "position": "312292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:50",
-        "ohtID": "C0087",
-        "position": "312292",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:50",
-        "ohtID": "C0087",
-        "position": "313892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:50",
-        "ohtID": "C0087",
-        "position": "313892",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:51",
-        "ohtID": "C0087",
-        "position": "314885",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:51",
-        "ohtID": "C0087",
-        "position": "314885",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:51",
-        "ohtID": "C0087",
-        "position": "314885",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:52",
-        "ohtID": "C0087",
-        "position": "315674",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:52",
-        "ohtID": "C0087",
-        "position": "315674",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:53",
-        "ohtID": "C0087",
-        "position": "316154",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:53",
-        "ohtID": "C0087",
-        "position": "316154",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:53",
-        "ohtID": "C0087",
-        "position": "316154",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:54",
-        "ohtID": "C0087",
-        "position": "316634",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:54",
-        "ohtID": "C0087",
-        "position": "316634",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:54",
-        "ohtID": "C0087",
-        "position": "316634",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:55",
-        "ohtID": "C0087",
-        "position": "317114",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:55",
-        "ohtID": "C0087",
-        "position": "317114",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:55",
-        "ohtID": "C0087",
-        "position": "317594",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:55",
-        "ohtID": "C0087",
-        "position": "317594",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:56",
-        "ohtID": "C0087",
-        "position": "381474",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:56",
-        "ohtID": "C0087",
-        "position": "381474",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:57",
-        "ohtID": "C0087",
-        "position": "381714",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:57",
-        "ohtID": "C0087",
-        "position": "381714",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:57",
-        "ohtID": "C0087",
-        "position": "342375",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:57",
-        "ohtID": "C0087",
-        "position": "342375",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:57",
-        "ohtID": "C0087",
-        "position": "342375",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:58",
-        "ohtID": "C0087",
-        "position": "343175",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:58",
-        "ohtID": "C0087",
-        "position": "343175",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:59",
-        "ohtID": "C0087",
-        "position": "344054",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 15:59:59",
-        "ohtID": "C0087",
-        "position": "344054",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:0",
-        "ohtID": "C0087",
-        "position": "344374",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:0",
-        "ohtID": "C0087",
-        "position": "344374",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:0",
-        "ohtID": "C0087",
-        "position": "344374",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:1",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:1",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:1",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:2",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:2",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:2",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:2",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:3",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:3",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:4",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:4",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:4",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:5",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:5",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:5",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:6",
-        "ohtID": "C0087",
-        "position": "344633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:9",
-        "ohtID": "C0087",
-        "position": "345913",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:9",
-        "ohtID": "C0087",
-        "position": "345913",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:9",
-        "ohtID": "C0087",
-        "position": "345913",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:10",
-        "ohtID": "C0087",
-        "position": "346633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:10",
-        "ohtID": "C0087",
-        "position": "346633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:10",
-        "ohtID": "C0087",
-        "position": "346633",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:11",
-        "ohtID": "C0087",
-        "position": "347213",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:11",
-        "ohtID": "C0087",
-        "position": "347213",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:12",
-        "ohtID": "C0087",
-        "position": "347693",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:12",
-        "ohtID": "C0087",
-        "position": "347693",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:13",
-        "ohtID": "C0087",
-        "position": "347933",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:13",
-        "ohtID": "C0087",
-        "position": "347933",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:13",
-        "ohtID": "C0087",
-        "position": "348413",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:13",
-        "ohtID": "C0087",
-        "position": "348413",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:13",
-        "ohtID": "C0087",
-        "position": "348413",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:14",
-        "ohtID": "C0087",
-        "position": "349553",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:14",
-        "ohtID": "C0087",
-        "position": "349553",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:14",
-        "ohtID": "C0087",
-        "position": "349553",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:15",
-        "ohtID": "C0087",
-        "position": "350922",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:15",
-        "ohtID": "C0087",
-        "position": "350922",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:15",
-        "ohtID": "C0087",
-        "position": "350922",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:16",
-        "ohtID": "C0087",
-        "position": "351482",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:16",
-        "ohtID": "C0087",
-        "position": "351482",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:16",
-        "ohtID": "C0087",
-        "position": "351482",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:17",
-        "ohtID": "C0087",
-        "position": "352431",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:17",
-        "ohtID": "C0087",
-        "position": "352431",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:17",
-        "ohtID": "C0087",
-        "position": "352431",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:18",
-        "ohtID": "C0087",
-        "position": "352911",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:18",
-        "ohtID": "C0087",
-        "position": "352911",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:18",
-        "ohtID": "C0087",
-        "position": "352911",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:19",
-        "ohtID": "C0087",
-        "position": "353391",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:19",
-        "ohtID": "C0087",
-        "position": "353391",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:20",
-        "ohtID": "C0087",
-        "position": "353971",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:20",
-        "ohtID": "C0087",
-        "position": "353971",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:20",
-        "ohtID": "C0087",
-        "position": "354451",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:20",
-        "ohtID": "C0087",
-        "position": "354451",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:20",
-        "ohtID": "C0087",
-        "position": "354451",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:21",
-        "ohtID": "C0087",
-        "position": "355031",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:21",
-        "ohtID": "C0087",
-        "position": "355031",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:21",
-        "ohtID": "C0087",
-        "position": "355031",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:21",
-        "ohtID": "C0087",
-        "position": "355031",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "356470",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "356470",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:25",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:25",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:25",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:28",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:28",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:29",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:29",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:29",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:29",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:29",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:30",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:30",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:30",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:30",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:31",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:34",
-        "ohtID": "C0087",
-        "position": "358284",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:34",
-        "ohtID": "C0087",
-        "position": "358284",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:34",
-        "ohtID": "C0087",
-        "position": "358284",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:34",
-        "ohtID": "C0087",
-        "position": "358284",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:35",
-        "ohtID": "C0087",
-        "position": "361404",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:35",
-        "ohtID": "C0087",
-        "position": "361404",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:35",
-        "ohtID": "C0087",
-        "position": "361404",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:35",
-        "ohtID": "C0087",
-        "position": "361404",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:36",
-        "ohtID": "C0087",
-        "position": "363804",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:36",
-        "ohtID": "C0087",
-        "position": "363804",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:36",
-        "ohtID": "C0087",
-        "position": "363804",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:36",
-        "ohtID": "C0087",
-        "position": "363804",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:36",
-        "ohtID": "C0087",
-        "position": "363804",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:38",
-        "ohtID": "C0087",
-        "position": "365597",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:38",
-        "ohtID": "C0087",
-        "position": "365597",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:38",
-        "ohtID": "C0087",
-        "position": "365597",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:38",
-        "ohtID": "C0087",
-        "position": "365597",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:39",
-        "ohtID": "C0087",
-        "position": "366866",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:39",
-        "ohtID": "C0087",
-        "position": "366866",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:39",
-        "ohtID": "C0087",
-        "position": "366866",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:39",
-        "ohtID": "C0087",
-        "position": "366866",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:39",
-        "ohtID": "C0087",
-        "position": "366866",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:41",
-        "ohtID": "C0087",
-        "position": "367586",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:43",
-        "ohtID": "C0087",
-        "position": "289987",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:43",
-        "ohtID": "C0087",
-        "position": "289987",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:43",
-        "ohtID": "C0087",
-        "position": "289987",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:44",
-        "ohtID": "C0087",
-        "position": "290787",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:44",
-        "ohtID": "C0087",
-        "position": "290787",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:44",
-        "ohtID": "C0087",
-        "position": "290787",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:45",
-        "ohtID": "C0087",
-        "position": "292206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:45",
-        "ohtID": "C0087",
-        "position": "292206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:45",
-        "ohtID": "C0087",
-        "position": "292206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:46",
-        "ohtID": "C0087",
-        "position": "293806",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:46",
-        "ohtID": "C0087",
-        "position": "293806",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:47",
-        "ohtID": "C0087",
-        "position": "295406",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:47",
-        "ohtID": "C0087",
-        "position": "295406",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:47",
-        "ohtID": "C0087",
-        "position": "295406",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:48",
-        "ohtID": "C0087",
-        "position": "297806",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:48",
-        "ohtID": "C0087",
-        "position": "297806",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:48",
-        "ohtID": "C0087",
-        "position": "297806",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:49",
-        "ohtID": "C0087",
-        "position": "299406",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:49",
-        "ohtID": "C0087",
-        "position": "299406",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:49",
-        "ohtID": "C0087",
-        "position": "301006",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:49",
-        "ohtID": "C0087",
-        "position": "301006",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:49",
-        "ohtID": "C0087",
-        "position": "301006",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:50",
-        "ohtID": "C0087",
-        "position": "302606",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:50",
-        "ohtID": "C0087",
-        "position": "302606",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:51",
-        "ohtID": "C0087",
-        "position": "304206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:54",
-        "ohtID": "C0087",
-        "position": "309006",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:54",
-        "ohtID": "C0087",
-        "position": "309006",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "310606",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "310606",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "310606",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "312206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "312206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:55",
-        "ohtID": "C0087",
-        "position": "312206",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:56",
-        "ohtID": "C0087",
-        "position": "314559",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:56",
-        "ohtID": "C0087",
-        "position": "314559",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:00:57",
-        "ohtID": "C0087",
-        "position": "315518",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:0",
-        "ohtID": "C0087",
-        "position": "317038",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:0",
-        "ohtID": "C0087",
-        "position": "317038",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:0",
-        "ohtID": "C0087",
-        "position": "317038",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:0",
-        "ohtID": "C0087",
-        "position": "317038",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:1",
-        "ohtID": "C0087",
-        "position": "381398",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:1",
-        "ohtID": "C0087",
-        "position": "381398",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:2",
-        "ohtID": "C0087",
-        "position": "381638",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:2",
-        "ohtID": "C0087",
-        "position": "381638",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:2",
-        "ohtID": "C0087",
-        "position": "342299",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:2",
-        "ohtID": "C0087",
-        "position": "342299",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:2",
-        "ohtID": "C0087",
-        "position": "342299",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:3",
-        "ohtID": "C0087",
-        "position": "343099",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:3",
-        "ohtID": "C0087",
-        "position": "343099",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:4",
-        "ohtID": "C0087",
-        "position": "344468",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:4",
-        "ohtID": "C0087",
-        "position": "344468",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:5",
-        "ohtID": "C0087",
-        "position": "344708",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:5",
-        "ohtID": "C0087",
-        "position": "344708",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:5",
-        "ohtID": "C0087",
-        "position": "345268",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:5",
-        "ohtID": "C0087",
-        "position": "345268",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:5",
-        "ohtID": "C0087",
-        "position": "345268",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:6",
-        "ohtID": "C0087",
-        "position": "345748",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:6",
-        "ohtID": "C0087",
-        "position": "345748",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:7",
-        "ohtID": "C0087",
-        "position": "345988",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:7",
-        "ohtID": "C0087",
-        "position": "346228",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "346708",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "346708",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "346708",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "347288",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "347288",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:8",
-        "ohtID": "C0087",
-        "position": "347288",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:9",
-        "ohtID": "C0087",
-        "position": "347768",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:9",
-        "ohtID": "C0087",
-        "position": "347768",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:10",
-        "ohtID": "C0087",
-        "position": "348248",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:10",
-        "ohtID": "C0087",
-        "position": "348248",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:11",
-        "ohtID": "C0087",
-        "position": "348488",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:11",
-        "ohtID": "C0087",
-        "position": "348488",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:11",
-        "ohtID": "C0087",
-        "position": "349148",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:11",
-        "ohtID": "C0087",
-        "position": "349148",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:11",
-        "ohtID": "C0087",
-        "position": "349148",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:12",
-        "ohtID": "C0087",
-        "position": "350267",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:12",
-        "ohtID": "C0087",
-        "position": "350267",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:12",
-        "ohtID": "C0087",
-        "position": "350267",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:12",
-        "ohtID": "C0087",
-        "position": "350267",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:12",
-        "ohtID": "C0087",
-        "position": "350267",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:14",
-        "ohtID": "C0087",
-        "position": "351797",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:14",
-        "ohtID": "C0087",
-        "position": "351797",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:14",
-        "ohtID": "C0087",
-        "position": "351797",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:15",
-        "ohtID": "C0087",
-        "position": "352517",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:15",
-        "ohtID": "C0087",
-        "position": "352517",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "352997",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "352997",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "352997",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "353237",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "353237",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:16",
-        "ohtID": "C0087",
-        "position": "353237",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:17",
-        "ohtID": "C0087",
-        "position": "354057",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:20",
-        "ohtID": "C0087",
-        "position": "355917",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:20",
-        "ohtID": "C0087",
-        "position": "355917",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:20",
-        "ohtID": "C0087",
-        "position": "355917",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:21",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:21",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:21",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:22",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:22",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:22",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:23",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:24",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:24",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:24",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:24",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:25",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:25",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:26",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  },
-  {
-    "VehicleInfo": [
-      {
-        "lastTime": "2023-10-11 16:01:27",
-        "ohtID": "C0087",
-        "position": "357004",
-      }
-    ]
-  }
+  { "VehicleInfo": [{ "currentSpeed": "5902", "distance": "4996", "lastTime": "2023-12-22 14:52:46", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "241837", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092620", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6017", "distance": "4995", "lastTime": "2023-12-22 14:52:47", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "242066", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092620", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6877", "distance": "4995", "lastTime": "2023-12-22 14:52:47", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "242257", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092621", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6772", "distance": "1612", "lastTime": "2023-12-22 14:52:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "242448", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092621", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6067", "distance": "2625", "lastTime": "2023-12-22 14:52:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "242653", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092621", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6096", "distance": "4995", "lastTime": "2023-12-22 14:52:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "242877", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092622", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6080", "distance": "4995", "lastTime": "2023-12-22 14:52:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243095", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092622", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5781", "distance": "4995", "lastTime": "2023-12-22 14:52:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243323", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092623", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5781", "distance": "4995", "lastTime": "2023-12-22 14:52:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243323", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092623", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65461", "distance": "4995", "lastTime": "2023-12-22 14:52:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243405", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092623", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65399", "distance": "4995", "lastTime": "2023-12-22 14:52:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243396", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092623", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65465", "distance": "4996", "lastTime": "2023-12-22 14:52:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243392", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092624", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65488", "distance": "4995", "lastTime": "2023-12-22 14:52:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243389", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092624", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65518", "distance": "4995", "lastTime": "2023-12-22 14:52:51", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243388", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092624", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65518", "distance": "4995", "lastTime": "2023-12-22 14:52:51", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243387", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092625", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "4996", "lastTime": "2023-12-22 14:52:51", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243387", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092625", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2645", "distance": "4995", "lastTime": "2023-12-22 14:52:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243415", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092625", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2645", "distance": "4995", "lastTime": "2023-12-22 14:52:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243415", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092625", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5888", "distance": "4995", "lastTime": "2023-12-22 14:52:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243588", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092626", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6055", "distance": "4995", "lastTime": "2023-12-22 14:52:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243790", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092626", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6058", "distance": "4995", "lastTime": "2023-12-22 14:52:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "243986", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092626", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6040", "distance": "4995", "lastTime": "2023-12-22 14:52:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "244184", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092627", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5940", "distance": "4995", "lastTime": "2023-12-22 14:52:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "244383", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092627", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6079", "distance": "4995", "lastTime": "2023-12-22 14:52:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "244521", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092627", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6588", "distance": "4995", "lastTime": "2023-12-22 14:52:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "244655", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092628", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5802", "distance": "4994", "lastTime": "2023-12-22 14:52:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "244805", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092628", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5529", "distance": "4995", "lastTime": "2023-12-22 14:52:55", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "261235", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092628", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4969", "distance": "4858", "lastTime": "2023-12-22 14:52:55", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "261459", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092629", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5968", "distance": "4287", "lastTime": "2023-12-22 14:52:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "261736", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092629", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5974", "distance": "4275", "lastTime": "2023-12-22 14:52:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "261930", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092629", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6004", "distance": "4244", "lastTime": "2023-12-22 14:52:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262128", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092630", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6017", "distance": "4204", "lastTime": "2023-12-22 14:52:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262345", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092630", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6051", "distance": "4163", "lastTime": "2023-12-22 14:52:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262563", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092630", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6027", "distance": "4114", "lastTime": "2023-12-22 14:52:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262781", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092631", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6034", "distance": "4075", "lastTime": "2023-12-22 14:52:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262980", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092631", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6034", "distance": "4075", "lastTime": "2023-12-22 14:52:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "262980", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092631", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "14539", "distance": "4995", "lastTime": "2023-12-22 14:52:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "263626", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092632", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "19517", "distance": "4995", "lastTime": "2023-12-22 14:52:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "264172", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092632", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "17695", "distance": "4995", "lastTime": "2023-12-22 14:52:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "264835", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092632", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "10998", "distance": "4995", "lastTime": "2023-12-22 14:52:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "265331", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092633", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6558", "distance": "4995", "lastTime": "2023-12-22 14:53:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "265600", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092633", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5652", "distance": "4995", "lastTime": "2023-12-22 14:53:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "265789", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092633", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5698", "distance": "4995", "lastTime": "2023-12-22 14:53:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "265975", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092634", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5823", "distance": "4996", "lastTime": "2023-12-22 14:53:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "266164", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092634", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5843", "distance": "4996", "lastTime": "2023-12-22 14:53:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "266357", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092634", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5904", "distance": "4995", "lastTime": "2023-12-22 14:53:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "266552", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092635", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5943", "distance": "4996", "lastTime": "2023-12-22 14:53:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "266748", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092635", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5995", "distance": "4995", "lastTime": "2023-12-22 14:53:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "266945", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092635", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5988", "distance": "4995", "lastTime": "2023-12-22 14:53:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "267150", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092636", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5933", "distance": "4996", "lastTime": "2023-12-22 14:53:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "267346", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092636", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6231", "distance": "4996", "lastTime": "2023-12-22 14:53:03", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "267607", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092636", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6604", "distance": "4995", "lastTime": "2023-12-22 14:53:03", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "267968", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092637", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5601", "distance": "4995", "lastTime": "2023-12-22 14:53:03", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "268161", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092637", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5495", "distance": "4995", "lastTime": "2023-12-22 14:53:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "268478", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092637", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4972", "distance": "4995", "lastTime": "2023-12-22 14:53:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "268693", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092638", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6175", "distance": "4995", "lastTime": "2023-12-22 14:53:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "268904", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092638", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6743", "distance": "4995", "lastTime": "2023-12-22 14:53:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "269227", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092638", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5283", "distance": "4996", "lastTime": "2023-12-22 14:53:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "269447", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092639", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6015", "distance": "4996", "lastTime": "2023-12-22 14:53:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "269902", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092639", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4854", "distance": "4995", "lastTime": "2023-12-22 14:53:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270155", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092639", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5293", "distance": "1655", "lastTime": "2023-12-22 14:53:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270361", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092640", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6025", "distance": "1456", "lastTime": "2023-12-22 14:53:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270558", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092640", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6025", "distance": "1456", "lastTime": "2023-12-22 14:53:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270558", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092640", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5958", "distance": "1259", "lastTime": "2023-12-22 14:53:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270758", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092640", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4271", "distance": "1074", "lastTime": "2023-12-22 14:53:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "270934", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092641", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2689", "distance": "943", "lastTime": "2023-12-22 14:53:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271046", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092641", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1662", "distance": "865", "lastTime": "2023-12-22 14:53:08", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271114", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092641", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1053", "distance": "814", "lastTime": "2023-12-22 14:53:08", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271158", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092642", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "681", "distance": "780", "lastTime": "2023-12-22 14:53:08", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271188", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092642", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "457", "distance": "759", "lastTime": "2023-12-22 14:53:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271206", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092642", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "316", "distance": "744", "lastTime": "2023-12-22 14:53:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271218", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092643", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "183", "distance": "735", "lastTime": "2023-12-22 14:53:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271227", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092643", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "144", "distance": "728", "lastTime": "2023-12-22 14:53:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271234", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092643", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65528", "distance": "724", "lastTime": "2023-12-22 14:53:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092644", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65526", "distance": "723", "lastTime": "2023-12-22 14:53:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092644", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "13", "distance": "723", "lastTime": "2023-12-22 14:53:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092644", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "723", "lastTime": "2023-12-22 14:53:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092645", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "722", "lastTime": "2023-12-22 14:53:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092645", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "723", "lastTime": "2023-12-22 14:53:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092645", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "725", "lastTime": "2023-12-22 14:53:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092646", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "724", "lastTime": "2023-12-22 14:53:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092646", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "723", "lastTime": "2023-12-22 14:53:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092646", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "8", "distance": "722", "lastTime": "2023-12-22 14:53:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092647", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "722", "lastTime": "2023-12-22 14:53:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092647", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65526", "distance": "722", "lastTime": "2023-12-22 14:53:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092647", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "723", "lastTime": "2023-12-22 14:53:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092648", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "723", "lastTime": "2023-12-22 14:53:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092648", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5", "distance": "724", "lastTime": "2023-12-22 14:53:15", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092648", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "724", "lastTime": "2023-12-22 14:53:15", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092649", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "723", "lastTime": "2023-12-22 14:53:15", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092649", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "724", "lastTime": "2023-12-22 14:53:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092649", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "724", "lastTime": "2023-12-22 14:53:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092649", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "723", "lastTime": "2023-12-22 14:53:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092650", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "724", "lastTime": "2023-12-22 14:53:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092650", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "724", "lastTime": "2023-12-22 14:53:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092650", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "723", "lastTime": "2023-12-22 14:53:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092651", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "723", "lastTime": "2023-12-22 14:53:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092651", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "724", "lastTime": "2023-12-22 14:53:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092651", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "724", "lastTime": "2023-12-22 14:53:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092652", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "724", "lastTime": "2023-12-22 14:53:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092652", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "724", "lastTime": "2023-12-22 14:53:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092652", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "723", "lastTime": "2023-12-22 14:53:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092653", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65532", "distance": "723", "lastTime": "2023-12-22 14:53:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092653", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "723", "lastTime": "2023-12-22 14:53:20", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092653", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "723", "lastTime": "2023-12-22 14:53:20", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092654", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65532", "distance": "723", "lastTime": "2023-12-22 14:53:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092654", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "724", "lastTime": "2023-12-22 14:53:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092654", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "723", "lastTime": "2023-12-22 14:53:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092655", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "724", "lastTime": "2023-12-22 14:53:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092655", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "721", "lastTime": "2023-12-22 14:53:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092655", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "723", "lastTime": "2023-12-22 14:53:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092656", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "770", "lastTime": "2023-12-22 14:53:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092656", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "956", "lastTime": "2023-12-22 14:53:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092656", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "1294", "lastTime": "2023-12-22 14:53:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092657", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "1745", "lastTime": "2023-12-22 14:53:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092657", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "2084", "lastTime": "2023-12-22 14:53:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "1", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092657", "totalTaskCnt": "613972", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "2297", "lastTime": "2023-12-22 14:53:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092658", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "2455", "lastTime": "2023-12-22 14:53:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092658", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "2612", "lastTime": "2023-12-22 14:53:25", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "1", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092658", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2762", "lastTime": "2023-12-22 14:53:25", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2762", "lastTime": "2023-12-22 14:53:25", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2792", "lastTime": "2023-12-22 14:53:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2792", "lastTime": "2023-12-22 14:53:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2792", "lastTime": "2023-12-22 14:53:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2792", "lastTime": "2023-12-22 14:53:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "2792", "lastTime": "2023-12-22 14:53:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "1", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "1", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "1", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "21", "position": "271236", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092659", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "14476", "distance": "2017", "lastTime": "2023-12-22 14:53:27", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "272158", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092661", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "9986", "distance": "1551", "lastTime": "2023-12-22 14:53:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "272588", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092661", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "8418", "distance": "1249", "lastTime": "2023-12-22 14:53:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "272882", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092661", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6359", "distance": "968", "lastTime": "2023-12-22 14:53:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273123", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092662", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4553", "distance": "777", "lastTime": "2023-12-22 14:53:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273297", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092662", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3304", "distance": "632", "lastTime": "2023-12-22 14:53:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273426", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092662", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2385", "distance": "522", "lastTime": "2023-12-22 14:53:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273524", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092663", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1739", "distance": "442", "lastTime": "2023-12-22 14:53:30", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273597", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092663", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1169", "distance": "384", "lastTime": "2023-12-22 14:53:30", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273651", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092663", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65448", "distance": "359", "lastTime": "2023-12-22 14:53:30", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273661", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092664", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65517", "distance": "360", "lastTime": "2023-12-22 14:53:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273659", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092664", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65507", "distance": "362", "lastTime": "2023-12-22 14:53:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273658", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092664", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65519", "distance": "362", "lastTime": "2023-12-22 14:53:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273658", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092665", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65519", "distance": "362", "lastTime": "2023-12-22 14:53:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273658", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092665", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "363", "lastTime": "2023-12-22 14:53:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273657", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092665", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65527", "distance": "364", "lastTime": "2023-12-22 14:53:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273657", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092666", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65529", "distance": "363", "lastTime": "2023-12-22 14:53:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273657", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092666", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "363", "lastTime": "2023-12-22 14:53:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273657", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092666", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "363", "lastTime": "2023-12-22 14:53:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092667", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "363", "lastTime": "2023-12-22 14:53:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092667", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65529", "distance": "363", "lastTime": "2023-12-22 14:53:34", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092667", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "8", "distance": "364", "lastTime": "2023-12-22 14:53:34", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092668", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65528", "distance": "363", "lastTime": "2023-12-22 14:53:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092668", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65528", "distance": "363", "lastTime": "2023-12-22 14:53:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092668", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "364", "lastTime": "2023-12-22 14:53:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092668", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65528", "distance": "363", "lastTime": "2023-12-22 14:53:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092669", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "363", "lastTime": "2023-12-22 14:53:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092669", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "414", "lastTime": "2023-12-22 14:53:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273656", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092669", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1602", "distance": "570", "lastTime": "2023-12-22 14:53:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273675", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092670", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2851", "distance": "688", "lastTime": "2023-12-22 14:53:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273761", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092670", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3525", "distance": "756", "lastTime": "2023-12-22 14:53:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "273879", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092671", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3953", "distance": "802", "lastTime": "2023-12-22 14:53:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274013", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092671", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4204", "distance": "841", "lastTime": "2023-12-22 14:53:38", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274155", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092671", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4204", "distance": "841", "lastTime": "2023-12-22 14:53:38", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274155", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092671", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4434", "distance": "2522", "lastTime": "2023-12-22 14:53:38", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274314", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092672", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5979", "distance": "4996", "lastTime": "2023-12-22 14:53:38", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274494", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092672", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5848", "distance": "4996", "lastTime": "2023-12-22 14:53:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274717", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092672", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65527", "distance": "4996", "lastTime": "2023-12-22 14:53:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274805", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092673", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65409", "distance": "4996", "lastTime": "2023-12-22 14:53:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274795", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092673", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65461", "distance": "4996", "lastTime": "2023-12-22 14:53:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274791", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092673", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65492", "distance": "4995", "lastTime": "2023-12-22 14:53:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274790", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092674", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65520", "distance": "4995", "lastTime": "2023-12-22 14:53:41", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274789", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092674", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65524", "distance": "4995", "lastTime": "2023-12-22 14:53:41", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092674", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65522", "distance": "4995", "lastTime": "2023-12-22 14:53:41", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092675", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65522", "distance": "4995", "lastTime": "2023-12-22 14:53:41", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092675", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "4995", "lastTime": "2023-12-22 14:53:42", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092675", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "4996", "lastTime": "2023-12-22 14:53:42", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092676", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "917", "distance": "4995", "lastTime": "2023-12-22 14:53:42", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274790", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092676", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5335", "distance": "4996", "lastTime": "2023-12-22 14:53:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "274901", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092676", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6099", "distance": "4996", "lastTime": "2023-12-22 14:53:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275128", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092677", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6035", "distance": "4995", "lastTime": "2023-12-22 14:53:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275342", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092677", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6026", "distance": "4995", "lastTime": "2023-12-22 14:53:44", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275557", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092677", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5992", "distance": "4996", "lastTime": "2023-12-22 14:53:44", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275772", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092678", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5972", "distance": "4995", "lastTime": "2023-12-22 14:53:45", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275987", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092678", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5972", "distance": "4995", "lastTime": "2023-12-22 14:53:45", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "275987", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092678", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6333", "distance": "4995", "lastTime": "2023-12-22 14:53:45", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "276188", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092678", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6724", "distance": "4996", "lastTime": "2023-12-22 14:53:45", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "276338", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092679", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5754", "distance": "4996", "lastTime": "2023-12-22 14:53:46", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "276509", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092679", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5666", "distance": "4996", "lastTime": "2023-12-22 14:53:46", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "276664", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092679", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5666", "distance": "4996", "lastTime": "2023-12-22 14:53:46", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "276664", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092679", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6073", "distance": "4995", "lastTime": "2023-12-22 14:53:47", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "247629", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092680", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6039", "distance": "4995", "lastTime": "2023-12-22 14:53:47", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "247826", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092681", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6325", "distance": "4995", "lastTime": "2023-12-22 14:53:47", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "248025", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092681", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "10641", "distance": "4996", "lastTime": "2023-12-22 14:53:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "248330", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092681", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "15021", "distance": "4995", "lastTime": "2023-12-22 14:53:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "248788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092682", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "15021", "distance": "4995", "lastTime": "2023-12-22 14:53:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "248788", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092682", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "18998", "distance": "4995", "lastTime": "2023-12-22 14:53:48", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "249389", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092682", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20098", "distance": "4995", "lastTime": "2023-12-22 14:53:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "249826", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092682", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20170", "distance": "4996", "lastTime": "2023-12-22 14:53:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "250320", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092683", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20123", "distance": "4995", "lastTime": "2023-12-22 14:53:49", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "251016", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092683", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20055", "distance": "4995", "lastTime": "2023-12-22 14:53:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "251671", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092683", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "19896", "distance": "4995", "lastTime": "2023-12-22 14:53:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "252107", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092684", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20056", "distance": "4995", "lastTime": "2023-12-22 14:53:50", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "252432", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092684", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20776", "distance": "4995", "lastTime": "2023-12-22 14:53:51", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "253186", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092684", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20776", "distance": "4995", "lastTime": "2023-12-22 14:53:51", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "253186", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092684", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30405", "distance": "4995", "lastTime": "2023-12-22 14:53:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "255138", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092685", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "26133", "distance": "4995", "lastTime": "2023-12-22 14:53:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "256105", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092685", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "15942", "distance": "4995", "lastTime": "2023-12-22 14:53:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "256870", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092686", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "15942", "distance": "4995", "lastTime": "2023-12-22 14:53:52", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "256870", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092686", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "8527", "distance": "4995", "lastTime": "2023-12-22 14:53:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "257290", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092686", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5300", "distance": "4995", "lastTime": "2023-12-22 14:53:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "257538", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092687", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5335", "distance": "4995", "lastTime": "2023-12-22 14:53:53", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "257717", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092687", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5557", "distance": "4995", "lastTime": "2023-12-22 14:53:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "257914", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092687", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5693", "distance": "4995", "lastTime": "2023-12-22 14:53:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258124", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092688", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4360", "distance": "4995", "lastTime": "2023-12-22 14:53:54", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258313", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092688", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3777", "distance": "4995", "lastTime": "2023-12-22 14:53:55", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258455", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092688", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3839", "distance": "4994", "lastTime": "2023-12-22 14:53:55", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258594", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092689", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3882", "distance": "4995", "lastTime": "2023-12-22 14:53:55", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258733", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092689", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5616", "distance": "4995", "lastTime": "2023-12-22 14:53:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258891", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092689", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5616", "distance": "4995", "lastTime": "2023-12-22 14:53:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "258891", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092689", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5773", "distance": "4995", "lastTime": "2023-12-22 14:53:56", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "259115", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092690", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4937", "distance": "4996", "lastTime": "2023-12-22 14:53:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "259382", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092690", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4930", "distance": "4995", "lastTime": "2023-12-22 14:53:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "259613", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092690", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5945", "distance": "4995", "lastTime": "2023-12-22 14:53:57", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "259826", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092691", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6521", "distance": "4995", "lastTime": "2023-12-22 14:53:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "260071", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092691", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6765", "distance": "4995", "lastTime": "2023-12-22 14:53:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "260183", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092691", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5638", "distance": "4995", "lastTime": "2023-12-22 14:53:58", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "260308", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092692", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5704", "distance": "4995", "lastTime": "2023-12-22 14:53:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "260493", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092692", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5148", "distance": "4996", "lastTime": "2023-12-22 14:53:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168109", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092693", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6167", "distance": "4995", "lastTime": "2023-12-22 14:53:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168339", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092693", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6167", "distance": "4995", "lastTime": "2023-12-22 14:53:59", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168339", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092693", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5989", "distance": "4995", "lastTime": "2023-12-22 14:54:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168559", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "2", "switchGuideDirRight": "2", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092693", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6008", "distance": "4996", "lastTime": "2023-12-22 14:54:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168776", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092694", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5997", "distance": "4994", "lastTime": "2023-12-22 14:54:00", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "168991", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092694", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6018", "distance": "4996", "lastTime": "2023-12-22 14:54:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "169185", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092694", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6015", "distance": "4995", "lastTime": "2023-12-22 14:54:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "169388", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092695", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6006", "distance": "4996", "lastTime": "2023-12-22 14:54:01", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "169604", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092695", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6545", "distance": "4995", "lastTime": "2023-12-22 14:54:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "169849", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092695", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "7151", "distance": "4996", "lastTime": "2023-12-22 14:54:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "170218", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092696", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5851", "distance": "4996", "lastTime": "2023-12-22 14:54:02", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "170464", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092696", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6081", "distance": "4995", "lastTime": "2023-12-22 14:54:03", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "299304", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092696", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6225", "distance": "4996", "lastTime": "2023-12-22 14:54:03", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "299744", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092697", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6071", "distance": "4995", "lastTime": "2023-12-22 14:54:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "299787", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092697", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5371", "distance": "4995", "lastTime": "2023-12-22 14:54:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "34190", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092697", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5001", "distance": "4996", "lastTime": "2023-12-22 14:54:04", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "34401", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092698", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6090", "distance": "4995", "lastTime": "2023-12-22 14:54:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "34607", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092698", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6001", "distance": "4995", "lastTime": "2023-12-22 14:54:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "34806", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092698", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6147", "distance": "4995", "lastTime": "2023-12-22 14:54:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35000", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092699", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6147", "distance": "4995", "lastTime": "2023-12-22 14:54:05", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35000", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092699", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "9928", "distance": "4995", "lastTime": "2023-12-22 14:54:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35258", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092699", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "13971", "distance": "4995", "lastTime": "2023-12-22 14:54:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35643", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092699", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "17737", "distance": "4995", "lastTime": "2023-12-22 14:54:06", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35868", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092700", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "19748", "distance": "4995", "lastTime": "2023-12-22 14:54:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "35868", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092700", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "20047", "distance": "4995", "lastTime": "2023-12-22 14:54:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "36481", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092700", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "22568", "distance": "4994", "lastTime": "2023-12-22 14:54:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "37216", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092701", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "27415", "distance": "4996", "lastTime": "2023-12-22 14:54:07", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "38016", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092701", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30508", "distance": "4995", "lastTime": "2023-12-22 14:54:08", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "38962", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092701", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30585", "distance": "4546", "lastTime": "2023-12-22 14:54:08", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "40057", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092702", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "26959", "distance": "3523", "lastTime": "2023-12-22 14:54:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "41073", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092702", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "19176", "distance": "2606", "lastTime": "2023-12-22 14:54:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "41921", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092702", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "13555", "distance": "1979", "lastTime": "2023-12-22 14:54:09", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "42496", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092703", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "9143", "distance": "1529", "lastTime": "2023-12-22 14:54:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "42916", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092703", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "7130", "distance": "1174", "lastTime": "2023-12-22 14:54:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43258", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092704", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5443", "distance": "953", "lastTime": "2023-12-22 14:54:10", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43469", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092704", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4061", "distance": "776", "lastTime": "2023-12-22 14:54:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43586", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092704", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4061", "distance": "776", "lastTime": "2023-12-22 14:54:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43586", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092704", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3035", "distance": "639", "lastTime": "2023-12-22 14:54:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43715", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092705", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2312", "distance": "533", "lastTime": "2023-12-22 14:54:11", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43812", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092705", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1772", "distance": "458", "lastTime": "2023-12-22 14:54:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43880", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092705", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1316", "distance": "396", "lastTime": "2023-12-22 14:54:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43938", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092706", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "360", "lastTime": "2023-12-22 14:54:12", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43960", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092706", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65474", "distance": "361", "lastTime": "2023-12-22 14:54:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43956", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092706", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65500", "distance": "363", "lastTime": "2023-12-22 14:54:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43955", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092707", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65495", "distance": "365", "lastTime": "2023-12-22 14:54:13", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43953", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092707", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65514", "distance": "366", "lastTime": "2023-12-22 14:54:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43952", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092707", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65524", "distance": "366", "lastTime": "2023-12-22 14:54:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43952", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092708", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65524", "distance": "367", "lastTime": "2023-12-22 14:54:14", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092708", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "366", "lastTime": "2023-12-22 14:54:15", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092708", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "367", "lastTime": "2023-12-22 14:54:15", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092709", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "366", "lastTime": "2023-12-22 14:54:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092709", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "366", "lastTime": "2023-12-22 14:54:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092709", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65527", "distance": "367", "lastTime": "2023-12-22 14:54:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092709", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65531", "distance": "366", "lastTime": "2023-12-22 14:54:16", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092710", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65527", "distance": "367", "lastTime": "2023-12-22 14:54:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092710", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65519", "distance": "366", "lastTime": "2023-12-22 14:54:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092711", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65521", "distance": "368", "lastTime": "2023-12-22 14:54:17", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092711", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "368", "lastTime": "2023-12-22 14:54:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "1", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092711", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "408", "lastTime": "2023-12-22 14:54:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43951", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092712", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1447", "distance": "592", "lastTime": "2023-12-22 14:54:18", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "43964", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092712", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3373", "distance": "918", "lastTime": "2023-12-22 14:54:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "44053", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092712", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3373", "distance": "918", "lastTime": "2023-12-22 14:54:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "44053", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092712", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5971", "distance": "1364", "lastTime": "2023-12-22 14:54:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "44215", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092713", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "9295", "distance": "1904", "lastTime": "2023-12-22 14:54:19", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "44486", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092713", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "9317", "distance": "2516", "lastTime": "2023-12-22 14:54:20", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "44858", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092713", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5584", "distance": "3303", "lastTime": "2023-12-22 14:54:20", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45118", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092714", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3200", "distance": "4222", "lastTime": "2023-12-22 14:54:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45272", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092714", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1864", "distance": "4993", "lastTime": "2023-12-22 14:54:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45359", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092714", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1108", "distance": "4996", "lastTime": "2023-12-22 14:54:21", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45412", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092715", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "737", "distance": "4996", "lastTime": "2023-12-22 14:54:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45443", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092715", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "488", "distance": "4996", "lastTime": "2023-12-22 14:54:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45464", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092715", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "315", "distance": "4996", "lastTime": "2023-12-22 14:54:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45479", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092716", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "315", "distance": "4996", "lastTime": "2023-12-22 14:54:22", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45479", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092716", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "232", "distance": "4996", "lastTime": "2023-12-22 14:54:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45488", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092716", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "134", "distance": "4995", "lastTime": "2023-12-22 14:54:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "1", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45495", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092717", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65531", "distance": "4995", "lastTime": "2023-12-22 14:54:23", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "21", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092717", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65527", "distance": "4995", "lastTime": "2023-12-22 14:54:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092717", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4995", "lastTime": "2023-12-22 14:54:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092718", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "6", "distance": "4995", "lastTime": "2023-12-22 14:54:24", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092718", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4994", "lastTime": "2023-12-22 14:54:25", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092718", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4995", "lastTime": "2023-12-22 14:54:25", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092719", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65526", "distance": "4995", "lastTime": "2023-12-22 14:54:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092719", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4996", "lastTime": "2023-12-22 14:54:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092719", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4996", "lastTime": "2023-12-22 14:54:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092719", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "4994", "lastTime": "2023-12-22 14:54:26", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092720", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4995", "lastTime": "2023-12-22 14:54:27", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092720", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "4995", "lastTime": "2023-12-22 14:54:27", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092720", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4995", "lastTime": "2023-12-22 14:54:27", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092721", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "4995", "lastTime": "2023-12-22 14:54:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092721", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4995", "lastTime": "2023-12-22 14:54:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092722", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4995", "lastTime": "2023-12-22 14:54:28", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092722", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "4995", "lastTime": "2023-12-22 14:54:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092722", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "4995", "lastTime": "2023-12-22 14:54:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092722", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4995", "lastTime": "2023-12-22 14:54:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092723", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "4996", "lastTime": "2023-12-22 14:54:29", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092723", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65532", "distance": "4994", "lastTime": "2023-12-22 14:54:30", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092723", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "4", "distance": "4996", "lastTime": "2023-12-22 14:54:30", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092724", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "4995", "lastTime": "2023-12-22 14:54:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "HX3Fdemo00000018", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092724", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4995", "lastTime": "2023-12-22 14:54:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092724", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65531", "distance": "4995", "lastTime": "2023-12-22 14:54:31", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092725", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "7", "distance": "4995", "lastTime": "2023-12-22 14:54:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092725", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4995", "lastTime": "2023-12-22 14:54:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092725", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65531", "distance": "4995", "lastTime": "2023-12-22 14:54:32", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092726", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65530", "distance": "4995", "lastTime": "2023-12-22 14:54:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092726", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "4995", "lastTime": "2023-12-22 14:54:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092727", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65533", "distance": "4995", "lastTime": "2023-12-22 14:54:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092727", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4995", "lastTime": "2023-12-22 14:54:33", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092727", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4995", "lastTime": "2023-12-22 14:54:34", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092727", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4995", "lastTime": "2023-12-22 14:54:34", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092728", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65534", "distance": "4995", "lastTime": "2023-12-22 14:54:34", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092728", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "2", "distance": "4993", "lastTime": "2023-12-22 14:54:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45498", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092728", "totalTaskCnt": "613973", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "3", "distance": "4995", "lastTime": "2023-12-22 14:54:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092729", "totalTaskCnt": "613979", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5", "distance": "4996", "lastTime": "2023-12-22 14:54:35", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092729", "totalTaskCnt": "613986", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "1", "distance": "4996", "lastTime": "2023-12-22 14:54:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "1", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "1", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "1", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "1", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092729", "totalTaskCnt": "613993", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4996", "lastTime": "2023-12-22 14:54:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092730", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4996", "lastTime": "2023-12-22 14:54:36", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092730", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "65535", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092730", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "0", "distance": "4996", "lastTime": "2023-12-22 14:54:37", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "1", "position": "45497", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092731", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "16239", "distance": "4995", "lastTime": "2023-12-22 14:54:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "46354", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092732", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "16239", "distance": "4995", "lastTime": "2023-12-22 14:54:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "46354", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092732", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "16239", "distance": "4995", "lastTime": "2023-12-22 14:54:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "46354", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092732", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "16239", "distance": "4995", "lastTime": "2023-12-22 14:54:39", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "46354", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092732", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30894", "distance": "4994", "lastTime": "2023-12-22 14:54:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "49749", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092734", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30894", "distance": "4994", "lastTime": "2023-12-22 14:54:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "49749", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092734", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30894", "distance": "4994", "lastTime": "2023-12-22 14:54:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "49749", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092734", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30894", "distance": "4994", "lastTime": "2023-12-22 14:54:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "49749", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092734", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "30894", "distance": "4994", "lastTime": "2023-12-22 14:54:40", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "49749", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092734", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "8386", "distance": "4995", "lastTime": "2023-12-22 14:54:42", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "54328", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092736", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5412", "distance": "4995", "lastTime": "2023-12-22 14:54:42", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "54540", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092736", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5260", "distance": "4995", "lastTime": "2023-12-22 14:54:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "54713", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092736", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5509", "distance": "4995", "lastTime": "2023-12-22 14:54:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "54916", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092737", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5509", "distance": "4995", "lastTime": "2023-12-22 14:54:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "54916", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092737", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5683", "distance": "4995", "lastTime": "2023-12-22 14:54:43", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "55113", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092737", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5779", "distance": "4994", "lastTime": "2023-12-22 14:54:44", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "55317", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092737", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5872", "distance": "4994", "lastTime": "2023-12-22 14:54:44", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "55535", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092738", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] },
+  { "VehicleInfo": [{ "currentSpeed": "5901", "distance": "4995", "lastTime": "2023-12-22 14:54:44", "loadE84Error": "0", "loadFoupEmpty": "0", "location": "1", "ohtID": "V0022", "ohtIP": "10.7.10.42", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "1", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "1", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "0", "ohtStatus_Scanove": "1", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "plcVersion": "V3.8.7", "port": "0", "position": "55747", "rfidMisMatch": "0", "rfidReadError": "0", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "", "totalExceptionStopCnt": "657", "totalExceptionTime": "81200", "totalMile": "0", "totalPowerOnCnt": "502", "totalPowerOnTime": "11092738", "totalTaskCnt": "614000", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] }
 ]
 
 export default mockData3

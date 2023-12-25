@@ -465,6 +465,13 @@ export default class SkyCar {
       lookAtPosition.y = currentPosition.y
       lookAtPosition.z = currentPosition.z
 
+      // 车子在当前轨道上走了多少进度
+      // const progress = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length
+      // const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this_.line)
+      // if (progress && thisLineMesh) {
+      //   thisLineMesh.material.uniforms.progress.value = progress
+      // }
+
       // 解决闪烁问题
       if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
         this_.skyCarMesh.lookAt(lookAtPosition)
@@ -618,7 +625,7 @@ export default class SkyCar {
                 cb && cb()
 
                 setTimeout(() => {
-                  this_.up(where,() => {
+                  this_.up(where, () => {
                     this_.animationOver = true
                   })
                 }, 300)
@@ -633,7 +640,7 @@ export default class SkyCar {
                 cb && cb()
 
                 setTimeout(() => {
-                  this_.up(where,() => {
+                  this_.up(where, () => {
                     this_.animationOver = true
                   })
                 }, 300)
@@ -645,7 +652,7 @@ export default class SkyCar {
     })
   }
 
-  up(where = '在机台上', cb) {
+  up(where = '在货架上', cb) {
     const this_ = this
     this.animationSpeedTimes = (where === '在机台上' ? 0.01 : 0.002)
     if (this.catchDirection === 'right') {
