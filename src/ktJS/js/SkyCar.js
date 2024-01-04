@@ -23,9 +23,11 @@ export default class SkyCar {
   line = ''                   // 是在哪一根线上
   lineIndex = 0               // 当前线上面的索引
   nextLine = []               // 下几根要走的轨道
+  passLine = []               // 走过的近5根轨道
   animationOver = true        // 动画执行完毕
   isAnimateSoon = false       // 即将有动画
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
+  focus = false               // 是不是聚焦在这个车上
 
 
   constructor(opt) {
@@ -112,6 +114,15 @@ export default class SkyCar {
 
       API.search('天车', this.id)
       this.initClickPopup()
+
+      // 车子在当前轨道上走了多少进度
+      const progress = this.lineIndex / STATE.sceneList.linePosition[this.line].length
+      const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this.line)
+      if (progress && thisLineMesh) {
+        thisLineMesh.material.uniforms.currentFocusLineStartPoint.value = this.line.split('-')[0]
+        thisLineMesh.material.uniforms.currentFocusLineEndPoint.value = this.line.split('-')[1]
+        thisLineMesh.material.uniforms.progress.value = progress
+      }
     }))
 
   }
@@ -135,7 +146,7 @@ export default class SkyCar {
     }
 
     const init = (data) => {
-
+      this.focus = true
 
       if (this.clickPopup && this.clickPopup.parent) {
         this.clickPopup.parent.remove(this.clickPopup)
@@ -253,6 +264,14 @@ export default class SkyCar {
         closeVisible: true,
         closeColor: "#FFFFFF",
         closeCallback: (() => {
+          this.focus = false
+          STATE.sceneList.lineList.forEach(e => {
+            e.material.uniforms.next.value = 0
+            e.material.uniforms.pass.value = 0
+            e.material.uniforms.currentFocusLineStartPoint.value = -1
+            e.material.uniforms.currentFocusLineEndPoint.value = -1
+          })
+
           this.popup.visible = true
           this.clickPopup.parent.remove(this.clickPopup)
           this.clickPopup = null
@@ -447,6 +466,10 @@ export default class SkyCar {
         } else if (this_.nextLine.length) {
           this_.line = this_.nextLine[0].replace('_', '-')
           this_.lineIndex = 0
+
+          this_.setCurrentLineState()
+
+          this_.passLine.push(this_.nextLine[0])
           this_.nextLine.splice(0, 1)
         }
       }
@@ -466,11 +489,11 @@ export default class SkyCar {
       lookAtPosition.z = currentPosition.z
 
       // 车子在当前轨道上走了多少进度
-      // const progress = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length
-      // const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this_.line)
-      // if (progress && thisLineMesh) {
-      //   thisLineMesh.material.uniforms.progress.value = progress
-      // }
+      const progress = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length
+      const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this_.line)
+      if (progress && thisLineMesh) {
+        thisLineMesh.material.uniforms.progress.value = progress
+      }
 
       // 解决闪烁问题
       if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
@@ -482,6 +505,48 @@ export default class SkyCar {
 
     } else {
       cb && cb()
+    }
+  }
+
+  // 轨道颜色
+  setCurrentLineState() {
+
+    if (this.focus) {
+      STATE.sceneList.lineList.forEach(e => {
+        e.material.uniforms.next.value = 0
+        e.material.uniforms.pass.value = 0
+        e.material.uniforms.currentFocusLineStartPoint.value = -1
+        e.material.uniforms.currentFocusLineEndPoint.value = -1
+      })
+      if (this.passLine.length >= 5) {
+        this.passLine.splice(0, 1)
+      }
+
+      // nextLine轨道
+      const nextLineArr = STATE.sceneList.lineList.filter(e =>
+        this.nextLine.includes(e.name.replace('-', '_'))
+      )
+
+      nextLineArr.forEach(e => {
+        e.material.uniforms.next.value = 1
+      })
+
+      const passLineArr = STATE.sceneList.lineList.filter(e =>
+        this.passLine.includes(e.name.replace('-', '_'))
+      )
+
+      passLineArr.forEach(e => {
+        e.material.uniforms.pass.value = 1
+      })
+
+      STATE.sceneList.lineList.forEach(e => {
+        if (e.name === this.line) {
+          e.material.uniforms.next.value = 0
+          e.material.uniforms.pass.value = 0
+        }
+        e.material.uniforms.currentFocusLineStartPoint.value = this.line.split('-')[0]
+        e.material.uniforms.currentFocusLineEndPoint.value = this.line.split('-')[1]
+      })
     }
   }
 

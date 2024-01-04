@@ -6,7 +6,7 @@ import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 // import mockData1 from './js/mock1'
 import mockData2 from './js/mock2'
-import mockData3 from './js/mock3'
+// import mockData3 from './js/mock3'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd, GetBayStateInfo } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
@@ -33,8 +33,8 @@ function getData() {
   // let i = 0
   // window.aa = () => { }
   // setInterval(() => {
-  //   if (i >= mockData3.length) i = 0
-  //   drive(mockData3[i])
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
   //   i++
   // }, 333)
 
@@ -300,69 +300,84 @@ function handleLine() {
   })
 
 
-  // // 测试shader
-  // // 顶点着色器代码
-  // const vertexShader = `
-  //   #include <logdepthbuf_pars_vertex>
-  //   #include <common>
+  // 测试shader
+  // 顶点着色器代码
+  const vertexShader = `
+    #include <logdepthbuf_pars_vertex>
+    #include <common>
 
-  //   varying vec2 vUv; // 传递纹理坐标给片元着色器
-  //   varying vec2 vPosition;
-  //   void main() {
-  //     vUv = uv;
-  //     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    varying vec2 vUv; // 传递纹理坐标给片元着色器
+    varying vec2 vPosition;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       
-  //     #include <logdepthbuf_vertex>
-  //   }
-  // `
+      #include <logdepthbuf_vertex>
+    }
+  `
 
-  // // 片元着色器代码
-  // const fragmentShader = `
-  //   #include <logdepthbuf_pars_fragment>
-  //   #include <common>
+  // 片元着色器代码
+  const fragmentShader = `
+    #include <logdepthbuf_pars_fragment>
+    #include <common>
     
-  //   uniform int startPoint;
-  //   uniform int endPoint;
-  //   uniform float progress;
-  //   varying vec2 vUv; // 接收从顶点着色器传递过来的纹理坐标
-  //   varying vec2 vPosition;
-  //   void main() {
+    uniform int startPoint;
+    uniform int endPoint;
+    uniform int currentFocusLineStartPoint;
+    uniform int currentFocusLineEndPoint;
+    uniform int pass;
+    uniform int next;
+    uniform float progress;
+    varying vec2 vUv; // 接收从顶点着色器传递过来的纹理坐标
+    varying vec2 vPosition;
+    void main() {
       
-  //     vec4 color = vec4(0.7,0.7,0.7,1.);
-  //     if(startPoint == 26 && endPoint == 22) {
-  //       if(vUv.x > progress ) {
-  //         color = vec4(0.0,0.0,0.0,1.);
-  //       }
-  //     }
-  //     gl_FragColor = color; // 应用纹理颜色到片元
+      vec4 color = vec4(0.7,0.7,0.7,1.);
       
-  //     #include <logdepthbuf_fragment>
-  //   }
-  // `
+      if (next == 1) {
+        color = vec4(0.95,0.41,0.16,1.);
 
-  // // 创建 ShaderMaterial，并传入纹理
-  // const material = new Bol3D.ShaderMaterial({
-  //   uniforms: {
-  //     startPoint: { value: 0 },
-  //     endPoint: { value: 0 },
-  //     progress: { value: 0.0 }
-  //   },
-  //   vertexShader: vertexShader,
-  //   fragmentShader: fragmentShader
-  // })
-  // material.needsUpdate = true
+      } else if(pass == 1) {
+        color = vec4(0.2,0.2,0.2,1.);
+        
+      } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
+        
+        if(vUv.x > progress) {
+          color = vec4(0.95,0.41,0.16,1.);
+        } else {
+          color = vec4(0.2,0.2,0.2,1.);
+        }
+      }
+
+        
+
+      gl_FragColor = color; // 应用纹理颜色到片元
+      #include <logdepthbuf_fragment>
+    }
+  `
+
+  // 创建 ShaderMaterial，并传入纹理
+  const material = new Bol3D.ShaderMaterial({
+    uniforms: {
+      startPoint: { value: 0 },
+      endPoint: { value: 0 },
+      progress: { value: 1.0 },
+      pass: { value: 0 },
+      next: { value: 0 },
+      currentFocusLineStartPoint: { value: -1 },
+      currentFocusLineEndPoint: { value: -1 }
+    },
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader
+  })
+  material.needsUpdate = true
 
 
-  // STATE.sceneList.lineList.forEach(e => {
-  //   e.material = material.clone()
-  //   e.material.uniforms.startPoint.value = e.name.split('-')[0]
-  //   e.material.uniforms.endPoint.value = e.name.split('-')[1]
-
-  //   if(e.name === '26-22') {
-      
-  //   }
-  // })
-
+  STATE.sceneList.lineList.forEach(e => {
+    e.material = material.clone()
+    e.material.uniforms.startPoint.value = e.name.split('-')[0]
+    e.material.uniforms.endPoint.value = e.name.split('-')[1]
+  })
 }
 
 

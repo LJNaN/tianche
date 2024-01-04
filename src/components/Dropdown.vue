@@ -96,7 +96,7 @@ function searchCandidate(text) {
     const list1 = STATE.sceneList.kaxiaList.children.filter(e => e.userData.id.includes(text)).map(e => e.userData.id)
     const list2 = []
     STATE.sceneList.skyCarList.forEach(e => {
-      if(e.catch) {
+      if (e.catch) {
         list2.push(e.catch.userData.id)
       }
     })
@@ -128,8 +128,31 @@ function handleItem(item) {
 
   STATE.searchAnimateDestroy = true
   setTimeout(() => {
-    if (selected.value === '轨道' || selected.value === '天车') {
+    if (selected.value === '轨道') {
       API.search(selected.value, searchText.value)
+
+    } else if (selected.value === '天车') {
+      API.search(selected.value, searchText.value)
+      const instance = STATE.sceneList.skyCarList.find(e => e.id === searchText.value)
+      if (instance) {
+        STATE.sceneList.skyCarList.forEach(e => {
+          e.popup.visible = true
+          if (e.clickPopup) {
+            e.clickPopup.element.remove()
+            e.clickPopup.parent.remove(e.clickPopup)
+            e.clickPopup = null
+          }
+        })
+        instance.initClickPopup()
+        // 车子在当前轨道上走了多少进度
+        const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
+        const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === instance.line)
+        if (progress && thisLineMesh) {
+          thisLineMesh.material.uniforms.currentFocusLineStartPoint.value = instance.line.split('-')[0]
+          thisLineMesh.material.uniforms.currentFocusLineEndPoint.value = instance.line.split('-')[1]
+          thisLineMesh.material.uniforms.progress.value = progress
+        }
+      }
 
     } else if (selected.value === 'OHB') {
       const OHBItemInfo = temp.find(e => e.shelf === item)
@@ -151,7 +174,7 @@ function handleItem(item) {
       API.search(selected.value, searchText.value)
 
     } else if (selected.value === '设备') {
-      
+
       let objMap = null
       let objType = null
       for (let key in CACHE.instanceNameMap) {
@@ -162,15 +185,15 @@ function handleItem(item) {
           break
         }
       }
-      
-      
+
+
       const deviceDetail = DATA.deviceMapArray.find(e => e.id === item)
 
       const instanceMesh = CACHE.container.scene.children.find(e =>
         e.isInstancedMesh && e.name.split('_')[0] === deviceDetail?.modelType
       )
 
-      
+
 
       if (instanceMesh) {
         API.clickInstance(instanceMesh, objMap.index)

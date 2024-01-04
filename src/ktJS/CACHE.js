@@ -8,6 +8,7 @@ const removed = {}
 
 const goods = []
 
+
 let oldClock = 0
 
 export const CACHE = {
@@ -18,5 +19,5 @@ export const CACHE = {
   tempCameraState,
   goods,
   oldClock,
-  removed
+  removed,
 }

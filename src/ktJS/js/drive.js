@@ -420,7 +420,7 @@ export default function drive(wsMessage) {
           const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
           if (kaxiaIndex >= 0 && STATE.sceneList.kaxiaList.children[kaxiaIndex].parent) {
             STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
-            STATE.sceneList.kaxiaList.splice(kaxiaIndex, 1)
+            STATE.sceneList.kaxiaList.children.splice(kaxiaIndex, 1)
           }
 
           newKaxia.traverse(e2 => {

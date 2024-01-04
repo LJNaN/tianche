@@ -82,11 +82,11 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
             // 左右键行为
-            CACHE.container.orbitControls.mouseButtons = {
-              LEFT: Bol3D.MOUSE.PAN,
-              MIDDLE: Bol3D.MOUSE.DOLLY,
-              RIGHT: Bol3D.MOUSE.ROTATE
-            }
+            // CACHE.container.orbitControls.mouseButtons = {
+            //   LEFT: Bol3D.MOUSE.PAN,
+            //   MIDDLE: Bol3D.MOUSE.DOLLY,
+            //   RIGHT: Bol3D.MOUSE.ROTATE
+            // }
 
 
             // 开灯开阴影
@@ -133,7 +133,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                   e.material = new Bol3D.MeshLambertMaterial({ color: '#717880' })
                   // e.material.map = map
                   // e.material.map.needsUpdate = true
-  
+
                 } else if (e.name.includes('X-')) { // 隐藏红线
                   e.visible = false
                 }
@@ -248,7 +248,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
       events.ondblclick = (e) => {
         if (e.objects.length) {
           const obj = e.objects[0].object
-          console.log('obj: ', obj);
+
 
           if (VUEDATA.isEditorMode.value) {
             if (obj.userData.type === '机台') {
@@ -274,6 +274,14 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                   }
                 })
                 instance.initClickPopup()
+                // 车子在当前轨道上走了多少进度
+                const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
+                const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === instance.line)
+                if (progress && thisLineMesh) {
+                  thisLineMesh.material.uniforms.currentFocusLineStartPoint.value = instance.line.split('-')[0]
+                  thisLineMesh.material.uniforms.currentFocusLineEndPoint.value = instance.line.split('-')[1]
+                  thisLineMesh.material.uniforms.progress.value = progress
+                }
               }
             } else if (obj.userData.type === '轨道') {
               API.search('轨道', obj.userData.id)
