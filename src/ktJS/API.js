@@ -602,9 +602,11 @@ function search(type, id) {
     const camera = CACHE.container.orbitCamera
     const control = CACHE.container.orbitControls
 
-    CACHE.tempCameraState = {
-      position: camera.position.clone(),
-      target: control.target.clone()
+    if(!CACHE.tempCameraState.position) {
+      CACHE.tempCameraState = {
+        position: camera.position.clone(),
+        target: control.target.clone()
+      }
     }
     let objWorldPosition = new Bol3D.Vector3()
     obj.getWorldPosition(objWorldPosition)
@@ -1270,9 +1272,11 @@ function clickInstance(obj, index) {
 
   let thisDevice = null
 
-  CACHE.tempCameraState = {
-    position: camera.position.clone(),
-    target: control.target.clone()
+  if(!CACHE.tempCameraState.position) {
+    CACHE.tempCameraState = {
+      position: camera.position.clone(),
+      target: control.target.clone()
+    }
   }
 
   if (STATE.currentPopup) {

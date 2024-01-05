@@ -260,6 +260,15 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             }
 
           } else {
+            STATE.sceneList.lineList.forEach(e => {
+              e.material.uniforms.next.value = 0
+              e.material.uniforms.pass.value = 0
+              e.material.uniforms.currentFocusLineStartPoint.value = -1
+              e.material.uniforms.currentFocusLineEndPoint.value = -1
+            })
+            STATE.sceneList.skyCarList.forEach(e2 => {
+              e2.focus = false
+            })
 
             if (obj.userData.type === '天车') {
               STATE.searchAnimateDestroy = true
@@ -267,7 +276,6 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
               const instance = STATE.sceneList.skyCarList.find(e2 => e2.id === obj.userData.id)
               if (instance) {
                 STATE.sceneList.skyCarList.forEach(e2 => {
-                  e2.focus = false
                   e2.popup.visible = true
                   if (e2.clickPopup) {
                     e2.clickPopup.element.remove()
@@ -277,12 +285,6 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                 })
                 instance.initClickPopup()
                 // 车子在当前轨道上走了多少进度
-                STATE.sceneList.lineList.forEach(e => {
-                  e.material.uniforms.next.value = 0
-                  e.material.uniforms.pass.value = 0
-                  e.material.uniforms.currentFocusLineStartPoint.value = -1
-                  e.material.uniforms.currentFocusLineEndPoint.value = -1
-                })
                 const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
                 const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === instance.line)
                 if (progress && thisLineMesh) {

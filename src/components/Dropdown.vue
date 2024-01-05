@@ -128,6 +128,16 @@ function handleItem(item) {
 
   STATE.searchAnimateDestroy = true
   setTimeout(() => {
+    STATE.sceneList.lineList.forEach(e => {
+      e.material.uniforms.next.value = 0
+      e.material.uniforms.pass.value = 0
+      e.material.uniforms.currentFocusLineStartPoint.value = -1
+      e.material.uniforms.currentFocusLineEndPoint.value = -1
+    })
+    STATE.sceneList.skyCarList.forEach(e2 => {
+      e2.focus = false
+    })
+
     if (selected.value === '轨道') {
       API.search(selected.value, searchText.value)
 
@@ -137,7 +147,6 @@ function handleItem(item) {
       const instance = STATE.sceneList.skyCarList.find(e => e.id === searchText.value)
       if (instance) {
         STATE.sceneList.skyCarList.forEach(e => {
-          e.focus = false
           e.popup.visible = true
           if (e.clickPopup) {
             e.clickPopup.element.remove()
@@ -147,12 +156,6 @@ function handleItem(item) {
         })
         instance.initClickPopup()
         // 车子在当前轨道上走了多少进度
-        STATE.sceneList.lineList.forEach(e => {
-          e.material.uniforms.next.value = 0
-          e.material.uniforms.pass.value = 0
-          e.material.uniforms.currentFocusLineStartPoint.value = -1
-          e.material.uniforms.currentFocusLineEndPoint.value = -1
-        })
         const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
         const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === instance.line)
         if (progress && thisLineMesh) {
