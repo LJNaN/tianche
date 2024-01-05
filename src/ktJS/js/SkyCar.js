@@ -102,6 +102,7 @@ export default class SkyCar {
 
     popup.element.addEventListener('dblclick', (() => {
       STATE.sceneList.skyCarList.forEach(e => {
+        e.focus = false
         e.popup.visible = true
         if (e.clickPopup) {
           if (e.clickPopup.parent) {
@@ -116,6 +117,12 @@ export default class SkyCar {
       this.initClickPopup()
 
       // 车子在当前轨道上走了多少进度
+      STATE.sceneList.lineList.forEach(e => {
+        e.material.uniforms.next.value = 0
+        e.material.uniforms.pass.value = 0
+        e.material.uniforms.currentFocusLineStartPoint.value = -1
+        e.material.uniforms.currentFocusLineEndPoint.value = -1
+      })
       const progress = this.lineIndex / STATE.sceneList.linePosition[this.line].length
       const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this.line)
       if (progress && thisLineMesh) {
@@ -265,6 +272,7 @@ export default class SkyCar {
         closeColor: "#FFFFFF",
         closeCallback: (() => {
           this.focus = false
+          STATE.searchAnimateDestroy = true
           STATE.sceneList.lineList.forEach(e => {
             e.material.uniforms.next.value = 0
             e.material.uniforms.pass.value = 0
@@ -273,7 +281,7 @@ export default class SkyCar {
           })
 
           this.popup.visible = true
-          this.clickPopup.parent.remove(this.clickPopup)
+          this.clickPopup && this.clickPopup.parent && this.clickPopup.parent.remove(this.clickPopup)
           this.clickPopup = null
           STATE.currentPopup = null
 
@@ -774,4 +782,6 @@ export default class SkyCar {
       }
     })
   }
+
+
 }

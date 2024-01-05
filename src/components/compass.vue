@@ -100,6 +100,23 @@ function clickArrow() {
     .onComplete(() => {
       tweenRenderFlag.value = false
     })
+
+
+  // 恢复初始状态
+  STATE.sceneList.skyCarList.forEach(e => {
+    e.focus = false
+    e.popup.visible = true
+    e.clickPopup && e.clickPopup.parent && e.clickPopup.parent.remove(e.clickPopup)
+    e.clickPopup = null
+  })
+  STATE.currentPopup = null
+  STATE.searchAnimateDestroy = true
+  STATE.sceneList.lineList.forEach(e => {
+    e.material.uniforms.next.value = 0
+    e.material.uniforms.pass.value = 0
+    e.material.uniforms.currentFocusLineStartPoint.value = -1
+    e.material.uniforms.currentFocusLineEndPoint.value = -1
+  })
 }
 
 function TweenRender() {

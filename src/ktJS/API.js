@@ -601,6 +601,7 @@ function search(type, id) {
     let isCameraMoveOver = false // 动画移动完成
     const camera = CACHE.container.orbitCamera
     const control = CACHE.container.orbitControls
+
     CACHE.tempCameraState = {
       position: camera.position.clone(),
       target: control.target.clone()

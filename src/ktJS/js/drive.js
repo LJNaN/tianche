@@ -309,7 +309,7 @@ export default function drive(wsMessage) {
                     skyCar.catch.rotation.y = DATA.shelvesMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
                   }
                   skyCar.catch.visible = true
-                  skyCar.catch.parent.remove(skyCar.catch)
+                  skyCar.catch.parent && skyCar.catch.parent.remove(skyCar.catch)
 
                   skyCar.catch.traverse(e2 => {
                     if (e2.isMesh) {
