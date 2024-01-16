@@ -428,25 +428,25 @@ export default class SkyCar {
     // 有特殊事件时
     if (this.isAnimateSoon) {
       this.isAnimateSoon = false
-      const animateTargetMsg = this.history[Math.floor(VUEDATA.messageLen / 2)]
+      const animateTargetMsg = this.history[0]
       const { position } = animateTargetMsg
       const line = DATA.pointCoordinateMap.find(e => e.startCoordinate < position && e.endCoordinate > position)
       if (!line) return
 
       const lineName = line.name.replace('_', '-')
       if (this.line === lineName) {
-        const process1 = this.lineIndex / STATE.sceneList.linePosition[this.line].length
-        const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate)
-        const processDifference = process2 - process1
-        const timeDifference = this.history[Math.floor(VUEDATA.messageLen / 2)].time - this.history[VUEDATA.messageLen - 1].time
+        const process1 = this.lineIndex / STATE.sceneList.linePosition[this.line].length // 在当前轨道上的进度
+        const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
+        const processDifference = process2 - process1 // 进度差
 
-
-        if (processDifference < 0) {
-          this.quickenSpeedTimes = 0
+        if (processDifference > 0) {
+          const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
+          this.quickenSpeedTimes = (catchUpIndex / STATE.frameRate) * 0.5
+          console.log('this.quickenSpeedTimes: ', this.quickenSpeedTimes);
+          
 
         } else {
-          const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length
-          this.quickenSpeedTimes = (catchUpIndex / STATE.frameRate) / (timeDifference / 1000)
+          this.quickenSpeedTimes = 0
         }
 
       } else {
@@ -470,10 +470,21 @@ export default class SkyCar {
         if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
           this_.lineIndex += this_.runSpeed
 
+          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+          if (map) {
+            const process = this_.lineIndex / (map.endCoordinate - map.startCoordinate)
+            this_.coordinate = map.startCoordinate + (map.endCoordinate - map.startCoordinate) * process
+          }
+
           // 如果这根线到尽头了，找nextLine
         } else if (this_.nextLine.length) {
           this_.line = this_.nextLine[0].replace('_', '-')
           this_.lineIndex = 0
+
+          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+          if (map) {
+            this_.coordinate = map.startCoordinate
+          }
 
           this_.setCurrentLineState()
 

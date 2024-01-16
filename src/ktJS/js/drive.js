@@ -157,20 +157,6 @@ export default function drive(wsMessage) {
         }
 
 
-        // 两个先行动画，光执行，不移动
-        function beforeComplete() {
-          const cb = () => {
-            skyCar.run = true
-          }
-
-          // if (skyCar.history.old.loading == '1' && skyCar.history.new.loading == '0') { // 装载结束
-          //   skyCar.up(cb)
-
-          // } else if (skyCar.history.old.ohtStatus_UnLoading == '1' && skyCar.history.new.ohtStatus_UnLoading == '0') { // 卸货结束
-          //   skyCar.up(cb)
-          // }
-        }
-
         // 两个后行动画，先移动，再执行
         function onComplete(newHistory, oldHistory) {
           if (!skyCar.animationOver) return
@@ -340,10 +326,11 @@ export default function drive(wsMessage) {
         // 不改变位置的情况 装货结束
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
-          // skyCar.isAnimateSoon = false
+          skyCar.isAnimateSoon = false
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
+          skyCar.isAnimateSoon = false
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
           // 改变位置的情况
@@ -361,8 +348,10 @@ export default function drive(wsMessage) {
 
 
         // 判断一下是否即将有动画
-        const animateTargetMsg = skyCar.history[Math.floor(VUEDATA.messageLen / 2)]
+        const animateTargetMsg = skyCar.history[0]
         if (animateTargetMsg && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
+          console.log('马上有动画了')
+          console.log(animateTargetMsg.position)
           skyCar.isAnimateSoon = true
         }
 
