@@ -30,20 +30,20 @@ function getData() {
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // window.aa = () => { }
-  // setInterval(() => {
-  //   if (i >= mockData3.length) i = 0
-  //   drive(mockData3[i])
-  //   i++
-  // }, 333)
-
   let i = 0
-  function aaa() {
+  window.aa = () => { }
+  setInterval(() => {
+    if (i >= mockData2.length) i = 0
     drive(mockData2[i])
     i++
-  }
-  window.aaa = aaa
+  }, 333)
+
+  // let i = 0
+  // function aaa() {
+  //   drive(mockData2[i])
+  //   i++
+  // }
+  // window.aaa = aaa
 }
 
 
@@ -407,7 +407,7 @@ function computedCameraTweenPosition(currentP, targetP, gapDistance = 100) {
 
 
 // 加载模拟天车
-function initSkyCar() {
+function initMockSkyCar() {
   DATA.skyCarMap.forEach(e => {
     const skyCar = new SkyCar({ coordinate: e.coordinate, id: e.id })
 
@@ -2327,7 +2327,7 @@ export const API = {
   cameraAnimation,
   loadGUI,
   handleLine,
-  initSkyCar,
+  initMockSkyCar,
   initReflexFloor,
   search,
   initDeviceByMap,

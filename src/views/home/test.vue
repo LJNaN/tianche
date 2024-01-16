@@ -1,7 +1,7 @@
 <template>
   <div class="slider">
     <span class="demonstration">小车坐标</span>
-    <el-slider v-model="value1" :min="137560" :max="159620" show-input @input="sliderChange" />
+    <el-slider v-model="value1" :min="137560" :max="509620" show-input @input="sliderChange" />
   </div>
 </template>
 

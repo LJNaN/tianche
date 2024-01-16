@@ -158,7 +158,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             API.handleLine()
             API.getBayState()
             // API.initReflexFloor()
-            // API.initSkyCar()
+            // API.initMockSkyCar()
             API.initDeviceByMap()
             API.initShelves()
             API.search()

@@ -169,7 +169,9 @@ export default function drive(wsMessage) {
             }
           }
 
-          if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') { // 装载开始
+
+          // 装载开始 || // 卸货开始
+          if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') {
             skyCar.run = false
 
             // 找离天车最近的机台或者货架
@@ -265,7 +267,7 @@ export default function drive(wsMessage) {
             skyCar.down(positionData.type, cb)
 
 
-          } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') { // 卸货开始
+          } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') { 
 
             skyCar.run = false
             // setTimeout(() => { skyCar.run = true }, 10000)
@@ -326,21 +328,21 @@ export default function drive(wsMessage) {
         // 不改变位置的情况 装货结束
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
-          skyCar.isAnimateSoon = false
+          skyCar.fastRun = false
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
-          skyCar.isAnimateSoon = false
+          skyCar.fastRun = false
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
-          // 改变位置的情况
-          skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
+          // 即将到来的两次数据位置不同 改变位置的情况
+          // skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
           const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
           const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
           skyCar.setPosition(onComplete(newHistory, oldHistory))
 
         } else {
-          skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
+          // skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
           const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
           const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
           skyCar.setPosition(onComplete(newHistory, oldHistory))
@@ -349,10 +351,11 @@ export default function drive(wsMessage) {
 
         // 判断一下是否即将有动画
         const animateTargetMsg = skyCar.history[0]
-        if (animateTargetMsg && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
+        if (animateTargetMsg && !skyCar.fastRun && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
           console.log('马上有动画了')
-          console.log(animateTargetMsg.position)
+          console.log('animateTargetMsg: ', animateTargetMsg);
           skyCar.isAnimateSoon = true
+          skyCar.fastRun = true
         }
 
 
@@ -378,7 +381,7 @@ export default function drive(wsMessage) {
           ohtID
         }]
 
-        newCar.coordinate = e.position
+        // newCar.coordinate = e.position
         newCar.skyCarMesh.position.set(235, 28.3, 231)
         newCar.skyCarMesh.rotation.y = Math.PI / 2
         newCar.setPosition()
