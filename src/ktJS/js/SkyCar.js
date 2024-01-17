@@ -171,6 +171,7 @@ export default class SkyCar {
         { name: '终点', value: '--' },
         { name: '优先级', value: '--' },
         { name: '当前状态', value: '--' },
+        { name: 'posPath', value: '--' },
         { name: 'Alarm List:', value: [] }
       ]
 
@@ -237,7 +238,7 @@ export default class SkyCar {
             position: absolute;
             background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
             width: 30vw;
-            height: 56vh;
+            height: 60vh;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
@@ -342,8 +343,9 @@ export default class SkyCar {
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
         } else if (key === 'carrierid') {
-          data['卡匣ID'] = res.data[key] || '--'
-        }
+        } else if (key === 'pospath') {
+          data['posPath'] = res.data[key] || '--'
+        } 
       }
       init(data)
     })

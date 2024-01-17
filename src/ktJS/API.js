@@ -19,24 +19,24 @@ function getData() {
 
   // 真实数据
   // ======================================
-  // const api = window.wsAPI
-  // const ws = new WebSocket(api)
-  // ws.onmessage = (info) => {
-  //   wsMessage = JSON.parse(info.data)
-  //   drive(wsMessage)
-  // }
+  const api = window.wsAPI
+  const ws = new WebSocket(api)
+  ws.onmessage = (info) => {
+    wsMessage = JSON.parse(info.data)
+    drive(wsMessage)
+  }
 
 
 
   // 模拟数据
   // =======================================
-  let i = 0
-  window.aa = () => { }
-  setInterval(() => {
-    if (i >= mockData2.length) i = 0
-    drive(mockData2[i])
-    i++
-  }, 333)
+  // let i = 0
+  // window.aa = () => { }
+  // setInterval(() => {
+  //   if (i >= mockData3.length) i = 0
+  //   drive(mockData3[i])
+  //   i++
+  // }, 333)
 
   // let i = 0
   // function aaa() {
@@ -235,17 +235,18 @@ function testBox() {
 
 // 全部轨道状态
 function getBayState() {
-  GetBayStateInfo().then(res => {
-    if (res?.data?.length) {
-      res.data.forEach(e => {
-        const line = STATE.sceneList.lineList.find(e2 => e2.name.replace('-', '_') === e.mapId)
-        if (line) {
+  // GetBayStateInfo().then(res => {
+  //   if (res?.data?.length) {
+  //     res.data.forEach(e => {
+  //       const line = STATE.sceneList.lineList.find(e2 => e2.name.replace('-', '_') === e.mapId)
+  //       if (line) {
+  //         console.log('line: ', line);
 
-          line.material.color.set(e.status === '0' ? '#333333' : '#b3b3b3')
-        }
-      })
-    }
-  })
+  //         // line.material.color.set(e.status === '0' ? '#333333' : '#b3b3b3')
+  //       }
+  //     })
+  //   }
+  // })
 }
 
 // 算所有线段的中心点及长度等
