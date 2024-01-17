@@ -25,10 +25,12 @@ export default class SkyCar {
   nextLine = []               // 下几根要走的轨道
   passLine = []               // 走过的近5根轨道
   animationOver = true        // 动画执行完毕
-  isAnimateSoon = false       // 即将有动画
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
   focus = false               // 是不是聚焦在这个车上
+
+  isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
+  targetCoordinate = -1       // 有动画时的目标坐标
 
 
   constructor(opt) {
@@ -368,7 +370,7 @@ export default class SkyCar {
 
   runRender() {
     requestAnimationFrame(this.runRender.bind(this))
-    this.runSpeed = Math.round(((1 / (STATE.frameRate / 60)) * 1) * this.quickenSpeedTimes)
+    this.runSpeed = Math.round(this.quickenSpeedTimes)
 
     if (!this.run || !this.animationOver) return
 
@@ -426,67 +428,83 @@ export default class SkyCar {
     if (this.history.length < VUEDATA.messageLen) { return }
 
     // 变速
-    // 有特殊事件时
-    if (this.isAnimateSoon) {
-      this.isAnimateSoon = false
-      const animateTargetMsg = this.history[0]
-      const { position } = animateTargetMsg
+    function computeQuickenSpeedTimes(skyCar, position) {
       const line = DATA.pointCoordinateMap.find(e => e.startCoordinate < position && e.endCoordinate > position)
       if (!line) return
 
       const lineName = line.name.replace('_', '-')
       
-      
-      
-      if (this.line === lineName) {
-        const process1 = this.lineIndex / STATE.sceneList.linePosition[this.line].length // 在当前轨道上的进度
+      if (skyCar.line === lineName) {
+        const process1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
         const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
         const processDifference = process2 - process1 // 进度差
-        
+
 
         if (processDifference > 0) {
           const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
-          this.quickenSpeedTimes = (catchUpIndex / STATE.frameRate) * 2
+          const speed = catchUpIndex / STATE.frameRate
+          if (speed > 8) {
+            skyCar.quickenSpeedTimes = 8
+          } else if (speed < 0.8) {
+            skyCar.quickenSpeedTimes = 0.8
+          } else {
+            skyCar.quickenSpeedTimes = speed
+          }
           
-          
-          
-
         } else {
-          this.quickenSpeedTimes = 0
+          skyCar.quickenSpeedTimes = 0
         }
 
       } else {
         // 不在同一根轨道的话，就糟了老罪咯
         // 要去统计nextline 看看离他所谓的那个b点还有多少个index没有走
-        if (this.nextLine.includes(line.name)) {
+        if (skyCar.nextLine.includes(line.name)) {
           let totalIndex = 0
-          for (let i = 0; i < this.nextLine.length; i++) {
-            if (this.nextLine[i] !== line.name) {
-              totalIndex += STATE.sceneList.linePosition[this.nextLine[i].replace('_', '-')].length
+          for (let i = 0; i < skyCar.nextLine.length; i++) {
+            if (skyCar.nextLine[i] !== line.name) {
+              totalIndex += STATE.sceneList.linePosition[skyCar.nextLine[i].replace('_', '-')].length
 
             } else {
-              const process1 = this.lineIndex / STATE.sceneList.linePosition[this.line].length // 在当前轨道上的进度
+              const process1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
               const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
-              const subIndex1 = (1 - process1) * STATE.sceneList.linePosition[this.line].length
+              const subIndex1 = (1 - process1) * STATE.sceneList.linePosition[skyCar.line].length
               const subIndex2 = process2 * STATE.sceneList.linePosition[line.name.replace('_', '-')].length
               totalIndex += subIndex1 + subIndex2
               break
             }
           }
-          
+
           if (totalIndex > 0) {
-            this.quickenSpeedTimes = (totalIndex / STATE.frameRate) * 1.35
-            
+            const speed = totalIndex / STATE.frameRate
+            if (speed > 8) {
+              skyCar.quickenSpeedTimes = 8
+            } else if (speed < 0.8) {
+              skyCar.quickenSpeedTimes = 0.8
+            } else {
+              skyCar.quickenSpeedTimes = speed
+            }
           }
 
         } else {
           // 都查求不到这个轨道，随便吧
-          this.quickenSpeedTimes = 3
+          skyCar.quickenSpeedTimes = 3
         }
       }
+    }
+
+    // 有特殊事件时
+    if (this.isAnimateSoon) {
+      this.isAnimateSoon = false
+      const animateTargetMsg = this.history[0]
+      const { position } = animateTargetMsg
+      this.targetCoordinate = Number(position)
+      computeQuickenSpeedTimes(this, position)
 
     } else if (this.fastRun) {
-      // if()
+      // 每一帧都动态算一下 this.quickenSpeedTimes
+      if (this.targetCoordinate) {
+        computeQuickenSpeedTimes(this, this.targetCoordinate)
+      }
 
     } else {
       let totalIndex = (STATE.sceneList.linePosition[this.line]?.length - this.lineIndex) || 0

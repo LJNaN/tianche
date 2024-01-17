@@ -329,10 +329,12 @@ export default function drive(wsMessage) {
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
+          skyCar.targetCoordinate = -1
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
+          skyCar.targetCoordinate = -1
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
           // 即将到来的两次数据位置不同 改变位置的情况
@@ -352,8 +354,8 @@ export default function drive(wsMessage) {
         // 判断一下是否即将有动画
         const animateTargetMsg = skyCar.history[0]
         if (animateTargetMsg && !skyCar.fastRun && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
-          console.log('马上有动画了')
-          console.log('animateTargetMsg: ', animateTargetMsg);
+          
+          
           skyCar.isAnimateSoon = true
           skyCar.fastRun = true
         }
