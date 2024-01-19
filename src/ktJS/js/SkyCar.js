@@ -345,7 +345,7 @@ export default class SkyCar {
         } else if (key === 'carrierid') {
         } else if (key === 'pospath') {
           data['posPath'] = res.data[key] || '--'
-        } 
+        }
       }
       init(data)
     })
@@ -435,7 +435,7 @@ export default class SkyCar {
       if (!line) return
 
       const lineName = line.name.replace('_', '-')
-      
+
       if (skyCar.line === lineName) {
         const process1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
         const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
@@ -445,14 +445,8 @@ export default class SkyCar {
         if (processDifference > 0) {
           const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          if (speed > 8) {
-            skyCar.quickenSpeedTimes = 8
-          } else if (speed < 0.8) {
-            skyCar.quickenSpeedTimes = 0.8
-          } else {
-            skyCar.quickenSpeedTimes = speed
-          }
-          
+          skyCar.quickenSpeedTimes = speed * 2
+
         } else {
           skyCar.quickenSpeedTimes = 0
         }
@@ -478,13 +472,9 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            if (speed > 8) {
-              skyCar.quickenSpeedTimes = 8
-            } else if (speed < 0.8) {
-              skyCar.quickenSpeedTimes = 0.8
-            } else {
-              skyCar.quickenSpeedTimes = speed
-            }
+            skyCar.quickenSpeedTimes = speed * 2
+          } else {
+            skyCar.quickenSpeedTimes = 0
           }
 
         } else {
