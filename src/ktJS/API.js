@@ -4,9 +4,8 @@ import { DATA } from './DATA.js'
 import TU from './js/threeUtils.js'
 import { Reflector } from './js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
-// import mockData1 from './js/mock1'
+import mockData1 from './js/mock1'
 import mockData2 from './js/mock2'
-import mockData3 from './js/mock3'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd, GetBayStateInfo } from '@/axios/api.js'
 import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
@@ -19,24 +18,24 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // window.aa = () => { }
-  // setInterval(() => {
-  //   if (i >= mockData3.length) i = 0
-  //   drive(mockData3[i])
-  //   i++
-  // }, 333)
+  let i = 0
+  window.aa = () => { }
+  setInterval(() => {
+    if (i >= mockData1.length) i = 0
+    drive(mockData1[i])
+    i++
+  }, 333)
 
   // let i = 0
   // function aaa() {
