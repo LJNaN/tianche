@@ -36,6 +36,7 @@ export default function drive(wsMessage) {
           ) { return }
         }
 
+        
         skyCar.history.unshift({
           time: new Date() * 1,
           lastTime,

@@ -499,13 +499,29 @@ export default class SkyCar {
       }
 
     } else {
-      let totalIndex = (STATE.sceneList.linePosition[this.line]?.length - this.lineIndex) || 0
-      this.nextLine.forEach(e => {
-        const item = STATE.sceneList.linePosition[e.replace('_', '-')]
-        if (!item) return
-        totalIndex += item.length
-      })
-      this.quickenSpeedTimes = totalIndex > 1000 ? 3 : 1
+      // 看看前面有没有车
+      let runFlag = true
+      for (let i = 0; i < STATE.sceneList.skyCarList.length; i++) {
+        if (STATE.sceneList.skyCarList[i].id === this.id) {
+          continue
+        }
+
+        if (STATE.sceneList.skyCarList[i].line === this.line && (STATE.sceneList.skyCarList[i].lineIndex < (this.lineIndex + 100)) && (STATE.sceneList.skyCarList[i].lineIndex > this.lineIndex)) {
+          this.quickenSpeedTimes = 0
+          runFlag = false
+          break
+        }
+      }
+
+      if (runFlag) {
+        let totalIndex = (STATE.sceneList.linePosition[this.line]?.length - this.lineIndex) || 0
+        this.nextLine.forEach(e => {
+          const item = STATE.sceneList.linePosition[e.replace('_', '-')]
+          if (!item) return
+          totalIndex += item.length
+        })
+        this.quickenSpeedTimes = totalIndex > 1000 ? 3 : 1
+      }
     }
 
 
