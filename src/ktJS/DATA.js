@@ -83,11 +83,11 @@ const shelvesMap = {
     "W01_2_08": { fields: [1225, 1226, 1227, 1228], rotate: 90, position: [-227, 25.17, -84.7], direction: "left" }
   },
   "WBW01G02": {
-    "W01_2_09": { fields: [1248, 1247, 1246, 1245], rotate: 270, position: [-138, 25.17, -66], direction: "left" },
-    "W01_2_10": { fields: [1244, 1243, 1242, 1241], rotate: 270, position: [-160, 25.17, -66], direction: "left" },
+    "W01_2_09": { fields: [1232, 1231, 1230, 1229], rotate: 270, position: [-138, 25.17, -66], direction: "left" },
+    "W01_2_10": { fields: [1236, 1235, 1234, 1233], rotate: 270, position: [-160, 25.17, -66], direction: "left" },
     "W01_2_11": { fields: [1240, 1239, 1238, 1237], rotate: 270, position: [-182, 25.17, -66], direction: "left" },
-    "W01_2_12": { fields: [1236, 1235, 1234, 1233], rotate: 270, position: [-204, 25.17, -66], direction: "left" },
-    "W01_2_13": { fields: [1232, 1231, 1230, 1229], rotate: 270, position: [-226, 25.17, -66], direction: "left" },
+    "W01_2_12": { fields: [1244, 1243, 1242, 1241], rotate: 270, position: [-204, 25.17, -66], direction: "left" },
+    "W01_2_13": { fields: [1248, 1247, 1246, 1245], rotate: 270, position: [-226, 25.17, -66], direction: "left" },
     "W01_2_18": { fields: [1268, 1267, 1266, 1265], rotate: 90, position: [-226, 25.17, -59], direction: "right" },
     "W01_2_17": { fields: [1264, 1263, 1262, 1261], rotate: 90, position: [-204, 25.17, -59], direction: "right" },
     "W01_2_16": { fields: [1260, 1259, 1258, 1257], rotate: 90, position: [-182, 25.17, -59], direction: "right" },
@@ -95,11 +95,11 @@ const shelvesMap = {
     "W01_2_14": { fields: [1252, 1251, 1250, 1249], rotate: 90, position: [-138, 25.17, -59], direction: "right" }
   },
   "WBW01G03": {
-    "W01_1_05": { fields: [1165, 1166, 1167, 1168], rotate: 270, position: [-138, 25.17, -11], direction: "right" },
-    "W01_1_04": { fields: [1161, 1162, 1163, 1164], rotate: 270, position: [-160, 25.17, -11], direction: "right" },
-    "W01_1_03": { fields: [1157, 1158, 1159, 1160], rotate: 270, position: [-182, 25.17, -11], direction: "right" },
-    "W01_1_02": { fields: [1153, 1154, 1155, 1156], rotate: 270, position: [-204, 25.17, -11], direction: "right" },
-    "W01_1_01": { fields: [1149, 1150, 1151, 1152], rotate: 270, position: [-226, 25.17, -11], direction: "right" },
+    "W01_1_05": { fields: [1168, 1167, 1166, 1165], rotate: 90, position: [-226, 25.17, -11], direction: "right" },
+    "W01_1_04": { fields: [1164, 1163, 1162, 1161], rotate: 90, position: [-204, 25.17, -11], direction: "right" },
+    "W01_1_03": { fields: [1160, 1159, 1158, 1157], rotate: 90, position: [-182, 25.17, -11], direction: "right" },
+    "W01_1_02": { fields: [1156, 1155, 1154, 1153], rotate: 90, position: [-160, 25.17, -11], direction: "right" },
+    "W01_1_01": { fields: [1152, 1151, 1150, 1149], rotate: 90, position: [-138, 25.17, -11], direction: "right" },
     "W01_1_10": { fields: [1185, 1186, 1187, 1188], rotate: 90, position: [-226, 25.17, -4], direction: "left" },
     "W01_1_09": { fields: [1181, 1182, 1183, 1184], rotate: 90, position: [-204, 25.17, -4], direction: "left" },
     "W01_1_08": { fields: [1177, 1178, 1179, 1180], rotate: 90, position: [-182, 25.17, -4], direction: "left" },

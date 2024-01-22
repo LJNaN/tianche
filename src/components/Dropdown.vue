@@ -240,7 +240,7 @@ select option {
   cursor: pointer;
   z-index: 2;
   width: 5vh;
-  height: 4vh;
+  
 }
 
 .dropdown {

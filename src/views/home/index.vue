@@ -20,7 +20,7 @@ import { VUEDATA } from '@/VUEDATA'
     <Right></Right>
     <Bottom></Bottom>
     <ExtensionBtn></ExtensionBtn>
-    <!-- <Test></Test> -->
+    <Test></Test>
   </div>
 </template>
 

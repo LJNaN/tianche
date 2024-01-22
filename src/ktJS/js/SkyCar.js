@@ -169,9 +169,9 @@ export default class SkyCar {
         { name: 'USER ID', value: '--' },
         { name: '起点', value: '--' },
         { name: '终点', value: '--' },
+        { name: 'posPath', value: '--' },
         { name: '优先级', value: '--' },
         { name: '当前状态', value: '--' },
-        { name: 'posPath', value: '--' },
         { name: 'Alarm List:', value: [] }
       ]
 
@@ -191,12 +191,12 @@ export default class SkyCar {
           justify-content: space-between;
           align-items: center;
           padding: 0 5%;
-          height: 4vh;
+          margin-bottom: 4%;  
           width: 100%;
           background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
           ">
-          <p style="font-size: 2vh;">${items[i].name}</p>
-          <p style="font-size: 2vh;">${items[i].value}</p>
+          <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+          <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
         </div>`
       }
 
@@ -205,7 +205,7 @@ export default class SkyCar {
         justify-content: flex-start;
         align-items: center;
         padding: 0 5%;
-        height: 4vh;
+        margin-bottom: 4%;
         width: 100%;
         background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
@@ -262,7 +262,9 @@ export default class SkyCar {
             flex-direction: column;
             width: 85%;
             margin: 4% auto 0 auto;
-            height: 100%;
+            height: 47vh;
+            overflow: scroll;
+            pointer-events: all;
           ">
           ${textValue}
           ${alertValue}
@@ -343,6 +345,7 @@ export default class SkyCar {
         } else if (key === 'createby') {
           data['USER ID'] = res.data[key] || '--'
         } else if (key === 'carrierid') {
+          data['卡匣ID'] = res.data[key] || '--'
         } else if (key === 'pospath') {
           data['posPath'] = res.data[key] || '--'
         }

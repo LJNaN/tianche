@@ -18,12 +18,12 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
@@ -37,12 +37,12 @@ function getData() {
   //   i++
   // }, 333)
 
-  // let i = 0
-  // function aaa() {
-  //   drive(mockData2[i])
-  //   i++
-  // }
-  // window.aaa = aaa
+  let i = 0
+  function aaa() {
+    drive(mockData2[i])
+    i++
+  }
+  window.aaa = aaa
 }
 
 
@@ -276,8 +276,8 @@ function handleLine() {
       }
 
       // 有些轨道的索引是反的，需要反转一下
-      const reserveList = ['66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '4-5', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13']
-      if (reserveList.includes(e.name.split('X-')[1])) {
+      const reverseList = [ '66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '95-96', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '5-8', '9-10', '10-81', '81-82', '82-83', '86-89', '11-12', '12-15', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13']
+      if (reverseList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
 
@@ -602,7 +602,7 @@ function search(type, id) {
     const camera = CACHE.container.orbitCamera
     const control = CACHE.container.orbitControls
 
-    if(!CACHE.tempCameraState.position) {
+    if (!CACHE.tempCameraState.position) {
       CACHE.tempCameraState = {
         position: camera.position.clone(),
         target: control.target.clone()
@@ -716,12 +716,12 @@ function search(type, id) {
               justify-content: space-between;
               align-items: center;
               padding: 0 5%;
-              height: 4vh;
+              margin-bottom: 4%;      
               width: 100%;
               background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
               ">
-              <p style="font-size: 2vh;">${items[i].name}</p>
-              <p style="font-size: 2vh;">${items[i].value}</p>
+              <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+              <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
             </div>`
       }
 
@@ -761,7 +761,9 @@ function search(type, id) {
                 flex-direction: column;
                 width: 85%;
                 margin: 4% auto 0 auto;
-                height: 100%;
+                height: 47vh;
+                overflow: scroll;
+                pointer-events: all;
               ">
               ${textValue}
               </div>
@@ -849,12 +851,12 @@ function search(type, id) {
               justify-content: space-between;
               align-items: center;
               padding: 0 5%;
-              height: 4vh;
+              margin-bottom: 4%;      
               width: 100%;
               background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
               ">
-              <p style="font-size: 2vh;">${items[i].name}</p>
-              <p style="font-size: 2vh;">${items[i].value}</p>
+              <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+              <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
             </div>`
           }
 
@@ -894,7 +896,9 @@ function search(type, id) {
                     flex-direction: column;
                     width: 85%;
                     margin: 4% auto 0 auto;
-                    height: 100%;
+                    height: 47vh;
+                    overflow: scroll;
+                    pointer-events: all;
                   ">
                   ${textValue}
                   </div>
@@ -987,12 +991,12 @@ function search(type, id) {
               justify-content: space-between;
               align-items: center;
               padding: 0 5%;
-              height: 4vh;
+              margin-bottom: 4%;      
               width: 100%;
               background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
               ">
-              <p style="font-size: 2vh;">${items[i].name}</p>
-              <p style="font-size: 2vh;">${items[i].value}</p>
+              <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+              <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
             </div>`
       }
 
@@ -1032,7 +1036,9 @@ function search(type, id) {
                 flex-direction: column;
                 width: 85%;
                 margin: 4% auto 0 auto;
-                height: 100%;
+                height: 47vh;
+                overflow: scroll;
+                pointer-events: all;
               ">
               ${textValue}
               </div>
@@ -1153,12 +1159,12 @@ function search(type, id) {
                     justify-content: space-between;
                     align-items: center;
                     padding: 0 5%;
-                    height: 4vh;
+                    margin-bottom: 4%;            
                     width: 100%;
                     background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
                     ">
-                    <p style="font-size: 2vh;">${items[i].name}</p>
-                    <p style="font-size: 2vh;">${items[i].value}</p>
+                    <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+                    <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
                   </div>`
           }
 
@@ -1198,7 +1204,9 @@ function search(type, id) {
                       flex-direction: column;
                       width: 85%;
                       margin: 4% auto 0 auto;
-                      height: 100%;
+                      height: 47vh;
+                      overflow: scroll;
+                      pointer-events: all;
                     ">
                     ${textValue}
                     </div>
@@ -1272,7 +1280,7 @@ function clickInstance(obj, index) {
 
   let thisDevice = null
 
-  if(!CACHE.tempCameraState.position) {
+  if (!CACHE.tempCameraState.position) {
     CACHE.tempCameraState = {
       position: camera.position.clone(),
       target: control.target.clone()
@@ -1313,8 +1321,8 @@ function clickInstance(obj, index) {
       { name: 'Remark', value: STATE.sceneList.shelves4Arr[index].shelf },
       { name: 'OHTPort1', value: STATE.sceneList.shelves4Arr[index].fields[0] },
       { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[1] },
-      { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[2] },
-      { name: 'OHTPort2', value: STATE.sceneList.shelves4Arr[index].fields[3] }
+      { name: 'OHTPort3', value: STATE.sceneList.shelves4Arr[index].fields[2] },
+      { name: 'OHTPort4', value: STATE.sceneList.shelves4Arr[index].fields[3] }
     ]
     height = '38vh'
     className = 'popup3d_shalves'
@@ -1359,12 +1367,12 @@ function clickInstance(obj, index) {
         justify-content: space-between;
         align-items: center;
         padding: 0 5%;
-        height: 4vh;
+        margin-bottom: 4%;
         width: 100%;
         background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
-        <p style="font-size: 2vh;">${items[i].name}</p>
-        <p style="font-size: 2vh;">${items[i].value}</p>
+        <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+        <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
       </div>`
   }
 
@@ -1404,7 +1412,9 @@ function clickInstance(obj, index) {
           flex-direction: column;
           width: 85%;
           margin: 4% auto 0 auto;
-          height: 100%;
+          height: 47vh;
+          overflow: scroll;
+          pointer-events: all;
         ">
         ${textValue}
         </div>
@@ -1520,12 +1530,12 @@ function clickInstance(obj, index) {
         justify-content: space-between;
         align-items: center;
         padding: 0 5%;
-        height: 4vh;
+        margin-bottom: 4%;
         width: 100%;
         background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
-        <p style="font-size: 2vh;">${items[i].name}</p>
-        <p style="font-size: 2vh;">${items[i].value}</p>
+        <p style="font-size: 2vh;text-align:left;margin-right:2%;">${items[i].name}</p>
+        <p style="font-size: 2vh;text-align:right;word-break:break-all;">${items[i].value}</p>
       </div>`
         }
 
@@ -1565,7 +1575,9 @@ function clickInstance(obj, index) {
           flex-direction: column;
           width: 85%;
           margin: 4% auto 0 auto;
-          height: 100%;
+          height: 47vh;
+          overflow: scroll;
+          pointer-events: all;
         ">
         ${textValue}
         </div>
@@ -1984,279 +1996,37 @@ function initKaxia() {
   CACHE.container.scene.add(STATE.sceneList.kaxiaList)
   GetCarrierInfo().then(res => {
 
-    // const res = {
-    //   data: [
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5201
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5202
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5203
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5204
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5205
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5206
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5207
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5208
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5209
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5210
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5211
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5212
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5213
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5214
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5215
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5216
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5217
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5218
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5101
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5102
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5103
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5104
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5105
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5106
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5107
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5108
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5109
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5115
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5116
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5219
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5220
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5221
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5301
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5303
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5304
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5305
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5308
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5309
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5318
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5319
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5226
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5227
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5228
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5351
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5352
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5353
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5354
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5310
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5311
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5313
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5050
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5051
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5052
-    //     },
-    //     {
-    //         "carrierType": "0",
-    //         "carrierId": "845 8334 6466 5D66 F",
-    //         "locationId": 5053
-    //     }
-    // ]
+    //   const res ={
+    //     "code": 0,
+    //     "msg": "",
+    //     "data": [
+    //         {
+    //             "carrierId": "TFP00011",
+    //             "carrierType": "0",
+    //             "locationId": "1229"
+    //         },
+    //         {
+    //             "carrierId": "TFP00016",
+    //             "carrierType": "0",
+    //             "locationId": "1233"
+    //         },
+    //         {
+    //             "carrierId": "TFP00015",
+    //             "carrierType": "0",
+    //             "locationId": "1238"
+    //         },
+    //         {
+    //             "carrierId": "TFP000155",
+    //             "carrierType": "0",
+    //             "locationId": "1246"
+    //         },
+    //         {
+    //             "carrierId": "TFP00004",
+    //             "carrierType": "0",
+    //             "locationId": "1241"
+    //         }
+    //     ],
+    //     "count": 45
     // }
 
     if (!res?.data) return
