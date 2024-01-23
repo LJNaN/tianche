@@ -138,6 +138,19 @@ function handleItem(item) {
       e2.focus = false
     })
 
+    // 恢复初始状态
+    if (STATE.currentPopup) {
+      STATE.currentPopup.visible = false
+      STATE.currentPopup.parent && STATE.currentPopup.parent.remove(STATE.currentPopup)
+    }
+    STATE.sceneList.skyCarList.forEach(e => {
+      e.focus = false
+      e.popup.visible = true
+      e.clickPopup && e.clickPopup.parent && e.clickPopup.parent.remove(e.clickPopup)
+      e.clickPopup = null
+    })
+    STATE.currentPopup = null
+
     if (selected.value === '轨道') {
       API.search(selected.value, searchText.value)
 
@@ -146,14 +159,8 @@ function handleItem(item) {
       API.search(selected.value, searchText.value)
       const instance = STATE.sceneList.skyCarList.find(e => e.id === searchText.value)
       if (instance) {
-        STATE.sceneList.skyCarList.forEach(e => {
-          e.popup.visible = true
-          if (e.clickPopup) {
-            e.clickPopup.element.remove()
-            e.clickPopup.parent.remove(e.clickPopup)
-            e.clickPopup = null
-          }
-        })
+
+
         instance.initClickPopup()
         // 车子在当前轨道上走了多少进度
         const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
@@ -239,8 +246,8 @@ select option {
   right: 0;
   cursor: pointer;
   z-index: 2;
+  height: 100%;
   width: 5vh;
-  
 }
 
 .dropdown {

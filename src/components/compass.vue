@@ -103,6 +103,10 @@ function clickArrow() {
 
 
   // 恢复初始状态
+  if (STATE.currentPopup) {
+    STATE.currentPopup.visible = false
+    STATE.currentPopup.parent && STATE.currentPopup.parent.remove(STATE.currentPopup)
+  }
   STATE.sceneList.skyCarList.forEach(e => {
     e.focus = false
     e.popup.visible = true

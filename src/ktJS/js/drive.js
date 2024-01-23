@@ -36,7 +36,7 @@ export default function drive(wsMessage) {
           ) { return }
         }
 
-        
+
         skyCar.history.unshift({
           time: new Date() * 1,
           lastTime,
@@ -139,7 +139,7 @@ export default function drive(wsMessage) {
 
         // 常态化清空 FOUP
         if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run) {
-
+          
           skyCar.catch.parent && skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
         }
@@ -268,7 +268,7 @@ export default function drive(wsMessage) {
             skyCar.down(positionData.type, cb)
 
 
-          } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') { 
+          } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') {
 
             skyCar.run = false
             // setTimeout(() => { skyCar.run = true }, 10000)
@@ -355,8 +355,8 @@ export default function drive(wsMessage) {
         // 判断一下是否即将有动画
         const animateTargetMsg = skyCar.history[0]
         if (animateTargetMsg && !skyCar.fastRun && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
-          
-          
+
+
           skyCar.isAnimateSoon = true
           skyCar.fastRun = true
         }
@@ -393,10 +393,10 @@ export default function drive(wsMessage) {
 
 
       // 单独依据 ohtStatus_IsHaveFoup 来给所有其值为 1 的天车绑上 FOUP
-      if (e.ohtStatus_IsHaveFoup === '1' && skyCar.run) {
+      if ((skyCar.history.length === VUEDATA.messageLen) && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '1' && skyCar.run) {
         if (!skyCar.catch) {
           const newKaxia = STATE.sceneList.FOUP.clone()
-          const kaxiaId = e.therfidFoup
+          const kaxiaId = skyCar.history[VUEDATA.messageLen - 1].therfidFoup
           newKaxia.userData.area = ''
           newKaxia.userData.shelf = ''
           newKaxia.userData.shelfIndex = -1
@@ -406,16 +406,19 @@ export default function drive(wsMessage) {
           newKaxia.position.set(0, -0.35, 0)
           newKaxia.rotation.y = -Math.PI / 2
           newKaxia.visible = true
-          STATE.sceneList.kaxiaList.children.push(newKaxia)
           skyCar.catch = newKaxia
 
           const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
           group.add(newKaxia)
-
+          
           const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
-          if (kaxiaIndex >= 0 && STATE.sceneList.kaxiaList.children[kaxiaIndex].parent) {
-            STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
-            STATE.sceneList.kaxiaList.children.splice(kaxiaIndex, 1)
+          if (kaxiaIndex >= 0) {
+            if(STATE.sceneList.kaxiaList.children[kaxiaIndex].parent) {
+              STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
+              STATE.sceneList.kaxiaList.children.splice(kaxiaIndex, 1)
+            }
+          } else {
+            STATE.sceneList.kaxiaList.children.push(newKaxia)
           }
 
           newKaxia.traverse(e2 => {
