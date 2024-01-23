@@ -393,10 +393,10 @@ export default function drive(wsMessage) {
 
 
       // 单独依据 ohtStatus_IsHaveFoup 来给所有其值为 1 的天车绑上 FOUP
-      if ((skyCar.history.length === VUEDATA.messageLen) && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '1' && skyCar.run) {
+      if (skyCar.history[0].ohtStatus_IsHaveFoup === '1' && skyCar.run) {
         if (!skyCar.catch) {
           const newKaxia = STATE.sceneList.FOUP.clone()
-          const kaxiaId = skyCar.history[VUEDATA.messageLen - 1].therfidFoup
+          const kaxiaId = skyCar.history[0].therfidFoup
           newKaxia.userData.area = ''
           newKaxia.userData.shelf = ''
           newKaxia.userData.shelfIndex = -1
@@ -407,6 +407,8 @@ export default function drive(wsMessage) {
           newKaxia.rotation.y = -Math.PI / 2
           newKaxia.visible = true
           skyCar.catch = newKaxia
+
+          
 
           const group = skyCar.skyCarMesh.children.find(e => e.name === 'tianche02')
           group.add(newKaxia)
