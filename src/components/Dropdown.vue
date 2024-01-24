@@ -134,9 +134,6 @@ function handleItem(item) {
       e.material.uniforms.currentFocusLineStartPoint.value = -1
       e.material.uniforms.currentFocusLineEndPoint.value = -1
     })
-    STATE.sceneList.skyCarList.forEach(e2 => {
-      e2.focus = false
-    })
 
     // 恢复初始状态
     if (STATE.currentPopup) {
@@ -148,6 +145,8 @@ function handleItem(item) {
       e.popup.visible = true
       e.clickPopup && e.clickPopup.parent && e.clickPopup.parent.remove(e.clickPopup)
       e.clickPopup = null
+      if (e.startPopup && e.startPopup.parent) e.startPopup.parent.remove(e.startPopup)
+      if (e.endPopup && e.endPopup.parent) e.endPopup.parent.remove(e.endPopup)
     })
     STATE.currentPopup = null
 

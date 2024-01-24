@@ -268,6 +268,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
             })
             STATE.sceneList.skyCarList.forEach(e2 => {
               e2.focus = false
+              if (e2.startPopup && e2.startPopup.parent) e2.startPopup.parent.remove(e2.startPopup)
+              if (e2.endPopup && e2.endPopup.parent) e2.endPopup.parent.remove(e2.endPopup)
             })
 
             if (obj.userData.type === '天车') {

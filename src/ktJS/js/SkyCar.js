@@ -1,4 +1,5 @@
 import { VUEDATA } from "@/VUEDATA"
+import { API } from '@/ktJS/API.js'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 
 // 天车类
@@ -27,6 +28,8 @@ export default class SkyCar {
   animationOver = true        // 动画执行完毕
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
   focus = false               // 是不是聚焦在这个车上
+  startPopup = null           // 起点标识弹窗
+  endPopup = null             // 终点标识弹窗
 
   isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
@@ -285,6 +288,8 @@ export default class SkyCar {
             e.material.uniforms.currentFocusLineStartPoint.value = -1
             e.material.uniforms.currentFocusLineEndPoint.value = -1
           })
+          if (this.startPopup && this.startPopup.parent) this.startPopup.parent.remove(this.startPopup)
+          if (this.endPopup && this.endPopup.parent) this.endPopup.parent.remove(this.endPopup)
 
           this.popup.visible = true
           this.clickPopup && this.clickPopup.parent && this.clickPopup.parent.remove(this.clickPopup)
@@ -316,6 +321,7 @@ export default class SkyCar {
       this.clickPopup = clickPopup
       clickPopup.position.y = 2.3
       STATE.currentPopup = clickPopup
+
     }
     init()
 
@@ -351,8 +357,81 @@ export default class SkyCar {
         }
       }
       init(data)
+
+      // 显示起点终点
+      this.showStartEndPositionImg(res.data.sourceport.split('_')[2], res.data.destport.split('_')[2])
     })
 
+  }
+
+  // 显示起点和终点坐标的两个图标
+  showStartEndPositionImg(start, end) {
+
+    if(start) {
+      const startP = API.getPositionByKaxiaLocation(start)
+      if (startP) {
+        const startPopup = new Bol3D.POI.Popup3DSprite({
+          value: `
+          <div style="
+            pointer-events: all;
+            margin:0;
+            color: #ffffff;
+          ">
+    
+            <div style="
+              position: absolute;
+              background: url('./assets/3d/img/66.png') center / 100% 100% no-repeat;
+              width: 30vw;
+              height: 20vh;
+              transform: translate(-50%, -50%);
+            ">
+              <p style="font-size: 8vh;line-height: 30%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${start}</p>
+            </div>
+          </div>
+        `,
+          position: [startP.position.x, startP.position.y + 20, startP.position.z],
+          className: 'popup3dclass',
+          closeVisible: false
+        })
+  
+        startPopup.scale.set(0.05, 0.05, 0.05)
+        CACHE.container.scene.add(startPopup)
+        this.startPopup = startPopup
+      }
+    }
+
+    if(end) {
+      const endP = API.getPositionByKaxiaLocation(end)
+      if (endP) {
+        const endPopup = new Bol3D.POI.Popup3DSprite({
+          value: `
+          <div style="
+            pointer-events: all;
+            margin:0;
+            color: #ffffff;
+          ">
+    
+            <div style="
+              position: absolute;
+              background: url('./assets/3d/img/65.png') center / 100% 100% no-repeat;
+              width: 30vw;
+              height: 20vh;
+              transform: translate(-50%, -50%);
+            ">
+              <p style="font-size: 8vh;line-height: 30%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${end}</p>
+            </div>
+          </div>
+        `,
+          position: [endP.position.x, endP.position.y + 20, endP.position.z],
+          className: 'popup3dclass',
+          closeVisible: false
+        })
+  
+        endPopup.scale.set(0.05, 0.05, 0.05)
+        CACHE.container.scene.add(endPopup)
+        this.endPopup = endPopup
+      }
+    }
   }
 
   setPopupColor() {
