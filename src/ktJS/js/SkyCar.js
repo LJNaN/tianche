@@ -359,7 +359,9 @@ export default class SkyCar {
       init(data)
 
       // 显示起点终点
-      this.showStartEndPositionImg(res.data.sourceport.split('_')[2], res.data.destport.split('_')[2])
+      const startPointArr = res.data.sourceport.split('_')
+      const endtPointArr = res.data.destport.split('_')
+      this.showStartEndPositionImg(startPointArr[startPointArr.length - 1], endtPointArr[endtPointArr.length - 1])
     })
 
   }
@@ -367,7 +369,7 @@ export default class SkyCar {
   // 显示起点和终点坐标的两个图标
   showStartEndPositionImg(start, end) {
 
-    if(start) {
+    if (start) {
       const startP = API.getPositionByKaxiaLocation(start)
       if (startP) {
         const startPopup = new Bol3D.POI.Popup3DSprite({
@@ -393,14 +395,14 @@ export default class SkyCar {
           className: 'popup3dclass',
           closeVisible: false
         })
-  
+
         startPopup.scale.set(0.05, 0.05, 0.05)
         CACHE.container.scene.add(startPopup)
         this.startPopup = startPopup
       }
     }
 
-    if(end) {
+    if (end) {
       const endP = API.getPositionByKaxiaLocation(end)
       if (endP) {
         const endPopup = new Bol3D.POI.Popup3DSprite({
@@ -426,7 +428,7 @@ export default class SkyCar {
           className: 'popup3dclass',
           closeVisible: false
         })
-  
+
         endPopup.scale.set(0.05, 0.05, 0.05)
         CACHE.container.scene.add(endPopup)
         this.endPopup = endPopup
