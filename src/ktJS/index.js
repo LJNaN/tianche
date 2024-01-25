@@ -265,11 +265,11 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
               e.material.uniforms.pass.value = 0
               e.material.uniforms.currentFocusLineStartPoint.value = -1
               e.material.uniforms.currentFocusLineEndPoint.value = -1
+              e.material.uniforms.isContinue.value = 0
+              e.material.uniforms.continueProgress.value = 0.0
             })
             STATE.sceneList.skyCarList.forEach(e2 => {
               e2.focus = false
-              if (e2.startPopup && e2.startPopup.parent) e2.startPopup.parent.remove(e2.startPopup)
-              if (e2.endPopup && e2.endPopup.parent) e2.endPopup.parent.remove(e2.endPopup)
             })
 
             if (obj.userData.type === '天车') {
@@ -279,7 +279,8 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
               if (instance) {
                 STATE.sceneList.skyCarList.forEach(e2 => {
                   e2.popup.visible = true
-                  if (e2.clickPopup) {
+                  e2.focus = false
+                  if (e2.clickPopup && e2.clickPopup.parent ) {
                     e2.clickPopup.element.remove()
                     e2.clickPopup.parent.remove(e2.clickPopup)
                     e2.clickPopup = null

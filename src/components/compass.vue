@@ -120,6 +120,8 @@ function clickArrow() {
     e.material.uniforms.pass.value = 0
     e.material.uniforms.currentFocusLineStartPoint.value = -1
     e.material.uniforms.currentFocusLineEndPoint.value = -1
+    e.material.uniforms.isContinue.value = 0
+    e.material.uniforms.continueProgress.value = 0.0
   })
 }
 

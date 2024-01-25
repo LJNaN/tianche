@@ -133,6 +133,8 @@ function handleItem(item) {
       e.material.uniforms.pass.value = 0
       e.material.uniforms.currentFocusLineStartPoint.value = -1
       e.material.uniforms.currentFocusLineEndPoint.value = -1
+      e.material.uniforms.isContinue.value = 0
+      e.material.uniforms.continueProgress.value = 0.0
     })
 
     // 恢复初始状态
@@ -145,8 +147,6 @@ function handleItem(item) {
       e.popup.visible = true
       e.clickPopup && e.clickPopup.parent && e.clickPopup.parent.remove(e.clickPopup)
       e.clickPopup = null
-      if (e.startPopup && e.startPopup.parent) e.startPopup.parent.remove(e.startPopup)
-      if (e.endPopup && e.endPopup.parent) e.endPopup.parent.remove(e.endPopup)
     })
     STATE.currentPopup = null
 

@@ -1,5 +1,6 @@
 import { VUEDATA } from "@/VUEDATA"
 import { API } from '@/ktJS/API.js'
+import { DATA } from '@/ktJS/DATA.js'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 
 // 天车类
@@ -27,9 +28,10 @@ export default class SkyCar {
   passLine = []               // 走过的近5根轨道
   animationOver = true        // 动画执行完毕
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
-  focus = false               // 是不是聚焦在这个车上
+  _focus = false              // 是不是聚焦在这个车上
   startPopup = null           // 起点标识弹窗
   endPopup = null             // 终点标识弹窗
+  posPath = null              // 抓放线路
 
   isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
@@ -43,6 +45,25 @@ export default class SkyCar {
     this.initPopup()
     this.setAnimation()
     this.setPosition()
+  }
+
+  get focus() {
+    return this._focus
+  }
+
+  set focus(val) {
+    this._focus = val
+
+    if (!val) {
+      if (this.startPopup && this.startPopup.parent) {
+        this.startPopup.parent.remove(this.startPopup)
+        this.startPopup = null
+      }
+      if (this.endPopup && this.endPopup.parent) {
+        this.endPopup.parent.remove(this.endPopup)
+        this.endPopup = null
+      }
+    }
   }
 
   initSkyCar() {
@@ -128,6 +149,8 @@ export default class SkyCar {
         e.material.uniforms.pass.value = 0
         e.material.uniforms.currentFocusLineStartPoint.value = -1
         e.material.uniforms.currentFocusLineEndPoint.value = -1
+        e.material.uniforms.isContinue.value = 0
+        e.material.uniforms.continueProgress.value = 0.0
       })
       const progress = this.lineIndex / STATE.sceneList.linePosition[this.line].length
       const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this.line)
@@ -208,7 +231,6 @@ export default class SkyCar {
         justify-content: flex-start;
         align-items: center;
         padding: 0 5%;
-        margin-bottom: 4%;
         width: 100%;
         background: url('./assets/3d/img/30.png') center / 100% 100% no-repeat;
         ">
@@ -287,6 +309,8 @@ export default class SkyCar {
             e.material.uniforms.pass.value = 0
             e.material.uniforms.currentFocusLineStartPoint.value = -1
             e.material.uniforms.currentFocusLineEndPoint.value = -1
+            e.material.uniforms.isContinue.value = 0
+            e.material.uniforms.continueProgress.value = 0.0
           })
           if (this.startPopup && this.startPopup.parent) this.startPopup.parent.remove(this.startPopup)
           if (this.endPopup && this.endPopup.parent) this.endPopup.parent.remove(this.endPopup)
@@ -359,9 +383,12 @@ export default class SkyCar {
       init(data)
 
       // 显示起点终点
-      const startPointArr = res.data.sourceport.split('_')
-      const endtPointArr = res.data.destport.split('_')
-      this.showStartEndPositionImg(startPointArr[startPointArr.length - 1], endtPointArr[endtPointArr.length - 1])
+      const startPointArr = DATA.MCS2ShelfMap[res.data.sourceport]
+      const endtPointArr = DATA.MCS2ShelfMap[res.data.destport]
+      this.showStartEndPositionImg(startPointArr, endtPointArr)
+
+      // 轨道变色
+      this.setCurrentLineState(res.data.pospath)
     })
 
   }
@@ -383,11 +410,11 @@ export default class SkyCar {
             <div style="
               position: absolute;
               background: url('./assets/3d/img/66.png') center / 100% 100% no-repeat;
-              width: 30vw;
-              height: 20vh;
+              width: 16vw;
+              height: 26vh;
               transform: translate(-50%, -50%);
             ">
-              <p style="font-size: 8vh;line-height: 30%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${start}</p>
+              <p style="font-size: 8vh;font-family: YouSheBiaoTiHei; text-align: center; margin-top: 20%;">${start}</p>
             </div>
           </div>
         `,
@@ -416,11 +443,11 @@ export default class SkyCar {
             <div style="
               position: absolute;
               background: url('./assets/3d/img/65.png') center / 100% 100% no-repeat;
-              width: 30vw;
-              height: 20vh;
+              width: 16vw;
+              height: 26vh;
               transform: translate(-50%, -50%);
             ">
-              <p style="font-size: 8vh;line-height: 30%; font-family: YouSheBiaoTiHei; text-align: center; margin-top: 7%;">${end}</p>
+              <p style="font-size: 8vh;font-family: YouSheBiaoTiHei; text-align: center; margin-top: 20%;">${end}</p>
             </div>
           </div>
         `,
@@ -497,8 +524,8 @@ export default class SkyCar {
     const linePosition = STATE.sceneList.linePosition[line.name]
     if (!linePosition) return
 
-    const process = (this.coordinate - map.startCoordinate) / mapLong
-    const lineIndex = Math.floor(linePosition.length * process)
+    const progress = (this.coordinate - map.startCoordinate) / mapLong
+    const lineIndex = Math.floor(linePosition.length * progress)
 
     return {
       line: line.name,
@@ -521,13 +548,13 @@ export default class SkyCar {
       const lineName = line.name.replace('_', '-')
 
       if (skyCar.line === lineName) {
-        const process1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
-        const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
-        const processDifference = process2 - process1 // 进度差
+        const progress1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
+        const progress2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
+        const progressDifference = progress2 - progress1 // 进度差
 
 
-        if (processDifference > 0) {
-          const catchUpIndex = processDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
+        if (progressDifference > 0) {
+          const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
           skyCar.quickenSpeedTimes = speed * 2
 
@@ -545,10 +572,10 @@ export default class SkyCar {
               totalIndex += STATE.sceneList.linePosition[skyCar.nextLine[i].replace('_', '-')].length
 
             } else {
-              const process1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
-              const process2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
-              const subIndex1 = (1 - process1) * STATE.sceneList.linePosition[skyCar.line].length
-              const subIndex2 = process2 * STATE.sceneList.linePosition[line.name.replace('_', '-')].length
+              const progress1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
+              const progress2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
+              const subIndex1 = (1 - progress1) * STATE.sceneList.linePosition[skyCar.line].length
+              const subIndex2 = progress2 * STATE.sceneList.linePosition[line.name.replace('_', '-')].length
               totalIndex += subIndex1 + subIndex2
               break
             }
@@ -617,8 +644,8 @@ export default class SkyCar {
 
           const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
           if (map) {
-            const process = this_.lineIndex / (map.endCoordinate - map.startCoordinate)
-            this_.coordinate = map.startCoordinate + (map.endCoordinate - map.startCoordinate) * process
+            const progress = this_.lineIndex / (map.endCoordinate - map.startCoordinate)
+            this_.coordinate = map.startCoordinate + (map.endCoordinate - map.startCoordinate) * progress
           }
 
           // 如果这根线到尽头了，找nextLine
@@ -630,10 +657,7 @@ export default class SkyCar {
           if (map) {
             this_.coordinate = map.startCoordinate
           }
-
-          this_.setCurrentLineState()
-
-          this_.passLine.push(this_.nextLine[0])
+          this.setCurrentLineState()
           this_.nextLine.splice(0, 1)
         }
       }
@@ -673,44 +697,84 @@ export default class SkyCar {
   }
 
   // 轨道颜色
-  setCurrentLineState() {
+  setCurrentLineState(data) {
+    if (!this.focus) return
 
-    if (this.focus) {
-      STATE.sceneList.lineList.forEach(e => {
+    let pospath = null
+    if (data) {
+      this.posPath = data
+      pospath = data
+    } else {
+      pospath = this.posPath
+    }
+
+    if (!pospath) return
+
+    const pospassArr = pospath.split(',')
+    const pathArr = pospassArr.slice(0, -1)
+    const endPoint = pospassArr[pospassArr.length - 1]
+
+    const thisLineIndex = pathArr.indexOf(this.line.split('-')[0])
+
+    const nextPathSlice = pathArr.slice(thisLineIndex + 1, -1);
+    const nextPathLineArr = nextPathSlice.slice(0, -1).map((val, i) => val + '-' + nextPathSlice[i + 1])
+
+    // 复位
+    STATE.sceneList.lineList.forEach(e => {
+      e.material.uniforms.next.value = 0
+      e.material.uniforms.pass.value = 0
+      e.material.uniforms.currentFocusLineStartPoint.value = -1
+      e.material.uniforms.currentFocusLineEndPoint.value = -1
+      e.material.uniforms.isContinue.value = 0
+      e.material.uniforms.continueProgress.value = 0.0
+    })
+
+    // nextLine轨道
+    const nextLineMeshArr = STATE.sceneList.lineList.filter(e =>
+      nextPathLineArr.includes(e.name)
+    )
+
+    nextLineMeshArr.forEach(e => {
+      e.material.uniforms.next.value = 1
+    })
+
+    // passLine轨道
+    const pathPassLine = pathArr.slice(0, thisLineIndex + 1)
+    const pathPassLineArr = pathPassLine.slice(0, -1).map((val, i) => val + '-' + pathPassLine[i + 1]);
+
+
+    const passLineMeshArr = STATE.sceneList.lineList.filter(e =>
+      pathPassLineArr.includes(e.name)
+    )
+
+    passLineMeshArr.forEach(e => {
+      e.material.uniforms.pass.value = 1
+    })
+
+    STATE.sceneList.lineList.forEach(e => {
+      if (e.name === this.line) {
         e.material.uniforms.next.value = 0
         e.material.uniforms.pass.value = 0
-        e.material.uniforms.currentFocusLineStartPoint.value = -1
-        e.material.uniforms.currentFocusLineEndPoint.value = -1
-      })
-      if (this.passLine.length >= 5) {
-        this.passLine.splice(0, 1)
       }
+      e.material.uniforms.currentFocusLineStartPoint.value = this.line.split('-')[0]
+      e.material.uniforms.currentFocusLineEndPoint.value = this.line.split('-')[1]
+    })
 
-      // nextLine轨道
-      const nextLineArr = STATE.sceneList.lineList.filter(e =>
-        this.nextLine.includes(e.name.replace('-', '_'))
-      )
 
-      nextLineArr.forEach(e => {
-        e.material.uniforms.next.value = 1
-      })
+    // ===还有一段延伸出去的轨道，起点到终点那一段，也要变色
+    const endPointLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < Number(endPoint) && e.endCoordinate > Number(endPoint))
+    console.log('endPointLine: ', endPointLine);
+    if (!endPointLine) return
 
-      const passLineArr = STATE.sceneList.lineList.filter(e =>
-        this.passLine.includes(e.name.replace('-', '_'))
-      )
+    const endPointMesh = STATE.sceneList.lineList.find(e => e.name === endPointLine.name.replace('_', '-'))
+    console.log('endPointMesh: ', endPointMesh);
+    if (!endPointMesh) return
 
-      passLineArr.forEach(e => {
-        e.material.uniforms.pass.value = 1
-      })
-
-      STATE.sceneList.lineList.forEach(e => {
-        if (e.name === this.line) {
-          e.material.uniforms.next.value = 0
-          e.material.uniforms.pass.value = 0
-        }
-        e.material.uniforms.currentFocusLineStartPoint.value = this.line.split('-')[0]
-        e.material.uniforms.currentFocusLineEndPoint.value = this.line.split('-')[1]
-      })
+    const progress = (Number(endPoint) - endPointLine.startCoordinate) / (endPointLine.endCoordinate - endPointLine.startCoordinate)
+    console.log('progress: ', progress);
+    if (progress > 0) {
+      endPointMesh.material.uniforms.isContinue.value = 1
+      endPointMesh.material.uniforms.continueProgress.value = progress
     }
   }
 
@@ -938,6 +1002,4 @@ export default class SkyCar {
       }
     })
   }
-
-
 }

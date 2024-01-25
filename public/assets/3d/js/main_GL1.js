@@ -11445,7 +11445,7 @@
 
 			this.near = near;
 			this.far = far;
-			this.focus = 10;
+			this._focus = 10;
 
 			this.aspect = aspect;
 			this.view = null;
@@ -11466,7 +11466,7 @@
 
 			this.near = source.near;
 			this.far = source.far;
-			this.focus = source.focus;
+			this._focus = source._focus;
 
 			this.aspect = source.aspect;
 			this.view = source.view === null ? null : Object.assign( {}, source.view );
@@ -11644,7 +11644,7 @@
 
 			data.object.near = this.near;
 			data.object.far = this.far;
-			data.object.focus = this.focus;
+			data.object._focus = this._focus;
 
 			data.object.aspect = this.aspect;
 
@@ -39159,7 +39159,7 @@
 
 			super( new PerspectiveCamera( 50, 1, 0.5, 500 ) );
 
-			this.focus = 1;
+			this._focus = 1;
 
 		}
 
@@ -39167,7 +39167,7 @@
 
 			const camera = this.camera;
 
-			const fov = RAD2DEG * 2 * light.angle * this.focus;
+			const fov = RAD2DEG * 2 * light.angle * this._focus;
 			const aspect = this.mapSize.width / this.mapSize.height;
 			const far = light.distance || camera.far;
 
@@ -39188,7 +39188,7 @@
 
 			super.copy( source );
 
-			this.focus = source.focus;
+			this._focus = source._focus;
 
 			return this;
 
@@ -41187,7 +41187,7 @@
 
 					object = new PerspectiveCamera( data.fov, data.aspect, data.near, data.far );
 
-					if ( data.focus !== undefined ) object.focus = data.focus;
+					if ( data._focus !== undefined ) object._focus = data._focus;
 					if ( data.zoom !== undefined ) object.zoom = data.zoom;
 					if ( data.filmGauge !== undefined ) object.filmGauge = data.filmGauge;
 					if ( data.filmOffset !== undefined ) object.filmOffset = data.filmOffset;
@@ -42216,13 +42216,13 @@
 
 			const cache = this._cache;
 
-			const needsUpdate = cache.focus !== camera.focus || cache.fov !== camera.fov ||
+			const needsUpdate = cache._focus !== camera._focus || cache.fov !== camera.fov ||
 				cache.aspect !== camera.aspect * this.aspect || cache.near !== camera.near ||
 				cache.far !== camera.far || cache.zoom !== camera.zoom || cache.eyeSep !== this.eyeSep;
 
 			if ( needsUpdate ) {
 
-				cache.focus = camera.focus;
+				cache._focus = camera._focus;
 				cache.fov = camera.fov;
 				cache.aspect = camera.aspect * this.aspect;
 				cache.near = camera.near;
@@ -42235,7 +42235,7 @@
 
 				const projectionMatrix = camera.projectionMatrix.clone();
 				const eyeSepHalf = cache.eyeSep / 2;
-				const eyeSepOnProjection = eyeSepHalf * cache.near / cache.focus;
+				const eyeSepOnProjection = eyeSepHalf * cache.near / cache._focus;
 				const ymax = ( cache.near * Math.tan( DEG2RAD * cache.fov * 0.5 ) ) / cache.zoom;
 				let xmin, xmax;
 
@@ -79743,7 +79743,7 @@ void main() {
 			this.scene = scene;
 			this.camera = camera;
 
-			const focus = ( params.focus !== undefined ) ? params.focus : 1.0;
+			const focus = ( params._focus !== undefined ) ? params._focus : 1.0;
 			const aspect = ( params.aspect !== undefined ) ? params.aspect : camera.aspect;
 			const aperture = ( params.aperture !== undefined ) ? params.aperture : 0.025;
 			const maxblur = ( params.maxblur !== undefined ) ? params.maxblur : 1.0;
@@ -95629,7 +95629,7 @@ void main(){
 	                spotLight.shadow.camera.near = sptLightOpts.near;
 	                spotLight.shadow.camera.far = sptLightOpts.far;
 	                spotLight.angle = sptLightOpts.angle;
-	                spotLight.shadow.focus = sptLightOpts.focus;
+	                spotLight.shadow._focus = sptLightOpts._focus;
 	                spotLight.shadow.bias = sptLightOpts.bias;
 	                spotLight.shadow.camera.updateProjectionMatrix();
 	                spotLight.shadow.needsUpdate = true;
@@ -97082,7 +97082,7 @@ void main(){
 	                spotLight.shadow.camera.near = sptLightOpts.near;
 	                spotLight.shadow.camera.far = sptLightOpts.far;
 	                spotLight.angle = sptLightOpts.angle;
-	                spotLight.shadow.focus = sptLightOpts.focus;
+	                spotLight.shadow._focus = sptLightOpts._focus;
 	                spotLight.shadow.bias = sptLightOpts.bias;
 	                spotLight.shadow.camera.updateProjectionMatrix();
 	                spotLight.shadow.needsUpdate = true;
@@ -97185,8 +97185,8 @@ void main(){
 	            this.bokehPass.uniforms.aperture.value = opts.aperture;
 	        if (opts.maxblur !== undefined)
 	            this.bokehPass.uniforms.maxblur.value = opts.maxblur;
-	        if (opts.focus !== undefined)
-	            this.bokehPass.uniforms.focus.value = opts.focus;
+	        if (opts._focus !== undefined)
+	            this.bokehPass.uniforms._focus.value = opts._focus;
 	    }
 	    updateScenes(opts, cb) {
 	        if (!opts)

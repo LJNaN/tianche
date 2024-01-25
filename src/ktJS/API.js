@@ -301,7 +301,7 @@ function handleLine() {
   })
 
 
-  // 测试shader
+  // shader
   // 顶点着色器代码
   const vertexShader = `
     #include <logdepthbuf_pars_vertex>
@@ -329,6 +329,10 @@ function handleLine() {
     uniform int pass;
     uniform int next;
     uniform float progress;
+    uniform int isContinue;
+    uniform float continueProgress;
+
+
     varying vec2 vUv; // 接收从顶点着色器传递过来的纹理坐标
     varying vec2 vPosition;
     void main() {
@@ -336,21 +340,41 @@ function handleLine() {
       vec4 color = vec4(0.7,0.7,0.7,1.);
       
       if (next == 1) {
-        color = vec4(0.95,0.41,0.16,1.);
+        color = vec4(0.05,0.04,1.0,1.);
 
       } else if(pass == 1) {
-        color = vec4(0.2,0.2,0.2,1.);
+        color = vec4(0.2,0.0,0.0,1.);
         
       } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
-        
-        if(vUv.x > progress) {
-          color = vec4(0.95,0.41,0.16,1.);
+
+        if(isContinue == 1) {
+          if(vUv.x > continueProgress) {
+            color = vec4(0.7,0.7,0.7,1.);
+            
+          } else if (vUv.x < progress) {
+            color = vec4(0.2,0.0,0.0,1.);
+
+          } else {
+            color = vec4(0.05,0.04,1.0,1.);
+          }
+
         } else {
-          color = vec4(0.2,0.2,0.2,1.);
+          if(vUv.x > progress) {
+            color = vec4(0.05,0.04,1.0,1.);
+
+          } else {
+            color = vec4(0.2,0.0,0.0,1.);
+          }
+        }
+
+      } else if (isContinue == 1) {
+        if(vUv.x > continueProgress) {
+          color = vec4(0.7,0.7,0.7,1.); 
+
+        } else {
+          color = vec4(0.05,0.04,1.0,1.);
         }
       }
-
-        
 
       gl_FragColor = color; // 应用纹理颜色到片元
       #include <logdepthbuf_fragment>
@@ -366,7 +390,9 @@ function handleLine() {
       pass: { value: 0 },
       next: { value: 0 },
       currentFocusLineStartPoint: { value: -1 },
-      currentFocusLineEndPoint: { value: -1 }
+      currentFocusLineEndPoint: { value: -1 },
+      isContinue: { value: 0 },
+      continueProgress: { value: 0.0 }
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader
