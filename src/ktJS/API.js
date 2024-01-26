@@ -240,7 +240,7 @@ function getBayState() {
   //     res.data.forEach(e => {
   //       const line = STATE.sceneList.lineList.find(e2 => e2.name.replace('-', '_') === e.mapId)
   //       if (line) {
-  //         console.log('line: ', line);
+  //         
 
   //         // line.material.color.set(e.status === '0' ? '#333333' : '#b3b3b3')
   //       }
@@ -263,6 +263,7 @@ function handleLine() {
       const direction = long === size.x ? 'x' : 'z'
       e.userData.direction = direction
       e.userData.long = long
+
 
       const { array } = e.geometry.attributes.position
       const arr = []
@@ -290,9 +291,14 @@ function handleLine() {
 
   STATE.sceneList.guidao.traverse(child => {
     if (child.isMesh && child.name.includes('-') && !child.name.includes('X-')) {
+
       CACHE.container.clickObjects.push(child)
       child.userData.id = child.name.replace('-', '_')
       child.userData.type = '轨道'
+      const line = STATE.sceneList.guidao.children.find(e => e.name === 'X-' + child.name)
+      if (line) {
+        child.userData.lineLong = line.userData.long
+      }
       if (!STATE.sceneList.lineList) {
         STATE.sceneList.lineList = []
       }
@@ -307,11 +313,13 @@ function handleLine() {
     #include <logdepthbuf_pars_vertex>
     #include <common>
 
+    uniform float time;
     varying vec2 vUv; // 传递纹理坐标给片元着色器
     varying vec2 vPosition;
     void main() {
       vUv = uv;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
       
       #include <logdepthbuf_vertex>
     }
@@ -329,52 +337,98 @@ function handleLine() {
     uniform int pass;
     uniform int next;
     uniform float progress;
-    uniform int isContinue;
-    uniform float continueProgress;
+    uniform int isEndLine;
+    uniform float endLineProgress;
+    uniform int isStartLine;
+    uniform float startLineProgress;
+    uniform float time;
+    uniform float lineLong;
 
 
     varying vec2 vUv; // 接收从顶点着色器传递过来的纹理坐标
     varying vec2 vPosition;
+
     void main() {
       
       vec4 color = vec4(0.7,0.7,0.7,1.);
+
+      float threshold = 10.; // 控制留白的间距
+      float blockWidth = 0.5; // 控制留白的宽度
+      float flowSpeed = 5.0; // 控制流动速度
+      float flowOffset = vUv.x - time * flowSpeed / lineLong; // 控制流动效果
+      flowOffset = mod(flowOffset, threshold / lineLong); // 将偏移量限制在阈值范围内
+      float blockMask = 1.0 - step(flowOffset, blockWidth/ lineLong);
+
+
       
       if (next == 1) {
         color = vec4(0.05,0.04,1.0,1.);
+        color.a = blockMask;
 
       } else if(pass == 1) {
         color = vec4(0.2,0.0,0.0,1.);
+        color.a = blockMask;
         
       } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
 
-        if(isContinue == 1) {
-          if(vUv.x > continueProgress) {
+        if(isEndLine == 1) {
+          if(vUv.x > endLineProgress) {
             color = vec4(0.7,0.7,0.7,1.);
             
           } else if (vUv.x < progress) {
             color = vec4(0.2,0.0,0.0,1.);
+            color.a = blockMask;
+            
+          } else {
+            color = vec4(0.05,0.04,1.0,1.);
+            color.a = blockMask;
+          }
+          
+        } else if(isStartLine == 1) {
+          if(vUv.x < startLineProgress) {
+            color = vec4(0.7,0.7,0.7,1.);
+
+          } else if (vUv.x < progress) {
+            color = vec4(0.2,0.0,0.0,1.);
+            color.a = blockMask;
 
           } else {
             color = vec4(0.05,0.04,1.0,1.);
+            color.a = blockMask;
           }
 
         } else {
           if(vUv.x > progress) {
             color = vec4(0.05,0.04,1.0,1.);
+            color.a = blockMask;
 
           } else {
             color = vec4(0.2,0.0,0.0,1.);
+            color.a = blockMask;
           }
         }
 
-      } else if (isContinue == 1) {
-        if(vUv.x > continueProgress) {
+      } else if (isEndLine == 1) {
+        if(vUv.x > endLineProgress) {
           color = vec4(0.7,0.7,0.7,1.); 
 
         } else {
           color = vec4(0.05,0.04,1.0,1.);
+          color.a = blockMask;
+        }
+
+      } else if (isStartLine == 1) {
+        if(vUv.x < startLineProgress) {
+          color = vec4(0.7,0.7,0.7,1.);
+
+        } else {
+          color = vec4(0.2,0.0,0.0,1.);
+          color.a = blockMask;
         }
       }
+
+      
+      
 
       gl_FragColor = color; // 应用纹理颜色到片元
       #include <logdepthbuf_fragment>
@@ -391,11 +445,16 @@ function handleLine() {
       next: { value: 0 },
       currentFocusLineStartPoint: { value: -1 },
       currentFocusLineEndPoint: { value: -1 },
-      isContinue: { value: 0 },
-      continueProgress: { value: 0.0 }
+      isEndLine: { value: 0 },
+      endLineProgress: { value: 0.0 },
+      isStartLine: { value: 0 },
+      startLineProgress: { value: 0.0 },
+      time: { value: 0.0 },
+      lineLong: { value: 1.0 }
     },
     vertexShader: vertexShader,
-    fragmentShader: fragmentShader
+    fragmentShader: fragmentShader,
+    transparent: true
   })
   material.needsUpdate = true
 
@@ -404,6 +463,7 @@ function handleLine() {
     e.material = material.clone()
     e.material.uniforms.startPoint.value = e.name.split('-')[0]
     e.material.uniforms.endPoint.value = e.name.split('-')[1]
+    e.material.uniforms.lineLong.value = e.userData.lineLong
   })
 }
 
@@ -2485,6 +2545,12 @@ function render() {
   const frameRate = 1 / (t - CACHE.oldClock)
   STATE.frameRate = frameRate
   CACHE.oldClock = t
+
+  if (STATE?.sceneList?.lineList?.length) {
+    STATE.sceneList.lineList.forEach(e => {
+      e.material.uniforms.time.value = t
+    })
+  }
 }
 
 

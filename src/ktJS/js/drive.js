@@ -330,12 +330,14 @@ export default function drive(wsMessage) {
         if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
-          skyCar.targetCoordinate = -1
+          skyCar.targetCoordinate = -1,
+          skyCar.posPath = null
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
-          skyCar.targetCoordinate = -1
+          skyCar.targetCoordinate = -1,
+          skyCar.posPath = null
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
           // 即将到来的两次数据位置不同 改变位置的情况

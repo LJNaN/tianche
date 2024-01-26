@@ -149,8 +149,10 @@ export default class SkyCar {
         e.material.uniforms.pass.value = 0
         e.material.uniforms.currentFocusLineStartPoint.value = -1
         e.material.uniforms.currentFocusLineEndPoint.value = -1
-        e.material.uniforms.isContinue.value = 0
-        e.material.uniforms.continueProgress.value = 0.0
+        e.material.uniforms.isEndLine.value = 0
+        e.material.uniforms.endLineProgress.value = 0.0
+        e.material.uniforms.isStartLine.value = 0
+        e.material.uniforms.startLineProgress.value = 0.0
       })
       const progress = this.lineIndex / STATE.sceneList.linePosition[this.line].length
       const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this.line)
@@ -309,8 +311,10 @@ export default class SkyCar {
             e.material.uniforms.pass.value = 0
             e.material.uniforms.currentFocusLineStartPoint.value = -1
             e.material.uniforms.currentFocusLineEndPoint.value = -1
-            e.material.uniforms.isContinue.value = 0
-            e.material.uniforms.continueProgress.value = 0.0
+            e.material.uniforms.isEndLine.value = 0
+            e.material.uniforms.endLineProgress.value = 0.0
+            e.material.uniforms.isStartLine.value = 0
+            e.material.uniforms.startLineProgress.value = 0.0
           })
           if (this.startPopup && this.startPopup.parent) this.startPopup.parent.remove(this.startPopup)
           if (this.endPopup && this.endPopup.parent) this.endPopup.parent.remove(this.endPopup)
@@ -383,9 +387,9 @@ export default class SkyCar {
       init(data)
 
       // 显示起点终点
-      const startPointArr = DATA.MCS2ShelfMap[res.data.sourceport]
-      const endtPointArr = DATA.MCS2ShelfMap[res.data.destport]
-      this.showStartEndPositionImg(startPointArr, endtPointArr)
+      const startPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.sourceport)
+      const endtPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.destport)
+      this.showStartEndPositionImg(startPointArr?.port, endtPointArr?.port)
 
       // 轨道变色
       this.setCurrentLineState(res.data.pospath)
@@ -424,6 +428,7 @@ export default class SkyCar {
         })
 
         startPopup.scale.set(0.05, 0.05, 0.05)
+        startPopup.userData.port = start
         CACHE.container.scene.add(startPopup)
         this.startPopup = startPopup
       }
@@ -457,6 +462,7 @@ export default class SkyCar {
         })
 
         endPopup.scale.set(0.05, 0.05, 0.05)
+        endPopup.userData.port = end
         CACHE.container.scene.add(endPopup)
         this.endPopup = endPopup
       }
@@ -712,12 +718,12 @@ export default class SkyCar {
 
     const pospassArr = pospath.split(',')
     const pathArr = pospassArr.slice(0, -1)
+
     const endPoint = pospassArr[pospassArr.length - 1]
-
     const thisLineIndex = pathArr.indexOf(this.line.split('-')[0])
-
-    const nextPathSlice = pathArr.slice(thisLineIndex + 1, -1);
+    const nextPathSlice = pathArr.slice(thisLineIndex + 1, pathArr.length);
     const nextPathLineArr = nextPathSlice.slice(0, -1).map((val, i) => val + '-' + nextPathSlice[i + 1])
+
 
     // 复位
     STATE.sceneList.lineList.forEach(e => {
@@ -725,8 +731,10 @@ export default class SkyCar {
       e.material.uniforms.pass.value = 0
       e.material.uniforms.currentFocusLineStartPoint.value = -1
       e.material.uniforms.currentFocusLineEndPoint.value = -1
-      e.material.uniforms.isContinue.value = 0
-      e.material.uniforms.continueProgress.value = 0.0
+      e.material.uniforms.isEndLine.value = 0
+      e.material.uniforms.endLineProgress.value = 0.0
+      e.material.uniforms.isStartLine.value = 0
+      e.material.uniforms.startLineProgress.value = 0.0
     })
 
     // nextLine轨道
@@ -763,18 +771,35 @@ export default class SkyCar {
 
     // ===还有一段延伸出去的轨道，起点到终点那一段，也要变色
     const endPointLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < Number(endPoint) && e.endCoordinate > Number(endPoint))
-    console.log('endPointLine: ', endPointLine);
-    if (!endPointLine) return
 
-    const endPointMesh = STATE.sceneList.lineList.find(e => e.name === endPointLine.name.replace('_', '-'))
-    console.log('endPointMesh: ', endPointMesh);
-    if (!endPointMesh) return
+    if (endPointLine) {
+      const endPointMesh = STATE.sceneList.lineList.find(e => e.name === endPointLine.name.replace('_', '-'))
+      if (endPointMesh) {
+        const progress = (Number(endPoint) - endPointLine.startCoordinate) / (endPointLine.endCoordinate - endPointLine.startCoordinate)
+        if (progress > 0) {
+          endPointMesh.material.uniforms.isEndLine.value = 1
+          endPointMesh.material.uniforms.endLineProgress.value = progress
+        }
+      }
+    }
 
-    const progress = (Number(endPoint) - endPointLine.startCoordinate) / (endPointLine.endCoordinate - endPointLine.startCoordinate)
-    console.log('progress: ', progress);
-    if (progress > 0) {
-      endPointMesh.material.uniforms.isContinue.value = 1
-      endPointMesh.material.uniforms.continueProgress.value = progress
+    // ===还有起始点的轨道，他没有startPosition，要根据ohtport算出来
+    if (pathArr.length && this.startPopup?.userData?.port) {
+      const startPositionMap = DATA.MCS2ShelfMap.find(e => e.port === this.startPopup.userData.port)
+
+      if (startPositionMap) {
+        const lineMap = DATA.pointCoordinateMap.find(e => e.startCoordinate < startPositionMap.position && e.endCoordinate > startPositionMap.position)
+
+        if (lineMap) {
+          const progress = (startPositionMap.position - lineMap.startCoordinate) / (lineMap.endCoordinate - lineMap.startCoordinate)
+          const startLineMesh = STATE.sceneList.lineList.find(e => e.name === lineMap.name.replace('_', '-'))
+
+          if (startLineMesh) {
+            startLineMesh.material.uniforms.isStartLine.value = 1
+            startLineMesh.material.uniforms.startLineProgress.value = progress
+          }
+        }
+      }
     }
   }
 
