@@ -386,13 +386,15 @@ export default class SkyCar {
       }
       init(data)
 
-      // 显示起点终点
-      const startPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.sourceport)
-      const endtPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.destport)
-      this.showStartEndPositionImg(startPointArr?.port, endtPointArr?.port)
-
-      // 轨道变色
-      this.setCurrentLineState(res.data.pospath)
+      if(res.data) {
+        // 显示起点终点
+        const startPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.sourceport)
+        const endtPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.destport)
+        this.showStartEndPositionImg(startPointArr?.port, endtPointArr?.port)
+  
+        // 轨道变色
+        this.setCurrentLineState(res.data.pospath)
+      }
     })
 
   }
@@ -563,7 +565,7 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          skyCar.quickenSpeedTimes = speed * 2
+          skyCar.quickenSpeedTimes = speed * 1.6
 
         } else {
           skyCar.quickenSpeedTimes = 0
@@ -590,7 +592,7 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            skyCar.quickenSpeedTimes = speed * 2
+            skyCar.quickenSpeedTimes = speed * 1.6
           } else {
             skyCar.quickenSpeedTimes = 0
           }
@@ -613,8 +615,13 @@ export default class SkyCar {
 
     } else if (this.fastRun) {
       // 每一帧都动态算一下 this.quickenSpeedTimes
+      
+      
       if (this.targetCoordinate) {
-        computeQuickenSpeedTimes(this, this.targetCoordinate)
+        if(this.targetCoordinate < this.coordinate) {
+          this.run = false
+        }
+        // computeQuickenSpeedTimes(this, this.targetCoordinate)
       }
 
     } else {
@@ -639,7 +646,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 1000 ? 3 : 1
+        this.quickenSpeedTimes = totalIndex > 500 ? 4 : 1.2
       }
     }
 
@@ -651,9 +658,10 @@ export default class SkyCar {
           this_.lineIndex += this_.runSpeed
 
           const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
-          if (map) {
-            const progress = this_.lineIndex / (map.endCoordinate - map.startCoordinate)
-            this_.coordinate = map.startCoordinate + (map.endCoordinate - map.startCoordinate) * progress
+          const lineMap = STATE.sceneList.linePosition[this_.line]
+          if (map && lineMap) {
+            const progress = this_.lineIndex / lineMap.length
+            this_.coordinate = map.startCoordinate + Math.floor((map.endCoordinate - map.startCoordinate) * progress)
           }
 
           // 如果这根线到尽头了，找nextLine

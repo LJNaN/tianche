@@ -34,8 +34,8 @@ function getData() {
   // let i = 0
   // window.aa = () => { }
   // setInterval(() => {
-  //   if (i >= mockData4.length) i = 0
-  //   drive(mockData4[i])
+  //   if (i >= mockData2.length) i = 0
+  //   drive(mockData2[i])
   //   i++
   // }, 333)
 
