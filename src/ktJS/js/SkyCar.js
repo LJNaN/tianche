@@ -470,6 +470,7 @@ export default class SkyCar {
   }
 
   setPopupColor() {
+    
     const item = DATA.skyCarStateColorMap[this.state]
 
     const div = this.popup?.element?.children[0]
@@ -603,6 +604,7 @@ export default class SkyCar {
 
     // 有特殊事件时
     if (this.isAnimateSoon) {
+      
       this.isAnimateSoon = false
       const animateTargetMsg = this.history[0]
       const { position } = animateTargetMsg
@@ -656,6 +658,7 @@ export default class SkyCar {
 
           // 如果这根线到尽头了，找nextLine
         } else if (this_.nextLine.length) {
+          
           this_.line = this_.nextLine[0].replace('_', '-')
           this_.lineIndex = 0
 

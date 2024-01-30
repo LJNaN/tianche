@@ -112,11 +112,14 @@ export default function drive(wsMessage) {
         const thisLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < thisPosition && e.endCoordinate > thisPosition)
         for (let i = 1; i <= VUEDATA.messageLen - 1; i++) {
           const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.history[VUEDATA.messageLen - 1 - i].position && e.endCoordinate > skyCar.history[VUEDATA.messageLen - 1 - i].position)
+          
           if (nextLine && thisLine && nextLine.name != thisLine.name) {
             if ((!skyCar.nextLine.length || skyCar.nextLine[skyCar.nextLine.length - 1] != nextLine.name) && skyCar.line != nextLine.name.replace('_', '-')) {
               if (skyCar.nextLine.length > 2) {
                 if (skyCar.nextLine[skyCar.nextLine.length - 2] === nextLine.name) {
                   skyCar.nextLine.splice(skyCar.nextLine.length - 1, 1)
+                  skyCar.nextLine.push(nextLine.name)
+                } else {
                   skyCar.nextLine.push(nextLine.name)
                 }
               } else {
@@ -138,14 +141,16 @@ export default function drive(wsMessage) {
         }
 
         // 常态化清空 FOUP
-        if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run) {
+        if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run && skyCar.animationOver) {
+          
           
           skyCar.catch.parent && skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
         }
-
+        
         // 强制清除取货行中的FOUP
         if (skyCar.state === 0 && !skyCar.catch) {
+          
           skyCar.skyCarMesh.traverse(e => {
             if (e.isGroup && e.userData.type === 'kaxia') {
               e.parent && e.parent.remove(e)
@@ -270,6 +275,7 @@ export default function drive(wsMessage) {
 
           } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') {
 
+            
             skyCar.run = false
             // setTimeout(() => { skyCar.run = true }, 10000)
 
@@ -338,6 +344,7 @@ export default function drive(wsMessage) {
           skyCar.fastRun = false
           skyCar.targetCoordinate = -1,
           skyCar.posPath = null
+          
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
           // 即将到来的两次数据位置不同 改变位置的情况

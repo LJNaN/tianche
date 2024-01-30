@@ -23,7 +23,7 @@ VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
 <template>
   <Scene />
   <router-view></router-view>
-  <p class="version">Version 1.9.5</p>
+  <p class="version">Version 1.9.6</p>
 </template>
 
 <style scoped>

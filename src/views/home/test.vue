@@ -1,7 +1,7 @@
 <template>
   <div class="slider">
     <span class="demonstration">小车坐标</span>
-    <el-slider v-model="value1" :min="10000" :max="1500000" show-input @input="sliderChange" />
+    <el-slider v-model="value1" :min="10000" :max="500000" show-input @input="sliderChange" />
   </div>
 </template>
 
@@ -14,14 +14,14 @@ let car = null
 
 setTimeout(() => {
   aaa({ "VehicleInfo": [{ "currentSpeed": "400", "distance": "4999", "lastTime": new Date().format('YYYY-MM-DD hh:mm:ss'), "loadE84Error": "0", "loadFoupEmpty": "0", "location": "0", "ohtID": "V0001", "ohtIP": "192.168.150.133", "ohtStatus_AlarmSet": "0", "ohtStatus_ErrSet": "0", "ohtStatus_Fanghuoda": "0", "ohtStatus_Fanghuoxing": "0", "ohtStatus_Idle": "0", "ohtStatus_IsHaveFoup": "0", "ohtStatus_LoadEnable": "0", "ohtStatus_Loading": "0", "ohtStatus_LocalControl": "0", "ohtStatus_ManualControl": "0", "ohtStatus_MoveEnable": "0", "ohtStatus_Moving": "0", "ohtStatus_OnlineControl": "1", "ohtStatus_Pausing": "0", "ohtStatus_Prohibit": "0", "ohtStatus_Quhuoda": "0", "ohtStatus_Quhuoxing": "0", "ohtStatus_Rfidove": "0", "ohtStatus_Roaming": "1", "ohtStatus_Scanove": "0", "ohtStatus_Scanxing": "0", "ohtStatus_UnLoadEnable": "0", "ohtStatus_UnLoading": "0", "pauseTime": "0", "port": "8085", "position": -1, "rfidMisMatch": "0", "rfidReadError": "1", "switchGuideDirLeft": "1", "switchGuideDirRight": "1", "therfidFoup": "845 8334 6466 5D66 F", "totalExceptionStopCnt": "871", "totalExceptionTime": "155987", "totalMile": "0", "totalPowerOnCnt": "459", "totalPowerOnTime": "9962041", "totalTaskCnt": "64249", "unLoadE84Error": "0", "unLoadFoupFull": "0" }] })
-  car = STATE.sceneList.skyCarList[0]
+  car = STATE.sceneList.skyCarList[1]
   car.run = false
 
 
 
   car.line = '26-22'
   car.lineIndex = 0
-}, 5000);
+}, 15000);
 
 function sliderChange(val) {
 
