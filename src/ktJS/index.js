@@ -288,6 +288,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                     e2.clickPopup = null
                   }
                 })
+                instance.focus = true
                 instance.initClickPopup()
                 // 车子在当前轨道上走了多少进度
                 const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length

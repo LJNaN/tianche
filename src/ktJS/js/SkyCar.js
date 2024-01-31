@@ -52,6 +52,7 @@ export default class SkyCar {
   }
 
   set focus(val) {
+    console.log(val)
     this._focus = val
 
     if (!val) {
@@ -141,6 +142,8 @@ export default class SkyCar {
       })
 
       API.search('天车', this.id)
+
+      this.focus = true
       this.initClickPopup()
 
       // 车子在当前轨道上走了多少进度
@@ -166,8 +169,16 @@ export default class SkyCar {
   }
 
   initClickPopup() {
-    if (this.clickPopup) {
-      return;
+    console.log('this.focus: ', this.focus);
+
+    if (this.focus) {
+      // 刷新数据
+      if (this.clickPopup && this.clickPopup.parent) {
+        this.clickPopup.parent.remove(this.clickPopup)
+      }
+
+    } else {
+      return
     }
 
     if (STATE.currentPopup) {
@@ -184,7 +195,6 @@ export default class SkyCar {
     }
 
     const init = (data) => {
-      this.focus = true
 
       if (this.clickPopup && this.clickPopup.parent) {
         this.clickPopup.parent.remove(this.clickPopup)
@@ -386,12 +396,12 @@ export default class SkyCar {
       }
       init(data)
 
-      if(res.data) {
+      if (res.data) {
         // 显示起点终点
         const startPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.sourceport)
         const endtPointArr = DATA.MCS2ShelfMap.find(e => e.MSC === res.data.destport)
         this.showStartEndPositionImg(startPointArr?.port, endtPointArr?.port)
-  
+
         // 轨道变色
         this.setCurrentLineState(res.data.pospath)
       }
@@ -472,7 +482,7 @@ export default class SkyCar {
   }
 
   setPopupColor() {
-    
+
     const item = DATA.skyCarStateColorMap[this.state]
 
     const div = this.popup?.element?.children[0]
@@ -606,7 +616,7 @@ export default class SkyCar {
 
     // 有特殊事件时
     if (this.isAnimateSoon) {
-      
+
       this.isAnimateSoon = false
       const animateTargetMsg = this.history[0]
       const { position } = animateTargetMsg
@@ -615,10 +625,10 @@ export default class SkyCar {
 
     } else if (this.fastRun) {
       // 每一帧都动态算一下 this.quickenSpeedTimes
-      
-      
+
+
       if (this.targetCoordinate) {
-        if(this.targetCoordinate < this.coordinate) {
+        if (this.targetCoordinate < this.coordinate) {
           this.run = false
         }
         // computeQuickenSpeedTimes(this, this.targetCoordinate)
@@ -646,7 +656,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? 4 : 1.2
+        this.quickenSpeedTimes = totalIndex > 500 ? 3.2 : 1
       }
     }
 
@@ -666,7 +676,7 @@ export default class SkyCar {
 
           // 如果这根线到尽头了，找nextLine
         } else if (this_.nextLine.length) {
-          
+
           this_.line = this_.nextLine[0].replace('_', '-')
           this_.lineIndex = 0
 

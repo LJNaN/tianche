@@ -161,7 +161,7 @@ function handleItem(item) {
       const instance = STATE.sceneList.skyCarList.find(e => e.id === searchText.value)
       if (instance) {
 
-
+        instance.focus = true
         instance.initClickPopup()
         // 车子在当前轨道上走了多少进度
         const progress = instance.lineIndex / STATE.sceneList.linePosition[instance.line].length
