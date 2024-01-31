@@ -839,7 +839,7 @@ function search(type, id) {
                 letter-spacing: 8px;
                 margin-left: 4px;
                 text-align: center;
-                margin-top: 10%;
+                margin-top: 8%;
               ">
                 ${title}
               </p>
@@ -850,8 +850,7 @@ function search(type, id) {
                 width: 85%;
                 margin: 4% auto 0 auto;
                 height: 47vh;
-                overflow: scroll;
-                pointer-events: all;
+                                pointer-events: all;
               ">
               ${textValue}
               </div>
@@ -974,7 +973,7 @@ function search(type, id) {
                     letter-spacing: 8px;
                     margin-left: 4px;
                     text-align: center;
-                    margin-top: 10%;
+                    margin-top: 8%;
                   ">
                     ${title}
                   </p>
@@ -985,8 +984,7 @@ function search(type, id) {
                     width: 85%;
                     margin: 4% auto 0 auto;
                     height: 47vh;
-                    overflow: scroll;
-                    pointer-events: all;
+                                        pointer-events: all;
                   ">
                   ${textValue}
                   </div>
@@ -1114,7 +1112,7 @@ function search(type, id) {
                 letter-spacing: 8px;
                 margin-left: 4px;
                 text-align: center;
-                margin-top: 10%;
+                margin-top: 8%;
               ">
                 ${title}
               </p>
@@ -1125,8 +1123,7 @@ function search(type, id) {
                 width: 85%;
                 margin: 4% auto 0 auto;
                 height: 47vh;
-                overflow: scroll;
-                pointer-events: all;
+                                pointer-events: all;
               ">
               ${textValue}
               </div>
@@ -1282,7 +1279,7 @@ function search(type, id) {
                       letter-spacing: 8px;
                       margin-left: 4px;
                       text-align: center;
-                      margin-top: 10%;
+                      margin-top: 8%;
                     ">
                       ${title}
                     </p>
@@ -1293,8 +1290,7 @@ function search(type, id) {
                       width: 85%;
                       margin: 4% auto 0 auto;
                       height: 47vh;
-                      overflow: scroll;
-                      pointer-events: all;
+                                            pointer-events: all;
                     ">
                     ${textValue}
                     </div>
@@ -1490,7 +1486,7 @@ function clickInstance(obj, index) {
           letter-spacing: 8px;
           margin-left: 4px;
           text-align: center;
-          margin-top: 10%;
+          margin-top: 8%;
         ">
           ${title}
         </p>
@@ -1501,8 +1497,7 @@ function clickInstance(obj, index) {
           width: 85%;
           margin: 4% auto 0 auto;
           height: 47vh;
-          overflow: scroll;
-          pointer-events: all;
+                    pointer-events: all;
         ">
         ${textValue}
         </div>
@@ -1653,7 +1648,7 @@ function clickInstance(obj, index) {
           letter-spacing: 8px;
           margin-left: 4px;
           text-align: center;
-          margin-top: 10%;
+          margin-top: 8%;
         ">
           ${title}
         </p>
@@ -1664,8 +1659,7 @@ function clickInstance(obj, index) {
           width: 85%;
           margin: 4% auto 0 auto;
           height: 47vh;
-          overflow: scroll;
-          pointer-events: all;
+                    pointer-events: all;
         ">
         ${textValue}
         </div>

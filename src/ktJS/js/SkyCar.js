@@ -52,16 +52,16 @@ export default class SkyCar {
   }
 
   set focus(val) {
-    console.log(val)
     this._focus = val
-
     if (!val) {
-      if (this.startPopup && this.startPopup.parent) {
-        this.startPopup.parent.remove(this.startPopup)
+      if (this.startPopup) {
+        this.startPopup.visible = false
+        this.startPopup.parent && this.startPopup.parent.remove(this.startPopup)
         this.startPopup = null
       }
-      if (this.endPopup && this.endPopup.parent) {
-        this.endPopup.parent.remove(this.endPopup)
+      if (this.endPopup) {
+        this.endPopup.visible = false
+        this.endPopup.parent && this.endPopup.parent.remove(this.endPopup)
         this.endPopup = null
       }
     }
@@ -169,7 +169,7 @@ export default class SkyCar {
   }
 
   initClickPopup() {
-    console.log('this.focus: ', this.focus);
+    
 
     if (this.focus) {
       // 刷新数据
@@ -275,12 +275,12 @@ export default class SkyCar {
             position: absolute;
             background: url('./assets/3d/img/${DATA.skyCarStateColorMap[this.state].img[2]}.png') center / 100% 100% no-repeat;
             width: 30vw;
-            height: 60vh;
-            transform: translate(-50%, -50%);
+            padding-bottom: 4vh;
+            transform: translate(-50%, 0);
             display: flex;
             flex-direction: column;
             left: 50%;
-            top: 50%;
+            top: -50vh;
             z-index: 2;
           ">
           <p style="
@@ -289,7 +289,7 @@ export default class SkyCar {
             letter-spacing: 8px;
             margin-left: 4px;
             text-align: center;
-            margin-top: 10%;
+            margin-top: 8%;
           ">
             ${this.id}
           </p>
@@ -299,8 +299,6 @@ export default class SkyCar {
             flex-direction: column;
             width: 85%;
             margin: 4% auto 0 auto;
-            height: 47vh;
-            overflow: scroll;
             pointer-events: all;
           ">
           ${textValue}

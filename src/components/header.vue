@@ -73,7 +73,7 @@ p {
   width: 100%;
   height: 8%;
   z-index: 2;
-  pointer-events: all;
+  pointer-events: none;
 
   .title {
     position: absolute;
@@ -195,5 +195,9 @@ p {
   width: 50%;
   height: 100%;
   right: 0%;
+}
+
+.right-fill {
+  pointer-events: all;
 }
 </style>

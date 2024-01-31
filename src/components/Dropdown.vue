@@ -225,6 +225,11 @@ function handleItem(item) {
 </script>
 
 <style scoped lang="less">
+
+*{
+  pointer-events: all;
+}
+
 select option {
   background-color: transparent;
 }

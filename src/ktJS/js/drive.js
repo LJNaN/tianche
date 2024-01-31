@@ -68,42 +68,49 @@ export default function drive(wsMessage) {
           if (skyCar.state != 5) {
             skyCar.state = 5
             skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
 
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
           if (skyCar.state != 4) {
             skyCar.state = 4
             skyCar.setPopupColor()
-          }
-
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
-          if (skyCar.state != 3) {
-            skyCar.state = 3
-            skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
 
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
           if (skyCar.state != 2) {
             skyCar.state = 2
             skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1') { // 取货行
-
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoda === '1') { // 取货行
           if (skyCar.state != 0) {
             skyCar.state = 0
             skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoxing === '1') { // 放货行
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoxing === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoda === '1') { // 放货行
           if (skyCar.state != 1) {
             skyCar.state = 1
             skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
+          
+        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
+          if (skyCar.state != 3) {
+            skyCar.state = 3
+            skyCar.setPopupColor()
+            skyCar.initClickPopup()
+          }
+
         } else {
           if (skyCar.state != 3) {
             skyCar.state = 3
             skyCar.setPopupColor()
+            skyCar.initClickPopup()
           }
         }
 
@@ -144,8 +151,6 @@ export default function drive(wsMessage) {
         if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run && skyCar.animationOver) {
           skyCar.catch.parent && skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
-          skyCar.initClickPopup()
-          console.log(2)
         }
 
         // 强制清除取货行中的FOUP
@@ -336,16 +341,12 @@ export default function drive(wsMessage) {
           skyCar.fastRun = false
           skyCar.targetCoordinate = -1
           skyCar.posPath = null
-          skyCar.initClickPopup()
-          console.log(6)
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
           skyCar.targetCoordinate = -1
           skyCar.posPath = null
-          skyCar.initClickPopup()
-          console.log(7)
 
 
         } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
