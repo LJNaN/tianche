@@ -34,8 +34,8 @@ function getData() {
   // let i = 0
   // window.aa = () => { }
   // setInterval(() => {
-  //   if (i >= mockData2.length) i = 0
-  //   drive(mockData2[i])
+  //   if (i >= mockData4.length) i = 0
+  //   drive(mockData4[i])
   //   i++
   // }, 333)
 
@@ -2531,9 +2531,15 @@ function initKaxia() {
 
 
 // render
+let j = 0
 render()
 function render() {
   requestAnimationFrame(render)
+
+
+  // for(let i = 0; i < 10000000; i++) {
+  //   j += i
+  // }
 
   // 更新当前帧率
   const t = STATE.clock.getElapsedTime()

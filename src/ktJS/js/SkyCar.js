@@ -500,7 +500,7 @@ export default class SkyCar {
 
   runRender() {
     requestAnimationFrame(this.runRender.bind(this))
-    this.runSpeed = Math.round(this.quickenSpeedTimes)
+    this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes)
 
     if (!this.run || !this.animationOver) return
 
@@ -573,7 +573,7 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          skyCar.quickenSpeedTimes = speed * 1.6
+          skyCar.quickenSpeedTimes = speed * 1.0
 
         } else {
           skyCar.quickenSpeedTimes = 0
@@ -600,7 +600,7 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            skyCar.quickenSpeedTimes = speed * 1.6
+            skyCar.quickenSpeedTimes = speed * 1.0
           } else {
             skyCar.quickenSpeedTimes = 0
           }
