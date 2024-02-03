@@ -390,6 +390,10 @@ export default class SkyCar {
           data['卡匣ID'] = res.data[key] || '--'
         } else if (key === 'pospath') {
           data['posPath'] = res.data[key] || '--'
+
+          STATE.sceneList.lineList.forEach(e => {
+            e.material.uniforms.hasPosPath.value = res.data[key] ? 1 : 0
+          })
         }
       }
       init(data)

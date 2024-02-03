@@ -20,24 +20,24 @@ function getData() {
 
   // 真实数据
   // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
-  }
+  // const api = window.wsAPI
+  // const ws = new WebSocket(api)
+  // ws.onmessage = (info) => {
+  //   wsMessage = JSON.parse(info.data)
+  //   drive(wsMessage)
+  // }
 
 
 
   // 模拟数据
   // =======================================
-  // let i = 0
-  // window.aa = () => { }
-  // setInterval(() => {
-  //   if (i >= mockData4.length) i = 0
-  //   drive(mockData4[i])
-  //   i++
-  // }, 333)
+  let i = 0
+  window.aa = () => { }
+  setInterval(() => {
+    if (i >= mockData4.length) i = 0
+    drive(mockData4[i])
+    i++
+  }, 333)
 
   // let j = 0
   // function aaa() {
@@ -344,6 +344,7 @@ function handleLine() {
     uniform float startLineProgress;
     uniform float time;
     uniform float lineLong;
+    uniform int hasPosPath;
 
 
     varying vec2 vUv; // 接收从顶点着色器传递过来的纹理坐标
@@ -362,7 +363,10 @@ function handleLine() {
 
 
       
-      if (next == 1) {
+      if (hasPosPath == 0) {
+        color = vec4(0.7,0.7,0.7,1.);
+
+      } else if (next == 1) {
         color = vec4(0.05,0.04,1.0,1.);
         color.a = blockMask;
 
@@ -371,7 +375,6 @@ function handleLine() {
         color.a = blockMask;
         
       } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
-
         if(isEndLine == 1) {
           if(vUv.x > endLineProgress) {
             color = vec4(0.7,0.7,0.7,1.);
@@ -451,7 +454,8 @@ function handleLine() {
       isStartLine: { value: 0 },
       startLineProgress: { value: 0.0 },
       time: { value: 0.0 },
-      lineLong: { value: 1.0 }
+      lineLong: { value: 1.0 },
+      hasPosPath: { value: 0 }
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader,
