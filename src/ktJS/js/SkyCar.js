@@ -169,7 +169,7 @@ export default class SkyCar {
   }
 
   initClickPopup() {
-    
+
 
     if (this.focus) {
       // 刷新数据
@@ -413,6 +413,17 @@ export default class SkyCar {
 
   // 显示起点和终点坐标的两个图标
   showStartEndPositionImg(start, end) {
+    if (this.startPopup) {
+      this.startPopup.visible = false
+      this.startPopup.parent && this.startPopup.parent.remove(this.startPopup)
+      this.startPopup = null
+    }
+
+    if (this.endPopup) {
+      this.endPopup.visible = false
+      this.endPopup.parent && this.endPopup.parent.remove(this.endPopup)
+      this.endPopup = null
+    }
 
     if (start) {
       const startP = API.getPositionByKaxiaLocation(start)
@@ -644,7 +655,7 @@ export default class SkyCar {
           continue
         }
 
-        if (STATE.sceneList.skyCarList[i].line === this.line && (STATE.sceneList.skyCarList[i].lineIndex < (this.lineIndex + 100)) && (STATE.sceneList.skyCarList[i].lineIndex > this.lineIndex)) {
+        if (STATE.sceneList.skyCarList[i].line === this.line && (STATE.sceneList.skyCarList[i].lineIndex < (this.lineIndex + 200)) && (STATE.sceneList.skyCarList[i].lineIndex > this.lineIndex)) {
           this.quickenSpeedTimes = 0
           runFlag = false
           break
@@ -658,7 +669,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? 3.2 : 1
+        this.quickenSpeedTimes = totalIndex > 500 ? 3 : 1
       }
     }
 
@@ -737,7 +748,13 @@ export default class SkyCar {
       pospath = this.posPath
     }
 
-    if (!pospath) return
+    if (!pospath) {
+      STATE.sceneList.lineList.forEach(e => {
+        e.material.uniforms.hasPosPath.value = 0
+      })
+      this.posPath = null
+      return
+    }
 
     const pospassArr = pospath.split(',')
     const pathArr = pospassArr.slice(0, -1)
