@@ -367,11 +367,11 @@ function handleLine() {
         color = vec4(0.7,0.7,0.7,1.);
 
       } else if (next == 1) {
-        color = vec4(0.05,0.04,1.0,1.);
+        color = vec4(0.0,0.2,0.0,1.);
         color.a = blockMask;
 
       } else if(pass == 1) {
-        color = vec4(0.2,0.0,0.0,1.);
+        color = vec4(0.0,0.0,0.2,1.);
         color.a = blockMask;
         
       } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
@@ -380,11 +380,11 @@ function handleLine() {
             color = vec4(0.7,0.7,0.7,1.);
             
           } else if (vUv.x < progress) {
-            color = vec4(0.2,0.0,0.0,1.);
+            color = vec4(0.0,0.0,0.2,1.);
             color.a = blockMask;
             
           } else {
-            color = vec4(0.05,0.04,1.0,1.);
+            color = vec4(0.0,0.2,0.0,1.);
             color.a = blockMask;
           }
           
@@ -393,21 +393,21 @@ function handleLine() {
             color = vec4(0.7,0.7,0.7,1.);
 
           } else if (vUv.x < progress) {
-            color = vec4(0.2,0.0,0.0,1.);
+            color = vec4(0.0,0.0,0.2,1.);
             color.a = blockMask;
 
           } else {
-            color = vec4(0.05,0.04,1.0,1.);
+            color = vec4(0.0,0.2,0.0,1.);
             color.a = blockMask;
           }
 
         } else {
           if(vUv.x > progress) {
-            color = vec4(0.05,0.04,1.0,1.);
+            color = vec4(0.0,0.2,0.0,1.);
             color.a = blockMask;
 
           } else {
-            color = vec4(0.2,0.0,0.0,1.);
+            color = vec4(0.0,0.0,0.2,1.);
             color.a = blockMask;
           }
         }
@@ -417,7 +417,7 @@ function handleLine() {
           color = vec4(0.7,0.7,0.7,1.); 
 
         } else {
-          color = vec4(0.05,0.04,1.0,1.);
+          color = vec4(0.0,0.2,0.0,1.);
           color.a = blockMask;
         }
 
@@ -426,7 +426,7 @@ function handleLine() {
           color = vec4(0.7,0.7,0.7,1.);
 
         } else {
-          color = vec4(0.2,0.0,0.0,1.);
+          color = vec4(0.0,0.0,0.2,1.);
           color.a = blockMask;
         }
       }

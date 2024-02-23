@@ -622,7 +622,7 @@ export default class SkyCar {
 
         } else {
           // 都查求不到这个轨道，随便吧
-          skyCar.quickenSpeedTimes = 3
+          skyCar.quickenSpeedTimes = 2.5
         }
       }
     }
@@ -669,7 +669,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? 3 : 1
+        this.quickenSpeedTimes = totalIndex > 500 ? 2.5 : 1
       }
     }
 

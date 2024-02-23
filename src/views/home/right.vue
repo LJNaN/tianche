@@ -323,7 +323,7 @@ const option2 = reactive({
   ],
   yAxis: [
     {
-      max: 100000,
+      max: 3000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -455,7 +455,7 @@ const option3 = reactive({
   ],
   yAxis: [
     {
-      max: 3000,
+      max: 100000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -547,20 +547,6 @@ function getData() {
     option.series[2].data = ohbRatio
   }).catch(() => { })
 
-  GetMTBFInfo().then(res => {
-    const splitArr = res.data.slice(0, 15)
-    const xAxis = []
-    const value = []
-    splitArr.forEach(e => {
-      const time = e.mfgdate.substring(4, 6) + '-' + e.mfgdate.substring(6, 8)
-      xAxis.push(time)
-      value.push(e.mtbf)
-    })
-
-    option2.xAxis[0].data = xAxis
-    option2.series[0].data = value
-  }).catch(() => { })
-
   GetMCBFInfo().then(res => {
     const splitArr = res.data.slice(0, 15)
     const xAxis = []
@@ -569,6 +555,20 @@ function getData() {
       const time = e.mfgdate.substring(4, 6) + '-' + e.mfgdate.substring(6, 8)
       xAxis.push(time)
       value.push(e.mcbf)
+    })
+
+    option2.xAxis[0].data = xAxis
+    option2.series[0].data = value
+  }).catch(() => { })
+
+  GetMTBFInfo().then(res => {
+    const splitArr = res.data.slice(0, 15)
+    const xAxis = []
+    const value = []
+    splitArr.forEach(e => {
+      const time = e.mfgdate.substring(4, 6) + '-' + e.mfgdate.substring(6, 8)
+      xAxis.push(time)
+      value.push(e.mtbf)
     })
 
     option3.xAxis[0].data = xAxis
