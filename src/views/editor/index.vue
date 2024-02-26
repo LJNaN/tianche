@@ -91,6 +91,11 @@ import bus from '@/utils/mitt'
 import { STATE } from "@/ktJS/STATE";
 import { ElMessage } from 'element-plus'
 
+const editorFlag = localStorage.getItem('editorFlag')
+if(!editorFlag || editorFlag !== '1') {
+  localStorage.setItem('editorFlag', '1')
+  location.reload()
+}
 
 
 const modelList = JSON.parse(JSON.stringify(DATA.deviceTypeMap))

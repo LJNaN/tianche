@@ -7,7 +7,7 @@ var setupRAF = function () { var lastTime = 0; var vendors = ["ms", "moz", "webk
 function create() {
     //背景底纹
     KT_loading = document.createElement('div');
-    KT_loading.style.background = '#222 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAFVBMVEUqKiopKSkoKCgjIyMuLi4kJCQtLS0dJckpAAAAO0lEQVR42iXLAQoAUQhCQSvr/kfe910jHIikElsl5qVFa1iE5f0Pom/CNZdbNM6756lQ41NInMfuFPgAHVEAlGk4lvIAAAAASUVORK5CYII=")';
+    KT_loading.style.background = '#333 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAFVBMVEUqKiopKSkoKCgjIyMuLi4kJCQtLS0dJckpAAAAO0lEQVR42iXLAQoAUQhCQSvr/kfe910jHIikElsl5qVFa1iE5f0Pom/CNZdbNM6756lQ41NInMfuFPgAHVEAlGk4lvIAAAAASUVORK5CYII=")';
     KT_loading.style.position = "absolute";
     KT_loading.style.width = "100%";
     KT_loading.style.height = "100%";
@@ -20,13 +20,13 @@ function create() {
     //进度文字
     KT_loadText = document.createElement('div');
     KT_loadText.style.position = "absolute";
-    KT_loadText.style.width = "40px";
-    KT_loadText.style.height = "20px";
+    KT_loadText.style.width = "50px";
+    KT_loadText.style.height = "30px";
     KT_loadText.style.top = "50%";
     KT_loadText.style.marginTop = "-30px";
     KT_loadText.style.left = "50%";
     KT_loadText.style.marginLeft = "-20px";
-    KT_loadText.style.color = "#ff0000";
+    KT_loadText.style.color = "#ffffff";
     KT_loadText.style.fontSize = "14px";
     KT_loadText.style.textAlign = "center";
     KT_loadText.innerHTML = "0%";

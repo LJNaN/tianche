@@ -18,8 +18,11 @@
 
   <div class="deviceShow" @click="handleDeviceShow()"
     :style="{ background: `url(./assets/3d/img/${VUEDATA.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
+  </div>
 
 
+  <div class="replay" @click="handleReplay()"
+    :style="{ background: `url(./assets/3d/img/${VUEDATA.isReplayMode.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
   </div>
 </template>
 
@@ -27,6 +30,7 @@
 import { VUEDATA } from '@/VUEDATA'
 import { ref } from 'vue'
 import { API } from '@/ktJS/API'
+import router from '@/router/index'
 
 let drawerActive = ref(false)
 const drawerList = [
@@ -93,6 +97,11 @@ function handleDrawerItem(id) {
 
 
 }
+
+
+function handleReplay() {
+  router.push('/replay')
+}
 </script>
 
 <style lang="less" scoped>
@@ -144,7 +153,15 @@ function handleDrawerItem(id) {
   height: 26px;
   top: 14%;
   left: 0.9%;
+}
 
-
+.replay {
+  cursor: pointer;
+  pointer-events: all;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 18%;
+  left: 0.9%;
 }
 </style>

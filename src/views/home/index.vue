@@ -6,9 +6,15 @@ import Right from './right.vue'
 import Left from './left.vue'
 import Bottom from './bottom.vue'
 import Test from './test.vue'
-import ExtensionBtn from './extensionBtn.vue'
+import ExtensionBtn from '@/components/extensionBtn.vue'
 import Compass from '@/components/compass.vue';
 import { VUEDATA } from '@/VUEDATA'
+
+const editorFlag = localStorage.getItem('editorFlag')
+if(!editorFlag || editorFlag !== '2') {
+  localStorage.setItem('editorFlag', '2')
+  location.reload()
+}
 </script>
 
 <template>

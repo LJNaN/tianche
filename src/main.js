@@ -13,11 +13,15 @@ import router from "./router/index.js"
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@/utils/dateFormat.js'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+
 
 const app = createApp(App)
-app.use(ElementPlus)
+app.use(ElementPlus, {
+  locale: zhCn,
+})
 app.use(router)
 
 // if(new Date() * 1 < new Date('2023-10-16') * 1) {
-  app.mount('#app')
+app.mount('#app')
 // }

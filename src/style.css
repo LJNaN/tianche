@@ -103,3 +103,8 @@ body {
     transform: translate(-50%, 40%);
   }
 }
+
+:root {
+  --el-color-primary: #f1682a !important;
+  --el-select-input-focus-border-color: #FFFFFF !important;
+}

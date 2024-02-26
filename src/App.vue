@@ -8,6 +8,10 @@ if(location.hash.includes('editor')) {
   VUEDATA.isEditorMode.value = true
 }
 
+// if(location.hash === '#/replay') {
+//   location.href = location.origin
+// }
+
 
 progress.init()
 
