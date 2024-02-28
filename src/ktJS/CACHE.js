@@ -11,6 +11,8 @@ const goods = []
 
 let oldClock = 0
 
+let currentReplayData = [] // 当前时间回溯数据
+
 export const CACHE = {
   container,
   instanceTransformInfo,
@@ -20,4 +22,5 @@ export const CACHE = {
   goods,
   oldClock,
   removed,
+  currentReplayData
 }

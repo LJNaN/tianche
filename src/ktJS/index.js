@@ -152,7 +152,9 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
 
 
             TU.init(container, Bol3D)
-            API.getData()
+
+            const getData = new API.GetData()
+            STATE.getData = getData
             API.initKaxia()
             API.getAnimationList()
             API.handleLine()
@@ -282,7 +284,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
                 STATE.sceneList.skyCarList.forEach(e2 => {
                   e2.popup.visible = true
                   e2.focus = false
-                  if (e2.clickPopup && e2.clickPopup.parent ) {
+                  if (e2.clickPopup && e2.clickPopup.parent) {
                     e2.clickPopup.element.remove()
                     e2.clickPopup.parent.remove(e2.clickPopup)
                     e2.clickPopup = null

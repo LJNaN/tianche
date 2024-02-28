@@ -22,7 +22,7 @@
 
 
   <div class="replay" @click="handleReplay()"
-    :style="{ background: `url(./assets/3d/img/${VUEDATA.isReplayMode.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
+    :style="{ background: `url(./assets/3d/img/${VUEDATA.isReplayMode.value ? 79 : 78}.png) center / 100% 100% no-repeat` }">
   </div>
 </template>
 
@@ -31,6 +31,7 @@ import { VUEDATA } from '@/VUEDATA'
 import { ref } from 'vue'
 import { API } from '@/ktJS/API'
 import router from '@/router/index'
+import { STATE } from '@/ktJS/STATE'
 
 let drawerActive = ref(false)
 const drawerList = [
@@ -100,7 +101,28 @@ function handleDrawerItem(id) {
 
 
 function handleReplay() {
-  router.push('/replay')
+  STATE.sceneList.skyCarList.forEach(e => {
+    e.dispose()
+  })
+  VUEDATA.replayPaused.value = true // 时间回溯暂停
+  VUEDATA.replayLoop.value = true // 一直循环
+  VUEDATA.replayTimes.value = 1 // 时间回溯倍率
+  VUEDATA.replayIndex.value = 0 // 时间回溯当前索引
+  VUEDATA.replaySlider.value = 0 // 回溯进度条的千分比
+  VUEDATA.replayProgressTime.value = '0000-00-00 00:00:00'
+
+  if (VUEDATA.isReplayMode.value) {
+    VUEDATA.isReplayMode.value = false
+    STATE.getData.reset()
+    router.push('/')
+    STATE.getData.run()
+    
+  } else {
+    VUEDATA.isReplayMode.value = true
+    STATE.getData.closeLink()
+    STATE.getData.reset()
+    router.push('/replay')
+  }
 }
 </script>
 

@@ -1,10 +1,13 @@
 import { VUEDATA } from "@/VUEDATA"
 import { API } from '@/ktJS/API.js'
+import { STATE } from '@/ktJS/STATE.js'
 import { DATA } from '@/ktJS/DATA.js'
+import { CACHE } from '@/ktJS/CACHE.js'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 
 // 天车类
 export default class SkyCar {
+  disposed = false            // 已被销毁
   coordinate = 0              // 当前坐标
   history = []                // 10条历史数据
   state = 0                   // 状态
@@ -36,6 +39,8 @@ export default class SkyCar {
   isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
   targetCoordinate = -1       // 有动画时的目标坐标
+
+  replayRun = true            // 回溯时是否运行
 
 
   constructor(opt) {
@@ -514,8 +519,18 @@ export default class SkyCar {
   }
 
   runRender() {
+    if (this.disposed) {
+      return
+    }
+
     requestAnimationFrame(this.runRender.bind(this))
-    this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes)
+    if (!this.replayRun) {
+      return
+    }
+
+
+
+    this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes * VUEDATA.replayTimes.value)
 
     if (!this.run || !this.animationOver) return
 
@@ -588,7 +603,7 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          skyCar.quickenSpeedTimes = speed * 1.0
+          skyCar.quickenSpeedTimes = speed / VUEDATA.replayTimes.value
 
         } else {
           skyCar.quickenSpeedTimes = 0
@@ -615,7 +630,7 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            skyCar.quickenSpeedTimes = speed * 1.0
+            skyCar.quickenSpeedTimes = speed / VUEDATA.replayTimes.value
           } else {
             skyCar.quickenSpeedTimes = 0
           }
@@ -637,14 +652,21 @@ export default class SkyCar {
       computeQuickenSpeedTimes(this, position)
 
     } else if (this.fastRun) {
-      // 每一帧都动态算一下 this.quickenSpeedTimes
+      // 目标停车点
+      if (this.targetCoordinate != -1) {
+        const targetLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.targetCoordinate && e.endCoordinate > this.targetCoordinate)
+        if (targetLine && this.line === targetLine.name.replace('_', '-')) {
+          if (this.targetCoordinate > (this.coordinate + VUEDATA.replayTimes.value)) {
+            this.run = true
 
-
-      if (this.targetCoordinate) {
-        if (this.targetCoordinate < this.coordinate) {
-          this.run = false
+          } else {
+            // this.coordinate = this.targetCoordinate
+            // const position = API.getPositionByCoordinate(this.coordinate)
+            // this.line = position.line
+            // this.lineIndex = position.lineIndex
+            this.run = false
+          }
         }
-        // computeQuickenSpeedTimes(this, this.targetCoordinate)
       }
 
     } else {
@@ -669,7 +691,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? 2.5 : 1
+        this.quickenSpeedTimes = totalIndex > 500 ? (2.5 / VUEDATA.replayTimes.value) : (1 / VUEDATA.replayTimes.value)
       }
     }
 
@@ -677,8 +699,8 @@ export default class SkyCar {
     if (this_.run && this_.animationOver) {
       if (this_.line && STATE.sceneList.linePosition[this_.line]) {
         // 如果前面还有路，就往前走
-        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed) {
-          this_.lineIndex += this_.runSpeed
+        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed * VUEDATA.replayTimes.value) {
+          this_.lineIndex += Math.round(this_.runSpeed * VUEDATA.replayTimes.value)
 
           const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
           const lineMap = STATE.sceneList.linePosition[this_.line]
@@ -725,8 +747,8 @@ export default class SkyCar {
 
       // 解决闪烁问题
       if (!this_.oldPosition || currentPosition.x != this_.oldPosition.x || currentPosition.z != this_.oldPosition.z) {
-        this_.skyCarMesh.lookAt(lookAtPosition)
-        this_.skyCarMesh.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
+        this_.skyCarMesh?.lookAt(lookAtPosition)
+        this_.skyCarMesh?.position.set(currentPosition.x, currentPosition.y, currentPosition.z)
       }
       this_.oldPosition = currentPosition
       cb && cb()
@@ -865,7 +887,7 @@ export default class SkyCar {
     function animate() {
       requestAnimationFrame(animate)
 
-      this_.animationSpeed = (1 / (STATE.frameRate / 60)) * this_.animationSpeedTimes
+      this_.animationSpeed = (1 / (STATE.frameRate / 60)) * this_.animationSpeedTimes * VUEDATA.replayTimes.value
 
       this_.mixer.update(this_.animationSpeed)
     }
@@ -1066,5 +1088,22 @@ export default class SkyCar {
         cb && cb()
       }
     })
+  }
+
+  dispose() {
+    const currentInstanceIndex = STATE.sceneList.skyCarList.findIndex(e => e === this)
+    if (currentInstanceIndex >= 0) {
+      STATE.sceneList.skyCarList.splice(currentInstanceIndex, 1)
+    }
+    this.disposed = true
+    this.skyCarMesh.visible = false
+    this.popup && (this.popup.visible = false)
+    this.clickPopup && (this.clickPopup.visible = false)
+    if (this.skyCarMesh.parent) {
+      this.popup?.parent && this.popup.parent.remove(this.popup)
+      this.clickPopup?.parent && this.clickPopup.parent.remove(this.clickPopup)
+      this.skyCarMesh.parent.remove(this.skyCarMesh)
+      this.skyCarMesh = null
+    }
   }
 }

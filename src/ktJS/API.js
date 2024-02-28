@@ -13,38 +13,105 @@ import { VUEDATA } from '@/VUEDATA.js'
 import SkyCar from './js/SkyCar.js'
 import drive from './js/drive.js'
 
-// 获取数据
-function getData() {
-  STATE.sceneList.skyCarList = []
-  let wsMessage = null
+// 获取数据  有data 模拟/回溯 无data 线上
+class GetData {
+  currentReplayData = null
+  replayTimer = null
+  ws = null
 
-  // 真实数据
-  // ======================================
-  const api = window.wsAPI
-  const ws = new WebSocket(api)
-  ws.onmessage = (info) => {
-    wsMessage = JSON.parse(info.data)
-    drive(wsMessage)
+  constructor() {
+    this.run()
   }
 
+  run(replayData) {
+    this.closeLink()
 
+    if (replayData) {
+      this.currentReplayData = replayData
+    } else {
+      this.currentReplayData = null
+    }
 
-  // 模拟数据
-  // =======================================
-  // let i = 0
-  // window.aa = () => { }
-  // setInterval(() => {
-  //   if (i >= mockData4.length) i = 0
-  //   drive(mockData4[i])
-  //   i++
-  // }, 333)
+    if (!this.currentReplayData) {
+      // 真实数据
+      // ======================================
+      const api = window.wsAPI
+      const ws = new WebSocket(api)
+      this.ws = ws
+      this.ws.onmessage = (info) => {
+        const wsMessage = JSON.parse(info.data)
+        drive(wsMessage)
+      }
 
-  // let j = 0
-  // function aaa() {
-  //   drive(mockData2[j])
-  //   j++
-  // }
-  // window.aaa = aaa
+    } else {
+      // 模拟数据/回溯数据
+      // =======================================
+
+      STATE.sceneList.skyCarList.forEach(e => {
+        e.replayRun = true
+      })
+
+      const replayTimer = setInterval(() => {
+        if (VUEDATA.replayIndex.value >= this.currentReplayData.length - 1) {
+          if (VUEDATA.replayLoop.value) {
+            this.reset()
+            setTimeout(() => {
+              this.reset()
+            }, 0)
+            VUEDATA.replayIndex.value = 0
+            drive(this.currentReplayData[VUEDATA.replayIndex.value])
+            VUEDATA.replayIndex.value++
+            VUEDATA.replaySlider.value = Math.floor(VUEDATA.replayIndex.value / this.currentReplayData.length * 1000)
+            VUEDATA.replayProgressTime.value = new Date(STATE.getData.currentReplayData[VUEDATA.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
+          } else {
+            VUEDATA.replayPaused.value = true
+            this.pause()
+          }
+
+        } else {
+          drive(this.currentReplayData[VUEDATA.replayIndex.value])
+          VUEDATA.replayIndex.value++
+          VUEDATA.replaySlider.value = Math.floor(VUEDATA.replayIndex.value / this.currentReplayData.length * 1000)
+          VUEDATA.replayProgressTime.value = new Date(STATE.getData.currentReplayData[VUEDATA.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
+        }
+      }, 333 / VUEDATA.replayTimes.value / 1.3)
+      this.replayTimer = replayTimer
+
+      // setInterval(() => {
+      // if (i >= mockData4.length) i = 0
+      // drive(mockData4[i])
+      // i++
+      // }, 333)
+    }
+  }
+
+  pause() {
+    if (this.replayTimer) {
+      clearInterval(this.replayTimer)
+      this.replayTimer = null
+    }
+
+    STATE.sceneList.skyCarList.forEach(e => {
+      e.replayRun = false
+    })
+  }
+
+  reset() {
+    STATE.sceneList.skyCarList.forEach(e => {
+      e.dispose()
+    })
+  }
+
+  closeLink() {
+    if (this.ws) {
+      this.ws.close()
+      this.ws = null
+    }
+    if (this.replayTimer) {
+      clearInterval(this.replayTimer)
+      this.replayTimer = null
+    }
+  }
 }
 
 
@@ -2533,6 +2600,18 @@ function initKaxia() {
   })
 }
 
+function getPositionByCoordinate(c) {
+  const coordinate = Number(c)
+  const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < coordinate && e.endCoordinate > coordinate)
+  const lineMap = STATE.sceneList.linePosition[map.name.replace('_', '-')]
+  const lineProgress = (coordinate - map.startCoordinate) / (map.endCoordinate - map.startCoordinate)
+  const index = Math.floor(lineMap.length * lineProgress)
+  return {
+    line: map.name.replace('_', '-'),
+    lineIndex: index
+  }
+}
+
 
 // render
 let j = 0
@@ -2564,7 +2643,7 @@ function render() {
 
 export const API = {
   ...TU,
-  getData,
+  GetData,
   cameraAnimation,
   loadGUI,
   handleLine,
@@ -2581,5 +2660,6 @@ export const API = {
   deviceShow,
   getPositionByKaxiaLocation,
   initKaxia,
+  getPositionByCoordinate,
   getBayState
 }

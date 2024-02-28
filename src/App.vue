@@ -8,9 +8,9 @@ if(location.hash.includes('editor')) {
   VUEDATA.isEditorMode.value = true
 }
 
-// if(location.hash === '#/replay') {
-//   location.href = location.origin
-// }
+if(location.hash === '#/replay') {
+  location.href = location.origin
+}
 
 
 progress.init()
@@ -27,7 +27,7 @@ VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
 <template>
   <Scene />
   <router-view></router-view>
-  <p class="version">Version 1.9.10</p>
+  <p class="version">Version 1.9.11</p>
 </template>
 
 <style scoped>

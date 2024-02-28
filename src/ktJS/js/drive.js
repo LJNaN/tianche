@@ -1,5 +1,6 @@
 import SkyCar from './SkyCar.js'
 import { VUEDATA } from '@/VUEDATA.js'
+import { STATE } from '@/ktJS/STATE.js'
 import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
 
 
@@ -98,7 +99,7 @@ export default function drive(wsMessage) {
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
-          
+
         } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
           if (skyCar.state != 3) {
             skyCar.state = 3
@@ -376,6 +377,7 @@ export default function drive(wsMessage) {
 
 
       } else { // 新建车
+
         const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
         STATE.sceneList.skyCarList.push(newCar)
         newCar.history = [{
