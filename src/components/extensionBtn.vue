@@ -1,7 +1,10 @@
 
 <template>
-  <div class="chartShow" @click="clickDrawer()"
-    :style="{ background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat` }">
+  <div class="chartShow" @click="clickDrawer()" :style="{
+    background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat`,
+    cursor: `${VUEDATA.isReplayMode.value ? 'no-drop' : 'pointer'}`
+  }
+    ">
 
     <div v-show="drawerActive" class="chartShow-list">
       <div class="chartShow-list-item" v-for="item in drawerList" :key="item.id" @click.stop="handleDrawerItem(item.id)"
@@ -57,7 +60,9 @@ function handleDeviceShow() {
 }
 
 function clickDrawer() {
-  drawerActive.value = !drawerActive.value
+  if (!VUEDATA.isReplayMode.value) {
+    drawerActive.value = !drawerActive.value
+  }
 }
 
 function handleDrawerItem(id) {
@@ -101,22 +106,18 @@ function handleDrawerItem(id) {
 
 
 function handleReplay() {
-  STATE.sceneList.skyCarList.forEach(e => {
-    e.dispose()
-  })
+  STATE.getData.reset()
   VUEDATA.replayPaused.value = true // 时间回溯暂停
-  VUEDATA.replayLoop.value = true // 一直循环
   VUEDATA.replayTimes.value = 1 // 时间回溯倍率
   VUEDATA.replayIndex.value = 0 // 时间回溯当前索引
   VUEDATA.replaySlider.value = 0 // 回溯进度条的千分比
-  VUEDATA.replayProgressTime.value = '0000-00-00 00:00:00'
 
   if (VUEDATA.isReplayMode.value) {
     VUEDATA.isReplayMode.value = false
     STATE.getData.reset()
     router.push('/')
     STATE.getData.run()
-    
+
   } else {
     VUEDATA.isReplayMode.value = true
     STATE.getData.closeLink()

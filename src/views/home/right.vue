@@ -323,7 +323,6 @@ const option2 = reactive({
   ],
   yAxis: [
     {
-      max: 3000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,
@@ -455,7 +454,6 @@ const option3 = reactive({
   ],
   yAxis: [
     {
-      max: 100000,
       nameTextStyle: {
         color: "#fff",
         fontSize: 12,

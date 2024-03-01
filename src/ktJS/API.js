@@ -1,3 +1,4 @@
+import {ref} from 'vue'
 import { STATE } from './STATE.js'
 import { CACHE } from './CACHE.js'
 import { DATA } from './DATA.js'
@@ -15,7 +16,7 @@ import drive from './js/drive.js'
 
 // 获取数据  有data 模拟/回溯 无data 线上
 class GetData {
-  currentReplayData = null
+  currentReplayData = ref([])
   replayTimer = null
   ws = null
 
@@ -27,12 +28,12 @@ class GetData {
     this.closeLink()
 
     if (replayData) {
-      this.currentReplayData = replayData
+      this.currentReplayData.value = replayData
     } else {
-      this.currentReplayData = null
+      this.currentReplayData.value = []
     }
 
-    if (!this.currentReplayData) {
+    if (!this.currentReplayData.value.length) {
       // 真实数据
       // ======================================
       const api = window.wsAPI
@@ -52,29 +53,16 @@ class GetData {
       })
 
       const replayTimer = setInterval(() => {
-        if (VUEDATA.replayIndex.value >= this.currentReplayData.length - 1) {
-          if (VUEDATA.replayLoop.value) {
-            this.reset()
-            setTimeout(() => {
-              this.reset()
-            }, 0)
-            VUEDATA.replayIndex.value = 0
-            drive(this.currentReplayData[VUEDATA.replayIndex.value])
-            VUEDATA.replayIndex.value++
-            VUEDATA.replaySlider.value = Math.floor(VUEDATA.replayIndex.value / this.currentReplayData.length * 1000)
-            VUEDATA.replayProgressTime.value = new Date(STATE.getData.currentReplayData[VUEDATA.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
-          } else {
-            VUEDATA.replayPaused.value = true
-            this.pause()
-          }
+        if (VUEDATA.replayIndex.value >= this.currentReplayData.value.length - 1) {
+          VUEDATA.replayPaused.value = true
+          this.pause()
 
         } else {
-          drive(this.currentReplayData[VUEDATA.replayIndex.value])
+          drive(this.currentReplayData.value[VUEDATA.replayIndex.value])
           VUEDATA.replayIndex.value++
-          VUEDATA.replaySlider.value = Math.floor(VUEDATA.replayIndex.value / this.currentReplayData.length * 1000)
-          VUEDATA.replayProgressTime.value = new Date(STATE.getData.currentReplayData[VUEDATA.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
+          VUEDATA.replaySlider.value = Math.floor(VUEDATA.replayIndex.value / this.currentReplayData.value.length * 1000)
         }
-      }, 333 / VUEDATA.replayTimes.value / 1.3)
+      }, 333 / VUEDATA.replayTimes.value)
       this.replayTimer = replayTimer
 
       // setInterval(() => {
@@ -97,12 +85,13 @@ class GetData {
   }
 
   reset() {
-    STATE.sceneList.skyCarList.forEach(e => {
-      e.dispose()
-    })
+    while(STATE.sceneList.skyCarList.length) {
+      STATE.sceneList.skyCarList[0].dispose()
+    }
   }
 
   closeLink() {
+    this.currentReplayData.value = []
     if (this.ws) {
       this.ws.close()
       this.ws = null

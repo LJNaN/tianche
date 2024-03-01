@@ -64,7 +64,7 @@ export function GetBayStateInfo(id = '') {
 }
 
 // 历史轨迹、时间回溯接口
-export function GetReplayData(date) {
+export function GetReplayData(date, size = 10800) {
   if (!date || date.length < 2) return
 
   const params = {
@@ -90,6 +90,7 @@ export function GetReplayData(date) {
         ]
       }
     },
+    size,
     sort: [
       {
         createTime: {
