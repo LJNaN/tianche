@@ -7,7 +7,7 @@
     <div class="timepicker">
       <div class="timepicker-label">回溯时间:</div>
       <el-date-picker v-model="timePark" type="datetimerange" range-separator="-" start-placeholder="开始时间"
-        end-placeholder="结束时间" :teleported="false" :disabled-date="disabledDate" @change="datePickerChange" />
+        end-placeholder="结束时间" :teleported="false" :disabled-date="disabledDate" @change="datePickerChange" :clearable="false" />
       <div class="timepicker-confirm" @click="handleConfirm">确定</div>
     </div>
 
@@ -61,7 +61,9 @@ const replayProgressTime = computed(() => {
 
 async function handleConfirm() {
   handleStop()
-  const long = Math.floor((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000 * 10800)
+  let long = Math.floor((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000 * 10800)
+  if (long > 10000) long = 10000
+
   const res = await GetReplayData([
     timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
     timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
@@ -74,19 +76,20 @@ async function handleConfirm() {
   const res3 = res2.map(e => e?._source?.data)
   const replayData = []
   for (let i = 0; i < res3.length; i++) {
+    if(res3[i].includes('失败')) {
+      continue
+    }
     res3[i] = JSON.parse(res3[i].replaceAll(' ', '').replace('\r\n天车实时信息:-', ''))
     replayData.push({ VehicleInfo: [res3[i]] })
   }
 
 
-  // const dataTime = mock2.map(e => e.VehicleInfo[0].lastTime)
   const dataTime = replayData.map(e => e.VehicleInfo[0].lastTime)
   let minTime = 0
   let maxTime = 0
   for (let i = 0; i < dataTime.length; i++) {
     dataTime[i] = dataTime[i].slice(0, 10) + ' ' + dataTime[i].slice(10)
     const time = new Date(dataTime[i])
-    // mock2[i].VehicleInfo[0].timeStamp = time * 1
     replayData[i].VehicleInfo[0].timeStamp = time * 1
     if (minTime === 0 || time * 1 < minTime) {
       minTime = time * 1
@@ -97,10 +100,8 @@ async function handleConfirm() {
   }
   sliderTimePark.value = [minTime, maxTime]
 
-  // STATE.getData.currentReplayData.value = mock2
   STATE.getData.currentReplayData.value = replayData
   STATE.getData.run(replayData)
-  // STATE.getData.run(STATE.getData.currentReplayData.value)
 
   VUEDATA.replayPaused.value = false
   VUEDATA.replayIndex.value = 0
@@ -149,6 +150,9 @@ function disabledDate(date) {
   return date > new Date()
 }
 function handlePause() {
+  if (!STATE.getData.currentReplayData.value.length) {
+    return
+  }
   VUEDATA.replayPaused.value = !VUEDATA.replayPaused.value
   STATE.sceneList.skyCarList.forEach(e => {
     e.replayRun = !VUEDATA.replayPaused.value
@@ -183,15 +187,13 @@ function selectChange(e) {
   }
 }
 function sliderChange(e) {
+
   if (sliderTimePark.value.length) {
     const progress = e / 1000
     VUEDATA.replayIndex.value = Math.floor(progress * STATE.getData.currentReplayData.value.length)
     if (VUEDATA.replayIndex.value >= STATE.getData.currentReplayData.value.length) {
       VUEDATA.replayIndex.value = STATE.getData.currentReplayData.value.length - 1
     }
-    VUEDATA.replayPaused.value = true
-    STATE.getData.pause()
-
     const currentData = STATE.getData.currentReplayData.value[VUEDATA.replayIndex.value]
     const car = STATE.sceneList.skyCarList.find(e => e.id === currentData.VehicleInfo[0].ohtID)
 
@@ -206,7 +208,8 @@ function sliderChange(e) {
 
     const coordinate = Number(currentData.VehicleInfo[0].position)
     const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < coordinate && e.endCoordinate > coordinate)
-    car.line = map.name.replace('_', '-')
+    if(!map) return
+    car.line = map.name.replace('_',  '-')
     const lineMap = STATE.sceneList.linePosition[car.line]
     const lineProgress = (coordinate - map.startCoordinate) / (map.endCoordinate - map.startCoordinate)
     const index = Math.floor(lineMap.length * lineProgress)
@@ -216,8 +219,13 @@ function sliderChange(e) {
     car.lineIndex = index
     car.replayRun = true
     car.fastRun = false
-    VUEDATA.replayPaused.value = false
+
+    const pause = VUEDATA.replayPaused.value
     STATE.getData.run(STATE.getData.currentReplayData.value)
+    if (pause) {
+      VUEDATA.replayPaused.value = true
+      STATE.getData.pause()
+    }
   }
 }
 function datePickerChange(e) {

@@ -73,9 +73,10 @@ const option = reactive({
           str += params[i].seriesName + ": " + params[i].value + "<br/>";
         }
       }
+      str += ""
       return str;
     },
-    extraCssText: "z-index:2",
+    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
   },
   legend: {
     left: "center",
@@ -111,7 +112,8 @@ const option = reactive({
         fontSize: 10
       },
       interval: 0,
-      overflow: 'breakAll'
+      overflow: 'breakAll',
+      rotate: 30,
     },
   },
   yAxis: [

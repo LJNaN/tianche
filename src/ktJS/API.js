@@ -1,4 +1,4 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { STATE } from './STATE.js'
 import { CACHE } from './CACHE.js'
 import { DATA } from './DATA.js'
@@ -48,9 +48,9 @@ class GetData {
       // 模拟数据/回溯数据
       // =======================================
 
-      STATE.sceneList.skyCarList.forEach(e => {
-        e.replayRun = true
-      })
+      // STATE.sceneList.skyCarList.forEach(e => {
+      //   e.replayRun = true
+      // })
 
       const replayTimer = setInterval(() => {
         if (VUEDATA.replayIndex.value >= this.currentReplayData.value.length - 1) {
@@ -85,7 +85,7 @@ class GetData {
   }
 
   reset() {
-    while(STATE.sceneList.skyCarList.length) {
+    while (STATE.sceneList.skyCarList.length) {
       STATE.sceneList.skyCarList[0].dispose()
     }
   }
@@ -423,11 +423,11 @@ function handleLine() {
         color = vec4(0.7,0.7,0.7,1.);
 
       } else if (next == 1) {
-        color = vec4(0.0,0.2,0.0,1.);
+        color = vec4(0.45,0.97,0.24,0.6);
         color.a = blockMask;
 
       } else if(pass == 1) {
-        color = vec4(0.0,0.0,0.2,1.);
+        color = vec4(0.04,0.29,0.96,0.6);
         color.a = blockMask;
         
       } else if (currentFocusLineStartPoint == startPoint && currentFocusLineEndPoint == endPoint) {
@@ -436,11 +436,11 @@ function handleLine() {
             color = vec4(0.7,0.7,0.7,1.);
             
           } else if (vUv.x < progress) {
-            color = vec4(0.0,0.0,0.2,1.);
+            color = vec4(0.04,0.29,0.96,0.6);
             color.a = blockMask;
             
           } else {
-            color = vec4(0.0,0.2,0.0,1.);
+            color = vec4(0.45,0.97,0.24,0.6);
             color.a = blockMask;
           }
           
@@ -449,21 +449,21 @@ function handleLine() {
             color = vec4(0.7,0.7,0.7,1.);
 
           } else if (vUv.x < progress) {
-            color = vec4(0.0,0.0,0.2,1.);
+            color = vec4(0.04,0.29,0.96,0.6);
             color.a = blockMask;
 
           } else {
-            color = vec4(0.0,0.2,0.0,1.);
+            color = vec4(0.45,0.97,0.24,0.6);
             color.a = blockMask;
           }
 
         } else {
           if(vUv.x > progress) {
-            color = vec4(0.0,0.2,0.0,1.);
+            color = vec4(0.45,0.97,0.24,0.6);
             color.a = blockMask;
 
           } else {
-            color = vec4(0.0,0.0,0.2,1.);
+            color = vec4(0.04,0.29,0.96,0.6);
             color.a = blockMask;
           }
         }
@@ -473,7 +473,7 @@ function handleLine() {
           color = vec4(0.7,0.7,0.7,1.); 
 
         } else {
-          color = vec4(0.0,0.2,0.0,1.);
+          color = vec4(0.45,0.97,0.24,0.6);
           color.a = blockMask;
         }
 
@@ -482,7 +482,7 @@ function handleLine() {
           color = vec4(0.7,0.7,0.7,1.);
 
         } else {
-          color = vec4(0.0,0.0,0.2,1.);
+          color = vec4(0.04,0.29,0.96,0.6);
           color.a = blockMask;
         }
       }

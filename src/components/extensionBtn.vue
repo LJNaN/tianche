@@ -134,7 +134,7 @@ function handleReplay() {
   position: absolute;
   width: 26px;
   height: 26px;
-  top: 10%;
+  top: 9%;
   left: 0.9%;
 
   &-list {
@@ -174,7 +174,7 @@ function handleReplay() {
   position: absolute;
   width: 26px;
   height: 26px;
-  top: 14%;
+  top: 12.5%;
   left: 0.9%;
 }
 
@@ -184,7 +184,7 @@ function handleReplay() {
   position: absolute;
   width: 26px;
   height: 26px;
-  top: 18%;
+  top: 16%;
   left: 0.9%;
 }
 </style>

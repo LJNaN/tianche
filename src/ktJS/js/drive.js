@@ -377,7 +377,6 @@ export default function drive(wsMessage) {
 
 
       } else { // 新建车
-
         const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
         STATE.sceneList.skyCarList.push(newCar)
         newCar.history = [{
