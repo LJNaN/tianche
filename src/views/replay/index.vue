@@ -6,24 +6,57 @@
 
     <div class="timepicker">
       <div class="timepicker-label">回溯时间:</div>
-      <el-date-picker v-model="timePark" type="datetimerange" range-separator="-" start-placeholder="开始时间"
-        end-placeholder="结束时间" :teleported="false" :disabled-date="disabledDate" @change="datePickerChange" :clearable="false" />
+      <el-date-picker
+        v-model="timePark"
+        type="datetimerange"
+        range-separator="-"
+        start-placeholder="开始时间"
+        end-placeholder="结束时间"
+        :teleported="false"
+        :disabled-date="disabledDate"
+        @change="datePickerChange"
+        :clearable="false"
+      />
       <div class="timepicker-confirm" @click="handleConfirm">确定</div>
     </div>
 
     <div class="control">
-      <div class="pause" :style="{ background: `url('./assets/3d/img/${STATE.mainBus.replayPaused.value ? 76 : 77}.png') center / 100% 100% no-repeat` }
-        " @click="handlePause"></div>
+      <div
+        class="pause"
+        :style="{
+          background: `url('./assets/3d/img/${
+            STATE.mainBus.replayPaused.value ? 76 : 77
+          }.png') center / 100% 100% no-repeat`,
+        }"
+        @click="handlePause"
+      ></div>
 
       <div class="stop" @click="handleStop"></div>
 
-      <el-slider class="slider" v-model="STATE.mainBus.replaySlider.value" :max="1000" :format-tooltip="sliderFormat"
-        :disabled=!sliderTimePark.length @input="sliderChange" />
+      <el-slider
+        class="slider"
+        v-model="STATE.mainBus.replaySlider.value"
+        :max="1000"
+        :format-tooltip="sliderFormat"
+        :disabled="!sliderTimePark.length || stop"
+        @input="sliderChange"
+      />
 
       <span class="progressTime">{{ replayProgressTime }}</span>
-      <el-select v-model="times" class="times" placeholder="倍速" size="small" :teleported="false"
-        @visible-change="selectChange">
-        <el-option v-for=" item  in  timesOptions " :key="item.value" :label="item.label" :value="item.value" />
+      <el-select
+        v-model="times"
+        class="times"
+        placeholder="倍速"
+        size="small"
+        :teleported="false"
+        @visible-change="selectChange"
+      >
+        <el-option
+          v-for="item in timesOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
       </el-select>
     </div>
   </div>
@@ -36,74 +69,82 @@ import ExtensionBtn from "@/components/extensionBtn.vue";
 import Compass from "@/components/compass.vue";
 import { GLOBAL } from "@/GLOBAL";
 import { GetReplayData } from "@/axios/api.js";
-import drive from '@/ktJS/drive.js'
-import { ElMessage } from 'element-plus'
-import replayData1 from '@/ktJS/js/mockReplayData1.js'
+import drive from "@/ktJS/drive.js";
+import { ElMessage } from "element-plus";
+import replayData1 from "@/ktJS/js/mockReplayData1.js";
 // import mock2 from '@/ktJS/js/mock2.js'
-import { stampTommss } from '@/utils/stampTommss.js'
+import { stampTommss } from "@/utils/stampTommss.js";
 import { STATE } from "@/ktJS/STATE";
 
 const timePark = ref([new Date(new Date() * 1 - 3600000), new Date()]);
 const timeLone = computed(() => {
-  return timePark.value[1] * 1 - timePark.value[0] * 1
-})
+  return timePark.value[1] * 1 - timePark.value[0] * 1;
+});
 const replayProgressTime = computed(() => {
-  let frontTime = null
+  let frontTime = null;
   if (STATE.mainBus.currentReplayData.value.length) {
-    frontTime = stampTommss(STATE.mainBus.replayIndex.value / STATE.mainBus.currentReplayData.value.length * timeLone.value)
+    frontTime = stampTommss(
+      (STATE.mainBus.replayIndex.value /
+        STATE.mainBus.currentReplayData.value.length) *
+        timeLone.value
+    );
   } else {
-    frontTime = '00:00'
+    frontTime = "00:00";
   }
-  return `${frontTime} / ${stampTommss(timeLone.value)}`
-})
+  return `${frontTime} / ${stampTommss(timeLone.value)}`;
+});
 
 async function handleConfirm() {
-  handleStop()
-  let long = Math.floor((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000 * 10800)
-  if (long > 10000) long = 10000
+  handleStop();
+  stop.value = false;
+  let long = Math.floor(
+    ((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000) * 10800
+  );
+  if (long > 10000) long = 10000;
 
-  // const res = await GetReplayData([
-  //   timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  //   timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  // ], long);
-  const res = replayData1
+  const res = await GetReplayData([
+    timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+    timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  ], long);
+  // const res = replayData1;
 
-  const res2 = res?.hits?.hits
-  if (!res2) return
+  const res2 = res?.hits?.hits;
+  if (!res2) return;
 
-  const res3 = res2.map(e => e?._source?.data)
-  const replayData = []
+  const res3 = res2.map((e) => e?._source?.data);
+  const replayData = [];
   for (let i = 0; i < res3.length; i++) {
-    if(res3[i].includes('失败')) {
-      continue
+    if (res3[i].includes("失败")) {
+      continue;
     }
-    res3[i] = JSON.parse(res3[i].replaceAll(' ', '').replace('\r\n天车实时信息:-', ''))
-    replayData.push({ VehicleInfo: [res3[i]] })
+    res3[i] = JSON.parse(
+      res3[i].replaceAll(" ", "").replace("\r\n天车实时信息:-", "")
+    );
+    replayData.push({ VehicleInfo: [res3[i]] });
   }
 
-
-  const dataTime = replayData.map(e => e.VehicleInfo[0].lastTime)
-  let minTime = 0
-  let maxTime = 0
+  const dataTime = replayData.map((e) => e.VehicleInfo[0].lastTime);
+  let minTime = 0;
+  let maxTime = 0;
   for (let i = 0; i < dataTime.length; i++) {
-    dataTime[i] = dataTime[i].slice(0, 10) + ' ' + dataTime[i].slice(10)
-    const time = new Date(dataTime[i])
-    replayData[i].VehicleInfo[0].timeStamp = time * 1
+    dataTime[i] = dataTime[i].slice(0, 10) + " " + dataTime[i].slice(10);
+    const time = new Date(dataTime[i]);
+    replayData[i].VehicleInfo[0].timeStamp = time * 1;
     if (minTime === 0 || time * 1 < minTime) {
-      minTime = time * 1
+      minTime = time * 1;
     }
     if (maxTime === 0 || time * 1 > maxTime) {
-      maxTime = time * 1
+      maxTime = time * 1;
     }
   }
-  sliderTimePark.value = [minTime, maxTime]
+  sliderTimePark.value = [minTime, maxTime];
 
-  STATE.mainBus.currentReplayData.value = replayData
-  STATE.mainBus.run(replayData)
+  STATE.mainBus.currentReplayData.value = replayData;
+  STATE.mainBus.run(replayData);
 
-  STATE.mainBus.replayPaused.value = false
-  STATE.mainBus.replayIndex.value = 0
-  STATE.mainBus.replaySlider.value = 0
+  STATE.mainBus.replayPaused.value = false;
+  STATE.mainBus.replayIndex.value = 0;
+  STATE.mainBus.replaySlider.value = 0;
 }
 
 let times = ref(1);
@@ -127,46 +168,55 @@ const timesOptions = [
   {
     value: 1,
     label: "1x",
-  }
+  },
 ];
-let sliderTimePark = ref([])
+let sliderTimePark = ref([]);
 
 function sliderFormat(e) {
-  if (sliderTimePark.value.length && STATE.mainBus.currentReplayData.value.length) {
+  if (
+    sliderTimePark.value.length &&
+    STATE.mainBus.currentReplayData.value.length
+  ) {
     // const long = sliderTimePark.value[1] - sliderTimePark.value[0]
     // const progress = e / 1000
     // const time = new Date(Math.floor(long * progress) + sliderTimePark.value[0])
     // return time.format('YYYY-MM-DD hh:mm:ss')
-    const format = new Date(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
-    return format
-
+    const format = new Date(
+      STATE.mainBus.currentReplayData.value[
+        STATE.mainBus.replayIndex.value
+      ].VehicleInfo[0].timeStamp
+    ).format("YYYY-MM-DD hh:mm:ss");
+    return format;
   } else {
-    return "无数据"
+    return "无数据";
   }
 }
 function disabledDate(date) {
-  return date > new Date()
+  return date > new Date();
 }
 function handlePause() {
   if (!STATE.mainBus.currentReplayData.value.length) {
-    return
+    return;
   }
-  STATE.mainBus.replayPaused.value = !STATE.mainBus.replayPaused.value
-  STATE.sceneList.skyCarList.forEach(e => {
-    e.replayRun = !STATE.mainBus.replayPaused.value
-  })
+  STATE.mainBus.replayPaused.value = !STATE.mainBus.replayPaused.value;
+  STATE.sceneList.skyCarList.forEach((e) => {
+    e.replayRun = !STATE.mainBus.replayPaused.value;
+  });
 
   if (STATE.mainBus.replayPaused.value) {
-    STATE.mainBus.pause()
-
+    STATE.mainBus.pause();
   } else {
-    if (STATE.mainBus.replayIndex.value === STATE.mainBus.currentReplayData.value.length - 1) {
-      STATE.mainBus.reset()
-      STATE.mainBus.replayIndex.value = 0
-      STATE.mainBus.replaySlider.value = 0
+    if (
+      STATE.mainBus.replayIndex.value ===
+      STATE.mainBus.currentReplayData.value.length - 1
+    ) {
+      STATE.mainBus.reset();
+      STATE.mainBus.replayIndex.value = 0;
+      STATE.mainBus.replaySlider.value = 0;
     }
-    STATE.mainBus.replayPaused.value = false
-    STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
+    stop.value = false
+    STATE.mainBus.replayPaused.value = false;
+    STATE.mainBus.run(STATE.mainBus.currentReplayData.value);
   }
 }
 function selectChange(e) {
@@ -174,75 +224,95 @@ function selectChange(e) {
     const fuckingInput = document.getElementsByClassName("times");
     if (fuckingInput[0]) {
       setTimeout(() => {
-        fuckingInput[0].children[0].children[0].children[0].className = 'el-input__wrapper'
-      }, 0)
+        fuckingInput[0].children[0].children[0].children[0].className =
+          "el-input__wrapper";
+      }, 0);
     }
 
-    STATE.mainBus.replayTimes.value = times.value
+    STATE.mainBus.replayTimes.value = times.value;
     if (STATE.mainBus.currentReplayData.value.length) {
-      STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
+      STATE.mainBus.run(STATE.mainBus.currentReplayData.value);
     }
   }
 }
 function sliderChange(e) {
-
   if (sliderTimePark.value.length) {
-    const progress = e / 1000
-    STATE.mainBus.replayIndex.value = Math.floor(progress * STATE.mainBus.currentReplayData.value.length)
-    if (STATE.mainBus.replayIndex.value >= STATE.mainBus.currentReplayData.value.length) {
-      STATE.mainBus.replayIndex.value = STATE.mainBus.currentReplayData.value.length - 1
+    const progress = e / 1000;
+    STATE.mainBus.replayIndex.value = Math.floor(
+      progress * STATE.mainBus.currentReplayData.value.length
+    );
+    if (
+      STATE.mainBus.replayIndex.value >=
+      STATE.mainBus.currentReplayData.value.length
+    ) {
+      STATE.mainBus.replayIndex.value =
+        STATE.mainBus.currentReplayData.value.length - 1;
     }
-    const currentData = STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value]
-    const car = STATE.sceneList.skyCarList.find(e => e.id === currentData.VehicleInfo[0].ohtID)
+    const currentData =
+      STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value];
+    const car = STATE.sceneList.skyCarList.find(
+      (e) => e.id === currentData.VehicleInfo[0].ohtID
+    );
 
-    car.history = []
-    car.nextLine = []
+    if (!car) return;
+
+    car.history = [];
+    car.nextLine = [];
     for (let i = 0; i < GLOBAL.messageLen; i++) {
-      if ((STATE.mainBus.replayIndex.value - i) > 0) {
-        car.history.push(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value - (GLOBAL.messageLen - 1 - i)].VehicleInfo[0])
+      if (STATE.mainBus.replayIndex.value - i > 0) {
+        car.history.push(
+          STATE.mainBus.currentReplayData.value[
+            STATE.mainBus.replayIndex.value - (GLOBAL.messageLen - 1 - i)
+          ].VehicleInfo[0]
+        );
       }
     }
-    drive(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value])
+    drive(
+      STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value]
+    );
 
-    const coordinate = Number(currentData.VehicleInfo[0].position)
-    const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < coordinate && e.endCoordinate > coordinate)
-    if(!map) return
-    car.line = map.name.replace('_',  '-')
-    const lineMap = STATE.sceneList.linePosition[car.line]
-    const lineProgress = (coordinate - map.startCoordinate) / (map.endCoordinate - map.startCoordinate)
-    const index = Math.floor(lineMap.length * lineProgress)
-    car.animationOver = true
-    car.run = true
-    car.isAnimationSoon = false
-    car.lineIndex = index
-    car.replayRun = true
-    car.fastRun = false
+    const coordinate = Number(currentData.VehicleInfo[0].position);
+    const map = DATA.pointCoordinateMap.find(
+      (e) => e.startCoordinate < coordinate && e.endCoordinate > coordinate
+    );
+    if (!map) return;
+    car.line = map.name.replace("_", "-");
+    const lineMap = STATE.sceneList.linePosition[car.line];
+    const lineProgress =
+      (coordinate - map.startCoordinate) /
+      (map.endCoordinate - map.startCoordinate);
+    const index = Math.floor(lineMap.length * lineProgress);
+    car.animationOver = true;
+    car.run = true;
+    car.isAnimationSoon = false;
+    car.lineIndex = index;
+    car.replayRun = true;
+    car.fastRun = false;
 
-    const pause = STATE.mainBus.replayPaused.value
-    STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
+    const pause = STATE.mainBus.replayPaused.value;
+    STATE.mainBus.run(STATE.mainBus.currentReplayData.value);
     if (pause) {
-      STATE.mainBus.replayPaused.value = true
-      STATE.mainBus.pause()
+      STATE.mainBus.replayPaused.value = true;
+      STATE.mainBus.pause();
     }
   }
 }
 function datePickerChange(e) {
   if (e[1] * 1 - e[0] * 1 > 3600000) {
-    ElMessage.warning('时间范围不能超过1小时')
-    timePark.value[0] = new Date(e[1] * 1 - 3600000)
+    ElMessage.warning("时间范围不能超过1小时");
+    timePark.value[0] = new Date(e[1] * 1 - 3600000);
   }
 }
+
+const stop = ref(true);
+
 function handleStop() {
-  STATE.mainBus.pause()
-  STATE.mainBus.reset()
-  STATE.mainBus.closeLink()
-  sliderTimePark.value = []
-  STATE.mainBus.replayPaused.value = true
-  STATE.mainBus.replayIndex.value = 0
-  STATE.mainBus.replaySlider.value = 0
+  stop.value = true;
+  STATE.mainBus.pause();
+  STATE.mainBus.reset();
+  STATE.mainBus.replayIndex.value = 0;
+  STATE.mainBus.replaySlider.value = 0;
 }
-
-
 </script>
 
 <style lang="less" scoped>
@@ -331,7 +401,7 @@ function handleStop() {
     cursor: pointer;
     transition: all 0.2s;
     margin-right: 1.5vw;
-    background: #FFF;
+    background: #fff;
     border-radius: 20%;
   }
 
@@ -345,7 +415,7 @@ function handleStop() {
     margin-right: 0.5vw;
     font-size: 12px;
     text-align: center;
-    color: #FFF;
+    color: #fff;
     word-break: keep-all;
   }
 
@@ -373,15 +443,14 @@ function handleStop() {
   top: -17px;
 }
 
-:deep(.control .el-input__wrapper) {
+:deep(.times .el-tooltip__trigger) {
   background: none;
-  width: 2vw;
+  width: 5vw;
   border: none;
   box-shadow: 0 0 0 1px #ffffff52 inset !important;
-  ;
 
   input {
-    color: #FFF;
+    color: #fff;
     text-align: center;
   }
 
@@ -390,8 +459,18 @@ function handleStop() {
   }
 }
 
+:deep(.control .el-input__wrapper) {
+  background: none;
+  border: none !important;
+  box-shadow: none;
+}
+
+:deep(.control .el-select__selected-item) {
+  color: #fff;
+}
+
 :deep(.el-select .el-input.is-focus .el-input__wrapper) {
-  box-shadow: 0 0 0 1px #FFF inset !important;
+  box-shadow: 0 0 0 1px #fff inset !important;
 }
 
 .el-select-dropdown__item {

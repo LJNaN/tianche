@@ -273,6 +273,7 @@ const option2 = reactive({
       type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
     },
     //formatter: '{a}<br />{c}'
+    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
   },
   color: ["#5E99DA", "#1A6A74"],
   legend: {
@@ -404,6 +405,7 @@ const option3 = reactive({
       type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
     },
     //formatter: '{a}<br />{c}'
+    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
   },
   color: ["#5E99DA", "#1A6A74"],
   legend: {

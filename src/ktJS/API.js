@@ -12,7 +12,7 @@ import drive from './drive.js'
 import bus from '@/utils/mitt.js'
 
 // 获取数据  有data 模拟/回溯 无data 线上
-class MainBus {
+class MainBus { 
   isReplayMode = ref(false)// 时间回溯模式
   replayPaused = ref(true) // 时间回溯暂停
   replayTimes = ref(1) // 时间回溯倍率
@@ -69,6 +69,7 @@ class MainBus {
       clearInterval(this.replayTimer)
       this.replayTimer = null
     }
+    this.replayPaused.value = true
 
     STATE.sceneList.skyCarList.forEach(e => {
       e.replayRun = false
