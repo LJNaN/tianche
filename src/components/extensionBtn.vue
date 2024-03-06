@@ -1,8 +1,8 @@
 
 <template>
   <div class="chartShow" @click="clickDrawer()" :style="{
-    background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat`,
-    cursor: `${VUEDATA.isReplayMode.value ? 'no-drop' : 'pointer'}`
+    background: `url(./assets/3d/img/${GLOBAL.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat`,
+    cursor: `${STATE.mainBus?.isReplayMode.value ? 'no-drop' : 'pointer'}`
   }
     ">
 
@@ -11,7 +11,7 @@
         :style="{ color: item.color, textShadow: '0 3px 4px #444' }">
 
         <div class="chartShow-list-item-circular"
-          :style="{ background: `url(./assets/3d/img/${VUEDATA.selectedItem.value.includes(item.id) ? 58 : 57}.png) center / 100% 100% no-repeat` }">
+          :style="{ background: `url(./assets/3d/img/${GLOBAL.selectedItem.value.includes(item.id) ? 58 : 57}.png) center / 100% 100% no-repeat` }">
         </div>
 
         {{ item.name }}
@@ -20,17 +20,17 @@
   </div>
 
   <div class="deviceShow" @click="handleDeviceShow()"
-    :style="{ background: `url(./assets/3d/img/${VUEDATA.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
+    :style="{ background: `url(./assets/3d/img/${GLOBAL.deviceShow.value ? 55 : 56}.png) center / 100% 100% no-repeat` }">
   </div>
 
 
   <div class="replay" @click="handleReplay()"
-    :style="{ background: `url(./assets/3d/img/${VUEDATA.isReplayMode.value ? 79 : 78}.png) center / 100% 100% no-repeat` }">
+    :style="{ background: `url(./assets/3d/img/${STATE.mainBus?.isReplayMode.value ? 79 : 78}.png) center / 100% 100% no-repeat` }">
   </div>
 </template>
 
 <script setup>
-import { VUEDATA } from '@/VUEDATA'
+import { GLOBAL } from '@/GLOBAL'
 import { ref } from 'vue'
 import { API } from '@/ktJS/API'
 import router from '@/router/index'
@@ -50,17 +50,17 @@ const drawerList = [
 ]
 
 // 二维界面图表部分显隐
-VUEDATA.selectedItem.value = []
-// VUEDATA.selectedItem.value = drawerList.map(e => e.id)
+GLOBAL.selectedItem.value = []
+// GLOBAL.selectedItem.value = drawerList.map(e => e.id)
 
 
 function handleDeviceShow() {
-  VUEDATA.deviceShow.value = !VUEDATA.deviceShow.value;
-  API.deviceShow(VUEDATA.deviceShow.value)
+  GLOBAL.deviceShow.value = !GLOBAL.deviceShow.value;
+  API.deviceShow(GLOBAL.deviceShow.value)
 }
 
 function clickDrawer() {
-  if (!VUEDATA.isReplayMode.value) {
+  if (!STATE.mainBus.isReplayMode.value) {
     drawerActive.value = !drawerActive.value
   }
 }
@@ -68,33 +68,33 @@ function clickDrawer() {
 function handleDrawerItem(id) {
   if (id === 0) {
     // 取消全选
-    if (VUEDATA.selectedItem.value.length === drawerList.length) {
-      VUEDATA.selectedItem.value = []
+    if (GLOBAL.selectedItem.value.length === drawerList.length) {
+      GLOBAL.selectedItem.value = []
     } else {
-      VUEDATA.selectedItem.value = drawerList.map(e => e.id)
+      GLOBAL.selectedItem.value = drawerList.map(e => e.id)
     }
 
   } else {
-    const itemIndex = VUEDATA.selectedItem.value.findIndex(e => e === id)
+    const itemIndex = GLOBAL.selectedItem.value.findIndex(e => e === id)
     if (itemIndex >= 0) {
-      VUEDATA.selectedItem.value.splice(itemIndex, 1)
+      GLOBAL.selectedItem.value.splice(itemIndex, 1)
     } else {
-      VUEDATA.selectedItem.value.push(id)
+      GLOBAL.selectedItem.value.push(id)
     }
 
     for (let i = 1; i < drawerList.length; i++) {
-      if (!VUEDATA.selectedItem.value.includes(drawerList[i].id)) {
-        const itemIndex = VUEDATA.selectedItem.value.findIndex(e => e === 0)
+      if (!GLOBAL.selectedItem.value.includes(drawerList[i].id)) {
+        const itemIndex = GLOBAL.selectedItem.value.findIndex(e => e === 0)
         if (itemIndex >= 0) {
-          VUEDATA.selectedItem.value.splice(itemIndex, 1)
+          GLOBAL.selectedItem.value.splice(itemIndex, 1)
         }
         break;
       }
 
       if (i === drawerList.length - 1) {
-        const itemIndex = VUEDATA.selectedItem.value.findIndex(e => e === 0)
+        const itemIndex = GLOBAL.selectedItem.value.findIndex(e => e === 0)
         if (itemIndex < 0) {
-          VUEDATA.selectedItem.value.push(0)
+          GLOBAL.selectedItem.value.push(0)
         }
       }
     }
@@ -106,22 +106,22 @@ function handleDrawerItem(id) {
 
 
 function handleReplay() {
-  STATE.getData.reset()
-  VUEDATA.replayPaused.value = true // 时间回溯暂停
-  VUEDATA.replayTimes.value = 1 // 时间回溯倍率
-  VUEDATA.replayIndex.value = 0 // 时间回溯当前索引
-  VUEDATA.replaySlider.value = 0 // 回溯进度条的千分比
+  STATE.mainBus.reset()
+  STATE.mainBus.replayPaused.value = true // 时间回溯暂停
+  STATE.mainBus.replayTimes.value = 1 // 时间回溯倍率
+  STATE.mainBus.replayIndex.value = 0 // 时间回溯当前索引
+  STATE.mainBus.replaySlider.value = 0 // 回溯进度条的千分比
 
-  if (VUEDATA.isReplayMode.value) {
-    VUEDATA.isReplayMode.value = false
-    STATE.getData.reset()
+  if (STATE.mainBus.isReplayMode.value) {
+    STATE.mainBus.isReplayMode.value = false
+    STATE.mainBus.reset()
     router.push('/')
-    STATE.getData.run()
+    STATE.mainBus.run()
 
   } else {
-    VUEDATA.isReplayMode.value = true
-    STATE.getData.closeLink()
-    STATE.getData.reset()
+    STATE.mainBus.isReplayMode.value = true
+    STATE.mainBus.closeLink()
+    STATE.mainBus.reset()
     router.push('/replay')
   }
 }

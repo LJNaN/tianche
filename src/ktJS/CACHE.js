@@ -6,7 +6,6 @@ const instanceMeshInfo = {} //  instance info
 const instanceNameMap = {}
 const removed = {}
 
-const goods = []
 
 
 let oldClock = 0
@@ -18,7 +17,6 @@ export const CACHE = {
   instanceMeshInfo,
   instanceNameMap,
   tempCameraState,
-  goods,
   oldClock,
   removed
 }

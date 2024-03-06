@@ -15,16 +15,16 @@ export default defineConfig({
     open: true,
     // 代理
     proxy: {
-      "/api1": {
-        target: "http://128.168.11.111:8090",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api1/, ""),
-      },
-      "/api2": {
-        target: "http://128.168.11.112:9200",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api2/, ""),
-      },
+      // "/api1": {
+      //   target: "http://128.168.11.111:8090",
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api1/, ""),
+      // },
+      // "/api2": {
+      //   target: "http://128.168.11.112:9200",
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api2/, ""),
+      // },
     },
   },
   build:{

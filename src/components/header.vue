@@ -2,7 +2,7 @@
   <div class="header">
     <p class="title">{{ title }}</p>
 
-    <Dropdown v-if="!VUEDATA.isEditorMode.value"></Dropdown>
+    <Dropdown v-if="!GLOBAL.isEditorMode.value"></Dropdown>
 
     <div class="right">
       <!-- <div class="right-weather">
@@ -31,7 +31,7 @@
 <script setup>
 import { ref } from "vue";
 import Dropdown from "@/components/Dropdown.vue";
-import { VUEDATA } from "@/VUEDATA";
+import { GLOBAL } from "@/GLOBAL";
 
 const title = window.title
 

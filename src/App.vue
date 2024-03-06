@@ -1,33 +1,23 @@
 <script setup>
 import Scene from '@/views/Scene.vue'
-import { ref } from 'vue'
-import { VUEDATA } from '@/VUEDATA.js'
-import { progress } from '@/utils/progress.js'
+import { GLOBAL } from '@/GLOBAL.js'
+import Progress from "@/components/Progress.vue";
 
 if(location.hash.includes('editor')) {
-  VUEDATA.isEditorMode.value = true
+  GLOBAL.isEditorMode.value = true
 }
 
 if(location.hash === '#/replay') {
   location.href = location.origin
 }
 
-
-progress.init()
-
-
-// 二维全局变量
-VUEDATA.deviceShow.value = true // 机台显隐
-VUEDATA.selectedItem.value = [] // 二维界面图表部分显隐
-
-
-
 </script>
 
 <template>
   <Scene />
   <router-view></router-view>
-  <p class="version">Version 2.0.0</p>
+  <Progress></Progress>
+  <p class="version">Version 2.1.0</p>
 </template>
 
 <style scoped>

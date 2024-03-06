@@ -1,8 +1,7 @@
 import SkyCar from './SkyCar.js'
-import { VUEDATA } from '@/VUEDATA.js'
+import { GLOBAL } from '@/GLOBAL.js'
 import { STATE } from '@/ktJS/STATE.js'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
-
+import { UTIL } from '@/ktJS/UTIL.js'
 
 // 数据驱动
 export default function drive(wsMessage) {
@@ -11,8 +10,6 @@ export default function drive(wsMessage) {
     wsMessage.VehicleInfo.forEach(e => {
       if (!e?.ohtID) return
       const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = e
-
-
       let skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
 
       if (skyCar) {
@@ -59,48 +56,48 @@ export default function drive(wsMessage) {
 
 
         // 保持去重后的数据在X条
-        if (skyCar.history.length < VUEDATA.messageLen + 1) { return }
-        skyCar.history.splice(VUEDATA.messageLen, 1)
+        if (skyCar.history.length < GLOBAL.messageLen + 1) { return }
+        skyCar.history.splice(GLOBAL.messageLen, 1)
 
 
         // 处理颜色
 
-        if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
+        if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
           if (skyCar.state != 5) {
             skyCar.state = 5
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
+        } else if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
           if (skyCar.state != 4) {
             skyCar.state = 4
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
+        } else if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Loading === '1' || skyCar.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
           if (skyCar.state != 2) {
             skyCar.state = 2
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoxing === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Quhuoda === '1') { // 取货行
+        } else if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoxing === '1' || skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoda === '1') { // 取货行
           if (skyCar.state != 0) {
             skyCar.state = 0
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoxing === '1' || skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Fanghuoda === '1') { // 放货行
+        } else if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoxing === '1' || skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoda === '1') { // 放货行
           if (skyCar.state != 1) {
             skyCar.state = 1
             skyCar.setPopupColor()
             skyCar.initClickPopup()
           }
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
+        } else if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
           if (skyCar.state != 3) {
             skyCar.state = 3
             skyCar.setPopupColor()
@@ -116,10 +113,10 @@ export default function drive(wsMessage) {
         }
 
         // 找一下 nextLine
-        const thisPosition = skyCar.history[VUEDATA.messageLen - 1].position
+        const thisPosition = skyCar.history[GLOBAL.messageLen - 1].position
         const thisLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < thisPosition && e.endCoordinate > thisPosition)
-        for (let i = 1; i <= VUEDATA.messageLen - 1; i++) {
-          const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.history[VUEDATA.messageLen - 1 - i].position && e.endCoordinate > skyCar.history[VUEDATA.messageLen - 1 - i].position)
+        for (let i = 1; i <= GLOBAL.messageLen - 1; i++) {
+          const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < skyCar.history[GLOBAL.messageLen - 1 - i].position && e.endCoordinate > skyCar.history[GLOBAL.messageLen - 1 - i].position)
 
           if (nextLine && thisLine && nextLine.name != thisLine.name) {
             if ((!skyCar.nextLine.length || skyCar.nextLine[skyCar.nextLine.length - 1] != nextLine.name) && skyCar.line != nextLine.name.replace('_', '-')) {
@@ -141,15 +138,15 @@ export default function drive(wsMessage) {
 
         // 除了position改变，有没有动画要放
         let haveAnimation = false
-        if ((skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '0' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '1')
-          || (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0')
-          || (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading == '0' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '1')
-          || (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0')) {
+        if ((skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '0' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '1')
+          || (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '0')
+          || (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '0' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '1')
+          || (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '1' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '0')) {
           haveAnimation = true
         }
 
         // 常态化清空 FOUP
-        if (!haveAnimation && skyCar.history[VUEDATA.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run && skyCar.animationOver) {
+        if (!haveAnimation && skyCar.history[GLOBAL.messageLen - 1].ohtStatus_IsHaveFoup === '0' && skyCar.catch && skyCar.run && skyCar.animationOver) {
           skyCar.catch.parent && skyCar.catch.parent.remove(skyCar.catch)
           skyCar.catch = null
         }
@@ -173,7 +170,7 @@ export default function drive(wsMessage) {
           if (!skyCar.animationOver) return
 
 
-          let positionData = API.getPositionByKaxiaLocation(newHistory.location)
+          let positionData = UTIL.getPositionByKaxiaLocation(newHistory.location)
           if (!positionData) {
             positionData = {
               type: '在货架上'
@@ -337,30 +334,30 @@ export default function drive(wsMessage) {
 
 
         // 不改变位置的情况 装货结束
-        if (skyCar.history[VUEDATA.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_Loading == '0') {
+        if (skyCar.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '1' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
           skyCar.targetCoordinate = -1
           skyCar.posPath = null
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[VUEDATA.messageLen - 2].ohtStatus_UnLoading == '0') {
+        } else if (skyCar.history[GLOBAL.messageLen - 1]?.ohtStatus_UnLoading == '1' && skyCar.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '0') {
           skyCar.run = true
           skyCar.fastRun = false
           skyCar.targetCoordinate = -1
           skyCar.posPath = null
 
 
-        } else if (skyCar.history[VUEDATA.messageLen - 1]?.position != skyCar.history[VUEDATA.messageLen - 2]?.position) {
+        } else if (skyCar.history[GLOBAL.messageLen - 1]?.position != skyCar.history[GLOBAL.messageLen - 2]?.position) {
           // 即将到来的两次数据位置不同 改变位置的情况
-          // skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
-          const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
-          const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
+          // skyCar.coordinate = skyCar.history[GLOBAL.messageLen - 2].position
+          const oldHistory = Object.assign({}, skyCar.history[GLOBAL.messageLen - 1])
+          const newHistory = Object.assign({}, skyCar.history[GLOBAL.messageLen - 2])
           skyCar.setPosition(onComplete(newHistory, oldHistory))
 
         } else {
-          // skyCar.coordinate = skyCar.history[VUEDATA.messageLen - 2].position
-          const oldHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 1])
-          const newHistory = Object.assign({}, skyCar.history[VUEDATA.messageLen - 2])
+          // skyCar.coordinate = skyCar.history[GLOBAL.messageLen - 2].position
+          const oldHistory = Object.assign({}, skyCar.history[GLOBAL.messageLen - 1])
+          const newHistory = Object.assign({}, skyCar.history[GLOBAL.messageLen - 2])
           skyCar.setPosition(onComplete(newHistory, oldHistory))
         }
 

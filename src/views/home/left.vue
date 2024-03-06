@@ -1,6 +1,6 @@
 <template>
   <div class="left" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
-    <div v-if="VUEDATA.selectedItem.value.includes(7)" class="cmd">
+    <div v-if="GLOBAL.selectedItem.value.includes(7)" class="cmd">
       <div class="cmd-content">
         <p class="cmd-title">实时指令</p>
 
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div v-if="VUEDATA.selectedItem.value.includes(8)" class="state">
+    <div v-if="GLOBAL.selectedItem.value.includes(8)" class="state">
       <div class="state-content">
         <p class="state-title">实时设备状态</p>
 
@@ -76,12 +76,12 @@
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import { GetRealTimeCmd, GetRealTimeEqpState } from '@/axios/api'
-import { VUEDATA } from '@/VUEDATA'
+import { GLOBAL } from '@/GLOBAL'
 
 const bgImg = computed(() => {
   let imgUrl = ''
   const targetElements = [7, 8]
-  const matchingElements = VUEDATA.selectedItem.value.filter(e => targetElements.includes(e))
+  const matchingElements = GLOBAL.selectedItem.value.filter(e => targetElements.includes(e))
   if (matchingElements.length === 0) imgUrl = '64'
   else if (matchingElements.length === 1) imgUrl = '63'
   else if (matchingElements.length === 2) imgUrl = '64'

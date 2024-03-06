@@ -921,7 +921,7 @@ function modelFocused(model, params = {}) {
         const box = new Bol3D$1.Box3().setFromObject(model);
         const res = box.getCenter(new Bol3D$1.Vector3);
         const cameraState = { position: { x: res.x + x, y: res.y + y, z: res.z + z }, target: { x: res.x, y: res.y, z: res.z } };
-        API.cameraAnimation({ cameraState });
+        UTIL.cameraAnimation({ cameraState });
     }
 }
 

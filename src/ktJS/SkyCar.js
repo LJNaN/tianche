@@ -1,15 +1,16 @@
-import { VUEDATA } from "@/VUEDATA"
+import { GLOBAL } from "@/GLOBAL"
 import { API } from '@/ktJS/API.js'
 import { STATE } from '@/ktJS/STATE.js'
 import { DATA } from '@/ktJS/DATA.js'
 import { CACHE } from '@/ktJS/CACHE.js'
-import { GetCarrierInfo, OhtFindCmdId, CarrierFindCmdId, GetEqpStateInfo, GetRealTimeEqpState, GetRealTimeCmd } from '@/axios/api.js'
+import { UTIL } from '@/ktJS/UTIL.js'
+import { OhtFindCmdId } from '@/axios/api.js'
 
 // 天车类
 export default class SkyCar {
   disposed = false            // 已被销毁
   coordinate = 0              // 当前坐标
-  history = []                // 10条历史数据
+  history = []                // 历史数据
   state = 0                   // 状态
   id = ''                     // id
   skyCarMesh = null           // 天车模型
@@ -28,7 +29,6 @@ export default class SkyCar {
   line = ''                   // 是在哪一根线上
   lineIndex = 0               // 当前线上面的索引
   nextLine = []               // 下几根要走的轨道
-  passLine = []               // 走过的近5根轨道
   animationOver = true        // 动画执行完毕
   oldPosition = null          // 上一次的position 主要是解决 lookat 闪烁的
   _focus = false              // 是不是聚焦在这个车上
@@ -431,7 +431,7 @@ export default class SkyCar {
     }
 
     if (start) {
-      const startP = API.getPositionByKaxiaLocation(start)
+      const startP = UTIL.getPositionByKaxiaLocation(start)
       if (startP) {
         const startPopup = new Bol3D.POI.Popup3DSprite({
           value: `
@@ -465,7 +465,7 @@ export default class SkyCar {
     }
 
     if (end) {
-      const endP = API.getPositionByKaxiaLocation(end)
+      const endP = UTIL.getPositionByKaxiaLocation(end)
       if (endP) {
         const endPopup = new Bol3D.POI.Popup3DSprite({
           value: `
@@ -530,7 +530,7 @@ export default class SkyCar {
 
 
 
-    this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes * VUEDATA.replayTimes.value)
+    this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes * STATE.mainBus.replayTimes.value)
 
     if (!this.run || !this.animationOver) return
 
@@ -585,7 +585,7 @@ export default class SkyCar {
   setPosition(cb) {
     const this_ = this
 
-    if (this.history.length < VUEDATA.messageLen) { return }
+    if (this.history.length < GLOBAL.messageLen) { return }
 
     // 变速
     function computeQuickenSpeedTimes(skyCar, position) {
@@ -603,7 +603,7 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          skyCar.quickenSpeedTimes = speed / VUEDATA.replayTimes.value
+          skyCar.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
 
         } else {
           skyCar.quickenSpeedTimes = 0
@@ -630,7 +630,7 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            skyCar.quickenSpeedTimes = speed / VUEDATA.replayTimes.value
+            skyCar.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
           } else {
             skyCar.quickenSpeedTimes = 0
           }
@@ -656,12 +656,12 @@ export default class SkyCar {
       if (this.targetCoordinate != -1) {
         const targetLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.targetCoordinate && e.endCoordinate > this.targetCoordinate)
         if (targetLine && this.line === targetLine.name.replace('_', '-')) {
-          if (this.targetCoordinate > (this.coordinate + VUEDATA.replayTimes.value)) {
+          if (this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) {
             this.run = true
 
           } else {
             // this.coordinate = this.targetCoordinate
-            // const position = API.getPositionByCoordinate(this.coordinate)
+            // const position = UTIL.getPositionByCoordinate(this.coordinate)
             // this.line = position.line
             // this.lineIndex = position.lineIndex
             this.run = false
@@ -691,7 +691,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? (2.5 / VUEDATA.replayTimes.value) : (1 / VUEDATA.replayTimes.value)
+        this.quickenSpeedTimes = totalIndex > 500 ? (2.5 / STATE.mainBus.replayTimes.value) : (1 / STATE.mainBus.replayTimes.value)
       }
     }
 
@@ -699,8 +699,8 @@ export default class SkyCar {
     if (this_.run && this_.animationOver) {
       if (this_.line && STATE.sceneList.linePosition[this_.line]) {
         // 如果前面还有路，就往前走
-        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed * VUEDATA.replayTimes.value) {
-          this_.lineIndex += Math.round(this_.runSpeed * VUEDATA.replayTimes.value)
+        if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed * STATE.mainBus.replayTimes.value) {
+          this_.lineIndex += Math.round(this_.runSpeed * STATE.mainBus.replayTimes.value)
 
           const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
           const lineMap = STATE.sceneList.linePosition[this_.line]
@@ -887,7 +887,7 @@ export default class SkyCar {
     function animate() {
       requestAnimationFrame(animate)
 
-      this_.animationSpeed = (1 / (STATE.frameRate / 60)) * this_.animationSpeedTimes * VUEDATA.replayTimes.value
+      this_.animationSpeed = (1 / (STATE.frameRate / 60)) * this_.animationSpeedTimes * STATE.mainBus.replayTimes.value
 
       this_.mixer.update(this_.animationSpeed)
     }

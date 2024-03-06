@@ -8,7 +8,7 @@ import Bottom from './bottom.vue'
 import Test from './test.vue'
 import ExtensionBtn from '@/components/extensionBtn.vue'
 import Compass from '@/components/compass.vue';
-import { VUEDATA } from '@/VUEDATA'
+import { GLOBAL } from '@/GLOBAL'
 
 const editorFlag = localStorage.getItem('editorFlag')
 if(!editorFlag || editorFlag !== '2') {

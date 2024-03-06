@@ -1,7 +1,7 @@
 <template>
   <div class="bottom" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
 
-    <div v-if="VUEDATA.selectedItem.value.includes(1)" class="leftdiv">
+    <div v-if="GLOBAL.selectedItem.value.includes(1)" class="leftdiv">
       <div class="zuyoutp"></div>
       <div class="lefttu"></div>
       <p class="zdivp">Alarm Info</p>
@@ -29,14 +29,14 @@
       </div>
     </div>
 
-    <div v-if="VUEDATA.selectedItem.value.includes(2)" class="zdiv">
+    <div v-if="GLOBAL.selectedItem.value.includes(2)" class="zdiv">
       <div class="zuyoutp"></div>
       <div class="ztup"></div>
       <p class="zdivp">Delivery Time</p>
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
 
-    <div v-if="VUEDATA.selectedItem.value.includes(3)" class="rdiv">
+    <div v-if="GLOBAL.selectedItem.value.includes(3)" class="rdiv">
       <div class="zuyoutp"></div>
       <div class="rtu"></div>
       <p class="rdivp">Delivery Count</p>
@@ -54,12 +54,12 @@ import { STATE } from '@/ktJS/STATE.js'
 import { API } from '@/ktJS/API.js'
 import { get15Day } from '@/utils/get15Day'
 import { McsDeliveryInfo } from '@/axios/api'
-import { VUEDATA } from '@/VUEDATA'
+import { GLOBAL } from '@/GLOBAL'
 
 const bgImg = computed(() => {
   let imgUrl = ''
   const targetElements = [1, 2, 3]
-  const matchingElements = VUEDATA.selectedItem.value.filter(e => targetElements.includes(e))
+  const matchingElements = GLOBAL.selectedItem.value.filter(e => targetElements.includes(e))
   if (matchingElements.length === 0) imgUrl = '3'
   else if (matchingElements.length === 1) imgUrl = '61'
   else if (matchingElements.length === 2) imgUrl = '62'

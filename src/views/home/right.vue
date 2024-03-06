@@ -1,13 +1,13 @@
 <template>
   <div class="right" :style="{ background: `url('./assets/3d/img/${bgImg}.png') center / 100% 100% no-repeat` }">
-    <div v-if="VUEDATA.selectedItem.value.includes(5)" class="topdiv">
+    <div v-if="GLOBAL.selectedItem.value.includes(5)" class="topdiv">
       <div class="zuyoutp"></div>
       <div class="youtu"></div>
       <p class="topp">OHB Storage Ratio</p>
       <Chart :option="option" width="100%" height="100%"></Chart>
     </div>
 
-    <div v-if="VUEDATA.selectedItem.value.includes(6)" class="inthediv">
+    <div v-if="GLOBAL.selectedItem.value.includes(6)" class="inthediv">
       <div class="zuyoutp"></div>
       <div class="inttu">
 
@@ -16,7 +16,7 @@
       <Chart :option="option2" width="100%" height="100%"></Chart>
     </div>
 
-    <div v-if="VUEDATA.selectedItem.value.includes(4)" class="underdiv">
+    <div v-if="GLOBAL.selectedItem.value.includes(4)" class="underdiv">
       <div class="zuyoutp"></div>
       <div class="undertu"></div>
       <p class="underp">MTBF</p>
@@ -31,12 +31,12 @@ import * as echarts from "echarts";
 import Chart from "@/components/Chart.vue";
 import { get15Day } from '@/utils/get15Day'
 import { OhbStorageRatio, GetMTBFInfo, GetMCBFInfo } from '@/axios/api'
-import { VUEDATA } from '@/VUEDATA'
+import { GLOBAL } from '@/GLOBAL'
 
 const bgImg = computed(() => {
   let imgUrl = ''
   const targetElements = [4, 5, 6]
-  const matchingElements = VUEDATA.selectedItem.value.filter(e => targetElements.includes(e))
+  const matchingElements = GLOBAL.selectedItem.value.filter(e => targetElements.includes(e))
   if (matchingElements.length === 0) imgUrl = '28'
   else if (matchingElements.length === 1) imgUrl = '59'
   else if (matchingElements.length === 2) imgUrl = '60'

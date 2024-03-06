@@ -12,12 +12,12 @@
     </div>
 
     <div class="control">
-      <div class="pause" :style="{ background: `url('./assets/3d/img/${VUEDATA.replayPaused.value ? 76 : 77}.png') center / 100% 100% no-repeat` }
+      <div class="pause" :style="{ background: `url('./assets/3d/img/${STATE.mainBus.replayPaused.value ? 76 : 77}.png') center / 100% 100% no-repeat` }
         " @click="handlePause"></div>
 
       <div class="stop" @click="handleStop"></div>
 
-      <el-slider class="slider" v-model="VUEDATA.replaySlider.value" :max="1000" :format-tooltip="sliderFormat"
+      <el-slider class="slider" v-model="STATE.mainBus.replaySlider.value" :max="1000" :format-tooltip="sliderFormat"
         :disabled=!sliderTimePark.length @input="sliderChange" />
 
       <span class="progressTime">{{ replayProgressTime }}</span>
@@ -30,15 +30,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from "vue";
-import * as echarts from "echarts";
+import { ref, computed } from "vue";
 import Header from "@/components/header.vue";
 import ExtensionBtn from "@/components/extensionBtn.vue";
 import Compass from "@/components/compass.vue";
-import { VUEDATA } from "@/VUEDATA";
+import { GLOBAL } from "@/GLOBAL";
 import { GetReplayData } from "@/axios/api.js";
-import { API } from "@/ktJS/API.js";
-import drive from '@/ktJS/js/drive.js'
+import drive from '@/ktJS/drive.js'
 import { ElMessage } from 'element-plus'
 import replayData1 from '@/ktJS/js/mockReplayData1.js'
 // import mock2 from '@/ktJS/js/mock2.js'
@@ -51,8 +49,8 @@ const timeLone = computed(() => {
 })
 const replayProgressTime = computed(() => {
   let frontTime = null
-  if (STATE.getData.currentReplayData.value.length) {
-    frontTime = stampTommss(VUEDATA.replayIndex.value / STATE.getData.currentReplayData.value.length * timeLone.value)
+  if (STATE.mainBus.currentReplayData.value.length) {
+    frontTime = stampTommss(STATE.mainBus.replayIndex.value / STATE.mainBus.currentReplayData.value.length * timeLone.value)
   } else {
     frontTime = '00:00'
   }
@@ -64,11 +62,11 @@ async function handleConfirm() {
   let long = Math.floor((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000 * 10800)
   if (long > 10000) long = 10000
 
-  const res = await GetReplayData([
-    timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
-    timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  ], long);
-  // const res = replayData1
+  // const res = await GetReplayData([
+  //   timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //   timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  // ], long);
+  const res = replayData1
 
   const res2 = res?.hits?.hits
   if (!res2) return
@@ -100,12 +98,12 @@ async function handleConfirm() {
   }
   sliderTimePark.value = [minTime, maxTime]
 
-  STATE.getData.currentReplayData.value = replayData
-  STATE.getData.run(replayData)
+  STATE.mainBus.currentReplayData.value = replayData
+  STATE.mainBus.run(replayData)
 
-  VUEDATA.replayPaused.value = false
-  VUEDATA.replayIndex.value = 0
-  VUEDATA.replaySlider.value = 0
+  STATE.mainBus.replayPaused.value = false
+  STATE.mainBus.replayIndex.value = 0
+  STATE.mainBus.replaySlider.value = 0
 }
 
 let times = ref(1);
@@ -134,12 +132,12 @@ const timesOptions = [
 let sliderTimePark = ref([])
 
 function sliderFormat(e) {
-  if (sliderTimePark.value.length && STATE.getData.currentReplayData.value.length) {
+  if (sliderTimePark.value.length && STATE.mainBus.currentReplayData.value.length) {
     // const long = sliderTimePark.value[1] - sliderTimePark.value[0]
     // const progress = e / 1000
     // const time = new Date(Math.floor(long * progress) + sliderTimePark.value[0])
     // return time.format('YYYY-MM-DD hh:mm:ss')
-    const format = new Date(STATE.getData.currentReplayData.value[VUEDATA.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
+    const format = new Date(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value].VehicleInfo[0].timeStamp).format('YYYY-MM-DD hh:mm:ss')
     return format
 
   } else {
@@ -150,25 +148,25 @@ function disabledDate(date) {
   return date > new Date()
 }
 function handlePause() {
-  if (!STATE.getData.currentReplayData.value.length) {
+  if (!STATE.mainBus.currentReplayData.value.length) {
     return
   }
-  VUEDATA.replayPaused.value = !VUEDATA.replayPaused.value
+  STATE.mainBus.replayPaused.value = !STATE.mainBus.replayPaused.value
   STATE.sceneList.skyCarList.forEach(e => {
-    e.replayRun = !VUEDATA.replayPaused.value
+    e.replayRun = !STATE.mainBus.replayPaused.value
   })
 
-  if (VUEDATA.replayPaused.value) {
-    STATE.getData.pause()
+  if (STATE.mainBus.replayPaused.value) {
+    STATE.mainBus.pause()
 
   } else {
-    if (VUEDATA.replayIndex.value === STATE.getData.currentReplayData.value.length - 1) {
-      STATE.getData.reset()
-      VUEDATA.replayIndex.value = 0
-      VUEDATA.replaySlider.value = 0
+    if (STATE.mainBus.replayIndex.value === STATE.mainBus.currentReplayData.value.length - 1) {
+      STATE.mainBus.reset()
+      STATE.mainBus.replayIndex.value = 0
+      STATE.mainBus.replaySlider.value = 0
     }
-    VUEDATA.replayPaused.value = false
-    STATE.getData.run(STATE.getData.currentReplayData.value)
+    STATE.mainBus.replayPaused.value = false
+    STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
   }
 }
 function selectChange(e) {
@@ -180,9 +178,9 @@ function selectChange(e) {
       }, 0)
     }
 
-    VUEDATA.replayTimes.value = times.value
-    if (STATE.getData.currentReplayData.value.length) {
-      STATE.getData.run(STATE.getData.currentReplayData.value)
+    STATE.mainBus.replayTimes.value = times.value
+    if (STATE.mainBus.currentReplayData.value.length) {
+      STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
     }
   }
 }
@@ -190,21 +188,21 @@ function sliderChange(e) {
 
   if (sliderTimePark.value.length) {
     const progress = e / 1000
-    VUEDATA.replayIndex.value = Math.floor(progress * STATE.getData.currentReplayData.value.length)
-    if (VUEDATA.replayIndex.value >= STATE.getData.currentReplayData.value.length) {
-      VUEDATA.replayIndex.value = STATE.getData.currentReplayData.value.length - 1
+    STATE.mainBus.replayIndex.value = Math.floor(progress * STATE.mainBus.currentReplayData.value.length)
+    if (STATE.mainBus.replayIndex.value >= STATE.mainBus.currentReplayData.value.length) {
+      STATE.mainBus.replayIndex.value = STATE.mainBus.currentReplayData.value.length - 1
     }
-    const currentData = STATE.getData.currentReplayData.value[VUEDATA.replayIndex.value]
+    const currentData = STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value]
     const car = STATE.sceneList.skyCarList.find(e => e.id === currentData.VehicleInfo[0].ohtID)
 
     car.history = []
     car.nextLine = []
-    for (let i = 0; i < VUEDATA.messageLen; i++) {
-      if ((VUEDATA.replayIndex.value - i) > 0) {
-        car.history.push(STATE.getData.currentReplayData.value[VUEDATA.replayIndex.value - (VUEDATA.messageLen - 1 - i)].VehicleInfo[0])
+    for (let i = 0; i < GLOBAL.messageLen; i++) {
+      if ((STATE.mainBus.replayIndex.value - i) > 0) {
+        car.history.push(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value - (GLOBAL.messageLen - 1 - i)].VehicleInfo[0])
       }
     }
-    drive(STATE.getData.currentReplayData.value[VUEDATA.replayIndex.value])
+    drive(STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value])
 
     const coordinate = Number(currentData.VehicleInfo[0].position)
     const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < coordinate && e.endCoordinate > coordinate)
@@ -220,11 +218,11 @@ function sliderChange(e) {
     car.replayRun = true
     car.fastRun = false
 
-    const pause = VUEDATA.replayPaused.value
-    STATE.getData.run(STATE.getData.currentReplayData.value)
+    const pause = STATE.mainBus.replayPaused.value
+    STATE.mainBus.run(STATE.mainBus.currentReplayData.value)
     if (pause) {
-      VUEDATA.replayPaused.value = true
-      STATE.getData.pause()
+      STATE.mainBus.replayPaused.value = true
+      STATE.mainBus.pause()
     }
   }
 }
@@ -235,13 +233,13 @@ function datePickerChange(e) {
   }
 }
 function handleStop() {
-  STATE.getData.pause()
-  STATE.getData.reset()
-  STATE.getData.closeLink()
+  STATE.mainBus.pause()
+  STATE.mainBus.reset()
+  STATE.mainBus.closeLink()
   sliderTimePark.value = []
-  VUEDATA.replayPaused.value = true
-  VUEDATA.replayIndex.value = 0
-  VUEDATA.replaySlider.value = 0
+  STATE.mainBus.replayPaused.value = true
+  STATE.mainBus.replayIndex.value = 0
+  STATE.mainBus.replaySlider.value = 0
 }
 
 

@@ -3,7 +3,7 @@ import { CACHE } from '@/ktJS/CACHE'
 import { STATE } from '@/ktJS/STATE'
 import { ref, computed } from 'vue'
 import * as TWEEN from '@tweenjs/tween.js'
-import { VUEDATA } from '@/VUEDATA.js'
+import { GLOBAL } from '@/GLOBAL.js'
 
 let deg = ref(0)
 let tweenRenderFlag = ref(false)
@@ -159,9 +159,9 @@ function zoomUp() {
 <template>
   <div class="main" :style="{
     right:
-      (VUEDATA.selectedItem.value.includes(4)
-        || VUEDATA.selectedItem.value.includes(5)
-        || VUEDATA.selectedItem.value.includes(6)
+      (GLOBAL.selectedItem.value.includes(4)
+        || GLOBAL.selectedItem.value.includes(5)
+        || GLOBAL.selectedItem.value.includes(6)
       ) ? '26%' : '1%'
   }">
     <div class="compass">
