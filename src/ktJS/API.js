@@ -8,11 +8,11 @@ import { GLOBAL } from '@/GLOBAL.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo } from '@/axios/api.js'
 import mockData2 from './js/mock2'
-import drive from './drive.js'
+import SkyCar from './SkyCar.js'
 import bus from '@/utils/mitt.js'
 
 // 获取数据  有data 模拟/回溯 无data 线上
-class MainBus { 
+class MainBus {
   isReplayMode = ref(false)// 时间回溯模式
   replayPaused = ref(true) // 时间回溯暂停
   replayTimes = ref(1) // 时间回溯倍率
@@ -22,8 +22,13 @@ class MainBus {
   replayTimer = null
   ws = null
 
-  constructor() {
-    this.run()
+  constructor(mockData) {
+    if (mockData) {
+      this.run(mockData)
+
+    } else {
+      this.run()
+    }
   }
 
   run(replayData) {
@@ -43,23 +48,81 @@ class MainBus {
       this.ws = ws
       this.ws.onmessage = (info) => {
         const wsMessage = JSON.parse(info.data)
-        drive(wsMessage)
-      }
+        wsMessage?.VehicleInfo.forEach(e => {
+          if (!e?.ohtID) return
+          const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
 
+          if (skyCar) {
+            skyCar.handleSkyCar(e)
+
+          } else {
+            const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
+            newCar.handleSkyCar(e)
+          }
+        })
+
+        // 更新报警
+        if (wsMessage?.AlarmInfo?.length) {
+          if (STATE.alarmList) {
+            const list = wsMessage.AlarmInfo.slice(0, 20)
+            list.forEach(e => {
+              if (e.alarmType === 'set') {
+                STATE.alarmList.value.unshift(e)
+              } else if (e.alarmType === 'cancel') {
+                const itemIndex = STATE.alarmList.value.findIndex(e2 => e2.alarmId === e.alarmId)
+                if (itemIndex >= 0) {
+                  STATE.alarmList.value.splice(itemIndex, 1)
+                }
+              }
+            })
+          }
+        }
+
+        // 处理轨道
+        if (wsMessage?.BayStateInfo?.length) {
+          wsMessage.BayStateInfo.forEach(e => {
+            const item = DATA.pointCoordinateMap.find(e2 => e2.startPoint == e.point && e2.endPoint == e.ntPoint)
+            if (item) {
+              item.startCoordinate = e.startPosition
+              item.endCoordinate = e.endPosition
+              item.status = e.status
+
+              // 锁定变透明
+              if (e.status === '0') {
+                const mesh = STATE.sceneList.lineList.find(e2 => e2.name == (e.point + '-' + e.ntPoint))
+                if (mesh) {
+                  mesh.material.color = new Bol3D.Color(0.3, 0.3, 0.3)
+                }
+              }
+            }
+          })
+        }
+      }
     } else {
       // 模拟数据/回溯数据
       // =======================================
       const replayTimer = setInterval(() => {
-        if (STATE.mainBus.replayIndex.value >= this.currentReplayData.value.length - 1) {
-          STATE.mainBus.replayPaused.value = true
+        if (this.replayIndex.value >= this.currentReplayData.value.length - 1) {
+          this.replayPaused.value = true
           this.pause()
 
         } else {
-          drive(this.currentReplayData.value[STATE.mainBus.replayIndex.value])
-          STATE.mainBus.replayIndex.value++
-          STATE.mainBus.replaySlider.value = Math.floor(STATE.mainBus.replayIndex.value / this.currentReplayData.value.length * 1000)
+          this.currentReplayData.value[this.replayIndex.value].VehicleInfo.forEach(e => {
+            if (!e?.ohtID) return
+            const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
+
+            if (skyCar) {
+              skyCar.handleSkyCar(e)
+
+            } else {
+              const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
+              newCar.handleSkyCar(e)
+            }
+          })
+          this.replayIndex.value++
+          this.replaySlider.value = Math.floor(this.replayIndex.value / this.currentReplayData.value.length * 1000)
         }
-      }, 333 / STATE.mainBus.replayTimes.value)
+      }, 333 / this.replayTimes.value)
       this.replayTimer = replayTimer
     }
   }
@@ -139,9 +202,7 @@ function afterOnload(evt) {
   CACHE.container.outlinePass.pulsePeriod = 1
 
   TU.init(container, Bol3D)
-
-  const mainBus = new API.MainBus()
-  STATE.mainBus = mainBus
+  STATE.mainBus = new API.MainBus()
   API.initKaxia()
   UTIL.getAnimationList()
   API.initLine()

@@ -46,6 +46,9 @@ export default class SkyCar {
   constructor(opt) {
     if (opt.coordinate != undefined) this.coordinate = opt.coordinate
     if (opt.id != undefined) this.id = opt.id
+
+
+
     this.initSkyCar()
     this.initPopup()
     this.setAnimation()
@@ -72,6 +75,382 @@ export default class SkyCar {
     }
   }
 
+
+  handleSkyCar(info) {
+    const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = info
+    const reduceInfo = { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID }
+
+    // 去重
+    if (this.history.length) {
+      let equal = true
+      for (let key in reduceInfo) {
+        if (this.history[0][key] != reduceInfo[key]) {
+          equal = false
+          break
+        }
+      }
+
+      // 完全相同 则忽略此条消息
+      if (equal) { return }
+      else { this.history.unshift(reduceInfo) }
+
+
+    } else {
+      this.history.push(reduceInfo)
+    }
+
+
+    // 保持去重后的数据在X条
+    if (this.history.length < GLOBAL.messageLen + 1) { return }
+    this.history.splice(GLOBAL.messageLen, 1)
+
+
+    // 处理颜色
+    if (this.history[GLOBAL.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
+      if (this.state != 5) {
+        this.state = 5
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
+      if (this.state != 4) {
+        this.state = 4
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Loading === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
+      if (this.state != 2) {
+        this.state = 2
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoxing === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoda === '1') { // 取货行
+      if (this.state != 0) {
+        this.state = 0
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoxing === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoda === '1') { // 放货行
+      if (this.state != 1) {
+        this.state = 1
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
+      if (this.state != 3) {
+        this.state = 3
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
+    } else {
+      if (this.state != 3) {
+        this.state = 3
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+    }
+
+
+    // 更新 nextLine
+    const thisPosition = this.history[GLOBAL.messageLen - 1].position
+    const thisLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < thisPosition && e.endCoordinate > thisPosition)
+    for (let i = 1; i <= GLOBAL.messageLen - 1; i++) {
+      const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.history[GLOBAL.messageLen - 1 - i].position && e.endCoordinate > this.history[GLOBAL.messageLen - 1 - i].position)
+
+      if (nextLine && thisLine && nextLine.name != thisLine.name) {
+        if ((!this.nextLine.length || this.nextLine[this.nextLine.length - 1] != nextLine.name) && this.line != nextLine.name.replace('_', '-')) {
+          if (this.nextLine.length > 2) {
+            if (this.nextLine[this.nextLine.length - 2] === nextLine.name) {
+              this.nextLine.splice(this.nextLine.length - 1, 1)
+              this.nextLine.push(nextLine.name)
+            } else {
+              this.nextLine.push(nextLine.name)
+            }
+          } else {
+            this.nextLine.push(nextLine.name)
+          }
+        }
+        break
+      }
+    }
+
+
+    // 除了position改变，有没有动画要放
+    let haveAnimation = false
+    if ((this.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '1')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '0')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '1')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '0')) {
+      haveAnimation = true
+    }
+
+    // 常态化清空 FOUP
+    // 如果没有动画，且没有取货，且有catch，且run，且动画结束，那么清空catch
+    if (!haveAnimation && this.history[GLOBAL.messageLen - 1].ohtStatus_IsHaveFoup === '0' && this.catch && this.run && this.animationOver) {
+      this.catch.parent && this.catch.parent.remove(this.catch)
+      this.catch = null
+    }
+
+
+    // 强制清除取货行中的FOUP
+    if (this.state === 0 && !this.catch) {
+      this.skyCarMesh.traverse(e => {
+        if (e.isGroup && e.userData.type === 'kaxia') {
+          e.parent && e.parent.remove(e)
+          const itemIndex = STATE.sceneList.kaxiaList.children.findIndex(e2 => e2 === e)
+          if (itemIndex >= 0) {
+            STATE.sceneList.kaxiaList.children.splice(itemIndex, 1)
+          }
+        }
+      })
+    }
+
+    // 如果即将要装货、卸货，那么就不动，不运行setPosition
+    // 其他情况 如果位置不同，才设置位置
+    if (
+      (this.history[GLOBAL.messageLen - 1]?.ohtStatus_Loading == '1' && this.history[GLOBAL.messageLen - 2]?.ohtStatus_Loading == '0') ||
+      (this.history[GLOBAL.messageLen - 1]?.ohtStatus_UnLoading == '1' && this.history[GLOBAL.messageLen - 2]?.ohtStatus_UnLoading == '0')
+    ) {
+      this.run = true
+      this.fastRun = false
+      this.targetCoordinate = -1
+      this.posPath = null
+
+      // 即将到来的两次数据位置不同 改变位置的情况
+    } else if (this.history[GLOBAL.messageLen - 1]?.position != this.history[GLOBAL.messageLen - 2]?.position) {
+      const oldHistory = Object.assign({}, this.history[GLOBAL.messageLen - 1])
+      const newHistory = Object.assign({}, this.history[GLOBAL.messageLen - 2])
+      this.afterMove(newHistory, oldHistory)
+      this.setPosition()
+    }
+
+
+    // 判断一下是否即将有动画，也就是堆栈里最后一条如果有动画
+    const animateTargetMsg = this.history[0]
+    if (animateTargetMsg && !this.fastRun && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
+
+      this.isAnimateSoon = true
+      this.fastRun = true
+    }
+
+
+    // 单独依据 ohtStatus_IsHaveFoup 来给所有其值为 1 的天车绑上 FOUP
+    if (this.history[0].ohtStatus_IsHaveFoup === '1' && this.run) {
+      if (!this.catch) {
+        const newKaxia = STATE.sceneList.FOUP.clone()
+        const kaxiaId = this.history[0].therfidFoup
+        newKaxia.userData.area = ''
+        newKaxia.userData.shelf = ''
+        newKaxia.userData.shelfIndex = -1
+        newKaxia.userData.type = 'kaxia'
+        newKaxia.userData.id = kaxiaId || '--'
+        newKaxia.scale.set(3, 3, 3)
+        newKaxia.position.set(0, -0.35, 0)
+        newKaxia.rotation.y = -Math.PI / 2
+        newKaxia.visible = true
+        this.catch = newKaxia
+
+
+
+        const group = this.skyCarMesh.children.find(e => e.name === 'tianche02')
+        group.add(newKaxia)
+
+        const kaxiaIndex = STATE.sceneList.kaxiaList.children.findIndex(e => e.userData.id === kaxiaId)
+        if (kaxiaIndex >= 0) {
+          if (STATE.sceneList.kaxiaList.children[kaxiaIndex].parent) {
+            STATE.sceneList.kaxiaList.children[kaxiaIndex].parent.remove(STATE.sceneList.kaxiaList.children[kaxiaIndex])
+            STATE.sceneList.kaxiaList.children.splice(kaxiaIndex, 1)
+          }
+        } else {
+          STATE.sceneList.kaxiaList.children.push(newKaxia)
+        }
+
+        newKaxia.traverse(e2 => {
+          if (e2.isMesh) {
+            e2.userData.id = kaxiaId
+            e2.userData.area = newKaxia.userData.area
+            e2.userData.shelf = newKaxia.userData.shelf
+            e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+            e2.userData.type = newKaxia.userData.type
+          }
+        })
+      }
+    }
+
+  }
+
+  // 执行完毕后的动画(取货开始、放货开始)
+  afterMove(newHistory, oldHistory) {
+    // 如果当前还有动画 就算了
+    if (!this.animationOver) return
+
+    // 确认下在货架上还是在机台上
+    let positionData = UTIL.getPositionByKaxiaLocation(newHistory.location)
+    if (!positionData) {
+      positionData = {
+        type: '在货架上'
+      }
+    }
+
+    // 装载开始 || 卸货开始
+    if (oldHistory.ohtStatus_Loading == '0' && newHistory.ohtStatus_Loading == '1') {
+      this.run = false
+
+      // 找离天车最近的机台或者货架
+      let distance = 0
+      let shelf = null
+
+      if (positionData.type === '在机台上') {
+        DATA.deviceMapArray.forEach(e => {
+          const dis = Math.sqrt((e.position[0] - this.skyCarMesh.position.x) ** 2 + (e.position[2] - this.skyCarMesh.position.z) ** 2)
+          if (distance === 0) {
+            distance = dis
+            shelf = e
+          }
+          else if (dis < distance) {
+            distance = dis
+            shelf = e
+          }
+        })
+
+      } else {
+        STATE.sceneList.shelves2Arr.forEach(e => {
+          const dis = Math.sqrt((e.position[0] - this.skyCarMesh.position.x) ** 2 + (e.position[2] - this.skyCarMesh.position.z) ** 2)
+          if (distance === 0) {
+            distance = dis
+            shelf = e
+          }
+          else if (dis < distance) {
+            distance = dis
+            shelf = e
+          }
+        })
+        STATE.sceneList.shelves4Arr.forEach(e => {
+          const dis = Math.sqrt((e.position[0] - this.skyCarMesh.position.x) ** 2 + (e.position[2] - this.skyCarMesh.position.z) ** 2)
+          if (distance === 0) {
+            distance = dis
+            shelf = e
+          }
+          else if (dis < distance) {
+            distance = dis
+            shelf = e
+          }
+        })
+      }
+
+
+      // 查找最近的货架最近的卡匣，有就搬，没有就生成
+      const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === newHistory.therfidFoup)
+
+      const direction = positionData.type === '在机台上' ? 'right' : shelf.direction
+      const cb = () => {
+        if (kaxia && kaxia.parent) {
+          kaxia.parent.remove(kaxia)
+          kaxia.position.set(0, -0.35, 0)
+          kaxia.scale.set(3, 3, 3)
+          kaxia.rotation.y = -Math.PI / 2
+          const group = this.skyCarMesh.children.find(e => e.name === 'tianche02')
+          if (group) {
+            group.add(kaxia)
+            this.catch = kaxia
+          }
+          kaxia.area = ''
+          kaxia.shelf = ''
+          kaxia.shelfIndex = -1
+        } else {
+          const newKaxia = STATE.sceneList.FOUP.clone()
+          newKaxia.userData.id = newHistory.therfidFoup
+          newKaxia.userData.area = ''
+          newKaxia.userData.shelf = ''
+          newKaxia.userData.shelfIndex = -1
+          newKaxia.userData.type = 'kaxia'
+          newKaxia.scale.set(3, 3, 3)
+          newKaxia.position.set(0, -0.35, 0)
+          newKaxia.rotation.y = -Math.PI / 2
+          newKaxia.visible = true
+          newKaxia.traverse(e2 => {
+            if (e2.isMesh) {
+              e2.userData.id = newKaxia.userData.id
+              e2.userData.area = newKaxia.userData.area
+              e2.userData.shelf = newKaxia.userData.shelf
+              e2.userData.shelfIndex = newKaxia.userData.shelfIndex
+              e2.userData.type = newKaxia.userData.type
+              CACHE.container.clickObjects.push(e2)
+            }
+          })
+          const group = this.skyCarMesh.children.find(e => e.name === 'tianche02')
+          if (group) {
+            group.add(newKaxia)
+            this.catch = newKaxia
+          }
+        }
+      }
+      this.catchDirection = direction
+      this.down(positionData.type, cb)
+
+
+    } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') {
+
+      this.run = false
+
+      const cb = () => {
+        if (this.catch) {
+
+          if (!positionData.position) {
+            this.catch.parent.remove(this.catch)
+            this.catch = null
+
+          } else {
+            this.catch.position.x = positionData.position.x
+            this.catch.position.y = positionData.position.y
+            this.catch.position.z = positionData.position.z
+            this.catch.userData.locationId = newHistory.location
+            this.catch.userData.carrierType = 'FOUP'
+            this.catch.userData.where = positionData.type
+            this.catch.userData.area = positionData.area
+            this.catch.userData.shelf = positionData.shelf
+            this.catch.userData.shelfIndex = positionData.shelfIndex
+            this.catch.userData.type = 'kaxia'
+            this.catch.scale.set(30, 30, 30)
+            if (positionData.type === '在机台上') {
+              this.catch.rotation.y = DATA.deviceMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
+            } else if (positionData.type === '在货架上') {
+              this.catch.rotation.y = DATA.shelvesMap[positionData.area][positionData.shelf].rotate * Math.PI / 180 - Math.PI / 2
+            }
+            this.catch.visible = true
+            this.catch.parent && this.catch.parent.remove(this.catch)
+
+            this.catch.traverse(e2 => {
+              if (e2.isMesh) {
+                e2.userData.id = this.catch.userData.id
+                e2.userData.locationId = this.catch.userData.locationId
+                e2.userData.carrierType = this.catch.userData.carrierType
+                e2.userData.where = this.catch.userData.where
+                e2.userData.area = this.catch.userData.area
+                e2.userData.shelf = this.catch.userData.shelf
+                e2.userData.shelfIndex = this.catch.userData.shelfIndex
+                e2.userData.type = this.catch.userData.type
+                CACHE.container.clickObjects.push(e2)
+              }
+            })
+
+            STATE.sceneList.kaxiaList.add(this.catch)
+            this.catch = null
+
+          }
+
+        }
+      }
+      this.down(positionData.type, cb)
+    }
+  }
+
   initSkyCar() {
     this.skyCarMesh = STATE.sceneList.tianche.clone()
     this.skyCarMesh.position.set(235, 28.3, 231)
@@ -86,6 +465,11 @@ export default class SkyCar {
         CACHE.container.clickObjects.push(e)
       }
     })
+
+    STATE.sceneList.skyCarList.push(this)
+    this.skyCarMesh.position.set(235, 28.3, 231)
+    this.skyCarMesh.rotation.y = Math.PI / 2
+    this.setPosition()
 
     this.runRender()
   }
@@ -174,8 +558,6 @@ export default class SkyCar {
   }
 
   initClickPopup() {
-
-
     if (this.focus) {
       // 刷新数据
       if (this.clickPopup && this.clickPopup.parent) {
@@ -579,7 +961,6 @@ export default class SkyCar {
       lineIndex: lineIndex
     }
   }
-
 
   // cb 回调 后执行
   setPosition(cb) {

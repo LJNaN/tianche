@@ -6,57 +6,27 @@
 
     <div class="timepicker">
       <div class="timepicker-label">回溯时间:</div>
-      <el-date-picker
-        v-model="timePark"
-        type="datetimerange"
-        range-separator="-"
-        start-placeholder="开始时间"
-        end-placeholder="结束时间"
-        :teleported="false"
-        :disabled-date="disabledDate"
-        @change="datePickerChange"
-        :clearable="false"
-      />
+      <el-date-picker v-model="timePark" type="datetimerange" range-separator="-" start-placeholder="开始时间"
+        end-placeholder="结束时间" :teleported="false" :disabled-date="disabledDate" @change="datePickerChange"
+        :clearable="false" />
       <div class="timepicker-confirm" @click="handleConfirm">确定</div>
     </div>
 
     <div class="control">
-      <div
-        class="pause"
-        :style="{
-          background: `url('./assets/3d/img/${
-            STATE.mainBus.replayPaused.value ? 76 : 77
+      <div class="pause" :style="{
+        background: `url('./assets/3d/img/${STATE.mainBus.replayPaused.value ? 76 : 77
           }.png') center / 100% 100% no-repeat`,
-        }"
-        @click="handlePause"
-      ></div>
+      }" @click="handlePause"></div>
 
       <div class="stop" @click="handleStop"></div>
 
-      <el-slider
-        class="slider"
-        v-model="STATE.mainBus.replaySlider.value"
-        :max="1000"
-        :format-tooltip="sliderFormat"
-        :disabled="!sliderTimePark.length || stop"
-        @input="sliderChange"
-      />
+      <el-slider class="slider" v-model="STATE.mainBus.replaySlider.value" :max="1000" :format-tooltip="sliderFormat"
+        :disabled="!sliderTimePark.length || stop" @input="sliderChange" />
 
       <span class="progressTime">{{ replayProgressTime }}</span>
-      <el-select
-        v-model="times"
-        class="times"
-        placeholder="倍速"
-        size="small"
-        :teleported="false"
-        @visible-change="selectChange"
-      >
-        <el-option
-          v-for="item in timesOptions"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
+      <el-select v-model="times" class="times" placeholder="倍速" size="small" :teleported="false"
+        @visible-change="selectChange">
+        <el-option v-for="item in timesOptions" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
     </div>
   </div>
@@ -69,7 +39,6 @@ import ExtensionBtn from "@/components/extensionBtn.vue";
 import Compass from "@/components/compass.vue";
 import { GLOBAL } from "@/GLOBAL";
 import { GetReplayData } from "@/axios/api.js";
-import drive from "@/ktJS/drive.js";
 import { ElMessage } from "element-plus";
 import replayData1 from "@/ktJS/js/mockReplayData1.js";
 // import mock2 from '@/ktJS/js/mock2.js'
@@ -86,7 +55,7 @@ const replayProgressTime = computed(() => {
     frontTime = stampTommss(
       (STATE.mainBus.replayIndex.value /
         STATE.mainBus.currentReplayData.value.length) *
-        timeLone.value
+      timeLone.value
     );
   } else {
     frontTime = "00:00";
@@ -102,11 +71,14 @@ async function handleConfirm() {
   );
   if (long > 10000) long = 10000;
 
-  const res = await GetReplayData([
-    timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
-    timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  ], long);
-  // const res = replayData1;
+  // const res = await GetReplayData(
+  //   [
+  //     timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //     timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //   ],
+  //   long
+  // );
+  const res = replayData1;
 
   const res2 = res?.hits?.hits;
   if (!res2) return;
@@ -171,6 +143,7 @@ const timesOptions = [
   },
 ];
 let sliderTimePark = ref([]);
+const stop = ref(true);
 
 function sliderFormat(e) {
   if (
@@ -214,7 +187,7 @@ function handlePause() {
       STATE.mainBus.replayIndex.value = 0;
       STATE.mainBus.replaySlider.value = 0;
     }
-    stop.value = false
+    stop.value = false;
     STATE.mainBus.replayPaused.value = false;
     STATE.mainBus.run(STATE.mainBus.currentReplayData.value);
   }
@@ -267,9 +240,24 @@ function sliderChange(e) {
         );
       }
     }
-    drive(
-      STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value]
-    );
+
+    STATE.mainBus.currentReplayData.value[STATE.mainBus.replayIndex.value].VehicleInfo.forEach((info) => {
+      if (!info?.ohtID) return;
+      const skyCar = STATE.sceneList.skyCarList.find(
+        (car) => car.id === info.ohtID
+      );
+
+
+      if (skyCar) {
+        skyCar.handleSkyCar(info);
+      } else {
+        const newCar = new SkyCar({
+          id: info.ohtID,
+          coordinate: info.position,
+        });
+        newCar.handleSkyCar(info);
+      }
+    });
 
     const coordinate = Number(currentData.VehicleInfo[0].position);
     const map = DATA.pointCoordinateMap.find(
@@ -303,9 +291,6 @@ function datePickerChange(e) {
     timePark.value[0] = new Date(e[1] * 1 - 3600000);
   }
 }
-
-const stop = ref(true);
-
 function handleStop() {
   stop.value = true;
   STATE.mainBus.pause();
