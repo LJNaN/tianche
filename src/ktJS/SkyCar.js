@@ -92,7 +92,10 @@ export default class SkyCar {
 
       // 完全相同 则忽略此条消息
       if (equal) { return }
-      else { this.history.unshift(reduceInfo) }
+      else {
+        reduceInfo.receiveTime = new Date().format('YYYY-MM-DD hh:mm:ss')
+        this.history.unshift(reduceInfo) 
+      }
 
 
     } else {
@@ -911,6 +914,11 @@ export default class SkyCar {
       return
     }
 
+    if (this.history.length && this.history[0]?.receiveTime && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
+      this.dispose()
+      return
+    }
+
 
 
     this.runSpeed = Math.round((1 / (STATE.frameRate / 60)) * this.quickenSpeedTimes * STATE.mainBus.replayTimes.value)
@@ -1073,7 +1081,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 500 ? (2.5 / STATE.mainBus.replayTimes.value) : (1 / STATE.mainBus.replayTimes.value)
+        this.quickenSpeedTimes = totalIndex > 750 ? (2.5 / STATE.mainBus.replayTimes.value) : (1 / STATE.mainBus.replayTimes.value)
       }
     }
 
@@ -1493,7 +1501,7 @@ export default class SkyCar {
       this.skyCarMesh = null
     }
 
-    if(this.catch) {
+    if (this.catch) {
       this.catch.visible = false
       this.catch.parent.remove(this.catch)
       this.catch = null
