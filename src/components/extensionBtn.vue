@@ -1,4 +1,3 @@
-
 <template>
   <div class="chartShow" @click="clickDrawer()" :style="{
     background: `url(./assets/3d/img/${GLOBAL.selectedItem.value.length === drawerList.length ? 54 : 53}.png) center / 100% 100% no-repeat`,
@@ -107,6 +106,16 @@ function handleDrawerItem(id) {
 
 function handleReplay() {
   STATE.mainBus.reset()
+  STATE.sceneList.lineList.forEach(e => {
+    e.material.uniforms.next.value = 0
+    e.material.uniforms.pass.value = 0
+    e.material.uniforms.currentFocusLineStartPoint.value = -1
+    e.material.uniforms.currentFocusLineEndPoint.value = -1
+    e.material.uniforms.isEndLine.value = 0
+    e.material.uniforms.endLineProgress.value = 0.0
+    e.material.uniforms.isStartLine.value = 0
+    e.material.uniforms.startLineProgress.value = 0.0
+  })
   STATE.mainBus.replayPaused.value = true // 时间回溯暂停
   STATE.mainBus.replayTimes.value = 1 // 时间回溯倍率
   STATE.mainBus.replayIndex.value = 0 // 时间回溯当前索引

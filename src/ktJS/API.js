@@ -48,18 +48,20 @@ class MainBus {
       this.ws = ws
       this.ws.onmessage = (info) => {
         const wsMessage = JSON.parse(info.data)
-        wsMessage?.VehicleInfo.forEach(e => {
-          if (!e?.ohtID) return
-          const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
-
-          if (skyCar) {
-            skyCar.handleSkyCar(e)
-
-          } else {
-            const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
-            newCar.handleSkyCar(e)
-          }
-        })
+        if(wsMessage?.VehicleInfo?.length) {
+          wsMessage?.VehicleInfo.forEach(e => {
+            if (!e?.ohtID) return
+            const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
+  
+            if (skyCar) {
+              skyCar.handleSkyCar(e)
+  
+            } else {
+              const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
+              newCar.handleSkyCar(e)
+            }
+          })
+        }
 
         // 更新报警
         if (wsMessage?.AlarmInfo?.length) {

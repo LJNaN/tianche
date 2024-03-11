@@ -58,10 +58,7 @@ const option = reactive({
     trigger: "axis",
     borderWidth: 1,
     axisPointer: {
-      type: "shadow",
-      // label: {
-      //   show: true,
-      // },
+      type: "shadow"
     },
     formatter: function (params) {
       var str = "";
@@ -70,7 +67,7 @@ const option = reactive({
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ": " + params[i].value + "<br/>";
+          str += `${params[i].seriesName}: ${params[i].value}${i === 2 ? '%' : ''}<br/>`
         }
       }
       str += ""
@@ -107,10 +104,8 @@ const option = reactive({
     },
     axisLabel: {
       show: true,
-      textStyle: {
-        color: "#FFF", //X轴文字颜色
-        fontSize: 10
-      },
+      color: "#FFF", //X轴文字颜色
+      fontSize: 10,
       interval: 0,
       overflow: 'breakAll',
       rotate: 30,
@@ -148,9 +143,7 @@ const option = reactive({
       },
       axisLabel: {
         show: true,
-        textStyle: {
-          color: "#FFF",
-        },
+        color: "#FFF"
       },
     },
     {
@@ -177,9 +170,7 @@ const option = reactive({
       },
       axisLabel: {
         show: true,
-        textStyle: {
-          color: "#FFF",
-        },
+        color: "#FFF",
         formatter: "{value} %",
       },
       max: 100,
@@ -269,11 +260,19 @@ const option2 = reactive({
   tooltip: {
     trigger: "axis",
     axisPointer: {
-      // 坐标轴指示器，坐标轴触发有效
-      type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+      type: "shadow"
     },
-    //formatter: '{a}<br />{c}'
-    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
+    formatter: function (params) {
+      console.log('params: ', params);
+      var str = "";
+      for (var i = 0; i < params.length; i++) {
+        if (params[i].seriesName !== "") {
+          str += `${params[i].name}: ${params[i].value}<br/>`
+        }
+      }
+      return str;
+    },
+    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;"
   },
   color: ["#5E99DA", "#1A6A74"],
   legend: {
@@ -306,10 +305,8 @@ const option2 = reactive({
       },
       axisLabel: {
         //坐标轴刻度标签的相关设置
-        textStyle: {
-          color: "#FFFFFF",
-          fontSize: 12,
-        },
+        color: "#FFFFFF",
+        fontSize: 12,
         rotate: 60,
       },
       splitLine: {
@@ -350,10 +347,8 @@ const option2 = reactive({
       },
       axisLabel: {
         show: true,
-        textStyle: {
-          color: "#fff",
-          fontSize: 14,
-        },
+        color: "#fff",
+        fontSize: 14,
       },
       axisTick: {
         show: false,
@@ -401,11 +396,19 @@ const option3 = reactive({
   tooltip: {
     trigger: "axis",
     axisPointer: {
-      // 坐标轴指示器，坐标轴触发有效
       type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
     },
-    //formatter: '{a}<br />{c}'
-    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
+    formatter: function (params) {
+      console.log('params: ', params);
+      var str = "";
+      for (var i = 0; i < params.length; i++) {
+        if (params[i].seriesName !== "") {
+          str += `${params[i].name}: ${params[i].value}<br/>`
+        }
+      }
+      return str;
+    },
+    extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;"
   },
   color: ["#5E99DA", "#1A6A74"],
   legend: {
@@ -414,11 +417,9 @@ const option3 = reactive({
     icon: "rect",
     itemWidth: 15, // 图例标记的图形宽度。
     itemHeight: 15, //  图例标记的图形高度。
-    textStyle: {
-      color: "#fff",
-      fontSize: 14,
-      padding: [0, 8, 0, 8],
-    },
+    color: "#fff",
+    fontSize: 14,
+    padding: [0, 8, 0, 8]
   },
   grid: {
     left: "5%",
@@ -438,10 +439,8 @@ const option3 = reactive({
       },
       axisLabel: {
         //坐标轴刻度标签的相关设置
-        textStyle: {
-          color: "#FFFFFF",
-          fontSize: 12,
-        },
+        color: "#FFFFFF",
+        fontSize: 12,
         rotate: 60,
       },
       splitLine: {
@@ -482,10 +481,8 @@ const option3 = reactive({
       },
       axisLabel: {
         show: true,
-        textStyle: {
-          color: "#fff",
-          fontSize: 14,
-        },
+        color: "#fff",
+        fontSize: 14
       },
       axisTick: {
         show: false,

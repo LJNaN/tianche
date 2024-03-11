@@ -96,6 +96,7 @@ export default class SkyCar {
 
 
     } else {
+      reduceInfo.receiveTime = new Date().format('YYYY-MM-DD hh:mm:ss')
       this.history.push(reduceInfo)
     }
 
@@ -962,7 +963,7 @@ export default class SkyCar {
     }
   }
 
-  // cb 回调 后执行
+  // 设置位置
   setPosition(cb) {
     const this_ = this
 
@@ -1480,11 +1481,23 @@ export default class SkyCar {
     this.skyCarMesh.visible = false
     this.popup && (this.popup.visible = false)
     this.clickPopup && (this.clickPopup.visible = false)
+    this.startPopup && (this.startPopup.visible = false)
+    this.endPopup && (this.endPopup.visible = false)
+
     if (this.skyCarMesh.parent) {
       this.popup?.parent && this.popup.parent.remove(this.popup)
       this.clickPopup?.parent && this.clickPopup.parent.remove(this.clickPopup)
+      this.startPopup?.parent && this.startPopup.parent.remove(this.startPopup)
+      this.endPopup?.parent && this.endPopup.parent.remove(this.endPopup)
       this.skyCarMesh.parent.remove(this.skyCarMesh)
       this.skyCarMesh = null
     }
+
+    if(this.catch) {
+      this.catch.visible = false
+      this.catch.parent.remove(this.catch)
+      this.catch = null
+    }
+
   }
 }

@@ -9,16 +9,17 @@
       <el-date-picker v-model="timePark" type="datetimerange" range-separator="-" start-placeholder="开始时间"
         end-placeholder="结束时间" :teleported="false" :disabled-date="disabledDate" @change="datePickerChange"
         :clearable="false" />
-      <div class="timepicker-confirm" @click="handleConfirm">确定</div>
+      <div class="timepicker-confirm" @click="handleConfirm" :style="{ cursor: loading ? 'wait' : 'pointer' }">确定</div>
     </div>
 
     <div class="control">
       <div class="pause" :style="{
         background: `url('./assets/3d/img/${STATE.mainBus.replayPaused.value ? 76 : 77
           }.png') center / 100% 100% no-repeat`,
+        cursor: loading ? 'wait' : 'pointer'
       }" @click="handlePause"></div>
 
-      <div class="stop" @click="handleStop"></div>
+      <div class="stop" :style="{ cursor: loading ? 'wait' : 'pointer' }" @click="handleStop"></div>
 
       <el-slider class="slider" v-model="STATE.mainBus.replaySlider.value" :max="1000" :format-tooltip="sliderFormat"
         :disabled="!sliderTimePark.length || stop" @input="sliderChange" />
@@ -29,6 +30,9 @@
         <el-option v-for="item in timesOptions" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
     </div>
+
+    <el-progress v-if="loading" class="progress" :percentage="100" :indeterminate="true" :duration="1"
+      :show-text="false" :stroke-width="3" />
   </div>
 </template>
 
@@ -44,6 +48,8 @@ import replayData1 from "@/ktJS/js/mockReplayData1.js";
 // import mock2 from '@/ktJS/js/mock2.js'
 import { stampTommss } from "@/utils/stampTommss.js";
 import { STATE } from "@/ktJS/STATE";
+
+const loading = ref(false)
 
 const timePark = ref([new Date(new Date() * 1 - 3600000), new Date()]);
 const timeLone = computed(() => {
@@ -64,21 +70,27 @@ const replayProgressTime = computed(() => {
 });
 
 async function handleConfirm() {
+  if (loading.value) {
+    return
+  }
+
   handleStop();
+  loading.value = true
   stop.value = false;
   let long = Math.floor(
     ((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000) * 10800
   );
   if (long > 10000) long = 10000;
 
-  // const res = await GetReplayData(
-  //   [
-  //     timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  //     timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
-  //   ],
-  //   long
-  // );
-  const res = replayData1;
+  const res = await GetReplayData(
+    [
+      timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+      timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
+    ],
+    long
+  );
+  // const res = replayData1;
+  loading.value = false
 
   const res2 = res?.hits?.hits;
   if (!res2) return;
@@ -168,6 +180,7 @@ function disabledDate(date) {
   return date > new Date();
 }
 function handlePause() {
+  if(loading.value) return
   if (!STATE.mainBus.currentReplayData.value.length) {
     return;
   }
@@ -292,6 +305,7 @@ function datePickerChange(e) {
   }
 }
 function handleStop() {
+  if(loading.value) return
   stop.value = true;
   STATE.mainBus.pause();
   STATE.mainBus.reset();
@@ -461,5 +475,12 @@ function handleStop() {
 .el-select-dropdown__item {
   text-align: center;
   padding: 0;
+}
+
+.progress {
+  position: absolute;
+  top: 11%;
+  left: 35%;
+  width: 30%;
 }
 </style>

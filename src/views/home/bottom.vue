@@ -153,14 +153,13 @@ const option2 = reactive({
       // },
     },
     formatter: function (params) {
-
       var str = "";
       if (params.length > 0) {
         str = params[0].name + "<br/>";
       }
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
-          str += params[i].seriesName + ": " + params[i].value + " 秒<br/>";
+          str += `${params[i].seriesName}: ${params[i].value}<br/>`
         }
       }
       return str;
@@ -197,9 +196,7 @@ const option2 = reactive({
     axisLabel: {
       rotate: 60,
       show: true,
-      textStyle: {
-        color: "#FFF", //X轴文字颜色
-      },
+      color: "#FFF", //X轴文字颜色
     },
   },
   yAxis: [
@@ -298,7 +295,18 @@ const option3 = reactive({
       // 坐标轴指示器，坐标轴触发有效
       type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
     },
-    //formatter: '{a}<br />{c}'
+    formatter: function (params) {
+      var str = "";
+      if (params.length > 0) {
+        str = params[0].name + "<br/>";
+      }
+      for (var i = 0; i < params.length; i++) {
+        if (params[i].seriesName !== "") {
+          str += `${params[i].seriesName}: ${params[i].value}<br/>`
+        }
+      }
+      return str;
+    },
     extraCssText: "z-index:2;opacity:0.8;font-size: 12px;padding: 0 1%;",
   },
   color: ["#5E99DA", "#1A6A74"],
@@ -334,10 +342,8 @@ const option3 = reactive({
     axisLabel: {
       rotate: 60,
       //坐标轴刻度标签的相关设置
-      textStyle: {
-        color: "#FFFFFF",
-        fontSize: 12,
-      },
+      color: "#FFFFFF",
+      fontSize: 12,
     },
     splitLine: {
       show: false,
@@ -377,10 +383,8 @@ const option3 = reactive({
       },
       axisLabel: {
         show: true,
-        textStyle: {
-          color: "#fff",
-          fontSize: 14,
-        },
+        color: "#fff",
+        fontSize: 14
       },
       axisTick: {
         show: false,
@@ -483,7 +487,7 @@ function getData() {
     option3.series[0].data = CycleCount
     option3.series[1].data = MFGCount
 
-  }).catch(() => {})
+  }).catch(() => { })
 }
 
 setInterval(() => {
