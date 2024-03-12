@@ -80,15 +80,35 @@ async function handleConfirm() {
   let long = Math.floor(
     ((timePark.value[1] * 1 - timePark.value[0] * 1) / 3600000) * 10800
   );
-  if (long > 10000) long = 10000;
 
-  const res = await GetReplayData(
+  const startT = timePark.value[0]
+  const endT = timePark.value[1]
+  const halfT = new Date(startT * 1 + (endT * 1 - startT * 1) / 2)
+  
+
+  const data1 = await GetReplayData(
     [
       timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+      halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
+    ],
+    long / 2
+  )
+
+  const data2 = await GetReplayData(
+    [
+      halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
       timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
     ],
-    long
+    long / 2
   );
+
+
+  if(data1?.hits?.hits && data2?.hits?.hits) {
+    data1.hits.hits = data1.hits.hits.concat(data2.hits.hits)
+  }
+  const res = data1
+  
+
   // const res = replayData1;
   loading.value = false
 
@@ -180,7 +200,7 @@ function disabledDate(date) {
   return date > new Date();
 }
 function handlePause() {
-  if(loading.value) return
+  if (loading.value) return
   if (!STATE.mainBus.currentReplayData.value.length) {
     return;
   }
@@ -305,7 +325,7 @@ function datePickerChange(e) {
   }
 }
 function handleStop() {
-  if(loading.value) return
+  if (loading.value) return
   stop.value = true;
   STATE.mainBus.pause();
   STATE.mainBus.reset();
