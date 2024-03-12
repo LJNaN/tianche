@@ -38,7 +38,7 @@ export default class SkyCar {
 
   isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
-  targetCoordinate = -1       // 有动画时的目标坐标
+  targetCoordinate = -1       // 有动画/oncall时的目标坐标
 
   replayRun = true            // 回溯时是否运行
 
@@ -77,8 +77,8 @@ export default class SkyCar {
 
 
   handleSkyCar(info) {
-    const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID } = info
-    const reduceInfo = { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID }
+    const { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID, ohtStatus_Oncall } = info
+    const reduceInfo = { lastTime, position, location, ohtStatus_Loading, ohtStatus_Quhuoda, ohtStatus_Roaming, ohtStatus_Quhuoxing, ohtStatus_Idle, ohtStatus_IsHaveFoup, therfidFoup, ohtStatus_MoveEnable, ohtStatus_Fanghuoxing, ohtStatus_Fanghuoda, ohtStatus_UnLoading, ohtID, ohtStatus_Oncall }
 
     // 去重
     if (this.history.length) {
@@ -94,7 +94,7 @@ export default class SkyCar {
       if (equal) { return }
       else {
         reduceInfo.receiveTime = new Date().format('YYYY-MM-DD hh:mm:ss')
-        this.history.unshift(reduceInfo) 
+        this.history.unshift(reduceInfo)
       }
 
 
@@ -236,11 +236,24 @@ export default class SkyCar {
 
 
     // 判断一下是否即将有动画，也就是堆栈里最后一条如果有动画
+    // 新增: oncall 同样是以下逻辑
     const animateTargetMsg = this.history[0]
-    if (animateTargetMsg && !this.fastRun && (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1')) {
+    if (animateTargetMsg && !this.fastRun) {
+      if (
+        (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1') ||
+        (animateTargetMsg.ohtStatus_Oncall == '1')) {
 
-      this.isAnimateSoon = true
-      this.fastRun = true
+        this.isAnimateSoon = true
+        this.fastRun = true
+      }
+    }
+
+
+    // 恢复oncall
+    if(animateTargetMsg.ohtStatus_Oncall === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncall === '1') {
+      this.isAnimateSoon = false
+      this.fastRun = false
+      this.run =true
     }
 
 
@@ -914,7 +927,7 @@ export default class SkyCar {
       return
     }
 
-    if (this.history.length && this.history[0]?.receiveTime && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
+    if (this.history.length && this.history[0]?.receiveTime && !STATE.mainBus.replayPaused.value && (new Date() * 1 - 6000 ) > new Date(this.history[0].receiveTime)) {
       this.dispose()
       return
     }
@@ -978,14 +991,14 @@ export default class SkyCar {
     if (this.history.length < GLOBAL.messageLen) { return }
 
     // 变速
-    function computeQuickenSpeedTimes(skyCar, position) {
+    function computeQuickenSpeedTimes(position) {
       const line = DATA.pointCoordinateMap.find(e => e.startCoordinate < position && e.endCoordinate > position)
       if (!line) return
 
       const lineName = line.name.replace('_', '-')
 
-      if (skyCar.line === lineName) {
-        const progress1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
+      if (this_.line === lineName) {
+        const progress1 = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length // 在当前轨道上的进度
         const progress2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
         const progressDifference = progress2 - progress1 // 进度差
 
@@ -993,25 +1006,25 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          skyCar.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
+          this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
 
         } else {
-          skyCar.quickenSpeedTimes = 0
+          this_.quickenSpeedTimes = 0
         }
 
       } else {
         // 不在同一根轨道的话，就糟了老罪咯
         // 要去统计nextline 看看离他所谓的那个b点还有多少个index没有走
-        if (skyCar.nextLine.includes(line.name)) {
+        if (this_.nextLine.includes(line.name)) {
           let totalIndex = 0
-          for (let i = 0; i < skyCar.nextLine.length; i++) {
-            if (skyCar.nextLine[i] !== line.name) {
-              totalIndex += STATE.sceneList.linePosition[skyCar.nextLine[i].replace('_', '-')].length
+          for (let i = 0; i < this_.nextLine.length; i++) {
+            if (this_.nextLine[i] !== line.name) {
+              totalIndex += STATE.sceneList.linePosition[this_.nextLine[i].replace('_', '-')].length
 
             } else {
-              const progress1 = skyCar.lineIndex / STATE.sceneList.linePosition[skyCar.line].length // 在当前轨道上的进度
+              const progress1 = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length // 在当前轨道上的进度
               const progress2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
-              const subIndex1 = (1 - progress1) * STATE.sceneList.linePosition[skyCar.line].length
+              const subIndex1 = (1 - progress1) * STATE.sceneList.linePosition[this_.line].length
               const subIndex2 = progress2 * STATE.sceneList.linePosition[line.name.replace('_', '-')].length
               totalIndex += subIndex1 + subIndex2
               break
@@ -1020,14 +1033,14 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            skyCar.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
+            this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
           } else {
-            skyCar.quickenSpeedTimes = 0
+            this_.quickenSpeedTimes = 0
           }
 
         } else {
           // 都查求不到这个轨道，随便吧
-          skyCar.quickenSpeedTimes = 2.5
+          this_.quickenSpeedTimes = 2.5
         }
       }
     }
@@ -1039,7 +1052,7 @@ export default class SkyCar {
       const animateTargetMsg = this.history[0]
       const { position } = animateTargetMsg
       this.targetCoordinate = Number(position)
-      computeQuickenSpeedTimes(this, position)
+      computeQuickenSpeedTimes(position)
 
     } else if (this.fastRun) {
       // 目标停车点
