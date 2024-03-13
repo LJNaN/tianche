@@ -22,6 +22,4 @@ app.use(ElementPlus, {
 })
 app.use(router)
 
-// if(new Date() * 1 < new Date('2023-10-16') * 1) {
 app.mount('#app')
-// }

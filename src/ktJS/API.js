@@ -48,14 +48,14 @@ class MainBus {
       this.ws = ws
       this.ws.onmessage = (info) => {
         const wsMessage = JSON.parse(info.data)
-        if(wsMessage?.VehicleInfo?.length) {
+        if (wsMessage?.VehicleInfo?.length) {
           wsMessage?.VehicleInfo.forEach(e => {
             if (!e?.ohtID) return
             const skyCar = STATE.sceneList.skyCarList.find(car => car.id === e.ohtID)
-  
+
             if (skyCar) {
               skyCar.handleSkyCar(e)
-  
+
             } else {
               const newCar = new SkyCar({ id: e.ohtID, coordinate: e.position })
               newCar.handleSkyCar(e)
@@ -160,6 +160,31 @@ class MainBus {
   }
 }
 
+function setReload() {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+
+      STATE.mainBus.closeLink()
+      STATE.mainBus.reset()
+      STATE.mainBus.run()
+
+    } else {
+      STATE.mainBus.closeLink()
+      STATE.mainBus.reset()
+    }
+  })
+
+
+  setInterval(() => {
+    const hh = new Date().getHours()
+    const mm = new Date().getMinutes()
+    if (hh % 2 === 0 && mm === 0) {
+      STATE.mainBus.closeLink()
+      STATE.mainBus.reset()
+      STATE.mainBus.run()
+    }
+  }, 1000 * 60)
+}
 
 // 初始化程序时处理模型
 function afterOnload(evt) {
@@ -1825,6 +1850,7 @@ function render() {
 export const API = {
   ...TU,
   MainBus,
+  setReload,
   initLine,
   search,
   initDeviceByMap,

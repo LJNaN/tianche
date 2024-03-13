@@ -263,7 +263,7 @@ const option2 = reactive({
       type: "shadow"
     },
     formatter: function (params) {
-      console.log('params: ', params);
+      
       var str = "";
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {
@@ -399,7 +399,7 @@ const option3 = reactive({
       type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
     },
     formatter: function (params) {
-      console.log('params: ', params);
+      
       var str = "";
       for (var i = 0; i < params.length; i++) {
         if (params[i].seriesName !== "") {

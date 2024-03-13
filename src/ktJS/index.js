@@ -52,7 +52,7 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           }
           evt.sceneList[model.name] = model
 
-          
+
           GLOBAL.loadedModelNum++
           GLOBAL.loadingPercent.value = Math.floor(GLOBAL.loadedModelNum / GLOBAL.modelNum * 100) - 1
         },
@@ -64,9 +64,12 @@ export const loadSceneByJSON = ({ domElement, callback }) => {
           CACHE.container = evt
 
           evt.updateSceneByNodes(jsonParser.nodes[0], 0, () => {
-          
+
             API.afterOnload(evt)
             GLOBAL.loadingPercent.value = 100
+
+            API.setReload()
+            
             // UTIL.testBox()
             // UTIL.loadGUI()
           })
