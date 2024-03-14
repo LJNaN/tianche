@@ -163,14 +163,14 @@ class MainBus {
 function setReload() {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
-
-      STATE.mainBus.closeLink()
-      STATE.mainBus.reset()
-      STATE.mainBus.run()
+      if ((CACHE.reloadTime + 60 * 1000 * 2) < new Date() * 1) {
+        STATE.mainBus.closeLink()
+        STATE.mainBus.reset()
+        STATE.mainBus.run()
+      }
 
     } else {
-      STATE.mainBus.closeLink()
-      STATE.mainBus.reset()
+      CACHE.reloadTime = new Date() * 1
     }
   })
 

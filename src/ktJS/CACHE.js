@@ -5,6 +5,7 @@ const instanceTransformInfo = {} //  transform info
 const instanceMeshInfo = {} //  instance info
 const instanceNameMap = {}
 const removed = {}
+let reloadTime = new Date() * 1
 
 
 
@@ -18,5 +19,6 @@ export const CACHE = {
   instanceNameMap,
   tempCameraState,
   oldClock,
+  reloadTime,
   removed
 }
