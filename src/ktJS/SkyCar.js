@@ -187,11 +187,12 @@ export default class SkyCar {
 
     // 除了position改变，有没有动画要放
     let haveAnimation = false
-    if ((this.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '1')
-      || (this.history[GLOBAL.messageLen - 1].ohtStatus_Loading == '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading == '0')
-      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '1')
-      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading == '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading == '0')) {
+    if ((this.history[GLOBAL.messageLen - 1].ohtStatus_Loading === '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading === '1')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_Loading === '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_Loading === '0')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading === '0' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading === '1')
+      || (this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading === '1' && this.history[GLOBAL.messageLen - 2].ohtStatus_UnLoading === '0')) {
       haveAnimation = true
+
     }
 
     // 常态化清空 FOUP
@@ -215,7 +216,7 @@ export default class SkyCar {
       })
     }
 
-    // 如果即将要装货、卸货，那么就不动，不运行setPosition
+    // 如果装卸货完成了  就让他run
     // 其他情况 如果位置不同，才设置位置
     if (
       (this.history[GLOBAL.messageLen - 1]?.ohtStatus_Loading == '1' && this.history[GLOBAL.messageLen - 2]?.ohtStatus_Loading == '0') ||
@@ -225,6 +226,15 @@ export default class SkyCar {
       this.fastRun = false
       this.targetCoordinate = -1
       this.posPath = null
+
+      // 处理数据的缺陷
+    } else if (
+      (this.history[GLOBAL.messageLen - 1]?.ohtStatus_UnLoading == '0' && this.history[GLOBAL.messageLen - 2]?.ohtStatus_UnLoading == '1') ||
+      (this.history[GLOBAL.messageLen - 1]?.ohtStatus_Loading == '0' && this.history[GLOBAL.messageLen - 2]?.ohtStatus_Loading == '1')
+    ) {
+      const oldHistory = Object.assign({}, this.history[GLOBAL.messageLen - 1])
+      const newHistory = Object.assign({}, this.history[GLOBAL.messageLen - 2])
+      this.afterMove(newHistory, oldHistory)
 
       // 即将到来的两次数据位置不同 改变位置的情况
     } else if (this.history[GLOBAL.messageLen - 1]?.position != this.history[GLOBAL.messageLen - 2]?.position) {
@@ -245,15 +255,16 @@ export default class SkyCar {
 
         this.isAnimateSoon = true
         this.fastRun = true
+
       }
     }
 
 
     // 恢复oncall
-    if(animateTargetMsg.ohtStatus_Oncall === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncall === '1') {
+    if (animateTargetMsg.ohtStatus_Oncall === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncall === '1') {
       this.isAnimateSoon = false
       this.fastRun = false
-      this.run =true
+      this.run = true
     }
 
 
@@ -304,6 +315,8 @@ export default class SkyCar {
 
   // 执行完毕后的动画(取货开始、放货开始)
   afterMove(newHistory, oldHistory) {
+
+
     // 如果当前还有动画 就算了
     if (!this.animationOver) return
 
@@ -409,6 +422,7 @@ export default class SkyCar {
         }
       }
       this.catchDirection = direction
+
       this.down(positionData.type, cb)
 
 
@@ -464,6 +478,7 @@ export default class SkyCar {
 
         }
       }
+
       this.down(positionData.type, cb)
     }
   }
@@ -927,7 +942,7 @@ export default class SkyCar {
       return
     }
 
-    if (this.history.length && this.history[0]?.receiveTime && !STATE.mainBus.replayPaused.value && (new Date() * 1 - 6000 ) > new Date(this.history[0].receiveTime)) {
+    if (this.history.length && this.history[0]?.receiveTime && !STATE.mainBus.replayPaused.value && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
       this.dispose()
       return
     }

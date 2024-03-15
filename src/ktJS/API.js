@@ -7,7 +7,7 @@ import TU from './js/threeUtils.js'
 import { GLOBAL } from '@/GLOBAL.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo } from '@/axios/api.js'
-import mockData2 from './js/mock2'
+// import mockData2 from './js/mock2'
 import SkyCar from './SkyCar.js'
 import bus from '@/utils/mitt.js'
 
@@ -242,7 +242,7 @@ function afterOnload(evt) {
   CACHE.container.outlinePass.pulsePeriod = 1
 
   TU.init(container, Bol3D)
-  STATE.mainBus = new API.MainBus()
+  STATE.mainBus = new MainBus()
   API.initKaxia()
   UTIL.getAnimationList()
   API.initLine()
@@ -1862,7 +1862,6 @@ function render() {
 
 export const API = {
   ...TU,
-  MainBus,
   setReload,
   initLine,
   search,
