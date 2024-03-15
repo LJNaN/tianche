@@ -164,6 +164,19 @@ function setReload() {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       if ((CACHE.reloadTime + 60 * 1000 * 2) < new Date() * 1) {
+        STATE.currentPopup = null
+        STATE.searchAnimateDestroy = true
+        STATE.sceneList.lineList.forEach(e => {
+          e.material.uniforms.next.value = 0
+          e.material.uniforms.pass.value = 0
+          e.material.uniforms.currentFocusLineStartPoint.value = -1
+          e.material.uniforms.currentFocusLineEndPoint.value = -1
+          e.material.uniforms.isEndLine.value = 0
+          e.material.uniforms.endLineProgress.value = 0.0
+          e.material.uniforms.isStartLine.value = 0
+          e.material.uniforms.startLineProgress.value = 0.0
+        })
+        
         STATE.mainBus.closeLink()
         STATE.mainBus.reset()
         STATE.mainBus.run()
