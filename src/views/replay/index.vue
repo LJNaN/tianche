@@ -44,7 +44,7 @@ import Compass from "@/components/compass.vue";
 import { GLOBAL } from "@/GLOBAL";
 import { GetReplayData } from "@/axios/api.js";
 import { ElMessage } from "element-plus";
-import replayData1 from "@/ktJS/js/mockReplayData1.js";
+// import replayData1 from "@/ktJS/js/mockReplayData1.js";
 // import mock2 from '@/ktJS/js/mock2.js'
 import { stampTommss } from "@/utils/stampTommss.js";
 import { STATE } from "@/ktJS/STATE";
