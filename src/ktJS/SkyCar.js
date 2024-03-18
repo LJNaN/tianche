@@ -942,9 +942,17 @@ export default class SkyCar {
       return
     }
 
-    if (this.history.length && this.history[0]?.receiveTime && !STATE.mainBus.replayPaused.value && this.history[0]?.ohtStatus_Oncall !== '1' &&  (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
-      this.dispose()
-      return
+    if (this.history.length && this.history[0]?.receiveTime && this.history[0]?.ohtStatus_Oncall === '0' && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
+      if (STATE.mainBus.isReplayMode.value) {
+        if (!STATE.mainBus.replayPaused.value) {
+          this.dispose()
+          return
+        }
+
+      } else {
+        this.dispose()
+        return
+      }
     }
 
 
