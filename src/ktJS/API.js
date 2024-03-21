@@ -7,9 +7,12 @@ import TU from './js/threeUtils.js'
 import { GLOBAL } from '@/GLOBAL.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo } from '@/axios/api.js'
-// import mockData2 from './js/mock2'
+import mockData3 from './js/mock3'
+import mockData4 from './js/mock4'
+import mockData5 from './js/mock5'
 import SkyCar from './SkyCar.js'
 import bus from '@/utils/mitt.js'
+
 
 // 获取数据  有data 模拟/回溯 无data 线上
 class MainBus {
@@ -160,6 +163,7 @@ class MainBus {
   }
 }
 
+// 重新加载
 function setReload() {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
@@ -176,7 +180,7 @@ function setReload() {
           e.material.uniforms.isStartLine.value = 0
           e.material.uniforms.startLineProgress.value = 0.0
         })
-        
+
         STATE.mainBus.closeLink()
         STATE.mainBus.reset()
         STATE.mainBus.run()
@@ -199,7 +203,7 @@ function setReload() {
   }, 1000 * 60)
 }
 
-// 初始化程序时处理模型
+// afterOnload
 function afterOnload(evt) {
   // 开灯开阴影
   CACHE.container.directionLights[0].visible = true
@@ -242,12 +246,12 @@ function afterOnload(evt) {
   CACHE.container.outlinePass.pulsePeriod = 1
 
   TU.init(container, Bol3D)
-  STATE.mainBus = new MainBus()
   API.initKaxia()
   UTIL.getAnimationList()
   API.initLine()
   API.initDeviceByMap()
   API.initShelves()
+  STATE.mainBus = new MainBus()
 
 
   // 货架实例化
@@ -323,7 +327,7 @@ function initLine() {
       }
 
       // 有些轨道的索引是反的，需要反转一下
-      const reverseList = ['92-11', '11-12', '114-37', '72-66', '66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '5-8', '9-10', '81-82', '82-83', '86-89', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13']
+      const reverseList = ['92-11', '11-12', '114-37', '72-66', '66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '5-8', '9-10', '81-82', '82-83', '86-89', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13','97-98']
       if (reverseList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
@@ -1332,15 +1336,36 @@ function initShelves() {
       model.userData.name = shelf
       model.userData.area = area
 
-      // if (!STATE.shelvesList[shelf]) {
-      //   STATE.shelvesList[shelf] = {}
-      // }
 
-      // STATE.shelvesList[shelf][e] = {
-      //   mesh: null,
-      //   position: [kaxia.position.x, kaxia.position.y, kaxia.position.z],
-      //   rotateY: kaxia.rotation.y
-      // }
+      // 货架上的文字
+      // const loader = new Bol3D.FontLoader()
+      // loader.load('/assets/optimer_bold.typeface.json', (font) => {
+      //   const g = new Bol3D.TextGeometry(DATA.shelvesMap[area][shelf].fields.join(','), {
+      //     font: font,
+      //     size: 150,
+      //     height: 1,
+      //     curveSegments: 12,
+      //     bevelEnabled: false,
+      //     bevelThickness: 1,
+      //     bevelSize: 1,
+      //     bevelSegments: 1
+      //   })
+      //   g.computeBoundingBox();
+      //   const m = new Bol3D.MeshBasicMaterial({ color: 0xff0000 })
+      //   const mesh = new Bol3D.Mesh(g, m)
+      //   mesh.position.set(...item.position)
+      //   mesh.position.y += 16
+      //   mesh.scale.set(0.01, 0.01, 0.01)
+      //   if (item.axle.includes('z')) {
+      //     mesh.rotation.y = -Math.PI / 2
+      //     mesh.position.z -= 7;
+      //   } else {
+      //     mesh.position.x -= 7;
+      //   }
+      //   CACHE.container.scene.add(mesh)
+
+      // })
+
 
       STATE.sceneList.shelves[shelf] = model
       CACHE.container.scene.add(model)

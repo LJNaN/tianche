@@ -39,6 +39,7 @@ export default class SkyCar {
   isAnimateSoon = false       // 即将有动画
   fastRun = false             // 即将有动画时  快速前进
   targetCoordinate = -1       // 有动画/oncall时的目标坐标
+  targetPosition = null       // 按照port来找的目标位置
 
   replayRun = true            // 回溯时是否运行
 
@@ -414,7 +415,7 @@ export default class SkyCar {
               CACHE.container.clickObjects.push(e2)
             }
           })
-          const group = this.skyCarMesh.children.find(e => e.name === 'tianche02')
+          const group = this.skyCarMesh?.children.find(e => e.name === 'tianche02')
           if (group) {
             group.add(newKaxia)
             this.catch = newKaxia
@@ -428,6 +429,18 @@ export default class SkyCar {
 
     } else if (oldHistory.ohtStatus_UnLoading == '0' && newHistory.ohtStatus_UnLoading == '1') {
 
+      let shelf = null
+      for (let key in DATA.shelvesMap) {
+        for (let key2 in DATA.shelvesMap[key]) {
+          if (DATA.shelvesMap[key][key2].fields.includes(Number(newHistory.location))) {
+            shelf = DATA.shelvesMap[key][key2]
+            break
+          }
+        }
+      }
+
+      if (!shelf) return
+      const direction = positionData.type === '在机台上' ? 'right' : shelf.direction
       this.run = false
 
       const cb = () => {
@@ -479,6 +492,7 @@ export default class SkyCar {
         }
       }
 
+      this.catchDirection = direction
       this.down(positionData.type, cb)
     }
   }
@@ -1063,7 +1077,7 @@ export default class SkyCar {
 
         } else {
           // 都查求不到这个轨道，随便吧
-          this_.quickenSpeedTimes = 2.5
+          this_.quickenSpeedTimes = 2
         }
       }
     }
@@ -1073,16 +1087,22 @@ export default class SkyCar {
 
       this.isAnimateSoon = false
       const animateTargetMsg = this.history[0]
-      const { position } = animateTargetMsg
-      this.targetCoordinate = Number(position)
+      const targetPosition = UTIL.getPositionByKaxiaLocation(animateTargetMsg.location)
+      const MCS2Shelf = DATA.MCS2ShelfMap.find(e => e.port == animateTargetMsg.location)
+      const position = Number(MCS2Shelf.position)
+      this.targetPosition = targetPosition
+      this.targetCoordinate = position
       computeQuickenSpeedTimes(position)
 
+
     } else if (this.fastRun) {
+
       // 目标停车点
-      if (this.targetCoordinate != -1) {
+      if (this.targetCoordinate != -1 && this.targetPosition) {
         const targetLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.targetCoordinate && e.endCoordinate > this.targetCoordinate)
         if (targetLine && this.line === targetLine.name.replace('_', '-')) {
-          if (this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) {
+          const distance = Math.sqrt((this.targetPosition.position.x - this.skyCarMesh.position.x) ** 2 + (this.targetPosition.position.z - this.skyCarMesh.position.z) ** 2)
+          if ((this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) && distance > 3.5) {
             this.run = true
 
           } else {
@@ -1117,7 +1137,7 @@ export default class SkyCar {
           if (!item) return
           totalIndex += item.length
         })
-        this.quickenSpeedTimes = totalIndex > 750 ? (2.5 / STATE.mainBus.replayTimes.value) : (1 / STATE.mainBus.replayTimes.value)
+        this.quickenSpeedTimes = totalIndex > 500 ? (2 / STATE.mainBus.replayTimes.value) : (1 / STATE.mainBus.replayTimes.value)
       }
     }
 
@@ -1539,7 +1559,7 @@ export default class SkyCar {
 
     if (this.catch) {
       this.catch.visible = false
-      this.catch.parent.remove(this.catch)
+      this.catch.parent && this.catch.parent.remove(this.catch)
       this.catch = null
     }
 
