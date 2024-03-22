@@ -40,6 +40,7 @@ export default class SkyCar {
   fastRun = false             // 即将有动画时  快速前进
   targetCoordinate = -1       // 有动画/oncall时的目标坐标
   targetPosition = null       // 按照port来找的目标位置
+  lastDistance = -1            // 小车对位置时的 距离货架的长度
 
   replayRun = true            // 回溯时是否运行
 
@@ -225,6 +226,7 @@ export default class SkyCar {
     ) {
       this.run = true
       this.fastRun = false
+      this.lastDistance = -1
       this.targetCoordinate = -1
       this.posPath = null
 
@@ -1043,7 +1045,7 @@ export default class SkyCar {
         if (progressDifference > 0) {
           const catchUpIndex = progressDifference * STATE.sceneList.linePosition[lineName].length // 进度差有多少个index
           const speed = catchUpIndex / STATE.frameRate
-          this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
+          this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value * 1.2
 
         } else {
           this_.quickenSpeedTimes = 0
@@ -1070,7 +1072,7 @@ export default class SkyCar {
 
           if (totalIndex > 0) {
             const speed = totalIndex / STATE.frameRate
-            this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value
+            this_.quickenSpeedTimes = speed / STATE.mainBus.replayTimes.value * 1.2
           } else {
             this_.quickenSpeedTimes = 0
           }
@@ -1102,7 +1104,8 @@ export default class SkyCar {
         const targetLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.targetCoordinate && e.endCoordinate > this.targetCoordinate)
         if (targetLine && this.line === targetLine.name.replace('_', '-')) {
           const distance = Math.sqrt((this.targetPosition.position.x - this.skyCarMesh.position.x) ** 2 + (this.targetPosition.position.z - this.skyCarMesh.position.z) ** 2)
-          if ((this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) && distance > 3.5) {
+
+          if ((this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) && (this.lastDistance === -1 || distance < this.lastDistance)) {
             this.run = true
 
           } else {
@@ -1112,6 +1115,8 @@ export default class SkyCar {
             // this.lineIndex = position.lineIndex
             this.run = false
           }
+
+          this.lastDistance = distance
         }
       }
 
