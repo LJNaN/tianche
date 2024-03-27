@@ -178,8 +178,19 @@ export default class SkyCar {
             } else {
               this.nextLine.push(nextLine.name)
             }
+
           } else {
             this.nextLine.push(nextLine.name)
+          }
+
+          if (this.nextLine.length) {
+            // 补足一根轨道
+            if (this.nextLine[0].split('_')[0] !== this.line.split('-')[1]) {
+              const centerLine = DATA.pointCoordinateMap.find(e => e.name.split('_')[0] === this.line.split('-')[1] && e.name.split('_')[1] === this.nextLine[0].split('_')[0])
+              if (centerLine) {
+                this.nextLine.unshift(centerLine.name)
+              }
+            }
           }
         }
         break
@@ -1109,11 +1120,29 @@ export default class SkyCar {
             this.run = true
 
           } else {
-            // this.coordinate = this.targetCoordinate
-            // const position = UTIL.getPositionByCoordinate(this.coordinate)
-            // this.line = position.line
-            // this.lineIndex = position.lineIndex
+            const animateTargetMsg = this.history[0]
+            const targetPosition = UTIL.getPositionByKaxiaLocation(animateTargetMsg.location)
+
+            this.coordinate = this.targetCoordinate
             this.run = false
+
+            const this_ = this
+            // 沿着轨道往前走
+            const thisPosition = this.skyCarMesh.position.clone()
+
+            // 车子在当前轨道上走了多少进度
+            const progress = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length
+            const thisLineMesh = STATE.sceneList.lineList.find(e => e.name === this_.line)
+            if (progress && thisLineMesh) {
+              thisLineMesh.material.uniforms.progress.value = progress
+            }
+
+            const thisLineMap = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+            if (thisLineMap.direction.includes('x')) {
+              this_.skyCarMesh?.position.set(targetPosition.position.x, 28.3, thisPosition.z)
+            } else {
+              this_.skyCarMesh?.position.set(thisPosition.x, 28.3, targetPosition.position.z)
+            }
           }
 
           this.lastDistance = distance

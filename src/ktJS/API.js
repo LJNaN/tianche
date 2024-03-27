@@ -251,7 +251,7 @@ function afterOnload(evt) {
   API.initLine()
   API.initDeviceByMap()
   API.initShelves()
-  STATE.mainBus = new MainBus(mockData5)
+  STATE.mainBus = new MainBus()
   
   
 
