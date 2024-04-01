@@ -392,6 +392,7 @@ export default class SkyCar {
       // 查找最近的货架最近的卡匣，有就搬，没有就生成
       const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === newHistory.therfidFoup)
 
+      
       const direction = positionData.type === '在机台上' ? 'right' : shelf.direction
       const cb = () => {
         if (kaxia && kaxia.parent) {
@@ -1102,6 +1103,7 @@ export default class SkyCar {
       const animateTargetMsg = this.history[0]
       const targetPosition = UTIL.getPositionByKaxiaLocation(animateTargetMsg.location)
       const MCS2Shelf = DATA.MCS2ShelfMap.find(e => e.port == animateTargetMsg.location)
+      if(!MCS2Shelf) return
       const position = Number(MCS2Shelf.position)
       this.targetPosition = targetPosition
       this.targetCoordinate = position

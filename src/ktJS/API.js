@@ -10,6 +10,7 @@ import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo 
 import mockData3 from './js/mock3'
 import mockData4 from './js/mock4'
 import mockData5 from './js/mock5'
+import mockData6 from './js/mock6'
 import SkyCar from './SkyCar.js'
 import bus from '@/utils/mitt.js'
 
@@ -251,7 +252,7 @@ function afterOnload(evt) {
   API.initLine()
   API.initDeviceByMap()
   API.initShelves()
-  STATE.mainBus = new MainBus()
+  STATE.mainBus = new MainBus(mockData4)
   
   
 

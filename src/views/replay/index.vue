@@ -44,7 +44,7 @@ import Compass from "@/components/compass.vue";
 import { GLOBAL } from "@/GLOBAL";
 import { GetReplayData } from "@/axios/api.js";
 import { ElMessage } from "element-plus";
-// import replayData1 from "@/ktJS/js/mockReplayData1.js";
+import replayData1 from "@/ktJS/js/mockReplayData1.js";
 // import mock2 from '@/ktJS/js/mock2.js'
 import { stampTommss } from "@/utils/stampTommss.js";
 import { STATE } from "@/ktJS/STATE";
@@ -86,30 +86,30 @@ async function handleConfirm() {
   const halfT = new Date(startT * 1 + (endT * 1 - startT * 1) / 2)
   
 
-  const data1 = await GetReplayData(
-    [
-      timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
-      halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
-    ],
-    long / 2
-  )
+  // const data1 = await GetReplayData(
+  //   [
+  //     timePark.value[0].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //     halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //   ],
+  //   long / 2
+  // )
 
-  const data2 = await GetReplayData(
-    [
-      halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
-      timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
-    ],
-    long / 2
-  );
+  // const data2 = await GetReplayData(
+  //   [
+  //     halfT.format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //     timePark.value[1].format("YYYY-MM-DD hh:mm:ss") + ".000",
+  //   ],
+  //   long / 2
+  // );
 
 
-  if(data1?.hits?.hits && data2?.hits?.hits) {
-    data1.hits.hits = data1.hits.hits.concat(data2.hits.hits)
-  }
-  const res = data1
+  // if(data1?.hits?.hits && data2?.hits?.hits) {
+  //   data1.hits.hits = data1.hits.hits.concat(data2.hits.hits)
+  // }
+  // const res = data1
   
 
-  // const res = replayData1;
+  const res = replayData1;
   loading.value = false
 
   const res2 = res?.hits?.hits;
