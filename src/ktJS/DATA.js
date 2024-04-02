@@ -19,7 +19,8 @@ const skyCarStateColorMap = [
   { id: 2, name: '小车去取货/放货动作执行中', color: '#8183fd', img: [35, 36, 70] },
   { id: 3, name: '小车无指令状态/cycling状态', color: '#00f600', img: [33, 34, 69] },
   { id: 4, name: '小车发生故障', color: '#fd0100', img: [31, 32, 13] },
-  { id: 5, name: '小车上线前状态', color: '#7d7d7d', img: [41, 42, 71] }
+  { id: 5, name: '小车上线前状态', color: '#7d7d7d', img: [41, 42, 71] },
+  { id: 6, name: 'oncall', color: '#ff8400', img: [81, 82, 83] },
 ]
 
 // OHB 货架

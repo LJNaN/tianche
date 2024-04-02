@@ -112,42 +112,48 @@ export default class SkyCar {
 
 
     // 处理颜色
-    if (this.history[GLOBAL.messageLen - 1].ohtStatus_OnlineControl === '0') { // 离线
+    if (this.history[0].ohtStatus_OnlineControl === '0') { // 离线
       if (this.state != 5) {
         this.state = 5
         this.setPopupColor()
         this.initClickPopup()
       }
 
-    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_ErrSet === '1') { // 故障
+    } else if (this.history[0].ohtStatus_ErrSet === '1') { // 故障
       if (this.state != 4) {
         this.state = 4
         this.setPopupColor()
         this.initClickPopup()
       }
+    } else if (this.history[0].ohtStatus_Oncall === '1') { // oncall
+      if (this.state != 6) {
+        this.state = 6
+        this.setPopupColor()
+        this.initClickPopup()
+      }
 
-    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Loading === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_UnLoading === '1') { // 取货、放货中
+    } else if (this.history[0].ohtStatus_Loading === '1' || this.history[0].ohtStatus_UnLoading === '1') { // 取货、放货中
       if (this.state != 2) {
         this.state = 2
         this.setPopupColor()
         this.initClickPopup()
       }
 
-    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoxing === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_Quhuoda === '1') { // 取货行
+    } else if (this.history[0].ohtStatus_Quhuoxing === '1' || this.history[0].ohtStatus_Quhuoda === '1') { // 取货行
       if (this.state != 0) {
         this.state = 0
         this.setPopupColor()
         this.initClickPopup()
       }
 
-    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoxing === '1' || this.history[GLOBAL.messageLen - 1].ohtStatus_Fanghuoda === '1') { // 放货行
+    } else if (this.history[0].ohtStatus_Fanghuoxing === '1' || this.history[0].ohtStatus_Fanghuoda === '1') { // 放货行
       if (this.state != 1) {
         this.state = 1
         this.setPopupColor()
         this.initClickPopup()
       }
 
-    } else if (this.history[GLOBAL.messageLen - 1].ohtStatus_Roaming === '1') { // 漫游
+    } else if (this.history[0].ohtStatus_Roaming === '1') { // 漫游
       if (this.state != 3) {
         this.state = 3
         this.setPopupColor()
@@ -392,7 +398,7 @@ export default class SkyCar {
       // 查找最近的货架最近的卡匣，有就搬，没有就生成
       const kaxia = STATE.sceneList.kaxiaList.children.find(e => e.userData.id === newHistory.therfidFoup)
 
-      
+
       const direction = positionData.type === '在机台上' ? 'right' : shelf.direction
       const cb = () => {
         if (kaxia && kaxia.parent) {
@@ -1103,7 +1109,7 @@ export default class SkyCar {
       const animateTargetMsg = this.history[0]
       const targetPosition = UTIL.getPositionByKaxiaLocation(animateTargetMsg.location)
       const MCS2Shelf = DATA.MCS2ShelfMap.find(e => e.port == animateTargetMsg.location)
-      if(!MCS2Shelf) return
+      if (!MCS2Shelf) return
       const position = Number(MCS2Shelf.position)
       this.targetPosition = targetPosition
       this.targetCoordinate = position
