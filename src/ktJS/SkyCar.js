@@ -105,6 +105,16 @@ export default class SkyCar {
       this.history.push(reduceInfo)
     }
 
+    // 针对20-1 和 10-11轨道
+    if (this.history.length) {
+      if (this.line === '10-11') {
+        if (this.history[0].position > 852700 && this.history[0].position < 853280) {
+          this.history.splice(GLOBAL.messageLen, 1)
+          return
+        }
+      }
+    }
+
 
     // 保持去重后的数据在X条
     if (this.history.length < GLOBAL.messageLen + 1) { return }
