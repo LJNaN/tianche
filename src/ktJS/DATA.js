@@ -21,6 +21,7 @@ const skyCarStateColorMap = [
   { id: 4, name: '小车发生故障', color: '#fd0100', img: [31, 32, 13] },
   { id: 5, name: '小车上线前状态', color: '#7d7d7d', img: [41, 42, 71] },
   { id: 6, name: 'oncall', color: '#ff8400', img: [81, 82, 83] },
+  { id: 7, name: 'oncalling', color: '#f794a5', img: [84,85,86] },
 ]
 
 // OHB 货架

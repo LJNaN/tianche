@@ -17,7 +17,7 @@ if(location.hash === '#/replay') {
   <Scene />
   <router-view></router-view>
   <Progress></Progress>
-  <p class="version">Version 2.1.10</p>
+  <p class="version">Version 2.1.12</p>
 </template>
 
 <style scoped>

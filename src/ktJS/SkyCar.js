@@ -142,6 +142,13 @@ export default class SkyCar {
         this.initClickPopup()
       }
 
+    } else if (this.history[0].ohtStatus_Oncalling === '1') { // oncall
+      if (this.state != 7) {
+        this.state = 7
+        this.setPopupColor()
+        this.initClickPopup()
+      }
+
     } else if (this.history[0].ohtStatus_Loading === '1' || this.history[0].ohtStatus_UnLoading === '1') { // 取货、放货中
       if (this.state != 2) {
         this.state = 2
