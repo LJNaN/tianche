@@ -7,6 +7,7 @@ import TU from './js/threeUtils.js'
 import { GLOBAL } from '@/GLOBAL.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo } from '@/axios/api.js'
+import mockData2 from './js/mock2'
 import mockData3 from './js/mock3'
 import mockData4 from './js/mock4'
 import mockData5 from './js/mock5'
@@ -253,7 +254,7 @@ function afterOnload(evt) {
   API.initLine()
   API.initDeviceByMap()
   API.initShelves()
-  STATE.mainBus = new MainBus()
+  STATE.mainBus = new MainBus(mockData2)
   
   
 

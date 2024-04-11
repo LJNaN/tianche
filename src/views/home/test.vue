@@ -1,7 +1,7 @@
 <template>
   <div class="slider">
     <span class="demonstration">小车坐标</span>
-    <el-slider v-model="value1" :min="220000" :max="240000" show-input @input="sliderChange" />
+    <el-slider v-model="value1" :min="839297" :max="869297" show-input @input="sliderChange" />
   </div>
 </template>
 
@@ -15,8 +15,6 @@ let car = null
 setTimeout(() => {
   car = STATE.sceneList.skyCarList[0]
   car.run = false
-
-
 
   car.line = '26-22'
   car.lineIndex = 0

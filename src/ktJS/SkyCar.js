@@ -105,15 +105,7 @@ export default class SkyCar {
       this.history.push(reduceInfo)
     }
 
-    // 针对20-1 和 10-11轨道
-    // if (this.history.length) {
-    //   if (this.line === '10-11') {
-    //     if (this.history[0].position > 852700 && this.history[0].position < 853280) {
-    //       this.history.splice(GLOBAL.messageLen, 1)
-    //       return
-    //     }
-    //   }
-    // }
+    
 
 
     // 保持去重后的数据在X条
@@ -135,13 +127,6 @@ export default class SkyCar {
         this.setPopupColor()
         this.initClickPopup()
       }
-    } else if (this.history[0].ohtStatus_Oncall === '1') { // oncall
-      if (this.state != 6) {
-        this.state = 6
-        this.setPopupColor()
-        this.initClickPopup()
-      }
-
     } else if (this.history[0].ohtStatus_Oncalling === '1') { // oncall
       if (this.state != 7) {
         this.state = 7
@@ -149,6 +134,12 @@ export default class SkyCar {
         this.initClickPopup()
       }
 
+    } else if (this.history[0].ohtStatus_Oncall === '1') { // oncall
+      if (this.state != 6) {
+        this.state = 6
+        this.setPopupColor()
+        this.initClickPopup()
+      }
     } else if (this.history[0].ohtStatus_Loading === '1' || this.history[0].ohtStatus_UnLoading === '1') { // 取货、放货中
       if (this.state != 2) {
         this.state = 2
@@ -191,9 +182,7 @@ export default class SkyCar {
     const thisLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < thisPosition && e.endCoordinate > thisPosition)
     const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.history[0].position && e.endCoordinate > this.history[0].position)
     
-    if(nextLine) {
-      if (this.line === nextLine.name ) return
-
+    if(nextLine && this.line !== nextLine.name ) {
       if(this.nextLine.length) {
         if(this.nextLine.at(-1) !== nextLine.name && this.nextLine.at(-2) !== nextLine.name) {
           this.nextLine.push(nextLine.name)
@@ -286,12 +275,9 @@ export default class SkyCar {
 
 
     // 判断一下是否即将有动画，也就是堆栈里最后一条如果有动画
-    // 新增: oncall 同样是以下逻辑
     const animateTargetMsg = this.history[0]
     if (animateTargetMsg && !this.fastRun) {
-      if (
-        (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1') ||
-        (animateTargetMsg.ohtStatus_Oncall == '1')) {
+      if (animateTargetMsg.ohtStatus_Loading == '1' || animateTargetMsg.ohtStatus_UnLoading == '1') {
 
         this.isAnimateSoon = true
         this.fastRun = true
@@ -299,9 +285,16 @@ export default class SkyCar {
       }
     }
 
+    // oncalling  oncall
+    if (this.history.length && (this.history[0].ohtStatus_Oncall == '1' || this.history[0].ohtStatus_Oncalling == '1')) {
+      this.run = false
+    }
 
     // 恢复oncall
-    if (animateTargetMsg.ohtStatus_Oncall === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncall === '1') {
+    if (
+      (animateTargetMsg.ohtStatus_Oncall === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncall === '1') ||
+      (animateTargetMsg.ohtStatus_Oncalling === '0' && this.history[GLOBAL.messageLen - 1].ohtStatus_Oncalling === '1')
+    ) {
       this.isAnimateSoon = false
       this.fastRun = false
       this.run = true
@@ -350,7 +343,6 @@ export default class SkyCar {
         })
       }
     }
-
   }
 
   // 执行完毕后的动画(取货开始、放货开始)

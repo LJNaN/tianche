@@ -301,6 +301,7 @@ function instantiationGroupInfo(arr, name, evt) {
 
 // 通过 GetCarrierInfo 的locationId 找 position
 function getPositionByKaxiaLocation(location) {
+  
   // 先判断机台
   for (let key in DATA.deviceMap) {
     for (let key2 in DATA.deviceMap[key]) {
@@ -499,3 +500,5 @@ export const UTIL = {
   getPositionByKaxiaLocation,
   getPositionByCoordinate
 }
+
+window.UTIL = UTIL
