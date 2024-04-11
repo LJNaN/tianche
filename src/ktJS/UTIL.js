@@ -480,11 +480,11 @@ function getPositionByKaxiaLocation(location) {
 function getPositionByCoordinate(c) {
   const coordinate = Number(c)
   const map = DATA.pointCoordinateMap.find(e => e.startCoordinate < coordinate && e.endCoordinate > coordinate)
-  const lineMap = STATE.sceneList.linePosition[map.name.replace('_', '-')]
+  const lineMap = STATE.sceneList.linePosition[map.name]
   const lineProgress = (coordinate - map.startCoordinate) / (map.endCoordinate - map.startCoordinate)
   const index = Math.floor(lineMap.length * lineProgress)
   return {
-    line: map.name.replace('_', '-'),
+    line: map.name,
     lineIndex: index
   }
 }

@@ -106,14 +106,14 @@ export default class SkyCar {
     }
 
     // 针对20-1 和 10-11轨道
-    if (this.history.length) {
-      if (this.line === '10-11') {
-        if (this.history[0].position > 852700 && this.history[0].position < 853280) {
-          this.history.splice(GLOBAL.messageLen, 1)
-          return
-        }
-      }
-    }
+    // if (this.history.length) {
+    //   if (this.line === '10-11') {
+    //     if (this.history[0].position > 852700 && this.history[0].position < 853280) {
+    //       this.history.splice(GLOBAL.messageLen, 1)
+    //       return
+    //     }
+    //   }
+    // }
 
 
     // 保持去重后的数据在X条
@@ -189,34 +189,37 @@ export default class SkyCar {
     // 更新 nextLine
     const thisPosition = this.history[GLOBAL.messageLen - 1].position
     const thisLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < thisPosition && e.endCoordinate > thisPosition)
-    for (let i = 1; i <= GLOBAL.messageLen - 1; i++) {
-      const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.history[GLOBAL.messageLen - 1 - i].position && e.endCoordinate > this.history[GLOBAL.messageLen - 1 - i].position)
+    const nextLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.history[0].position && e.endCoordinate > this.history[0].position)
+    
+    if(nextLine) {
+      if (this.line === nextLine.name ) return
 
-      if (nextLine && thisLine && nextLine.name != thisLine.name) {
-        if ((!this.nextLine.length || this.nextLine[this.nextLine.length - 1] != nextLine.name) && this.line != nextLine.name.replace('_', '-')) {
-          if (this.nextLine.length > 2) {
-            if (this.nextLine[this.nextLine.length - 2] === nextLine.name) {
-              this.nextLine.splice(this.nextLine.length - 1, 1)
-              this.nextLine.push(nextLine.name)
-            } else {
-              this.nextLine.push(nextLine.name)
-            }
-
-          } else {
-            this.nextLine.push(nextLine.name)
-          }
-
-          if (this.nextLine.length) {
-            // 补足一根轨道
-            if (this.nextLine[0].split('_')[0] !== this.line.split('-')[1]) {
-              const centerLine = DATA.pointCoordinateMap.find(e => e.name.split('_')[0] === this.line.split('-')[1] && e.name.split('_')[1] === this.nextLine[0].split('_')[0])
-              if (centerLine) {
-                this.nextLine.unshift(centerLine.name)
-              }
-            }
-          }
+      if(this.nextLine.length) {
+        if(this.nextLine.at(-1) !== nextLine.name && this.nextLine.at(-2) !== nextLine.name) {
+          this.nextLine.push(nextLine.name)
         }
-        break
+
+      } else {
+        this.nextLine.push(nextLine.name)
+      }
+    }
+    
+
+    // 剔除错误的数据
+    if(this.nextLine.length >= 2) {
+      const next1 = DATA.pointCoordinateMap.find(e => e.name === this.nextLine[0])
+      const next2 = DATA.pointCoordinateMap.find(e => e.name === this.nextLine[1])
+      if((next1.name.split('-')[1] !== next2.name.split('-')[0]) && this.line.split('-')[1] === next2.name.split('-')[0]) {
+        this.nextLine.splice(0, 1)
+      } 
+    }
+
+    if(this.nextLine.length >= 1) {
+      if (this.nextLine[0].split('-')[0] !== this.line.split('-')[1]) {
+        const centerLine = DATA.pointCoordinateMap.find(e => e.name.split('-')[0] === this.line.split('-')[1] && e.name.split('-')[1] === this.nextLine[0].split('-')[0])
+        if (centerLine) {
+          this.nextLine.unshift(centerLine.name)
+        }
       }
     }
 
@@ -987,13 +990,13 @@ export default class SkyCar {
     if (this.disposed) {
       return
     }
-
+    
     requestAnimationFrame(this.runRender.bind(this))
-    if (!this.replayRun) {
+    if (STATE.mainBus.isReplayMode.value && !this.replayRun) {
       return
     }
-
-    if (this.history.length && this.history[0]?.receiveTime && this.history[0]?.ohtStatus_Oncall === '0' && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
+    
+    if (!this.nextLine.length && this.history.length && this.history[0]?.receiveTime && this.history[0]?.ohtStatus_Oncall === '0' && (new Date() * 1 - 6000) > new Date(this.history[0].receiveTime)) {
       if (STATE.mainBus.isReplayMode.value) {
         if (!STATE.mainBus.replayPaused.value) {
           this.dispose()
@@ -1069,7 +1072,7 @@ export default class SkyCar {
       const line = DATA.pointCoordinateMap.find(e => e.startCoordinate < position && e.endCoordinate > position)
       if (!line) return
 
-      const lineName = line.name.replace('_', '-')
+      const lineName = line.name
 
       if (this_.line === lineName) {
         const progress1 = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length // 在当前轨道上的进度
@@ -1093,13 +1096,13 @@ export default class SkyCar {
           let totalIndex = 0
           for (let i = 0; i < this_.nextLine.length; i++) {
             if (this_.nextLine[i] !== line.name) {
-              totalIndex += STATE.sceneList.linePosition[this_.nextLine[i].replace('_', '-')].length
+              totalIndex += STATE.sceneList.linePosition[this_.nextLine[i]].length
 
             } else {
               const progress1 = this_.lineIndex / STATE.sceneList.linePosition[this_.line].length // 在当前轨道上的进度
               const progress2 = (position - line.startCoordinate) / (line.endCoordinate - line.startCoordinate) // 目标点在当前轨道上的进度
               const subIndex1 = (1 - progress1) * STATE.sceneList.linePosition[this_.line].length
-              const subIndex2 = progress2 * STATE.sceneList.linePosition[line.name.replace('_', '-')].length
+              const subIndex2 = progress2 * STATE.sceneList.linePosition[line.name].length
               totalIndex += subIndex1 + subIndex2
               break
             }
@@ -1138,7 +1141,7 @@ export default class SkyCar {
       // 目标停车点
       if (this.targetCoordinate != -1 && this.targetPosition) {
         const targetLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < this.targetCoordinate && e.endCoordinate > this.targetCoordinate)
-        if (targetLine && this.line === targetLine.name.replace('_', '-')) {
+        if (targetLine && this.line === targetLine.name) {
           const distance = Math.sqrt((this.targetPosition.position.x - this.skyCarMesh.position.x) ** 2 + (this.targetPosition.position.z - this.skyCarMesh.position.z) ** 2)
 
           if ((this.targetCoordinate > (this.coordinate + STATE.mainBus.replayTimes.value)) && (this.lastDistance === -1 || distance < this.lastDistance)) {
@@ -1162,7 +1165,7 @@ export default class SkyCar {
               thisLineMesh.material.uniforms.progress.value = progress
             }
 
-            const thisLineMap = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+            const thisLineMap = DATA.pointCoordinateMap.find(e => e.name === this_.line)
             if (thisLineMap.direction.includes('x')) {
               this_.skyCarMesh?.position.set(targetPosition.position.x, 28.3, thisPosition.z)
             } else {
@@ -1192,7 +1195,7 @@ export default class SkyCar {
       if (runFlag) {
         let totalIndex = (STATE.sceneList.linePosition[this.line]?.length - this.lineIndex) || 0
         this.nextLine.forEach(e => {
-          const item = STATE.sceneList.linePosition[e.replace('_', '-')]
+          const item = STATE.sceneList.linePosition[e]
           if (!item) return
           totalIndex += item.length
         })
@@ -1204,10 +1207,11 @@ export default class SkyCar {
     if (this_.run && this_.animationOver) {
       if (this_.line && STATE.sceneList.linePosition[this_.line]) {
         // 如果前面还有路，就往前走
+        
         if (this_.lineIndex < STATE.sceneList.linePosition[this_.line].length - this_.runSpeed * STATE.mainBus.replayTimes.value) {
           this_.lineIndex += Math.round(this_.runSpeed * STATE.mainBus.replayTimes.value)
 
-          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line)
           const lineMap = STATE.sceneList.linePosition[this_.line]
           if (map && lineMap) {
             const progress = this_.lineIndex / lineMap.length
@@ -1217,10 +1221,10 @@ export default class SkyCar {
           // 如果这根线到尽头了，找nextLine
         } else if (this_.nextLine.length) {
 
-          this_.line = this_.nextLine[0].replace('_', '-')
+          this_.line = this_.nextLine[0]
           this_.lineIndex = 0
 
-          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line.replace('-', '_'))
+          const map = DATA.pointCoordinateMap.find(e => e.name === this_.line)
           if (map) {
             this_.coordinate = map.startCoordinate
           }
@@ -1340,7 +1344,7 @@ export default class SkyCar {
     const endPointLine = DATA.pointCoordinateMap.find(e => e.startCoordinate < Number(endPoint) && e.endCoordinate > Number(endPoint))
 
     if (endPointLine) {
-      const endPointMesh = STATE.sceneList.lineList.find(e => e.name === endPointLine.name.replace('_', '-'))
+      const endPointMesh = STATE.sceneList.lineList.find(e => e.name === endPointLine.name)
       if (endPointMesh) {
         const progress = (Number(endPoint) - endPointLine.startCoordinate) / (endPointLine.endCoordinate - endPointLine.startCoordinate)
         if (progress > 0) {
@@ -1359,7 +1363,7 @@ export default class SkyCar {
 
         if (lineMap) {
           const progress = (startPositionMap.position - lineMap.startCoordinate) / (lineMap.endCoordinate - lineMap.startCoordinate)
-          const startLineMesh = STATE.sceneList.lineList.find(e => e.name === lineMap.name.replace('_', '-'))
+          const startLineMesh = STATE.sceneList.lineList.find(e => e.name === lineMap.name)
 
           if (startLineMesh) {
             startLineMesh.material.uniforms.isStartLine.value = 1
