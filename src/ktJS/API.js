@@ -5,6 +5,7 @@ import { DATA } from './DATA.js'
 import { UTIL } from './UTIL.js'
 import TU from './js/threeUtils.js'
 import { GLOBAL } from '@/GLOBAL.js'
+import { Reflector } from '@/ktJS/js/Reflector.js'
 import * as TWEEN from '@tweenjs/tween.js'
 import { GetCarrierInfo, CarrierFindCmdId, GetRealTimeEqpState, GetBayStateInfo } from '@/axios/api.js'
 import mockData2 from './js/mock2'
@@ -228,16 +229,27 @@ function afterOnload(evt) {
   })
 
   // 主场景处理
-  setTimeout(() => [
+  setTimeout(() => {
     STATE.sceneList.guidao.traverse(e => {
       if (e.isMesh && e.name === 'di') {
         e.material = new Bol3D.MeshLambertMaterial({ color: '#717880' })
+        e.material.transparent = true
+        e.material.opacity = 0.75
 
       } else if (e.name.includes('X-')) { // 隐藏红线
         e.visible = false
       }
     })
-  ], 0)
+
+    STATE.sceneList.kuang.visible = true
+    STATE.sceneList.kuang.scale.set(10, 10, 10)
+    STATE.sceneList.kuang.traverse(e => {
+      if (e.isMesh) {
+        CACHE.container.addBloom(e)
+        e.material.color.set(new Bol3D.Color(e.material.color.r * 0.4, e.material.color.g * 0.4, e.material.color.b * 0.4))
+      }
+    })
+  }, 0)
 
   // WBS002 处理
   STATE.sceneList.WBS002.children[1].position.x = 0
@@ -254,9 +266,10 @@ function afterOnload(evt) {
   API.initLine()
   API.initDeviceByMap()
   API.initShelves()
-  STATE.mainBus = new MainBus()
-  
-  
+  API.initReflexFloor()
+  STATE.mainBus = new MainBus(mockData4)
+
+
 
 
   // 货架实例化
@@ -303,6 +316,37 @@ function afterOnload(evt) {
 }
 
 
+// 加载反射器地板
+function initReflexFloor() {
+  const geo1 = new Bol3D.PlaneGeometry(600, 800)
+
+  const reflector = new Reflector(geo1, {
+    clipBias: 0,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+    blur: 0.25
+  })
+
+  reflector.rotation.x = -Math.PI / 2
+  reflector.position.set(0, -0.4, 0)
+  CACHE.container.scene.add(reflector)
+
+
+
+  // const gui = new dat.GUI()
+  // const floorBlur = gui.addFolder('地板模糊')
+  // floorBlur
+  //   .add(reflector.material.uniforms.blurSize, 'value')
+  //   .min(0)
+  //   .max(2)
+  //   .step(0.01)
+  //   .onChange((val) => {
+  //     reflector.material.uniforms.blurSize.value = val
+  //   })
+
+}
+
 // 加载并处理线段 计算所有线段的中心点及长度 创建shader
 function initLine() {
   STATE.sceneList.guidao.children.forEach(e => {
@@ -332,7 +376,7 @@ function initLine() {
       }
 
       // 有些轨道的索引是反的，需要反转一下
-      const reverseList = ['8-6','92-11', '11-12', '114-37', '72-66', '66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '5-8', '9-10', '81-82', '82-83', '86-89', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13','97-98','113-114']
+      const reverseList = ['8-6', '92-11', '11-12', '114-37', '72-66', '66-67', '57-58', '58-59', '68-69', '69-70', '70-64', '63-65', '65-71', '75-76', '77-78', '79-80', '13-21', '21-25', '25-29', '30-31', '31-32', '31-34', '21-22', '16-17', '17-23', '27-35', '35-36', '35-38', '23-24', '56-91', '90-95', '55-73', '74-72', '71-53', '53-52', '53-54', '36-33', '32-39', '39-40', '40-43', '44-47', '47-78', '48-49', '110-106', '50-119', '118-115', '41-42', '45-46', '49-50', '2-3', '6-7', '10-11', '1-4', '5-8', '9-10', '81-82', '82-83', '86-89', '15-16', '19-97', '100-101', '104-20', '98-105', '105-109', '109-113', '113-116', '105-106', '102-107', '111-117', '107-111', '107-108', '84-87', '87-88', '88-85', '93-94', '73-75', '43-41', '42-44', '47-45', '46-48', '117-120', '47-48', '53-54', '80-74', '12-13', '97-98', '113-114']
       if (reverseList.includes(e.name.split('X-')[1])) {
         arr.reverse()
       }
@@ -1901,5 +1945,6 @@ export const API = {
   deviceShow,
   initKaxia,
   afterOnload,
+  initReflexFloor,
   dbClickFunc
 }

@@ -10,7 +10,7 @@ const GLOBAL = {
   
   loadingPercent: ref(0),
   loadedModelNum: 0,
-  modelNum: 18
+  modelNum: 19
 }
 
 window.GLOBAL = GLOBAL

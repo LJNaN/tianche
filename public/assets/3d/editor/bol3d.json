@@ -21315,6 +21315,521 @@
           },
           "show": true,
           "parent": ""
+        },
+        {
+          "uuid": "root_kuang_0",
+          "name": "kuang",
+          "visible": true,
+          "selected": false,
+          "index": 0,
+          "spread": false,
+          "type": "Group",
+          "children": [
+            {
+              "uuid": "root_kuang_0_kuang_kuang_07",
+              "name": "kuang_kuang_07",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  -21.69,
+                  0.0151,
+                  -17.9667
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "DBDC414C-237D-4260-8D23-7B8A721FDC53",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_06",
+              "name": "kuang_kuang_06",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  -19.7912,
+                  0.0151,
+                  -6.3094
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "818D3619-122F-4FC3-81CE-1ADB184E49C9",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_05",
+              "name": "kuang_kuang_05",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  -21.5433,
+                  0.0151,
+                  -0.8325
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "6C2AA908-CACD-4024-BA3C-8771B01D548D",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_04",
+              "name": "kuang_kuang_04",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  -4.5093,
+                  0.0151,
+                  -7.0876
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "E887E708-4E56-44A2-BFA3-D04A83854629",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_03",
+              "name": "kuang_kuang_03",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  6.6176,
+                  0.0151,
+                  -6.2789
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "FE84F11C-6014-4205-96CF-F7D2BA8F500A",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_02",
+              "name": "kuang_kuang_02",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  12.601,
+                  0.0151,
+                  -0.5873
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "E84E3CAC-4BD5-4E03-9C29-0861374DF5FE",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            },
+            {
+              "uuid": "root_kuang_0_kuang_kuang_01",
+              "name": "kuang_kuang_01",
+              "visible": true,
+              "selected": false,
+              "index": 1,
+              "spread": false,
+              "type": "Mesh",
+              "children": [],
+              "options": {
+                "position": [
+                  19.0251,
+                  0.0151,
+                  -1.762
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1.3681,
+                  1
+                ],
+                "renderOrder": 2,
+                "castShadow": true,
+                "receiveShadow": true,
+                "bloom": false
+              },
+              "show": true,
+              "parent": "root_kuang_0",
+              "events": [],
+              "matOptions": [
+                {
+                  "uuid": "BD7EF3C0-79BB-4082-B30E-E55B83761F9B",
+                  "type": "MeshStandardMaterial",
+                  "name": "cheng",
+                  "color": "#731a02",
+                  "transparent": false,
+                  "opacity": 1,
+                  "map": "",
+                  "depthTest": true,
+                  "depthWrite": true,
+                  "wireframe": false,
+                  "side": 2,
+                  "extends": {
+                    "roughnessMap": "",
+                    "roughness": 0.7999999,
+                    "metalnessMap": "",
+                    "metalness": 0,
+                    "normalMap": "",
+                    "normalScale": [
+                      1,
+                      1
+                    ],
+                    "alphaMap": "",
+                    "lightMap": "",
+                    "lightMapIntensity": 1,
+                    "emissive": "#000000",
+                    "emissiveMap": "",
+                    "emissiveIntensity": 1,
+                    "aoMap": "",
+                    "aoMapIntensity": 1,
+                    "envMapIntensity": 1
+                  }
+                }
+              ]
+            }
+          ],
+          "options": {
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "renderOrder": 0
+          },
+          "show": true,
+          "parent": "",
+          "events": []
         }
       ],
       "threeDimensionEnvironment": [
@@ -21432,7 +21947,7 @@
           "options": {
             "visible": true,
             "color": "#ffffff",
-            "intensity": 0.63
+            "intensity": 0.4
           }
         },
         {
@@ -21578,6 +22093,7 @@
     "FOSB.glb",
     "tianche.glb",
     "huojia4.glb",
-    "huojia2.glb"
+    "huojia2.glb",
+    "kuang.glb"
   ]
 }
